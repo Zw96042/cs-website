@@ -19,7 +19,8 @@ const officers = [
     photo: zacharyPhoto,
     width: 749,
     height: 1048,
-    objectPosition: '50% 38%'
+    objectPosition: '50% 38%',
+    bio: 'Zach helps with UIL preparation and teaches competitive programming. He is most familiar with C++, Rusty C++, Java, and Python. He has spent more than 300 hours teaching and is always happy to explain a difficult problem or answer questions. Outside CS Club, Zach enjoys writing, conducting research, and working on the school’s robotics team.'
   },
   {
     name: 'Rahil Desai',

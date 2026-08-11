@@ -1,15 +1,19 @@
-const practice = [
+const competitionAreas = [
   {
-    name: 'Learn the pattern',
-    description: 'Trace algorithms and data structures until every step and tradeoff makes sense.'
+    name: 'Algorithms & data structures',
+    description: 'Graphs, sorting, searching, recursion, dynamic programming, and efficient data structures.'
   },
   {
-    name: 'Code the solution',
-    description: 'Turn the idea into clear Java and learn the details that matter in UIL Computer Science.'
+    name: 'UIL Computer Science',
+    description: 'Java, code tracing, language rules, written tests, hands-on programming, and team strategy.'
   },
   {
-    name: 'Test it under time',
-    description: 'Work through contest sets, compare approaches, and prepare with timed practice and mock competitions.'
+    name: 'Contest training',
+    description: 'Timed problem sets, solution reviews, and practice focused on speed, clarity, and correctness.'
+  },
+  {
+    name: 'Mock meets & hackathons',
+    description: 'Occasional events for longer problems, team competition, and building beyond a weekly lesson.'
   }
 ]
 
@@ -33,22 +37,21 @@ export default function ClubTracksSection () {
         </div>
 
         <div className='tracks-copy'>
-          <h2 className='section-heading' id='tracks-heading'>Inside competitive programming.</h2>
+          <h2 className='section-heading' id='tracks-heading'>
+            <span>Inside competitive</span>
+            <span>programming.</span>
+          </h2>
           <p className='section-intro'>
-            Insertion sort is one example of how CP studies an algorithm: trace each step, understand the tradeoffs, then implement it under contest constraints.
+            Practice algorithms, Java, and code tracing for programming contests and UIL Computer Science.
           </p>
-          <ol className='competition-list'>
-            {practice.map((item) => (
+          <ul className='competition-list'>
+            {competitionAreas.map((item) => (
               <li key={item.name}>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
               </li>
             ))}
-          </ol>
-          <div className='track-event'>
-            <h3>More than weekly practice</h3>
-            <p>The club also hosts occasional UIL mock competitions and hackathons, with Hack Club projects extending beyond weekly lessons.</p>
-          </div>
+          </ul>
         </div>
       </div>
     </section>

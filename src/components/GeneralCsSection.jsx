@@ -1,47 +1,12 @@
-const learningFlow = [
-  {
-    title: 'Understand the idea',
-    description: 'Start with the system underneath the topic, including what it can do, how it works, and where it breaks.'
-  },
-  {
-    title: 'Run an experiment',
-    description: 'Change an input, test an assumption, and use the result to see the concept directly instead of only hearing about it.'
-  },
-  {
-    title: 'Apply what worked',
-    description: 'Turn the experiment into a small build, Hack Club project, analysis, or demonstration that can be explained and extended.'
-  }
-]
-
 const focusAreas = [
-  {
-    title: 'AI / machine learning',
-    description: 'Models, training data, neural networks, predictions, and experiments that reveal where machine learning succeeds and fails.'
-  },
-  {
-    title: 'Cybersecurity',
-    description: 'Secure code, cryptography, system vulnerabilities, and controlled challenges built around defense.'
-  },
-  {
-    title: 'Computer vision',
-    description: 'Images as data, classification, detection, and the limits of what a computer can recognize.'
-  },
-  {
-    title: 'Data science',
-    description: 'Statistics, visualization, and the process of finding evidence without mistaking noise for a pattern.'
-  },
-  {
-    title: 'Computer graphics',
-    description: 'Rendering, shaders, geometry, and the math that turns code into images.'
-  },
-  {
-    title: 'Game development',
-    description: 'Game loops, simulation, interaction, and the systems behind playable experiences.'
-  },
-  {
-    title: 'Web development',
-    description: 'How interfaces, servers, and data connect to make useful websites and applications.'
-  }
+  'AI / machine learning',
+  'Cybersecurity',
+  'Computer vision',
+  'Data science',
+  'Computer graphics',
+  'Game development',
+  'Web development',
+  'Systems & hardware'
 ]
 
 export default function GeneralCsSection () {
@@ -49,41 +14,27 @@ export default function GeneralCsSection () {
     <section className='section-shell general-section' id='general-cs' aria-labelledby='general-heading'>
       <div className='section-inner general-layout'>
         <div className='general-heading'>
-          <h2 className='section-heading' id='general-heading'>Inside general computer science.</h2>
+          <h2 className='section-heading' id='general-heading'>
+            <span>Inside general</span>
+            <span>computer science.</span>
+          </h2>
           <p className='section-intro'>
-            General CS rotates through modern computing topics. Each session turns one big field into something members can inspect, test, and use.
+            Each meeting focuses on one area. Officers introduce the idea, then members test it through a demo, experiment, or Hack Club project.
           </p>
         </div>
 
-        <ol className='general-flow'>
-          {learningFlow.map((item, index) => (
-            <li key={item.title}>
-              <span aria-hidden='true'>{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-
         <div className='topic-index'>
           <div className='topic-index-head'>
-            <p>General CS / rotating topics</p>
-            <p>Seven core areas</p>
+            <h3>What we cover.</h3>
+            <p>Topics rotate throughout the year based on what members want to learn.</p>
           </div>
-          <ol>
-            {focusAreas.map((area, index) => (
-              <li key={area.title}>
-                <span aria-hidden='true'>{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{area.title}</h3>
-                  <p>{area.description}</p>
-                </div>
+          <ul className='topic-grid'>
+            {focusAreas.map((area) => (
+              <li key={area}>
+                <h4>{area}</h4>
               </li>
             ))}
-          </ol>
-          <p className='topic-index-note'>Additional topics follow member interest and new developments in computing.</p>
+          </ul>
         </div>
       </div>
     </section>

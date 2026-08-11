@@ -527,15 +527,16 @@ summary:focus-visible {
 
 .tracks-layout {
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(360px, 5fr);
+  grid-template-columns: minmax(0, 5fr) minmax(440px, 6fr);
   gap: clamp(48px, 7vw, 92px);
   align-items: center;
 }
 
 .logic-lab {
-  min-height: 520px;
+  width: min(100%, 540px);
+  min-height: 0;
   display: grid;
-  grid-template-rows: auto minmax(330px, 1fr) auto;
+  grid-template-rows: auto clamp(220px, 19vw, 260px) auto;
   border-block: 1px solid var(--line);
 }
 
@@ -579,7 +580,8 @@ summary:focus-visible {
 .sort-trigger {
   appearance: none;
   width: 100%;
-  min-height: 330px;
+  height: 100%;
+  min-height: 0;
   display: block;
   padding: 0;
   border: 0;
@@ -595,7 +597,7 @@ summary:focus-visible {
 .sort-canvas {
   width: 100%;
   height: 100%;
-  min-height: 330px;
+  min-height: 0;
   display: block;
 }
 
@@ -604,67 +606,37 @@ summary:focus-visible {
 }
 
 .tracks-copy .section-heading {
-  max-width: 11ch;
+  max-width: none;
   font-size: clamp(40px, 4.25vw, 58px);
+}
+
+.tracks-copy .section-heading span {
+  display: block;
 }
 
 .competition-list {
   margin: 34px 0 0;
-  padding: 0;
-  list-style: none;
+  padding: 28px 0 0;
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px clamp(28px, 4vw, 52px);
   border-block-start: 1px solid var(--line);
-  counter-reset: competition;
+  list-style: none;
 }
 
 .competition-list li {
-  counter-increment: competition;
-  position: relative;
-  padding: 22px 0 22px 42px;
-  border-block-end: 1px solid var(--line);
-}
-
-.competition-list li::before {
-  content: counter(competition, decimal-leading-zero);
-  position: absolute;
-  inset: 25px auto auto 0;
-  color: var(--faint);
-  font-family: "Geist Mono", monospace;
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
+  min-width: 0;
 }
 
 .competition-list h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 590;
   letter-spacing: -0.02em;
 }
 
 .competition-list p {
   margin: 9px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.62;
-  text-wrap: pretty;
-}
-
-.track-event {
-  margin-block-start: 28px;
-  padding-inline-start: 18px;
-  border-inline-start: 1px solid var(--accent);
-}
-
-.track-event h3 {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 590;
-  letter-spacing: -0.015em;
-}
-
-.track-event p {
-  max-width: 48ch;
-  margin: 8px 0 0;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.62;
@@ -673,128 +645,78 @@ summary:focus-visible {
 
 .general-layout {
   display: grid;
-  gap: clamp(42px, 5vw, 64px);
+  gap: clamp(48px, 5vw, 68px);
+}
+
+.general-section {
+  padding-block-start: clamp(72px, 7vw, 104px);
 }
 
 .general-heading {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(360px, 6fr);
-  gap: clamp(52px, 8vw, 116px);
-  align-items: end;
+  grid-template-columns: minmax(440px, 1.05fr) minmax(360px, 0.95fr);
+  gap: clamp(48px, 7vw, 104px);
+  align-items: center;
 }
 
 .general-heading .section-heading {
-  max-width: 10ch;
+  max-width: none;
   font-size: clamp(40px, 4.25vw, 58px);
 }
 
+.general-heading .section-heading span {
+  display: block;
+}
+
 .general-heading .section-intro {
+  max-width: 52ch;
   margin-block-start: 0;
 }
 
-.general-flow {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-block: 1px solid var(--line);
-  list-style: none;
-}
-
-.general-flow li {
-  min-width: 0;
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  gap: 16px;
-  padding: 26px 28px 28px;
-}
-
-.general-flow li + li {
-  border-inline-start: 1px solid var(--line);
-}
-
-.general-flow li > span {
-  color: var(--faint);
-  font-family: "Geist Mono", monospace;
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
-}
-
-.general-flow h3,
-.topic-index h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 590;
-  letter-spacing: -0.02em;
-}
-
-.general-flow p,
-.topic-index li p {
-  margin: 9px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.62;
-  text-wrap: pretty;
-}
-
 .topic-index {
-  border-block: 1px solid var(--line);
+  padding-block-start: clamp(18px, 2vw, 28px);
 }
 
 .topic-index-head {
-  min-height: 62px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  border-block-end: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(320px, 1.2fr);
+  gap: clamp(40px, 7vw, 96px);
+  align-items: end;
+}
+
+.topic-index-head h3 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 430;
+  line-height: 0.96;
+  letter-spacing: -0.035em;
 }
 
 .topic-index-head p {
+  max-width: 52ch;
   margin: 0;
-  color: var(--faint);
-  font-family: "Geist Mono", monospace;
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
-.topic-index > ol {
-  margin: 0;
+.topic-grid {
+  margin: clamp(34px, 4vw, 48px) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(28px, 3.5vw, 42px) clamp(24px, 4vw, 52px);
   list-style: none;
 }
 
-.topic-index > ol > li {
-  min-height: 132px;
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
-  padding: 26px 28px;
-  border-block-end: 1px solid var(--line);
-}
-
-.topic-index > ol > li:nth-child(even) {
-  border-inline-start: 1px solid var(--line);
-}
-
-.topic-index > ol > li > span {
-  color: var(--accent);
-  font-family: "Geist Mono", monospace;
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
-}
-
-.topic-index-note {
-  max-width: 58ch;
+.topic-grid h4 {
   margin: 0;
-  padding-block: 20px;
-  color: var(--faint);
-  font-size: 12px;
-  line-height: 1.55;
-  text-wrap: pretty;
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 540;
+  line-height: 1.2;
+  letter-spacing: -0.024em;
 }
 
 .officers-header {
@@ -970,6 +892,7 @@ summary:focus-visible {
   }
 
   .logic-lab {
+    width: 100%;
     min-height: 0;
   }
 
@@ -980,6 +903,15 @@ summary:focus-visible {
 
   .general-heading {
     max-width: 620px;
+  }
+
+  .topic-index-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .officer-grid {
@@ -1053,23 +985,8 @@ summary:focus-visible {
     padding-block: clamp(78px, 20vw, 112px);
   }
 
-  .general-flow,
-  .topic-index > ol {
+  .competition-list {
     grid-template-columns: 1fr;
-  }
-
-  .general-flow li + li {
-    border-inline-start: 0;
-  }
-
-  .topic-index > ol > li:nth-child(even) {
-    border-inline-start: 0;
-  }
-
-  .topic-index > ol > li {
-    min-height: 0;
-    padding-inline: 0;
-    border-block-end: 0;
   }
 
   .program-choices {
