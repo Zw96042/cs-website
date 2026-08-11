@@ -573,6 +573,14 @@ summary:focus-visible {
   letter-spacing: -0.018em;
 }
 
+.officer-bio {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
 .join-layout {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(280px, 4fr);

@@ -1,5 +1,11 @@
 # Design decisions
 
+## Implementation — React and Vite
+
+- Page sections are focused React components under `src/components/`; repeated officers, projects, meeting steps, and questions are data-driven.
+- Canvas rendering remains in `site.js`, behind a mount-and-cleanup lifecycle exposed to React through `src/lib/animations.js`.
+- The prototype gallery remains a separate static design tool under `proto/` and is available from the Vite development server.
+
 ## Homepage — promoted from the original page prototypes
 
 - Direction: Foundry’s restrained dark canvas, asymmetric hero, code-built graph, and editorial pacing.

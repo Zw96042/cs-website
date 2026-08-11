@@ -294,6 +294,14 @@ function drawDijkstra(canvas, progress = 1) {
 
 let graphAnimation = 0;
 
+function markGraphSeen() {
+  try {
+    sessionStorage.setItem("cs-club-dijkstra-seen", "seen");
+  } catch {
+    // The animation still works when storage is unavailable.
+  }
+}
+
 function playGraph() {
   const canvas = document.querySelector(".hero-canvas");
   if (!canvas) return;
@@ -301,16 +309,21 @@ function playGraph() {
 
   if (prefersReducedMotion.matches) {
     drawDijkstra(canvas, 1);
+    markGraphSeen();
     return;
   }
 
+  drawDijkstra(canvas, 0);
   const start = performance.now();
   const duration = 2500;
   const tick = (now) => {
     const progress = clamp((now - start) / duration);
     drawDijkstra(canvas, progress);
     if (progress < 1) graphAnimation = requestAnimationFrame(tick);
-    else graphAnimation = 0;
+    else {
+      graphAnimation = 0;
+      markGraphSeen();
+    }
   };
   graphAnimation = requestAnimationFrame(tick);
 }
@@ -318,19 +331,24 @@ function playGraph() {
 function initializeGraph() {
   const trigger = document.querySelector(".hero-media");
   const canvas = document.querySelector(".hero-canvas");
-  if (!trigger || !canvas) return;
+  if (!trigger || !canvas) return () => {};
 
   trigger.addEventListener("click", playGraph);
   let hasSeenGraph = false;
   try {
     hasSeenGraph = sessionStorage.getItem("cs-club-dijkstra-seen") === "seen";
-    if (!hasSeenGraph) sessionStorage.setItem("cs-club-dijkstra-seen", "seen");
   } catch {
     hasSeenGraph = false;
   }
 
   if (hasSeenGraph || prefersReducedMotion.matches) drawDijkstra(canvas, 1);
   else playGraph();
+
+  return () => {
+    trigger.removeEventListener("click", playGraph);
+    cancelAnimationFrame(graphAnimation);
+    graphAnimation = 0;
+  };
 }
 
 const sortValues = [72, 28, 91, 44, 63, 17, 55, 36];
@@ -435,7 +453,7 @@ function drawSortCanvas(canvas, state = {}) {
 
 function initializeSortLab() {
   const lab = document.querySelector("[data-sort-lab]");
-  if (!lab) return;
+  if (!lab) return () => {};
   const trigger = lab.querySelector(".sort-trigger");
   const canvas = lab.querySelector(".sort-canvas");
   const status = lab.querySelector(".logic-lab-status");
@@ -507,6 +525,15 @@ function initializeSortLab() {
   } else {
     sortAnimation = requestAnimationFrame(runSort);
   }
+
+  return () => {
+    trigger.removeEventListener("click", runSort);
+    sortObserver?.disconnect();
+    sortObserver = null;
+    cancelAnimationFrame(sortAnimation);
+    sortAnimation = 0;
+    trigger.disabled = false;
+  };
 }
 
 function redrawVisuals() {
@@ -516,13 +543,32 @@ function redrawVisuals() {
   if (sortCanvas) drawSortCanvas(sortCanvas, sortCanvas._sortState);
 }
 
-let resizeFrame = 0;
-window.addEventListener("resize", () => {
-  cancelAnimationFrame(resizeFrame);
-  resizeFrame = requestAnimationFrame(redrawVisuals);
-});
-prefersLightMode.addEventListener("change", () => requestAnimationFrame(redrawVisuals));
-document.fonts.ready.then(redrawVisuals);
+function initializeAnimations() {
+  let disposed = false;
+  let resizeFrame = 0;
+  const handleResize = () => {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(redrawVisuals);
+  };
+  const handleThemeChange = () => requestAnimationFrame(redrawVisuals);
 
-initializeGraph();
-initializeSortLab();
+  window.addEventListener("resize", handleResize);
+  prefersLightMode.addEventListener("change", handleThemeChange);
+  document.fonts.ready.then(() => {
+    if (!disposed) redrawVisuals();
+  });
+
+  const cleanupGraph = initializeGraph();
+  const cleanupSort = initializeSortLab();
+
+  return () => {
+    disposed = true;
+    cleanupGraph();
+    cleanupSort();
+    window.removeEventListener("resize", handleResize);
+    prefersLightMode.removeEventListener("change", handleThemeChange);
+    cancelAnimationFrame(resizeFrame);
+  };
+}
+
+window.initializeAnimations = initializeAnimations;

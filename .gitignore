@@ -2,3 +2,5 @@
 .npmrc
 .vite/
 .plans/
+dist/
+node_modules/
