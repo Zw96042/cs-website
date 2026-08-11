@@ -997,39 +997,25 @@ summary:focus-visible {
     isolation: isolate;
   }
 
-  .site-header::before,
-  .site-header::after {
+  .site-header::before {
     position: absolute;
+    inset: 0 0 auto;
     z-index: 0;
+    height: 100%;
+    border-block-end: 1px solid var(--line);
     background: var(--bg);
     content: "";
     pointer-events: none;
-    transform-origin: top;
     transition:
       background-color 180ms ease,
-      transform 180ms var(--ease-move);
+      height 180ms var(--ease-move);
   }
 
-  .site-header::before {
-    inset: 0 0 auto;
-    height: env(safe-area-inset-top);
-  }
-
-  .site-header::after {
-    inset: env(safe-area-inset-top) 0 auto;
-    height: 64px;
-    border-block-end: 1px solid var(--line);
-  }
-
-  .site-header[data-condensed]::before,
-  .site-header[data-condensed]::after {
+  .site-header[data-condensed]::before {
+    height: calc(56px + env(safe-area-inset-top));
     background: color-mix(in srgb, var(--bg) 82%, transparent);
     -webkit-backdrop-filter: blur(14px) saturate(125%);
     backdrop-filter: blur(14px) saturate(125%);
-  }
-
-  .site-header[data-condensed]::after {
-    transform: scaleY(0.875);
   }
 
   .site-header .header-inner {
