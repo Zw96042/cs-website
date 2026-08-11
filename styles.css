@@ -1006,16 +1006,11 @@ summary:focus-visible {
     background: var(--bg);
     content: "";
     pointer-events: none;
-    transition:
-      background-color 180ms ease,
-      height 180ms var(--ease-move);
+    transition: height 180ms var(--ease-move);
   }
 
   .site-header[data-condensed]::before {
     height: calc(56px + env(safe-area-inset-top));
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    -webkit-backdrop-filter: blur(14px) saturate(125%);
-    backdrop-filter: blur(14px) saturate(125%);
   }
 
   .site-header .header-inner {
