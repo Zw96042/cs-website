@@ -5,7 +5,7 @@ const questions = [
   },
   {
     question: "Do I have to choose one program?",
-    answer: "No. You can move between Competitive Programming and General CS whenever your goals or interests change.",
+    answer: "Choose the program that best matches your goals. Sticking with one track lets each week build on the last.",
   },
   {
     question: "What does Competitive Programming cover?",

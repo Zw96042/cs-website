@@ -18,7 +18,7 @@ export default function ProgramSection() {
         <div className="program-heading">
           <h2 className="section-heading" id="program-heading">Mondays split in two.</h2>
           <p className="section-intro">
-            Students head straight to General CS or Competitive Programming after school. Both meet in Room 198A, and you can switch from week to week.
+            Students head straight to General CS or Competitive Programming after school. Both meet in Room 198A.
           </p>
         </div>
         <div className="program-choices">
@@ -32,7 +32,7 @@ export default function ProgramSection() {
             </article>
           ))}
         </div>
-        <p className="program-note"><strong>Same room, same officers.</strong> Choose the group that matches what you want to work on that Monday.</p>
+        <p className="program-note"><strong>Same room, same officers.</strong> Choose the program that matches your goals, then build on it each Monday.</p>
       </div>
     </section>
   );
