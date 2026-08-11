@@ -990,17 +990,17 @@ summary:focus-visible {
 
 @media (max-width: 700px) {
   .site-header {
-    height: 64px;
+    height: calc(64px + env(safe-area-inset-top));
+    padding-block-start: env(safe-area-inset-top);
     border-block-end-color: transparent;
     background: transparent;
     isolation: isolate;
   }
 
-  .site-header::before {
+  .site-header::before,
+  .site-header::after {
     position: absolute;
-    inset: 0;
     z-index: 0;
-    border-block-end: 1px solid var(--line);
     background: var(--bg);
     content: "";
     pointer-events: none;
@@ -1010,10 +1010,25 @@ summary:focus-visible {
       transform 180ms var(--ease-move);
   }
 
-  .site-header[data-condensed]::before {
+  .site-header::before {
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top);
+  }
+
+  .site-header::after {
+    inset: env(safe-area-inset-top) 0 auto;
+    height: 64px;
+    border-block-end: 1px solid var(--line);
+  }
+
+  .site-header[data-condensed]::before,
+  .site-header[data-condensed]::after {
     background: color-mix(in srgb, var(--bg) 82%, transparent);
     -webkit-backdrop-filter: blur(14px) saturate(125%);
     backdrop-filter: blur(14px) saturate(125%);
+  }
+
+  .site-header[data-condensed]::after {
     transform: scaleY(0.875);
   }
 
