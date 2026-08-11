@@ -1,4 +1,4 @@
-window.prototypeHeaderMarkup = function prototypeHeaderMarkup() {
+window.prototypeHeaderMarkup = function prototypeHeaderMarkup () {
   return `
     <header class="prototype-header">
       <div class="prototype-header-inner">
@@ -15,10 +15,10 @@ window.prototypeHeaderMarkup = function prototypeHeaderMarkup() {
         </nav>
       </div>
     </header>
-  `;
-};
+  `
+}
 
-window.heroGraphMarkup = function heroGraphMarkup(modifier = "") {
+window.heroGraphMarkup = function heroGraphMarkup (modifier = '') {
   return `
     <button
       class="hero-media ${modifier}"
@@ -27,33 +27,33 @@ window.heroGraphMarkup = function heroGraphMarkup(modifier = "") {
     >
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
     </button>
-  `;
-};
+  `
+}
 
-window.prototypeLedeMarkup = function prototypeLedeMarkup(text) {
+window.prototypeLedeMarkup = function prototypeLedeMarkup (text) {
   return `
     <p class="prototype-lede">
       ${text}
     </p>
-  `;
-};
+  `
+}
 
-window.prototypeActionsMarkup = function prototypeActionsMarkup({
-  modifier = "",
-  primary = "Join a meeting",
-  secondary = "See what we build",
-  primaryHref = "../../#join",
-  secondaryHref = "../../#projects",
+window.prototypeActionsMarkup = function prototypeActionsMarkup ({
+  modifier = '',
+  primary = 'Join a meeting',
+  secondary = 'See what we build',
+  primaryHref = '../../#join',
+  secondaryHref = '../../#projects'
 } = {}) {
   return `
     <div class="prototype-actions ${modifier}">
       <a class="prototype-action prototype-action-primary" href="${primaryHref}">${primary} <span aria-hidden="true">→</span></a>
       <a class="prototype-action prototype-action-secondary" href="${secondaryHref}">${secondary} <span aria-hidden="true">→</span></a>
     </div>
-  `;
-};
+  `
+}
 
-window.prototypeSceneMarkup = function prototypeSceneMarkup(modifier, heroMarkup) {
+window.prototypeSceneMarkup = function prototypeSceneMarkup (modifier, heroMarkup) {
   return `
     <div class="site-page proto-scene is-replaying ${modifier}">
       ${window.prototypeHeaderMarkup()}
@@ -63,5 +63,5 @@ window.prototypeSceneMarkup = function prototypeSceneMarkup(modifier, heroMarkup
         </section>
       </main>
     </div>
-  `;
-};
+  `
+}

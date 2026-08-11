@@ -1,11 +1,11 @@
 window.heroVariants.push({
-  name: "Signal",
-  axis: "A hardware-first hero where a live signal becomes the visual language.",
-  render: () => window.prototypeSceneMarkup("concept-signal", `
+  name: 'Signal',
+  axis: 'A hardware-first hero where a live signal becomes the visual language.',
+  render: () => window.prototypeSceneMarkup('concept-signal', `
     <div class="signal-copy">
       <h1 class="prototype-title" id="hero-title">Software is only half the story.</h1>
-      ${window.prototypeLedeMarkup("Write the code, wire the sensor, and see your idea leave the screen.")}
-      ${window.prototypeActionsMarkup({ modifier: "signal-actions", primary: "Explore hardware", secondary: "Join a build night", secondaryHref: "../../#join" })}
+      ${window.prototypeLedeMarkup('Write the code, wire the sensor, and see your idea leave the screen.')}
+      ${window.prototypeActionsMarkup({ modifier: 'signal-actions', primary: 'Explore hardware', secondary: 'Join a build night', secondaryHref: '../../#join' })}
     </div>
     <div class="signal-field">
       <svg viewBox="0 0 720 480" aria-hidden="true">
@@ -16,5 +16,5 @@ window.heroVariants.push({
       </svg>
       <button class="concept-replay-control" type="button" data-replay>Replay signal <span aria-hidden="true">↻</span></button>
     </div>
-  `),
-});
+  `)
+})
