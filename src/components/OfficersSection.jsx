@@ -34,6 +34,7 @@ const officers = [
     width: 624,
     height: 876,
     objectPosition: "50% 38%",
+    bio: "Aadi has a strong background in software development, with the most experience in Go, Python, and Java, as well as robotics and AI. He will help with UIL preparation and competitive programming this year. Outside CS Club, he is involved in the school’s robotics team and enjoys building new projects and experimenting with the latest tools.",
   },
   {
     name: "Kelly Zhou",
