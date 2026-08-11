@@ -40,7 +40,6 @@
 
             packages = with pkgs; [
               nodejs
-              npm
               typescript
             ];
             /*
