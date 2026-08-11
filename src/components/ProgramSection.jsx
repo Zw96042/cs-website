@@ -18,7 +18,7 @@ export default function ProgramSection() {
         <div className="program-heading">
           <h2 className="section-heading" id="program-heading">Mondays split in two.</h2>
           <p className="section-intro">
-            Students head straight to General CS or Competitive Programming after school. Both meet in Room 198A.
+            Students head straight to General CS or Competitive Programming after school. Both meet in Room 291A.
           </p>
         </div>
         <div className="program-choices">

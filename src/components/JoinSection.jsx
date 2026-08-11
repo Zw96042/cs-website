@@ -28,7 +28,7 @@ export default function JoinSection() {
         <div className="join-copy">
           <h2 className="section-heading" id="join-heading">Mondays after school.</h2>
           <p className="section-intro">
-            Room 198A · Westlake High School
+            Room 291A · Westlake High School
           </p>
         </div>
         <div className="join-details">

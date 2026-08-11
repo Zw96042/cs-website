@@ -385,13 +385,35 @@ const completeSortStatus = "Complete / 8 values sorted";
 let sortObserver = null;
 let sortAnimation = 0;
 
-function drawSortCanvas(canvas, state = {}) {
-  const { context, width, height, colors } = canvasFrame(canvas);
+function sortVisualMetrics(state = {}) {
   const items = state.items || sortFrames[0].items;
   const previousItems = state.previousItems || items;
   const transition = easeInOutMotion(state.transition ?? 1);
+  const previousPositions = state.fromPositions instanceof Map
+    ? state.fromPositions
+    : new Map(previousItems.map((item, index) => [item.id, index]));
+  const positions = new Map(
+    items.map((item, index) => {
+      const previousIndex = previousPositions.get(item.id) ?? index;
+      return [item.id, previousIndex + (index - previousIndex) * transition];
+    }),
+  );
+  const targetSortedUnits = (state.activeId ?? null) === null
+    ? (state.sortedThrough ?? 0) + 1
+    : (state.sortedThrough ?? 0) + transition;
+  const previousSortedUnits = state.fromSortedUnits ?? targetSortedUnits;
+
+  return {
+    positions,
+    sortedUnits: previousSortedUnits + (targetSortedUnits - previousSortedUnits) * transition,
+  };
+}
+
+function drawSortCanvas(canvas, state = {}) {
+  const { context, width, height, colors } = canvasFrame(canvas);
+  const items = state.items || sortFrames[0].items;
+  const transition = easeInOutMotion(state.transition ?? 1);
   const activeId = state.activeId ?? null;
-  const sortedThrough = state.sortedThrough ?? 0;
   const sidePadding = Math.min(34, width * 0.055);
   const topPadding = 28;
   const bottomPadding = 42;
@@ -401,7 +423,7 @@ function drawSortCanvas(canvas, state = {}) {
   const chartHeight = height - topPadding - bottomPadding;
   const maximum = Math.max(...sortValues);
   const baseline = topPadding + chartHeight;
-  const previousPositions = new Map(previousItems.map((item, index) => [item.id, index]));
+  const { positions, sortedUnits } = sortVisualMetrics(state);
 
   context.save();
   context.globalAlpha = 0.72;
@@ -412,7 +434,6 @@ function drawSortCanvas(canvas, state = {}) {
   context.lineWidth = 1;
   context.stroke();
 
-  const sortedUnits = activeId === null ? sortedThrough + 1 : sortedThrough + transition;
   const sortedWidth = sortedUnits * barWidth + Math.max(0, sortedUnits - 1) * gap;
   context.beginPath();
   context.moveTo(sidePadding, baseline + 8.5);
@@ -425,9 +446,8 @@ function drawSortCanvas(canvas, state = {}) {
   const renderItems = [...items].sort((left, right) => Number(left.id === activeId) - Number(right.id === activeId));
   renderItems.forEach((item) => {
     const index = items.findIndex(({ id }) => id === item.id);
-    const previousIndex = previousPositions.get(item.id) ?? index;
-    const position = previousIndex + (index - previousIndex) * transition;
-    const moving = item.id === activeId && previousIndex !== index;
+    const position = positions.get(item.id) ?? index;
+    const moving = item.id === activeId && Math.abs(position - index) > 0.001;
     const lift = moving ? Math.sin(Math.PI * transition) * Math.min(22, height * 0.06) : 0;
     const barHeight = (item.value / maximum) * chartHeight;
     const x = sidePadding + position * (barWidth + gap);
@@ -461,15 +481,15 @@ function initializeSortLab() {
   const initialFrame = sortFrames[0];
   drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 });
 
-  const runSort = () => {
+  const runSort = ({ reset = true } = {}) => {
+    const currentMetrics = sortVisualMetrics(canvas._sortState || initialFrame);
     cancelAnimationFrame(sortAnimation);
     sortAnimation = 0;
     sortObserver?.disconnect();
     sortObserver = null;
     lab.setAttribute("aria-busy", "true");
     hint.textContent = "Click to restart";
-    status.textContent = initialFrame.status;
-    drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 });
+    status.textContent = reset ? "Resetting / returning to start" : initialFrame.status;
 
     if (prefersReducedMotion.matches) {
       const finalFrame = sortFrames[sortFrames.length - 1];
@@ -480,18 +500,46 @@ function initializeSortLab() {
       return;
     }
 
+    const resetDuration = reset ? 280 : 0;
+    const resetPause = reset ? 90 : 0;
     const durationPerFrame = 490;
     const segmentCount = sortFrames.length - 1;
     const totalDuration = segmentCount * durationPerFrame;
-    const start = performance.now();
+    let start = null;
     let lastSegment = -1;
+    let sortStarted = false;
 
     const tick = (now) => {
+      if (start === null) start = now;
       const elapsed = now - start;
-      const segment = Math.min(segmentCount - 1, Math.floor(elapsed / durationPerFrame));
+
+      if (elapsed < resetDuration) {
+        drawSortCanvas(canvas, {
+          ...initialFrame,
+          fromPositions: currentMetrics.positions,
+          fromSortedUnits: currentMetrics.sortedUnits,
+          transition: elapsed / resetDuration,
+        });
+        sortAnimation = requestAnimationFrame(tick);
+        return;
+      }
+
+      if (!sortStarted) {
+        drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 });
+        status.textContent = initialFrame.status;
+        sortStarted = true;
+      }
+
+      if (elapsed < resetDuration + resetPause) {
+        sortAnimation = requestAnimationFrame(tick);
+        return;
+      }
+
+      const sortElapsed = elapsed - resetDuration - resetPause;
+      const segment = Math.min(segmentCount - 1, Math.floor(sortElapsed / durationPerFrame));
       const previousFrame = sortFrames[segment];
       const currentFrame = sortFrames[segment + 1];
-      const transition = clamp((elapsed - segment * durationPerFrame) / durationPerFrame);
+      const transition = clamp((sortElapsed - segment * durationPerFrame) / durationPerFrame);
 
       drawSortCanvas(canvas, { ...currentFrame, previousItems: previousFrame.items, transition });
       if (segment !== lastSegment) {
@@ -499,7 +547,7 @@ function initializeSortLab() {
         lastSegment = segment;
       }
 
-      if (elapsed < totalDuration) {
+      if (sortElapsed < totalDuration) {
         sortAnimation = requestAnimationFrame(tick);
         return;
       }
@@ -514,21 +562,22 @@ function initializeSortLab() {
     sortAnimation = requestAnimationFrame(tick);
   };
 
-  trigger.addEventListener("click", runSort);
+  const replaySort = () => runSort({ reset: true });
+  trigger.addEventListener("click", replaySort);
   if ("IntersectionObserver" in window) {
     sortObserver = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.25)) runSort();
+        if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.25)) runSort({ reset: false });
       },
       { threshold: [0.25], rootMargin: "0px 0px -10%" },
     );
     sortObserver.observe(lab);
   } else {
-    sortAnimation = requestAnimationFrame(runSort);
+    sortAnimation = requestAnimationFrame(() => runSort({ reset: false }));
   }
 
   return () => {
-    trigger.removeEventListener("click", runSort);
+    trigger.removeEventListener("click", replaySort);
     sortObserver?.disconnect();
     sortObserver = null;
     cancelAnimationFrame(sortAnimation);
