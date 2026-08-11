@@ -1,15 +1,23 @@
 const questions = [
   {
-    question: "Do I need experience?",
-    answer: "No. The first session is designed to give you a useful place to start, even if you have never written code.",
+    question: "Can I join if I am new to coding?",
+    answer: "Yes. General CS sessions explain the foundation before the activity starts, and officers can help you get set up.",
   },
   {
-    question: "What should I bring?",
-    answer: "A laptop is useful but not required. We can pair you with another member for the meeting.",
+    question: "Do I have to choose one program?",
+    answer: "No. You can move between UIL practice and general CS whenever your goals or interests change.",
   },
   {
-    question: "Can I bring my own project?",
-    answer: "Yes. Bring the project, the problem, or the half-formed idea. Someone can help you find the next step.",
+    question: "What does the UIL group study?",
+    answer: "The competitive group focuses on Java, algorithms, data structures, contest strategy, and timed programming practice.",
+  },
+  {
+    question: "What does the general group study?",
+    answer: "Topics rotate through AI, cybersecurity, computer vision, data science, and other areas members want to explore.",
+  },
+  {
+    question: "Do you run competitions or hackathons?",
+    answer: "Occasionally. We host UIL mock competitions for contest practice and hackathons for longer collaborative builds.",
   },
 ];
 
@@ -20,12 +28,12 @@ export default function JoinSection() {
         <div className="join-copy">
           <h2 className="section-heading" id="join-heading">Mondays after school.</h2>
           <p className="section-intro">
-            Find us in Room 198A at Westlake High School.
+            Room 198A · Westlake High School
           </p>
         </div>
         <div className="join-details">
           {questions.map((item) => (
-            <details className="meeting-details" key={item.question}>
+            <details className="meeting-details" name="club-faq" key={item.question}>
               <summary>{item.question}</summary>
               <p>{item.answer}</p>
             </details>

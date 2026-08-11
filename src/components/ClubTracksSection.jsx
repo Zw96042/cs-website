@@ -1,15 +1,11 @@
 const programs = [
   {
-    name: "Competitive UIL CS",
-    description: "Prepare for UIL Computer Science with advanced algorithms, data structures, Java, and competition strategy.",
+    name: "UIL Computer Science",
+    description: "Advanced algorithms, data structures, Java, timed practice, and the strategy behind programming contests.",
   },
   {
-    name: "General CS",
-    description: "Explore artificial intelligence, cybersecurity, computer vision, data science, and other fields through lessons and hands-on work.",
-  },
-  {
-    name: "Mock competitions + hackathons",
-    description: "We occasionally host UIL mock competitions and hackathons to practice under pressure, collaborate, and build something new.",
+    name: "General computer science",
+    description: "Artificial intelligence, cybersecurity, computer vision, data science, and rotating topics requested by members.",
   },
 ];
 
@@ -20,6 +16,7 @@ export default function ClubTracksSection() {
         <div className="logic-lab" data-sort-lab>
           <div className="logic-lab-head">
             <p className="logic-lab-title">UIL algorithm lab / insertion sort</p>
+            <p className="logic-lab-hint">Click to replay</p>
           </div>
           <button className="sort-trigger" type="button" aria-describedby="sort-status">
             <canvas className="sort-canvas" aria-hidden="true" />
@@ -32,9 +29,9 @@ export default function ClubTracksSection() {
         </div>
 
         <div className="tracks-copy">
-          <h2 className="section-heading" id="tracks-heading">Competition and everything beyond it.</h2>
+          <h2 className="section-heading" id="tracks-heading">Competitive CS and general CS, side by side.</h2>
           <p className="section-intro">
-            Train for UIL Computer Science or explore the parts of computing that rarely fit in a class. Many members do both.
+            Pick the session that fits what you want to learn that week. Switching between them is encouraged.
           </p>
           <ul className="track-list">
             {programs.map((program) => (
@@ -44,6 +41,10 @@ export default function ClubTracksSection() {
               </li>
             ))}
           </ul>
+          <div className="track-event">
+            <h3>Beyond weekly meetings</h3>
+            <p>We occasionally host UIL mock competitions and hackathons for focused practice and longer-form building.</p>
+          </div>
         </div>
       </div>
     </section>

@@ -3,20 +3,20 @@ export default function AboutSection() {
     <section className="section-shell about-section" id="about" aria-labelledby="about-heading">
       <div className="section-inner about-layout">
         <div className="about-heading">
-          <h2 className="section-heading" id="about-heading">Start curious. Leave capable.</h2>
+          <h2 className="section-heading" id="about-heading">Different starting points. Same room.</h2>
           <p className="section-intro">
-            We make room for beginners, ambitious builders, and everyone still figuring out which one they are.
+            Some students are opening an editor for the first time. Others are already training for UIL. The club is designed for both.
           </p>
         </div>
         <div className="about-copy">
           <p className="about-principle">
-            The club is less about knowing the answer and more about learning how to find it.
+            Start at your level and work on something that actually challenges you.
           </p>
           <p>
-            Members work at their own level, pair up when a problem gets stubborn, and share the reasoning behind what they build.
+            Officers explain the foundation before the room splits into competitive and general CS work.
           </p>
           <p>
-            We care about readable code, useful feedback, and projects that teach something beyond the tutorial.
+            Members ask questions, debug together, and share the reasoning behind a solution—not just the finished answer.
           </p>
         </div>
       </div>

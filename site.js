@@ -381,7 +381,7 @@ function insertionFrames(values) {
 }
 
 const sortFrames = insertionFrames(sortValues);
-const completeSortStatus = "Complete / click visualization to replay";
+const completeSortStatus = "Complete / 8 values sorted";
 let sortObserver = null;
 let sortAnimation = 0;
 
@@ -457,16 +457,17 @@ function initializeSortLab() {
   const trigger = lab.querySelector(".sort-trigger");
   const canvas = lab.querySelector(".sort-canvas");
   const status = lab.querySelector(".logic-lab-status");
+  const hint = lab.querySelector(".logic-lab-hint");
   const initialFrame = sortFrames[0];
   drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 });
 
-  let running = false;
   const runSort = () => {
-    if (running) return;
-    running = true;
+    cancelAnimationFrame(sortAnimation);
+    sortAnimation = 0;
     sortObserver?.disconnect();
     sortObserver = null;
-    trigger.disabled = true;
+    lab.setAttribute("aria-busy", "true");
+    hint.textContent = "Click to restart";
     status.textContent = initialFrame.status;
     drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 });
 
@@ -474,8 +475,8 @@ function initializeSortLab() {
       const finalFrame = sortFrames[sortFrames.length - 1];
       drawSortCanvas(canvas, { ...finalFrame, activeId: null, previousItems: finalFrame.items, transition: 1 });
       status.textContent = completeSortStatus;
-      trigger.disabled = false;
-      running = false;
+      hint.textContent = "Click to replay";
+      lab.removeAttribute("aria-busy");
       return;
     }
 
@@ -505,8 +506,8 @@ function initializeSortLab() {
 
       drawSortCanvas(canvas, { ...currentFrame, activeId: null, previousItems: currentFrame.items, transition: 1 });
       status.textContent = completeSortStatus;
-      trigger.disabled = false;
-      running = false;
+      hint.textContent = "Click to replay";
+      lab.removeAttribute("aria-busy");
       sortAnimation = 0;
     };
 
@@ -532,7 +533,8 @@ function initializeSortLab() {
     sortObserver = null;
     cancelAnimationFrame(sortAnimation);
     sortAnimation = 0;
-    trigger.disabled = false;
+    lab.removeAttribute("aria-busy");
+    hint.textContent = "Click to replay";
   };
 }
 

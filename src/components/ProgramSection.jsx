@@ -1,15 +1,15 @@
 const meetingSteps = [
   {
-    title: "Learn one useful idea.",
-    description: "A short explanation gives everyone enough context to start, without taking over the meeting.",
+    title: "Quick lesson",
+    description: "Start with a focused walkthrough of an algorithm, tool, or computer science topic.",
   },
   {
-    title: "Build while help is nearby.",
-    description: "Use the rest of the session to work, ask questions, review code, and make visible progress.",
+    title: "Choose your session",
+    description: "Practice UIL problems with the competitive team or join the general CS lesson and activity.",
   },
   {
-    title: "Share how it works.",
-    description: "Explain the decisions, the failure, and the fix. Understanding grows when it can be communicated.",
+    title: "Work together",
+    description: "Solve problems, test ideas, and get help from officers and other members before the meeting ends.",
   },
 ];
 
@@ -18,9 +18,9 @@ export default function ProgramSection() {
     <section className="section-shell program-section" aria-labelledby="program-heading">
       <div className="section-inner program-layout">
         <div className="program-heading">
-          <h2 className="section-heading" id="program-heading">What happens in the room.</h2>
+          <h2 className="section-heading" id="program-heading">A Monday, in three parts.</h2>
           <p className="section-intro">
-            Each meeting creates a clear next step without turning curiosity into homework.
+            Meetings are structured enough to get started quickly and flexible enough to follow what you care about.
           </p>
         </div>
         <ol className="program-list">
