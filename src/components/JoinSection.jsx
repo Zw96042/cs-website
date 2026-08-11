@@ -20,11 +20,8 @@ export default function JoinSection() {
         <div className="join-copy">
           <h2 className="section-heading" id="join-heading">Mondays after school.</h2>
           <p className="section-intro">
-            Westlake High School CS meets in Room 198A. Bring a laptop if you have one; bring your curiosity either way.
+            Find us in Room 198A at Westlake High School.
           </p>
-          <a className="text-action primary-action" href="mailto:csclub@example.edu?subject=CS%20Club%20meeting">
-            Ask about the next meeting <span className="action-arrow" aria-hidden="true">→</span>
-          </a>
         </div>
         <div className="join-details">
           {questions.map((item) => (

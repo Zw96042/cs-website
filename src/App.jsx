@@ -7,7 +7,7 @@ import Hero from "./components/Hero.jsx";
 import JoinSection from "./components/JoinSection.jsx";
 import OfficersSection from "./components/OfficersSection.jsx";
 import ProgramSection from "./components/ProgramSection.jsx";
-import ProjectsSection from "./components/ProjectsSection.jsx";
+import ClubTracksSection from "./components/ClubTracksSection.jsx";
 
 export default function App() {
   useEffect(() => initializeAnimations(), []);
@@ -22,7 +22,7 @@ export default function App() {
         <Hero />
         <AboutSection />
         <ProgramSection />
-        <ProjectsSection />
+        <ClubTracksSection />
         <OfficersSection />
         <JoinSection />
       </main>

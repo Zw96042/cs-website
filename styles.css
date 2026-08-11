@@ -439,7 +439,7 @@ summary:focus-visible {
   line-height: 1.65;
 }
 
-.projects-layout {
+.tracks-layout {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(280px, 4fr);
   gap: clamp(42px, 7vw, 100px);
@@ -506,11 +506,11 @@ summary:focus-visible {
   display: block;
 }
 
-.project-copy {
+.tracks-copy {
   padding-block-end: 8px;
 }
 
-.project-list {
+.track-list {
   margin: 46px 0 0;
   padding: 0;
   list-style: none;
@@ -518,14 +518,14 @@ summary:focus-visible {
   gap: 34px;
 }
 
-.project-list h3 {
+.track-list h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 590;
   letter-spacing: -0.02em;
 }
 
-.project-list p {
+.track-list p {
   margin: 9px 0 0;
   color: var(--muted);
   font-size: 14px;
@@ -586,10 +586,6 @@ summary:focus-visible {
   grid-template-columns: minmax(0, 7fr) minmax(280px, 4fr);
   gap: clamp(50px, 9vw, 140px);
   align-items: start;
-}
-
-.join-copy .text-action {
-  margin-block-start: 32px;
 }
 
 .meeting-details {
@@ -693,7 +689,7 @@ summary:focus-visible {
 
   .about-layout,
   .program-layout,
-  .projects-layout,
+  .tracks-layout,
   .join-layout {
     grid-template-columns: 1fr;
     gap: 52px;
@@ -703,7 +699,8 @@ summary:focus-visible {
     min-height: 0;
   }
 
-  .project-copy {
+  .tracks-copy {
+    order: -1;
     max-width: 620px;
   }
 

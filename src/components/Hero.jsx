@@ -13,8 +13,8 @@ export default function Hero() {
           <a className="text-action primary-action" href="#join">
             Join a meeting <span className="action-arrow" aria-hidden="true">→</span>
           </a>
-          <a className="text-action secondary-action" href="#projects">
-            See what we build <span className="action-arrow" aria-hidden="true">→</span>
+          <a className="text-action secondary-action" href="#tracks">
+            Explore the programs <span className="action-arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>

@@ -7,7 +7,7 @@ export default function Header() {
         </a>
         <nav className="site-nav" aria-label="Main navigation">
           <a className="nav-link" href="#about">About</a>
-          <a className="nav-link" href="#projects">Projects</a>
+          <a className="nav-link" href="#tracks">Programs</a>
           <a className="nav-link" href="#officers">Officers</a>
           <a className="nav-join" href="#join">
             Join us <span className="action-arrow" aria-hidden="true">→</span>
