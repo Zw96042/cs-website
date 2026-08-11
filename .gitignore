@@ -4,3 +4,4 @@
 .plans/
 dist/
 node_modules/
+flake.lock
