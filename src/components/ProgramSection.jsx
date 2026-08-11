@@ -13,7 +13,7 @@ const meetingTracks = [
 
 export default function ProgramSection() {
   return (
-    <section className="section-shell program-section" aria-labelledby="program-heading">
+    <section className="section-shell program-section" id="programs" aria-labelledby="program-heading">
       <div className="section-inner program-layout">
         <div className="program-heading">
           <h2 className="section-heading" id="program-heading">Mondays split in two.</h2>
@@ -32,7 +32,7 @@ export default function ProgramSection() {
             </article>
           ))}
         </div>
-        <p className="program-note"><strong>Same room, same officers.</strong> Choose the program that matches your goals, then build on it each Monday.</p>
+        <p className="program-note">Choose the program that matches your goals, then build on it each Monday.</p>
       </div>
     </section>
   );

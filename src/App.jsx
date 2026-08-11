@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { initializeAnimations } from "./lib/animations.js";
-import AboutSection from "./components/AboutSection.jsx";
+import AffiliationSection from "./components/AffiliationSection.jsx";
 import Footer from "./components/Footer.jsx";
+import GeneralCsSection from "./components/GeneralCsSection.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import JoinSection from "./components/JoinSection.jsx";
@@ -20,9 +21,10 @@ export default function App() {
       <Header />
       <main className="club-main" id="club-content">
         <Hero />
-        <AboutSection />
         <ProgramSection />
+        <GeneralCsSection />
         <ClubTracksSection />
+        <AffiliationSection />
         <OfficersSection />
         <JoinSection />
       </main>

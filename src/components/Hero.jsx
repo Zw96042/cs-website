@@ -9,11 +9,31 @@ export default function Hero() {
         <p className="hero-lede">
           Explore computer science through hands-on lessons, collaborative projects, and competition practice in everything from AI to algorithms.
         </p>
+        <dl className="hero-meeting" aria-label="Meeting details">
+          <div>
+            <dt>Date</dt>
+            <dd>Every Monday</dd>
+          </div>
+          <div>
+            <dt>Time</dt>
+            <dd>After school</dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>Room 291A</dd>
+          </div>
+        </dl>
+        <ul className="hero-benefits" aria-label="What meetings include">
+          <li>Guest speakers</li>
+          <li>Free food and drinks</li>
+          <li>Free swag</li>
+          <li>Free admission</li>
+        </ul>
         <div className="hero-actions">
           <a className="text-action primary-action" href="#join">
             Join a meeting <span className="action-arrow" aria-hidden="true">→</span>
           </a>
-          <a className="text-action secondary-action" href="#tracks">
+          <a className="text-action secondary-action" href="#programs">
             Explore the programs <span className="action-arrow" aria-hidden="true">→</span>
           </a>
         </div>

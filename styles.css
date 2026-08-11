@@ -264,8 +264,74 @@ summary:focus-visible {
   text-wrap: pretty;
 }
 
+.hero-meeting {
+  max-width: 590px;
+  margin: 30px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--line);
+}
+
+.hero-meeting > div {
+  min-width: 0;
+  padding: 16px 18px 17px 0;
+}
+
+.hero-meeting > div + div {
+  padding-inline-start: 18px;
+  border-inline-start: 1px solid var(--line);
+}
+
+.hero-meeting dt {
+  color: var(--faint);
+  font-size: 11px;
+  font-weight: 520;
+  line-height: 1.2;
+}
+
+.hero-meeting dd {
+  margin: 7px 0 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 620;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.hero-benefits {
+  max-width: 590px;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
+  gap: 10px 20px;
+  color: var(--ink);
+  list-style: none;
+}
+
+.hero-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 570;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.hero-benefits li::before {
+  width: 4px;
+  height: 4px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+  content: "";
+}
+
 .hero-actions {
-  margin-block-start: 34px;
+  margin-block-start: 28px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -356,41 +422,28 @@ summary:focus-visible {
   text-wrap: pretty;
 }
 
-.about-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(360px, 6fr);
-  gap: clamp(54px, 8vw, 112px);
-  align-items: start;
+.affiliation-section {
+  padding-block: clamp(68px, 7vw, 98px);
 }
 
-.about-copy {
-  padding-block-start: 30px;
-  border-block-start: 1px solid var(--line);
+.affiliation-layout {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px 34px;
+  grid-template-columns: minmax(0, 5fr) minmax(300px, 5fr);
+  gap: clamp(50px, 9vw, 140px);
+  align-items: end;
 }
 
-.about-copy p {
+.affiliation-copy p {
+  max-width: 54ch;
   margin: 0;
   color: var(--muted);
-  font-size: 15px;
-  line-height: 1.66;
+  font-size: 16px;
+  line-height: 1.65;
   text-wrap: pretty;
 }
 
-.about-copy .about-principle {
-  grid-column: 1 / -1;
-  max-width: 27ch;
-  padding-block-end: 28px;
-  border-block-end: 1px solid var(--line);
-  color: var(--ink);
-  font-family: "Newsreader", Georgia, serif;
-  font-size: clamp(25px, 2.3vw, 32px);
-  font-weight: 450;
-  line-height: 1.24;
-  letter-spacing: -0.022em;
-  text-wrap: balance;
+.affiliation-link {
+  margin-block-start: 22px;
 }
 
 .program-layout {
@@ -470,11 +523,6 @@ summary:focus-visible {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
-}
-
-.program-note strong {
-  color: var(--ink);
-  font-weight: 570;
 }
 
 .tracks-layout {
@@ -620,6 +668,114 @@ summary:focus-visible {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.general-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 5fr) minmax(0, 6fr);
+  gap: clamp(52px, 8vw, 116px);
+  align-items: start;
+}
+
+.general-copy .section-heading {
+  max-width: 10ch;
+  font-size: clamp(40px, 4.25vw, 58px);
+}
+
+.general-flow {
+  margin: 34px 0 0;
+  padding: 0;
+  border-block-start: 1px solid var(--line);
+  list-style: none;
+  counter-reset: general-flow;
+}
+
+.general-flow li {
+  counter-increment: general-flow;
+  position: relative;
+  padding: 22px 0 22px 42px;
+  border-block-end: 1px solid var(--line);
+}
+
+.general-flow li::before {
+  content: counter(general-flow, decimal-leading-zero);
+  position: absolute;
+  inset: 25px auto auto 0;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.general-flow h3,
+.topic-index h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 590;
+  letter-spacing: -0.02em;
+}
+
+.general-flow p,
+.topic-index li p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.topic-index {
+  border-block: 1px solid var(--line);
+}
+
+.topic-index-head {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-block-end: 1px solid var(--line);
+}
+
+.topic-index-head p {
+  margin: 0;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-index > ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-index > ol > li {
+  min-height: 118px;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding-block: 24px;
+  border-block-end: 1px solid var(--line);
+}
+
+.topic-index > ol > li > span {
+  color: var(--accent);
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-index-note {
+  max-width: 58ch;
+  margin: 0;
+  padding-block: 20px;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.55;
   text-wrap: pretty;
 }
 
@@ -778,9 +934,10 @@ summary:focus-visible {
     height: min(74vw, 560px);
   }
 
-  .about-layout,
+  .affiliation-layout,
   .program-heading,
   .tracks-layout,
+  .general-layout,
   .join-layout {
     grid-template-columns: 1fr;
     gap: 52px;
@@ -800,6 +957,10 @@ summary:focus-visible {
 
   .tracks-copy {
     order: -1;
+    max-width: 620px;
+  }
+
+  .general-copy {
     max-width: 620px;
   }
 
@@ -828,8 +989,7 @@ summary:focus-visible {
   }
 
   .hero-lede,
-  .section-intro,
-  .about-copy p {
+  .section-intro {
     font-size: 16px;
   }
 
@@ -839,15 +999,6 @@ summary:focus-visible {
 
   .section-shell {
     padding-block: clamp(78px, 20vw, 112px);
-  }
-
-  .about-copy {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .about-copy .about-principle {
-    grid-column: auto;
   }
 
   .program-choices {
@@ -892,6 +1043,14 @@ summary:focus-visible {
 
 @media (max-width: 420px) {
   .hero-title > span {
+    white-space: normal;
+  }
+
+  .hero-benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-benefits li {
     white-space: normal;
   }
 

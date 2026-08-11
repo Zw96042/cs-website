@@ -6,8 +6,8 @@ export default function Header() {
           <span className="brand-name">Westlake CS</span>
         </a>
         <nav className="site-nav" aria-label="Main navigation">
-          <a className="nav-link" href="#about">About</a>
-          <a className="nav-link" href="#tracks">Programs</a>
+          <a className="nav-link" href="#programs">Programs</a>
+          <a className="nav-link" href="#hack-club">Hack Club</a>
           <a className="nav-link" href="#officers">Officers</a>
           <a className="nav-join" href="#join">
             Join us <span className="action-arrow" aria-hidden="true">→</span>

@@ -47,7 +47,7 @@ export default function ClubTracksSection() {
           </ol>
           <div className="track-event">
             <h3>More than weekly practice</h3>
-            <p>The club also hosts occasional UIL mock competitions and hackathons.</p>
+            <p>The club also hosts occasional UIL mock competitions and hackathons, with Hack Club projects extending beyond weekly lessons.</p>
           </div>
         </div>
       </div>
