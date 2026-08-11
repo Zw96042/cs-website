@@ -13,7 +13,7 @@ const questions = [
   },
   {
     question: 'What does General CS cover?',
-    answer: 'Topics rotate through AI, cybersecurity, computer vision, data science, and other areas members want to explore.'
+    answer: 'Topics rotate through AI and machine learning, cybersecurity, computer vision, data science, computer graphics, game development, web development, and other areas members want to explore.'
   },
   {
     question: 'Do you run competitions or hackathons?',

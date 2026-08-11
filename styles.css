@@ -673,35 +673,47 @@ summary:focus-visible {
 
 .general-layout {
   display: grid;
-  grid-template-columns: minmax(320px, 5fr) minmax(0, 6fr);
-  gap: clamp(52px, 8vw, 116px);
-  align-items: start;
+  gap: clamp(42px, 5vw, 64px);
 }
 
-.general-copy .section-heading {
+.general-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(360px, 6fr);
+  gap: clamp(52px, 8vw, 116px);
+  align-items: end;
+}
+
+.general-heading .section-heading {
   max-width: 10ch;
   font-size: clamp(40px, 4.25vw, 58px);
 }
 
+.general-heading .section-intro {
+  margin-block-start: 0;
+}
+
 .general-flow {
-  margin: 34px 0 0;
+  margin: 0;
   padding: 0;
-  border-block-start: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--line);
   list-style: none;
-  counter-reset: general-flow;
 }
 
 .general-flow li {
-  counter-increment: general-flow;
-  position: relative;
-  padding: 22px 0 22px 42px;
-  border-block-end: 1px solid var(--line);
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 16px;
+  padding: 26px 28px 28px;
 }
 
-.general-flow li::before {
-  content: counter(general-flow, decimal-leading-zero);
-  position: absolute;
-  inset: 25px auto auto 0;
+.general-flow li + li {
+  border-inline-start: 1px solid var(--line);
+}
+
+.general-flow li > span {
   color: var(--faint);
   font-family: "Geist Mono", monospace;
   font-size: 10px;
@@ -749,17 +761,23 @@ summary:focus-visible {
 .topic-index > ol {
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   list-style: none;
 }
 
 .topic-index > ol > li {
-  min-height: 118px;
+  min-height: 132px;
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
-  padding-block: 24px;
+  padding: 26px 28px;
   border-block-end: 1px solid var(--line);
+}
+
+.topic-index > ol > li:nth-child(even) {
+  border-inline-start: 1px solid var(--line);
 }
 
 .topic-index > ol > li > span {
@@ -937,7 +955,7 @@ summary:focus-visible {
   .affiliation-layout,
   .program-heading,
   .tracks-layout,
-  .general-layout,
+  .general-heading,
   .join-layout {
     grid-template-columns: 1fr;
     gap: 52px;
@@ -960,7 +978,7 @@ summary:focus-visible {
     max-width: 620px;
   }
 
-  .general-copy {
+  .general-heading {
     max-width: 620px;
   }
 
@@ -971,6 +989,44 @@ summary:focus-visible {
 }
 
 @media (max-width: 700px) {
+  .site-header {
+    height: 64px;
+    border-block-end-color: transparent;
+    background: transparent;
+    isolation: isolate;
+  }
+
+  .site-header::before {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-block-end: 1px solid var(--line);
+    background: var(--bg);
+    content: "";
+    pointer-events: none;
+    transform-origin: top;
+    transition:
+      background-color 180ms ease,
+      transform 180ms var(--ease-move);
+  }
+
+  .site-header[data-condensed]::before {
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+    backdrop-filter: blur(14px) saturate(125%);
+    transform: scaleY(0.875);
+  }
+
+  .site-header .header-inner {
+    position: relative;
+    z-index: 1;
+    transition: transform 180ms var(--ease-move);
+  }
+
+  .site-header[data-condensed] .header-inner {
+    transform: translateY(-4px);
+  }
+
   .header-inner,
   .section-inner,
   .club-hero,
@@ -999,6 +1055,25 @@ summary:focus-visible {
 
   .section-shell {
     padding-block: clamp(78px, 20vw, 112px);
+  }
+
+  .general-flow,
+  .topic-index > ol {
+    grid-template-columns: 1fr;
+  }
+
+  .general-flow li + li {
+    border-inline-start: 0;
+  }
+
+  .topic-index > ol > li:nth-child(even) {
+    border-inline-start: 0;
+  }
+
+  .topic-index > ol > li {
+    min-height: 0;
+    padding-inline: 0;
+    border-block-end: 0;
   }
 
   .program-choices {

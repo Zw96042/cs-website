@@ -2,7 +2,7 @@ const meetingTracks = [
   {
     code: 'CS',
     title: 'General Computer Science',
-    description: 'Follow a lesson and hands-on activity in AI, cybersecurity, computer vision, data science, or another topic chosen by the group.'
+    description: 'Follow a lesson and hands-on activity in AI/ML, cybersecurity, computer graphics, games, web development, data science, and more.'
   },
   {
     code: 'CP',

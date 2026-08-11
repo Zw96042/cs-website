@@ -15,8 +15,8 @@ const learningFlow = [
 
 const focusAreas = [
   {
-    title: 'Artificial intelligence',
-    description: 'Models, training data, predictions, and practical experiments with how AI succeeds and fails.'
+    title: 'AI / machine learning',
+    description: 'Models, training data, neural networks, predictions, and experiments that reveal where machine learning succeeds and fails.'
   },
   {
     title: 'Cybersecurity',
@@ -29,6 +29,18 @@ const focusAreas = [
   {
     title: 'Data science',
     description: 'Statistics, visualization, and the process of finding evidence without mistaking noise for a pattern.'
+  },
+  {
+    title: 'Computer graphics',
+    description: 'Rendering, shaders, geometry, and the math that turns code into images.'
+  },
+  {
+    title: 'Game development',
+    description: 'Game loops, simulation, interaction, and the systems behind playable experiences.'
+  },
+  {
+    title: 'Web development',
+    description: 'How interfaces, servers, and data connect to make useful websites and applications.'
   }
 ]
 
@@ -36,25 +48,29 @@ export default function GeneralCsSection () {
   return (
     <section className='section-shell general-section' id='general-cs' aria-labelledby='general-heading'>
       <div className='section-inner general-layout'>
-        <div className='general-copy'>
+        <div className='general-heading'>
           <h2 className='section-heading' id='general-heading'>Inside general computer science.</h2>
           <p className='section-intro'>
             General CS rotates through modern computing topics. Each session turns one big field into something members can inspect, test, and use.
           </p>
-          <ol className='general-flow'>
-            {learningFlow.map((item) => (
-              <li key={item.title}>
+        </div>
+
+        <ol className='general-flow'>
+          {learningFlow.map((item, index) => (
+            <li key={item.title}>
+              <span aria-hidden='true'>{String(index + 1).padStart(2, '0')}</span>
+              <div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
+              </div>
+            </li>
+          ))}
+        </ol>
 
         <div className='topic-index'>
           <div className='topic-index-head'>
             <p>General CS / rotating topics</p>
-            <p>Four core areas</p>
+            <p>Seven core areas</p>
           </div>
           <ol>
             {focusAreas.map((area, index) => (
