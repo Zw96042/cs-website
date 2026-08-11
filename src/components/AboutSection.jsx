@@ -13,10 +13,10 @@ export default function AboutSection() {
             Start at your level and work on something that actually challenges you.
           </p>
           <p>
-            Officers explain the foundation before the room splits into competitive and general CS work.
+            General CS explores a new topic through a lesson and hands-on activity. Competitive Programming works through algorithms, contest problems, and UIL preparation.
           </p>
           <p>
-            Members ask questions, debug together, and share the reasoning behind a solution—not just the finished answer.
+            Members ask questions, debug together, and explain how they reached a solution, not just what they submitted.
           </p>
         </div>
       </div>

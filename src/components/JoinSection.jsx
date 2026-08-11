@@ -5,14 +5,14 @@ const questions = [
   },
   {
     question: "Do I have to choose one program?",
-    answer: "No. You can move between UIL practice and general CS whenever your goals or interests change.",
+    answer: "No. You can move between Competitive Programming and General CS whenever your goals or interests change.",
   },
   {
-    question: "What does the UIL group study?",
-    answer: "The competitive group focuses on Java, algorithms, data structures, contest strategy, and timed programming practice.",
+    question: "What does Competitive Programming cover?",
+    answer: "CP focuses on Java, algorithms, data structures, UIL contest strategy, and timed programming practice.",
   },
   {
-    question: "What does the general group study?",
+    question: "What does General CS cover?",
     answer: "Topics rotate through AI, cybersecurity, computer vision, data science, and other areas members want to explore.",
   },
   {

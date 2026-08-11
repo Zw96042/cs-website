@@ -1,11 +1,15 @@
-const programs = [
+const practice = [
   {
-    name: "UIL Computer Science",
-    description: "Advanced algorithms, data structures, Java, timed practice, and the strategy behind programming contests.",
+    name: "Learn the pattern",
+    description: "Trace algorithms and data structures until every step and tradeoff makes sense.",
   },
   {
-    name: "General computer science",
-    description: "Artificial intelligence, cybersecurity, computer vision, data science, and rotating topics requested by members.",
+    name: "Code the solution",
+    description: "Turn the idea into clear Java and learn the details that matter in UIL Computer Science.",
+  },
+  {
+    name: "Test it under time",
+    description: "Work through contest sets, compare approaches, and prepare with timed practice and mock competitions.",
   },
 ];
 
@@ -29,21 +33,21 @@ export default function ClubTracksSection() {
         </div>
 
         <div className="tracks-copy">
-          <h2 className="section-heading" id="tracks-heading">Competitive CS and general CS, side by side.</h2>
+          <h2 className="section-heading" id="tracks-heading">Inside competitive programming.</h2>
           <p className="section-intro">
-            Pick the session that fits what you want to learn that week. Switching between them is encouraged.
+            Insertion sort is one example of how CP studies an algorithm: trace each step, understand the tradeoffs, then implement it under contest constraints.
           </p>
-          <ul className="track-list">
-            {programs.map((program) => (
-              <li key={program.name}>
-                <h3>{program.name}</h3>
-                <p>{program.description}</p>
+          <ol className="competition-list">
+            {practice.map((item) => (
+              <li key={item.name}>
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
               </li>
             ))}
-          </ul>
+          </ol>
           <div className="track-event">
-            <h3>Beyond weekly meetings</h3>
-            <p>We occasionally host UIL mock competitions and hackathons for focused practice and longer-form building.</p>
+            <h3>More than weekly practice</h3>
+            <p>The club also hosts occasional UIL mock competitions and hackathons.</p>
           </div>
         </div>
       </div>

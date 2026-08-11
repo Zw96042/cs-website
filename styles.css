@@ -410,49 +410,71 @@ summary:focus-visible {
   padding-block-end: 4px;
 }
 
-.program-list {
+.program-choices {
   margin: 0;
-  padding: 0;
-  list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(26px, 4vw, 52px);
-  border-block-start: 1px solid var(--line);
-  counter-reset: program;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block: 1px solid var(--line);
 }
 
-.program-item {
-  counter-increment: program;
+.program-choice {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
-  gap: 14px;
-  padding-block: 30px 4px;
+  grid-template-columns: clamp(70px, 7vw, 100px) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  padding-block: clamp(34px, 4vw, 52px);
 }
 
-.program-item::before {
-  content: counter(program, decimal-leading-zero);
-  padding-block-start: 4px;
+.program-choice-cs {
+  padding-inline-end: clamp(28px, 5vw, 70px);
+}
+
+.program-choice-cp {
+  padding-inline-start: clamp(28px, 5vw, 70px);
+  border-inline-start: 1px solid var(--line);
+}
+
+.program-code {
+  margin: 0;
   color: var(--faint);
   font-family: "Geist Mono", monospace;
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 430;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
 }
 
-.program-item h3 {
+.program-choice-cp .program-code {
+  color: var(--accent);
+}
+
+.program-choice h3 {
   margin: 0;
-  font-size: clamp(20px, 2vw, 27px);
+  font-size: clamp(21px, 2vw, 28px);
   font-weight: 540;
   line-height: 1.16;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
-.program-item p {
-  max-width: 34ch;
+.program-choice div > p {
+  max-width: 45ch;
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.program-note {
+  margin: -28px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.program-note strong {
+  color: var(--ink);
+  font-weight: 570;
 }
 
 .tracks-layout {
@@ -534,35 +556,49 @@ summary:focus-visible {
 }
 
 .tracks-copy .section-heading {
-  max-width: 12.5ch;
+  max-width: 11ch;
   font-size: clamp(40px, 4.25vw, 58px);
 }
 
-.track-list {
+.competition-list {
   margin: 34px 0 0;
   padding: 0;
   list-style: none;
   display: grid;
   border-block-start: 1px solid var(--line);
+  counter-reset: competition;
 }
 
-.track-list li {
-  padding-block: 22px;
+.competition-list li {
+  counter-increment: competition;
+  position: relative;
+  padding: 22px 0 22px 42px;
   border-block-end: 1px solid var(--line);
 }
 
-.track-list h3 {
+.competition-list li::before {
+  content: counter(competition, decimal-leading-zero);
+  position: absolute;
+  inset: 25px auto auto 0;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.competition-list h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 590;
   letter-spacing: -0.02em;
 }
 
-.track-list p {
+.competition-list p {
   margin: 9px 0 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.62;
+  text-wrap: pretty;
 }
 
 .track-event {
@@ -594,8 +630,8 @@ summary:focus-visible {
 .officer-grid {
   margin-block-start: clamp(48px, 7vw, 88px);
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(12px, 1.7vw, 22px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(42px, 5vw, 72px) clamp(20px, 3vw, 40px);
 }
 
 .officer {
@@ -814,15 +850,23 @@ summary:focus-visible {
     grid-column: auto;
   }
 
-  .program-list {
+  .program-choices {
     grid-template-columns: 1fr;
-    gap: 0;
   }
 
-  .program-item {
-    grid-template-columns: 42px minmax(0, 1fr);
-    padding-block: 26px;
-    border-block-end: 1px solid var(--line);
+  .program-choice {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 20px;
+    padding: 28px 0;
+  }
+
+  .program-choice-cp {
+    border-block-start: 1px solid var(--line);
+    border-inline-start: 0;
+  }
+
+  .program-note {
+    margin-block-start: -24px;
   }
 
   .officer-grid {
@@ -837,6 +881,12 @@ summary:focus-visible {
     align-items: flex-start;
     flex-direction: column;
     gap: 6px;
+  }
+}
+
+@media (max-width: 520px) {
+  .officer-grid {
+    grid-template-columns: 1fr;
   }
 }
 

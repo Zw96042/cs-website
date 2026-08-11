@@ -1,4 +1,5 @@
 import advaitPhoto from "../../assets/officers/advait-johari.webp";
+import aryanPhoto from "../../assets/officers/aryan-sinha.webp";
 import dylanPhoto from "../../assets/officers/dylan-zhong.webp";
 import kellyPhoto from "../../assets/officers/kelly-zhou.webp";
 import rahilPhoto from "../../assets/officers/rahil-desai.webp";
@@ -11,7 +12,7 @@ const officers = [
     width: 357,
     height: 500,
     objectPosition: "50% 39%",
-    bio: "I run the Computer Science Club. I work in several languages, with the most experience in Nix and Rust, high-performance computing, and systems programming. I also like wearing hats. You can come to me with any question you have!",
+    bio: "Dylan runs the Computer Science Club and works across several languages, with the most experience in Nix and Rust, high-performance computing, and systems programming. He also likes wearing hats and is happy to help with any question.",
   },
   {
     name: "Zachary Wilson",
@@ -40,6 +41,15 @@ const officers = [
     width: 1000,
     height: 1078,
     objectPosition: "50% 50%",
+    bio: "Kelly helps lead club lessons and provides Java tutoring. She has the most experience in cybersecurity, data science, and statistics, and is comfortable with Java and R. Outside computer science, she enjoys digital art and editing.",
+  },
+  {
+    name: "Aryan Sinha",
+    photo: aryanPhoto,
+    width: 843,
+    height: 843,
+    objectPosition: "50% 46%",
+    bio: "Aryan leads the Algorithmic Programming Club (APC) and helps organize new contests and competitions at Westlake. He works with Java, Python, and C++, as well as lower-level and hardware-oriented work in Verilog and NASM. He hopes to use computer science and engineering to invent with physics.",
   },
 ];
 

@@ -7,7 +7,7 @@ export default function Hero() {
           <span>wish existed.</span>
         </h1>
         <p className="hero-lede">
-          Learn by shipping software, exploring hardware, and solving real problems with people who care how things work.
+          Explore computer science through hands-on lessons, collaborative projects, and competition practice in everything from AI to algorithms.
         </p>
         <div className="hero-actions">
           <a className="text-action primary-action" href="#join">

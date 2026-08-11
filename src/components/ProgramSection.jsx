@@ -1,15 +1,13 @@
-const meetingSteps = [
+const meetingTracks = [
   {
-    title: "Quick lesson",
-    description: "Start with a focused walkthrough of an algorithm, tool, or computer science topic.",
+    code: "CS",
+    title: "General Computer Science",
+    description: "Follow a lesson and hands-on activity in AI, cybersecurity, computer vision, data science, or another topic chosen by the group.",
   },
   {
-    title: "Choose your session",
-    description: "Practice UIL problems with the competitive team or join the general CS lesson and activity.",
-  },
-  {
-    title: "Work together",
-    description: "Solve problems, test ideas, and get help from officers and other members before the meeting ends.",
+    code: "CP",
+    title: "Competitive Programming",
+    description: "Practice advanced algorithms, data structures, Java, and UIL-style problems with the contest team.",
   },
 ];
 
@@ -18,21 +16,23 @@ export default function ProgramSection() {
     <section className="section-shell program-section" aria-labelledby="program-heading">
       <div className="section-inner program-layout">
         <div className="program-heading">
-          <h2 className="section-heading" id="program-heading">A Monday, in three parts.</h2>
+          <h2 className="section-heading" id="program-heading">Mondays split in two.</h2>
           <p className="section-intro">
-            Meetings are structured enough to get started quickly and flexible enough to follow what you care about.
+            Students head straight to General CS or Competitive Programming after school. Both meet in Room 198A, and you can switch from week to week.
           </p>
         </div>
-        <ol className="program-list">
-          {meetingSteps.map((step) => (
-            <li className="program-item" key={step.title}>
+        <div className="program-choices">
+          {meetingTracks.map((track) => (
+            <article className={`program-choice program-choice-${track.code.toLowerCase()}`} key={track.code}>
+              <p className="program-code" aria-hidden="true">{track.code}</p>
               <div>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
+                <h3>{track.title}</h3>
+                <p>{track.description}</p>
               </div>
-            </li>
+            </article>
           ))}
-        </ol>
+        </div>
+        <p className="program-note"><strong>Same room, same officers.</strong> Choose the group that matches what you want to work on that Monday.</p>
       </div>
     </section>
   );
