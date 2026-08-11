@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f3ef" media="(prefers-color-scheme: light)" />
+    <title>Hero composition prototypes</title>
+    <link rel="preload" href="../../assets/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../../assets/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../../styles.css?rev=3" />
+    <link rel="stylesheet" href="proto.css?rev=22" />
+  </head>
+  <body>
+    <a class="skip-link" href="#hero-title">Skip to content</a>
+    <div id="stage"></div>
+
+    <nav class="proto-picker" aria-label="Prototype variants">
+      <span class="proto-picker-highlight" aria-hidden="true"></span>
+      <button class="proto-picker-item" aria-label="Foundry" data-active aria-current="true"><span class="proto-picker-name">Foundry</span><span class="proto-picker-index" aria-hidden="true">1</span></button>
+      <button class="proto-picker-item" aria-label="Signal"><span class="proto-picker-name">Signal</span><span class="proto-picker-index" aria-hidden="true">2</span></button>
+      <button class="proto-picker-item" aria-label="Compiler"><span class="proto-picker-name">Compiler</span><span class="proto-picker-index" aria-hidden="true">3</span></button>
+      <button class="proto-picker-item" aria-label="Semester"><span class="proto-picker-name">Semester</span><span class="proto-picker-index" aria-hidden="true">4</span></button>
+      <button class="proto-picker-item" aria-label="Ledger"><span class="proto-picker-name">Ledger</span><span class="proto-picker-index" aria-hidden="true">5</span></button>
+      <button class="proto-picker-item" aria-label="Pairing"><span class="proto-picker-name">Pairing</span><span class="proto-picker-index" aria-hidden="true">6</span></button>
+      <button class="proto-picker-item" aria-label="Pathfinder"><span class="proto-picker-name">Pathfinder</span><span class="proto-picker-index" aria-hidden="true">7</span></button>
+      <button class="proto-picker-item" aria-label="Launch"><span class="proto-picker-name">Launch</span><span class="proto-picker-index" aria-hidden="true">8</span></button>
+      <button class="proto-picker-item" aria-label="Commons"><span class="proto-picker-name">Commons</span><span class="proto-picker-index" aria-hidden="true">9</span></button>
+      <button class="proto-picker-item" aria-label="Manifesto"><span class="proto-picker-name">Manifesto</span><span class="proto-picker-index" aria-hidden="true">10</span></button>
+      <button class="proto-picker-item" aria-label="Constellation"><span class="proto-picker-name">Constellation</span><span class="proto-picker-index" aria-hidden="true">11</span></button>
+      <button class="proto-picker-item" aria-label="Blueprint"><span class="proto-picker-name">Blueprint</span><span class="proto-picker-index" aria-hidden="true">12</span></button>
+      <button class="proto-picker-item" aria-label="Meridian"><span class="proto-picker-name">Meridian</span><span class="proto-picker-index" aria-hidden="true">13</span></button>
+      <button class="proto-picker-item" aria-label="Offset"><span class="proto-picker-name">Offset</span><span class="proto-picker-index" aria-hidden="true">14</span></button>
+      <button class="proto-picker-item" aria-label="Gridline"><span class="proto-picker-name">Gridline</span><span class="proto-picker-index" aria-hidden="true">15</span></button>
+    </nav>
+
+    <script>window.heroVariants = [];</script>
+    <script src="shared.js?rev=2"></script>
+    <script src="variants/foundry.js?rev=3"></script>
+    <script src="variants/signal.js"></script>
+    <script src="variants/compiler.js"></script>
+    <script src="variants/semester.js"></script>
+    <script src="variants/ledger.js"></script>
+    <script src="variants/pairing.js"></script>
+    <script src="variants/pathfinder.js"></script>
+    <script src="variants/launch.js"></script>
+    <script src="variants/commons.js"></script>
+    <script src="variants/manifesto.js"></script>
+    <script src="variants/constellation.js"></script>
+    <script src="variants/blueprint.js"></script>
+    <script src="variants/meridian.js"></script>
+    <script src="variants/offset.js"></script>
+    <script src="variants/gridline.js"></script>
+    <script src="../../site.js"></script>
+    <script src="lettergraph.js?rev=2"></script>
+    <script src="harness.js?rev=10"></script>
+  </body>
+</html>
