@@ -12,7 +12,7 @@ const officers = [
     width: 357,
     height: 500,
     objectPosition: '50% 39%',
-    bio: 'Dylan runs the Computer Science Club and works across several languages, with the most experience in Nix and Rust, high-performance computing, and systems programming. He also likes wearing hats and is happy to help with any question.'
+    bio: 'Dylan runs the Computer Science Club and works across several languages, with the most experience in Nix and Rust, high-performance computing, and systems programming. They also like wearing hats and are happy to help with any question.'
   },
   {
     name: 'Zachary Wilson',
