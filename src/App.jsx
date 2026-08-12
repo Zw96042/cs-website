@@ -9,6 +9,7 @@ import JoinSection from './components/JoinSection.jsx'
 import OfficersSection from './components/OfficersSection.jsx'
 import ProgramSection from './components/ProgramSection.jsx'
 import ClubTracksSection from './components/ClubTracksSection.jsx'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function App () {
   useEffect(() => initializeAnimations(), [])
@@ -27,6 +28,7 @@ export default function App () {
         <AffiliationSection />
         <OfficersSection />
         <JoinSection />
+        <Analytics />
       </main>
       <Footer />
     </div>
