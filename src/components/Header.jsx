@@ -26,7 +26,7 @@ export default function Header () {
     <header className='site-header' data-condensed={isCondensed ? '' : undefined}>
       <div className='header-inner'>
         <a className='brand' href='#club-content' aria-label='Westlake High School CS home'>
-          <span className='brand-name'>Westlake CS</span>
+          <span className='brand-name'>Westlake Computer Science Club</span>
         </a>
         <nav className='site-nav' aria-label='Main navigation'>
           <a className='nav-link' href='#programs'>Programs</a>
