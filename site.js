@@ -401,28 +401,32 @@ function drawSortVisual (svg, state = {}) {
   items.forEach((item) => {
     const index = items.findIndex(({ id }) => id === item.id)
     const position = positions.get(item.id) ?? index
-    const moving = item.id === activeId && Math.abs(position - index) > 0.001
-    const lift = moving ? Math.sin(Math.PI * transition) * Math.min(22, height * 0.06) : 0
+    const previousIndex = (state.previousItems || items).findIndex(({ id }) => id === item.id)
+    const pickedUp = item.id === activeId && previousIndex !== index
+    const pickupProgress = pickedUp ? Math.sin(Math.PI * transition) : 0
+    const lift = pickupProgress * Math.min(22, height * 0.06)
     const barHeight = (item.value / maximum) * chartHeight
     const x = sidePadding + position * (barWidth + gap)
     const y = baseline - barHeight - lift
     const sorted = sortedIds.has(item.id)
     const active = item.id === activeId
-    const renderedWidth = active ? barWidth * 0.76 : barWidth
+    const widthScale = 1 - pickupProgress * 0.24
     const group = svg.querySelector(`[data-sort-item="${item.id}"]`)
     const rect = group.querySelector('rect')
     const label = group.querySelector('text')
+    const restingLabelY = height - 17 - y
 
     setAttributes(group, { transform: `translate(${x} ${y})` })
     setAttributes(rect, {
-      x: (barWidth - renderedWidth) / 2,
+      x: 0,
       y: 0,
-      width: renderedWidth,
-      height: barHeight
+      width: barWidth,
+      height: barHeight,
+      transform: `translate(${barWidth / 2} 0) scale(${widthScale} 1) translate(${-barWidth / 2} 0)`
     })
     setAttributes(label, {
       x: barWidth / 2,
-      y: moving ? -10 : height - 17 - y
+      y: restingLabelY
     })
     setBooleanAttribute(group, 'data-active', active)
     setBooleanAttribute(group, 'data-sorted', sorted)

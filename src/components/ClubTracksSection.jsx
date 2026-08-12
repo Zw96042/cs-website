@@ -49,8 +49,8 @@ export default function ClubTracksSection () {
 
         <div className='tracks-copy'>
           <h2 className='section-heading' id='tracks-heading'>
-            <span>Inside</span>
-            <span>competitive programming.</span>
+            <span>Inside competitive</span>{' '}
+            <span>programming.</span>
           </h2>
           <p className='section-intro'>
             Practice algorithms, Java, and code tracing for programming contests and UIL Computer Science.
