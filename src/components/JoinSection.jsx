@@ -26,7 +26,7 @@ export default function JoinSection () {
     <section className='section-shell join-section' id='join' aria-labelledby='join-heading'>
       <div className='section-inner join-layout'>
         <div className='join-copy'>
-          <h2 className='section-heading' id='join-heading'>Mondays after school.</h2>
+          <h2 className='section-heading' id='join-heading'>Mondays, 4:30-5:30</h2>
           <p className='section-intro'>
             Room 291A at Westlake High School
           </p>

@@ -16,7 +16,7 @@ export default function Hero () {
           </div>
           <div>
             <dt>Time</dt>
-            <dd>After school</dd>
+            <dd>4:30-5:30</dd>
           </div>
           <div>
             <dt>Location</dt>
