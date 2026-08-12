@@ -27,8 +27,8 @@ const officers = [
     photo: rahilPhoto,
     width: 1030,
     height: 1125,
-    objectPosition: '50% 42%'
-    bio: 'Rahil helps with competitive programming and UIL prep this year. He is most experienced with Python, Java, C++, and Go, and also has experience with AI, computer vision, and robotics. He enjoys building new projects, experimenting with AI tools, and finding ways to use technology to solve real world problems.'
+    objectPosition: '50% 42%',
+    bio: 'Rahil will help with competitive programming and UIL preparation this year. He is most experienced with Python, Java, C++, and Go, and also has experience with AI, computer vision, and robotics. He enjoys building new projects, experimenting with AI tools, and finding ways to use technology to solve real-world problems.'
   },
   {
     name: 'Advait Johari',
