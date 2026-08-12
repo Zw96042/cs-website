@@ -1,26 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export default function Header () {
-  const [isCondensed, setIsCondensed] = useState(false)
+  const [isCondensed, setIsCondensed] = useState(false);
 
   useEffect(() => {
-    let scrollFrame = 0
+    let scrollFrame = 0;
     const updateHeader = () => {
-      setIsCondensed(window.scrollY > 48)
-      scrollFrame = 0
-    }
+      setIsCondensed(window.scrollY > 48);
+      scrollFrame = 0;
+    };
     const handleScroll = () => {
-      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeader)
-    }
+      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeader);
+    };
 
-    updateHeader()
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    updateHeader();
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.cancelAnimationFrame(scrollFrame)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+      window.cancelAnimationFrame(scrollFrame);
+    };
+  }, []);
 
   return (
     <header className='site-header' data-condensed={isCondensed ? '' : undefined}>
@@ -38,5 +38,5 @@ export default function Header () {
         </nav>
       </div>
     </header>
-  )
+  );
 }

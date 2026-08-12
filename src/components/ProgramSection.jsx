@@ -9,7 +9,7 @@ const meetingTracks = [
     title: 'Competitive Programming',
     description: 'Practice advanced algorithms, data structures, Java, and UIL-style problems with the contest team.'
   }
-]
+];
 
 export default function ProgramSection () {
   return (
@@ -35,5 +35,5 @@ export default function ProgramSection () {
         <p className='program-note'>Choose the program that matches your goals, then build on it each Monday.</p>
       </div>
     </section>
-  )
+  );
 }

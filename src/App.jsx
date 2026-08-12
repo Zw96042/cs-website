@@ -1,19 +1,19 @@
-import { useEffect } from 'react'
-import { initializeAnimations } from './lib/animations.js'
-import AffiliationSection from './components/AffiliationSection.jsx'
-import Footer from './components/Footer.jsx'
-import GeneralCsSection from './components/GeneralCsSection.jsx'
-import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import JoinSection from './components/JoinSection.jsx'
-import OfficersSection from './components/OfficersSection.jsx'
-import ProgramSection from './components/ProgramSection.jsx'
-import ClubTracksSection from './components/ClubTracksSection.jsx'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/react'
+import { useEffect } from 'react';
+import { initializeAnimations } from './lib/animations.js';
+import AffiliationSection from './components/AffiliationSection.jsx';
+import Footer from './components/Footer.jsx';
+import GeneralCsSection from './components/GeneralCsSection.jsx';
+import Header from './components/Header.jsx';
+import Hero from './components/Hero.jsx';
+import JoinSection from './components/JoinSection.jsx';
+import OfficersSection from './components/OfficersSection.jsx';
+import ProgramSection from './components/ProgramSection.jsx';
+import ClubTracksSection from './components/ClubTracksSection.jsx';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App () {
-  useEffect(() => initializeAnimations(), [])
+  useEffect(() => initializeAnimations(), []);
 
   return (
     <div className='site-page'>
@@ -30,9 +30,9 @@ export default function App () {
         <OfficersSection />
         <JoinSection />
         <Analytics />
-        <SpeedInsights/> 
+        <SpeedInsights />
       </main>
       <Footer />
     </div>
-  )
+  );
 }

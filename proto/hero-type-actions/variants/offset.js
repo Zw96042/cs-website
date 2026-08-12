@@ -11,4 +11,4 @@ window.heroVariants.push({
       ${window.prototypeActionsMarkup({ modifier: 'offset-actions', primary: 'Find a meeting', secondary: 'See member projects' })}
     </div>
   `)
-})
+});

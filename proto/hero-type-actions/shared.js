@@ -15,8 +15,8 @@ window.prototypeHeaderMarkup = function prototypeHeaderMarkup () {
         </nav>
       </div>
     </header>
-  `
-}
+  `;
+};
 
 window.heroGraphMarkup = function heroGraphMarkup (modifier = '') {
   return `
@@ -27,16 +27,16 @@ window.heroGraphMarkup = function heroGraphMarkup (modifier = '') {
     >
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
     </button>
-  `
-}
+  `;
+};
 
 window.prototypeLedeMarkup = function prototypeLedeMarkup (text) {
   return `
     <p class="prototype-lede">
       ${text}
     </p>
-  `
-}
+  `;
+};
 
 window.prototypeActionsMarkup = function prototypeActionsMarkup ({
   modifier = '',
@@ -50,8 +50,8 @@ window.prototypeActionsMarkup = function prototypeActionsMarkup ({
       <a class="prototype-action prototype-action-primary" href="${primaryHref}">${primary} <span aria-hidden="true">→</span></a>
       <a class="prototype-action prototype-action-secondary" href="${secondaryHref}">${secondary} <span aria-hidden="true">→</span></a>
     </div>
-  `
-}
+  `;
+};
 
 window.prototypeSceneMarkup = function prototypeSceneMarkup (modifier, heroMarkup) {
   return `
@@ -63,5 +63,5 @@ window.prototypeSceneMarkup = function prototypeSceneMarkup (modifier, heroMarku
         </section>
       </main>
     </div>
-  `
-}
+  `;
+};

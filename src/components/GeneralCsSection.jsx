@@ -7,7 +7,7 @@ const focusAreas = [
   'Game development',
   'Web development',
   'Systems & hardware'
-]
+];
 
 export default function GeneralCsSection () {
   return (
@@ -38,5 +38,5 @@ export default function GeneralCsSection () {
         </div>
       </div>
     </section>
-  )
+  );
 }

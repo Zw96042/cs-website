@@ -1,4 +1,4 @@
-import { sortValues } from '../lib/visualData.js'
+import { sortValues } from '../lib/visualData.js';
 
 const competitionAreas = [
   {
@@ -17,7 +17,7 @@ const competitionAreas = [
     name: 'Mock meets & hackathons',
     description: 'Occasional events for longer problems, team competition, and building beyond a weekly lesson.'
   }
-]
+];
 
 export default function ClubTracksSection () {
   return (
@@ -66,5 +66,5 @@ export default function ClubTracksSection () {
         </div>
       </div>
     </section>
-  )
+  );
 }

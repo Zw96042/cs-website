@@ -6,5 +6,5 @@ export default function Footer () {
         <span>Room 291A · Mondays, 4:30-5:30</span>
       </div>
     </footer>
-  )
+  );
 }

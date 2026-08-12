@@ -16,4 +16,4 @@ window.heroVariants.push({
     </div>
     ${window.prototypeActionsMarkup({ modifier: 'semester-actions', primary: 'Start this semester', secondary: 'How meetings work', secondaryHref: '../../#about' })}
   `)
-})
+});

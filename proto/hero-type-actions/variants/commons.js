@@ -13,4 +13,4 @@ window.heroVariants.push({
       <button class="concept-replay-control" type="button" data-replay>Replay interests <span aria-hidden="true">↻</span></button>
     </div>
   `)
-})
+});

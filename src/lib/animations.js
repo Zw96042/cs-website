@@ -1,3 +1,3 @@
-import '../../site.js'
+import '../../site.js';
 
-export const initializeAnimations = window.initializeAnimations
+export const initializeAnimations = window.initializeAnimations;

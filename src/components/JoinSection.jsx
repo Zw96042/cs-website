@@ -19,7 +19,7 @@ const questions = [
     question: 'Do you run competitions or hackathons?',
     answer: 'Occasionally. We host UIL mock competitions for contest practice and hackathons for longer collaborative builds.'
   }
-]
+];
 
 export default function JoinSection () {
   return (
@@ -41,5 +41,5 @@ export default function JoinSection () {
         </div>
       </div>
     </section>
-  )
+  );
 }

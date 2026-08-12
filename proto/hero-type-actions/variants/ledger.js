@@ -15,4 +15,4 @@ window.heroVariants.push({
     </div>
     ${window.prototypeActionsMarkup({ modifier: 'ledger-actions', primary: 'Add your first commit', secondary: 'Browse projects' })}
   `)
-})
+});

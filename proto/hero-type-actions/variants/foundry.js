@@ -9,4 +9,4 @@ window.heroVariants.push({
     </div>
     ${window.heroGraphMarkup('foundry-graph')}
   `)
-})
+});

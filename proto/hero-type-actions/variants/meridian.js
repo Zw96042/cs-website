@@ -11,4 +11,4 @@ window.heroVariants.push({
       <canvas class="letter-graph-canvas" aria-hidden="true"></canvas>
     </button>
   `)
-})
+});

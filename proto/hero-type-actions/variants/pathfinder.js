@@ -9,4 +9,4 @@ window.heroVariants.push({
     ${window.heroGraphMarkup('pathfinder-graph')}
     ${window.prototypeActionsMarkup({ modifier: 'pathfinder-actions', primary: 'Join the next lesson', secondary: 'See member projects' })}
   `)
-})
+});

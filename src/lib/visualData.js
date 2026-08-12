@@ -6,7 +6,7 @@ export const graphNodes = [
   { id: 'E', x: 0.55, y: 0.78 },
   { id: 'F', x: 0.77, y: 0.58 },
   { id: 'G', x: 0.89, y: 0.23 }
-]
+];
 
 export const graphEdges = [
   { from: 'A', to: 'B', weight: 4 },
@@ -19,6 +19,6 @@ export const graphEdges = [
   { from: 'D', to: 'F', weight: 6 },
   { from: 'E', to: 'F', weight: 3 },
   { from: 'F', to: 'G', weight: 1 }
-]
+];
 
-export const sortValues = [72, 28, 91, 44, 63, 17, 55, 36]
+export const sortValues = [72, 28, 91, 44, 63, 17, 55, 36];

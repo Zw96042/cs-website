@@ -11,4 +11,4 @@ window.heroVariants.push({
       ${window.prototypeActionsMarkup({ modifier: 'manifesto-actions', primary: 'Come as you are', secondary: 'Leave with something real' })}
     </div>
   `)
-})
+});

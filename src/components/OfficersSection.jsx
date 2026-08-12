@@ -1,9 +1,9 @@
-import advaitPhoto from '../../assets/officers/advait-johari.webp'
-import aryanPhoto from '../../assets/officers/aryan-sinha.webp'
-import dylanPhoto from '../../assets/officers/dylan-zhong.webp'
-import kellyPhoto from '../../assets/officers/kelly-zhou.webp'
-import rahilPhoto from '../../assets/officers/rahil-desai.webp'
-import zacharyPhoto from '../../assets/officers/zachary-wilson.webp'
+import advaitPhoto from '../../assets/officers/advait-johari.webp';
+import aryanPhoto from '../../assets/officers/aryan-sinha.webp';
+import dylanPhoto from '../../assets/officers/dylan-zhong.webp';
+import kellyPhoto from '../../assets/officers/kelly-zhou.webp';
+import rahilPhoto from '../../assets/officers/rahil-desai.webp';
+import zacharyPhoto from '../../assets/officers/zachary-wilson.webp';
 
 const officers = [
   {
@@ -54,7 +54,7 @@ const officers = [
     objectPosition: '50% 46%',
     bio: 'Aryan leads the Algorithmic Programming Club (APC) and helps organize new contests and competitions at Westlake. He works with Java, Python, and C++, as well as lower-level and hardware-oriented work in Verilog and NASM. He hopes to use computer science and engineering to invent with physics.'
   }
-]
+];
 
 function Officer ({ officer }) {
   return (
@@ -76,7 +76,7 @@ function Officer ({ officer }) {
         {officer.bio ? <p className='officer-bio'>{officer.bio}</p> : null}
       </figcaption>
     </figure>
-  )
+  );
 }
 
 export default function OfficersSection () {
@@ -94,5 +94,5 @@ export default function OfficersSection () {
         </div>
       </div>
     </section>
-  )
+  );
 }

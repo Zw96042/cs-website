@@ -13,4 +13,4 @@ window.heroVariants.push({
       </div>
     </div>
   `)
-})
+});

@@ -1,4 +1,4 @@
-import { graphEdges, graphNodes } from '../lib/visualData.js'
+import { graphEdges, graphNodes } from '../lib/visualData.js';
 
 export default function Hero () {
   return (
@@ -81,5 +81,5 @@ export default function Hero () {
         </svg>
       </button>
     </section>
-  )
+  );
 }

@@ -11,4 +11,4 @@ window.heroVariants.push({
       ${window.prototypeActionsMarkup({ modifier: 'launch-actions', primary: 'Enter the loop', secondary: 'See member work' })}
     </div>
   `)
-})
+});
