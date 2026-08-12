@@ -1,3 +1,5 @@
+import { sortValues } from '../lib/visualData.js'
+
 const competitionAreas = [
   {
     name: 'Algorithms & data structures',
@@ -23,11 +25,20 @@ export default function ClubTracksSection () {
       <div className='section-inner tracks-layout'>
         <div className='logic-lab' data-sort-lab>
           <div className='logic-lab-head'>
-            <p className='logic-lab-title'>UIL algorithm lab / insertion sort</p>
+            <p className='logic-lab-title'>Insertion sort</p>
             <p className='logic-lab-hint'>Click to replay</p>
           </div>
           <button className='sort-trigger' type='button' aria-describedby='sort-status'>
-            <canvas className='sort-canvas' aria-hidden='true' />
+            <svg className='sort-visual' aria-hidden='true' focusable='false'>
+              <line className='sort-baseline' data-sort-baseline />
+              <line className='sort-progress' data-sort-progress />
+              {sortValues.map((value, id) => (
+                <g className='sort-item' data-sort-item={id} data-value={value} key={id}>
+                  <rect />
+                  <text>{value}</text>
+                </g>
+              ))}
+            </svg>
             <span className='sr-only'>Replay the insertion sort animation</span>
           </button>
           <div className='logic-lab-foot'>

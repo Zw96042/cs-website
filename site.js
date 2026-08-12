@@ -1,3 +1,5 @@
+import { graphEdges, graphNodes, sortValues } from './src/lib/visualData.js'
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 const prefersLightMode = window.matchMedia('(prefers-color-scheme: light)')
 
@@ -32,87 +34,46 @@ function easeInOutMotion (value) {
   return cubicBezierProgress(value, 0.77, 0, 0.175, 1)
 }
 
-function canvasFrame (canvas) {
-  const rect = canvas.getBoundingClientRect()
+function easeInOutSine (value) {
+  return -(Math.cos(Math.PI * value) - 1) / 2
+}
+
+function svgFrame (svg) {
+  const rect = svg.getBoundingClientRect()
   const width = Math.max(1, rect.width)
   const height = Math.max(1, rect.height)
-  const ratio = Math.min(window.devicePixelRatio || 1, 2)
-  const pixelWidth = Math.round(width * ratio)
-  const pixelHeight = Math.round(height * ratio)
-
-  if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
-    canvas.width = pixelWidth
-    canvas.height = pixelHeight
-  }
-
-  const context = canvas.getContext('2d')
-  context.setTransform(ratio, 0, 0, ratio, 0, 0)
-  context.clearRect(0, 0, width, height)
-  context.lineCap = 'round'
-  context.lineJoin = 'round'
-
-  const pageStyles = getComputedStyle(canvas.closest('.site-page'))
-  return {
-    context,
-    width,
-    height,
-    colors: {
-      background: pageStyles.getPropertyValue('--bg').trim(),
-      surface: pageStyles.getPropertyValue('--surface').trim(),
-      ink: pageStyles.getPropertyValue('--ink').trim(),
-      muted: pageStyles.getPropertyValue('--muted').trim(),
-      faint: pageStyles.getPropertyValue('--faint').trim(),
-      line: pageStyles.getPropertyValue('--line').trim(),
-      accent: pageStyles.getPropertyValue('--accent').trim()
-    }
-  }
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
+  return { width, height }
 }
 
-function traceLine (context, from, to, progress, color, width = 1) {
+function setAttributes (element, attributes) {
+  Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, String(value)))
+}
+
+function setBooleanAttribute (element, name, enabled) {
+  if (enabled && !element.hasAttribute(name)) element.setAttribute(name, 'true')
+  if (!enabled && element.hasAttribute(name)) element.removeAttribute(name)
+}
+
+function setLine (line, from, to, progress = 1) {
+  const length = Math.hypot(to.x - from.x, to.y - from.y)
   const amount = easeOutCubic(clamp(progress))
-  context.beginPath()
-  context.moveTo(from.x, from.y)
-  context.lineTo(from.x + (to.x - from.x) * amount, from.y + (to.y - from.y) * amount)
-  context.strokeStyle = color
-  context.lineWidth = width
-  context.stroke()
-}
-
-function drawLabel (context, text, x, y, color, options = {}) {
-  context.save()
-  context.globalAlpha = options.alpha ?? 1
-  context.fillStyle = color
-  context.font = `${options.weight || 480} ${options.size || 11}px "Geist Mono", monospace`
-  context.textAlign = options.align || 'left'
-  context.textBaseline = options.baseline || 'alphabetic'
-  context.fillText(text, x, y)
-  context.restore()
+  setAttributes(line, {
+    x1: from.x,
+    y1: from.y,
+    x2: to.x,
+    y2: to.y,
+    'stroke-dasharray': length,
+    'stroke-dashoffset': length * (1 - amount),
+    opacity: amount > 0 ? 1 : 0
+  })
 }
 
 const graph = {
   source: 'A',
   target: 'G',
-  nodes: [
-    { id: 'A', x: 0.11, y: 0.5 },
-    { id: 'B', x: 0.31, y: 0.2 },
-    { id: 'C', x: 0.3, y: 0.75 },
-    { id: 'D', x: 0.53, y: 0.37 },
-    { id: 'E', x: 0.55, y: 0.78 },
-    { id: 'F', x: 0.77, y: 0.58 },
-    { id: 'G', x: 0.89, y: 0.23 }
-  ],
-  edges: [
-    { from: 'A', to: 'B', weight: 4 },
-    { from: 'A', to: 'C', weight: 2 },
-    { from: 'B', to: 'C', weight: 1 },
-    { from: 'B', to: 'D', weight: 5 },
-    { from: 'C', to: 'D', weight: 8 },
-    { from: 'C', to: 'E', weight: 10 },
-    { from: 'D', to: 'E', weight: 2 },
-    { from: 'D', to: 'F', weight: 6 },
-    { from: 'E', to: 'F', weight: 3 },
-    { from: 'F', to: 'G', weight: 1 }
-  ]
+  nodes: graphNodes,
+  edges: graphEdges
 }
 
 function edgeKey (from, to) {
@@ -168,55 +129,22 @@ function solveDijkstra (weightedGraph) {
 
 const solution = solveDijkstra(graph)
 
-function drawEdgeWeight (context, edge, positions, colors, alpha) {
+function positionEdgeWeight (label, edge, positions, alpha) {
   const from = positions.get(edge.from)
   const to = positions.get(edge.to)
   const deltaX = to.x - from.x
   const deltaY = to.y - from.y
   const length = Math.hypot(deltaX, deltaY) || 1
-  const offset = edge.from === 'B' && edge.to === 'C' ? 11 : 8
+  const offset = edge.from === 'B' && edge.to === 'C' ? 15 : 12
   const x = (from.x + to.x) / 2 - (deltaY / length) * offset
   const y = (from.y + to.y) / 2 + (deltaX / length) * offset
-  const text = String(edge.weight)
 
-  context.save()
-  context.globalAlpha = alpha
-  context.font = '480 9px "Geist Mono", monospace'
-  const width = context.measureText(text).width + 8
-  context.fillStyle = colors.background
-  context.fillRect(x - width / 2, y - 7, width, 14)
-  context.fillStyle = colors.faint
-  context.textAlign = 'center'
-  context.textBaseline = 'middle'
-  context.fillText(text, x, y)
-  context.restore()
+  setAttributes(label, { x, y, opacity: alpha })
+  label.textContent = String(edge.weight)
 }
 
-function drawDijkstraNode (context, position, id, colors, options = {}) {
-  const radius = options.radius || 22
-  const scale = easeOutCubic(clamp(options.reveal ?? 1))
-  if (scale <= 0) return
-
-  context.save()
-  context.translate(position.x, position.y)
-  context.scale(scale, scale)
-  context.beginPath()
-  context.arc(0, 0, radius, 0, Math.PI * 2)
-  context.fillStyle = options.current ? colors.accent : options.settled ? colors.surface : colors.background
-  context.fill()
-  context.strokeStyle = options.path ? colors.accent : options.settled ? colors.ink : colors.muted
-  context.lineWidth = options.current || options.path ? 2 : 1
-  context.stroke()
-  context.fillStyle = options.current ? colors.background : colors.ink
-  context.font = `${options.fontSize || 10}px "Geist Mono", monospace`
-  context.textAlign = 'center'
-  context.textBaseline = 'middle'
-  context.fillText(id, 0, 0)
-  context.restore()
-}
-
-function drawDijkstra (canvas, progress = 1) {
-  const { context, width, height, colors } = canvasFrame(canvas)
+function drawDijkstra (svg, progress = 1) {
+  const { width, height } = svgFrame(svg)
   const revealProgress = clamp(progress / 0.12)
   const solveProgress = clamp((progress - 0.12) / 0.46)
   const reconstructProgress = clamp((progress - 0.58) / 0.34)
@@ -232,64 +160,89 @@ function drawDijkstra (canvas, progress = 1) {
       .map(([node, previous]) => edgeKey(node, previous))
   )
   const reversePath = [...solution.path].reverse()
-  const segmentProgress = reconstructProgress * (reversePath.length - 1)
-  const completeSegments = Math.floor(segmentProgress)
-  const partialSegment = segmentProgress - completeSegments
-
-  drawLabel(context, 'DIJKSTRA / RECONSTRUCT', 10, 18, colors.faint, { alpha: revealProgress, size: 10 })
-
-  graph.edges.forEach((edge) => {
-    const from = positions.get(edge.from)
-    const to = positions.get(edge.to)
-    traceLine(context, from, to, revealProgress, colors.line, 1)
-    if (treeEdges.has(edgeKey(edge.from, edge.to))) traceLine(context, from, to, 1, colors.muted, 1.25)
-    drawEdgeWeight(context, edge, positions, colors, revealProgress * 0.8)
-  })
-
-  reversePath.slice(0, -1).forEach((node, index) => {
+  let pathLength = 0
+  const segmentEnds = reversePath.slice(0, -1).map((node, index) => {
     const from = positions.get(node)
     const to = positions.get(reversePath[index + 1])
-    const amount = index < completeSegments ? 1 : index === completeSegments ? partialSegment : 0
-    if (amount > 0) traceLine(context, from, to, amount, colors.accent, 2.7)
-    if (index === completeSegments && amount > 0 && amount < 1) {
-      const easedAmount = easeOutCubic(amount)
-      const x = from.x + (to.x - from.x) * easedAmount
-      const y = from.y + (to.y - from.y) * easedAmount
-      context.beginPath()
-      context.arc(x, y, 4.5, 0, Math.PI * 2)
-      context.fillStyle = colors.accent
-      context.fill()
-    }
+    pathLength += Math.hypot(to.x - from.x, to.y - from.y)
+    return pathLength
   })
+  const traveledDistance = pathLength * easeInOutSine(reconstructProgress)
+  const completeSegments = segmentEnds.filter((end) => traveledDistance >= end).length
+
+  const kicker = svg.querySelector('[data-graph-kicker]')
+  setAttributes(kicker, { x: 10, y: 18, opacity: revealProgress })
+
+  graph.edges.forEach((edge, index) => {
+    const group = svg.querySelector(`[data-graph-edge="${index}"]`)
+    const from = positions.get(edge.from)
+    const to = positions.get(edge.to)
+    setLine(group.querySelector('[data-edge-base]'), from, to, revealProgress)
+    setLine(group.querySelector('[data-edge-tree]'), from, to, treeEdges.has(edgeKey(edge.from, edge.to)) ? 1 : 0)
+    positionEdgeWeight(svg.querySelector(`[data-edge-weight="${index}"]`), edge, positions, revealProgress * 0.8)
+  })
+
+  const solutionPath = svg.querySelector('[data-graph-path]')
+  const pathData = reversePath
+    .map((node, index) => {
+      const position = positions.get(node)
+      return `${index === 0 ? 'M' : 'L'} ${position.x} ${position.y}`
+    })
+    .join(' ')
+  setAttributes(solutionPath, {
+    d: pathData,
+    'stroke-dasharray': pathLength,
+    'stroke-dashoffset': pathLength - traveledDistance,
+    opacity: traveledDistance > 0 ? 1 : 0
+  })
+
+  const pathHead = svg.querySelector('[data-graph-path-head]')
+  if (reconstructProgress > 0 && reconstructProgress < 1) {
+    const point = solutionPath.getPointAtLength(traveledDistance)
+    setAttributes(pathHead, {
+      transform: `translate(${point.x} ${point.y})`,
+      opacity: 1
+    })
+  } else {
+    const restingPosition = reconstructProgress >= 1
+      ? positions.get(reversePath[reversePath.length - 1])
+      : positions.get(reversePath[0])
+    setAttributes(pathHead, {
+      transform: `translate(${restingPosition.x} ${restingPosition.y})`,
+      opacity: 0
+    })
+  }
 
   const visitedReverse = new Set(
     reversePath.slice(0, Math.min(reversePath.length, completeSegments + 1))
   )
   graph.nodes.forEach((node) => {
-    drawDijkstraNode(context, positions.get(node.id), node.id, colors, {
-      radius: Math.min(23, Math.max(16, width * 0.043)),
-      reveal: revealProgress,
-      current:
-        reconstructProgress > 0 &&
-        reversePath[Math.min(completeSegments, reversePath.length - 1)] === node.id,
-      settled: snapshot.settled.includes(node.id),
-      path: visitedReverse.has(node.id)
-    })
+    const group = svg.querySelector(`[data-graph-node="${node.id}"]`)
+    const position = positions.get(node.id)
+    const scale = easeOutCubic(revealProgress)
+    const current = reconstructProgress > 0 &&
+      reversePath[Math.min(completeSegments, reversePath.length - 1)] === node.id
+    setAttributes(group, { transform: `translate(${position.x} ${position.y}) scale(${scale})` })
+    group.querySelector('circle').setAttribute('r', String(Math.min(23, Math.max(16, width * 0.043))))
+    setBooleanAttribute(group, 'data-current', current)
+    setBooleanAttribute(group, 'data-settled', snapshot.settled.includes(node.id))
+    setBooleanAttribute(group, 'data-path', visitedReverse.has(node.id))
   })
 
-  const visibleNodes = Math.min(reversePath.length, Math.ceil(segmentProgress + 1))
+  const visibleNodes = reconstructProgress > 0
+    ? Math.min(reversePath.length, completeSegments + 1)
+    : 0
   const routeText = reversePath.slice(0, visibleNodes).join(' ← ')
-  let status = snapshot.current ? `search / settle ${snapshot.current}` : 'search / source A'
-  if (solveProgress >= 1) status = 'target G reached / follow previous pointers'
+  let status = ''
   if (reconstructProgress > 0) status = routeText
-  if (reconstructProgress >= 1) status = `${solution.path.join(' → ')} / distance ${solution.distance}`
-  drawLabel(context, status, width / 2, height - 8, reconstructProgress > 0 ? colors.accent : colors.muted, {
-    align: 'center',
-    alpha: revealProgress,
-    size: width < 420 ? 9 : 10
-  })
+  if (reconstructProgress >= 1) status = `${routeText} / distance ${solution.distance}`
+  const statusLabel = svg.querySelector('[data-graph-status]')
+  setAttributes(statusLabel, { x: width / 2, y: height - 8, opacity: revealProgress })
+  setBooleanAttribute(statusLabel, 'data-path-active', reconstructProgress > 0)
+  statusLabel.style.fontSize = `${width < 420 ? 9 : 10}px`
+  statusLabel.textContent = status
 
-  canvas._graphProgress = progress
+  svg._graphProgress = progress
 }
 
 let graphAnimation = 0
@@ -302,23 +255,25 @@ function markGraphSeen () {
   }
 }
 
-function playGraph () {
-  const canvas = document.querySelector('.hero-canvas')
-  if (!canvas) return
+function playGraph ({ includeReveal = false } = {}) {
+  const svg = document.querySelector('.hero-visual')
+  if (!svg) return
   cancelAnimationFrame(graphAnimation)
 
   if (prefersReducedMotion.matches) {
-    drawDijkstra(canvas, 1)
+    drawDijkstra(svg, 1)
     markGraphSeen()
     return
   }
 
-  drawDijkstra(canvas, 0)
+  const startProgress = includeReveal ? 0 : 0.12
+  drawDijkstra(svg, startProgress)
   const start = performance.now()
-  const duration = 2500
+  const duration = includeReveal ? 2500 : 2200
   const tick = (now) => {
-    const progress = clamp((now - start) / duration)
-    drawDijkstra(canvas, progress)
+    const elapsedProgress = clamp((now - start) / duration)
+    const progress = startProgress + elapsedProgress * (1 - startProgress)
+    drawDijkstra(svg, progress)
     if (progress < 1) graphAnimation = requestAnimationFrame(tick)
     else {
       graphAnimation = 0
@@ -330,10 +285,11 @@ function playGraph () {
 
 function initializeGraph () {
   const trigger = document.querySelector('.hero-media')
-  const canvas = document.querySelector('.hero-canvas')
-  if (!trigger || !canvas) return () => {}
+  const svg = document.querySelector('.hero-visual')
+  if (!trigger || !svg) return () => {}
 
-  trigger.addEventListener('click', playGraph)
+  const replayGraph = () => playGraph({ includeReveal: false })
+  trigger.addEventListener('click', replayGraph)
   let hasSeenGraph = false
   try {
     hasSeenGraph = sessionStorage.getItem('cs-club-dijkstra-seen') === 'seen'
@@ -341,17 +297,15 @@ function initializeGraph () {
     hasSeenGraph = false
   }
 
-  if (hasSeenGraph || prefersReducedMotion.matches) drawDijkstra(canvas, 1)
-  else playGraph()
+  if (hasSeenGraph || prefersReducedMotion.matches) drawDijkstra(svg, 1)
+  else playGraph({ includeReveal: true })
 
   return () => {
-    trigger.removeEventListener('click', playGraph)
+    trigger.removeEventListener('click', replayGraph)
     cancelAnimationFrame(graphAnimation)
     graphAnimation = 0
   }
 }
-
-const sortValues = [72, 28, 91, 44, 63, 17, 55, 36]
 
 function insertionFrames (values) {
   const working = values.map((value, id) => ({ id, value }))
@@ -409,8 +363,8 @@ function sortVisualMetrics (state = {}) {
   }
 }
 
-function drawSortCanvas (canvas, state = {}) {
-  const { context, width, height, colors } = canvasFrame(canvas)
+function drawSortVisual (svg, state = {}) {
+  const { width, height } = svgFrame(svg)
   const items = state.items || sortFrames[0].items
   const transition = easeInOutMotion(state.transition ?? 1)
   const activeId = state.activeId ?? null
@@ -424,27 +378,27 @@ function drawSortCanvas (canvas, state = {}) {
   const maximum = Math.max(...sortValues)
   const baseline = topPadding + chartHeight
   const { positions, sortedUnits } = sortVisualMetrics(state)
+  const sortedItems = activeId === null
+    ? items.slice(0, (state.sortedThrough ?? 0) + 1)
+    : (state.previousItems || items).slice(0, state.sortedThrough ?? 0)
+  const sortedIds = new Set(sortedItems.map(({ id }) => id))
 
-  context.save()
-  context.globalAlpha = 0.72
-  context.beginPath()
-  context.moveTo(sidePadding, baseline + 0.5)
-  context.lineTo(width - sidePadding, baseline + 0.5)
-  context.strokeStyle = colors.line
-  context.lineWidth = 1
-  context.stroke()
+  setAttributes(svg.querySelector('[data-sort-baseline]'), {
+    x1: sidePadding,
+    y1: baseline + 0.5,
+    x2: width - sidePadding,
+    y2: baseline + 0.5
+  })
 
   const sortedWidth = sortedUnits * barWidth + Math.max(0, sortedUnits - 1) * gap
-  context.beginPath()
-  context.moveTo(sidePadding, baseline + 8.5)
-  context.lineTo(sidePadding + sortedWidth, baseline + 8.5)
-  context.strokeStyle = colors.accent
-  context.lineWidth = 1.5
-  context.stroke()
-  context.restore()
+  setAttributes(svg.querySelector('[data-sort-progress]'), {
+    x1: sidePadding,
+    y1: baseline + 8.5,
+    x2: sidePadding + sortedWidth,
+    y2: baseline + 8.5
+  })
 
-  const renderItems = [...items].sort((left, right) => Number(left.id === activeId) - Number(right.id === activeId))
-  renderItems.forEach((item) => {
+  items.forEach((item) => {
     const index = items.findIndex(({ id }) => id === item.id)
     const position = positions.get(item.id) ?? index
     const moving = item.id === activeId && Math.abs(position - index) > 0.001
@@ -452,37 +406,42 @@ function drawSortCanvas (canvas, state = {}) {
     const barHeight = (item.value / maximum) * chartHeight
     const x = sidePadding + position * (barWidth + gap)
     const y = baseline - barHeight - lift
-    const sorted = index + 1 <= sortedUnits + 0.001
+    const sorted = sortedIds.has(item.id)
     const active = item.id === activeId
     const renderedWidth = active ? barWidth * 0.76 : barWidth
-    const renderedX = x + (barWidth - renderedWidth) / 2
+    const group = svg.querySelector(`[data-sort-item="${item.id}"]`)
+    const rect = group.querySelector('rect')
+    const label = group.querySelector('text')
 
-    context.save()
-    context.globalAlpha = active ? 1 : sorted ? 0.74 : 1
-    context.fillStyle = active ? colors.accent : sorted ? colors.muted : colors.line
-    context.fillRect(renderedX, y, renderedWidth, barHeight)
-    context.restore()
-
-    drawLabel(context, String(item.value), x + barWidth / 2, moving ? y - 10 : height - 17, active ? colors.ink : colors.muted, {
-      align: 'center',
-      size: 10
+    setAttributes(group, { transform: `translate(${x} ${y})` })
+    setAttributes(rect, {
+      x: (barWidth - renderedWidth) / 2,
+      y: 0,
+      width: renderedWidth,
+      height: barHeight
     })
+    setAttributes(label, {
+      x: barWidth / 2,
+      y: moving ? -10 : height - 17 - y
+    })
+    setBooleanAttribute(group, 'data-active', active)
+    setBooleanAttribute(group, 'data-sorted', sorted)
   })
-  canvas._sortState = state
+  svg._sortState = state
 }
 
 function initializeSortLab () {
   const lab = document.querySelector('[data-sort-lab]')
   if (!lab) return () => {}
   const trigger = lab.querySelector('.sort-trigger')
-  const canvas = lab.querySelector('.sort-canvas')
+  const svg = lab.querySelector('.sort-visual')
   const status = lab.querySelector('.logic-lab-status')
   const hint = lab.querySelector('.logic-lab-hint')
   const initialFrame = sortFrames[0]
-  drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 })
+  drawSortVisual(svg, { ...initialFrame, previousItems: initialFrame.items, transition: 1 })
 
   const runSort = ({ reset = true } = {}) => {
-    const currentMetrics = sortVisualMetrics(canvas._sortState || initialFrame)
+    const currentMetrics = sortVisualMetrics(svg._sortState || initialFrame)
     cancelAnimationFrame(sortAnimation)
     sortAnimation = 0
     sortObserver?.disconnect()
@@ -493,7 +452,7 @@ function initializeSortLab () {
 
     if (prefersReducedMotion.matches) {
       const finalFrame = sortFrames[sortFrames.length - 1]
-      drawSortCanvas(canvas, { ...finalFrame, activeId: null, previousItems: finalFrame.items, transition: 1 })
+      drawSortVisual(svg, { ...finalFrame, activeId: null, previousItems: finalFrame.items, transition: 1 })
       status.textContent = completeSortStatus
       hint.textContent = 'Click to replay'
       lab.removeAttribute('aria-busy')
@@ -514,7 +473,7 @@ function initializeSortLab () {
       const elapsed = now - start
 
       if (elapsed < resetDuration) {
-        drawSortCanvas(canvas, {
+        drawSortVisual(svg, {
           ...initialFrame,
           fromPositions: currentMetrics.positions,
           fromSortedUnits: currentMetrics.sortedUnits,
@@ -525,7 +484,7 @@ function initializeSortLab () {
       }
 
       if (!sortStarted) {
-        drawSortCanvas(canvas, { ...initialFrame, previousItems: initialFrame.items, transition: 1 })
+        drawSortVisual(svg, { ...initialFrame, previousItems: initialFrame.items, transition: 1 })
         status.textContent = initialFrame.status
         sortStarted = true
       }
@@ -541,7 +500,7 @@ function initializeSortLab () {
       const currentFrame = sortFrames[segment + 1]
       const transition = clamp((sortElapsed - segment * durationPerFrame) / durationPerFrame)
 
-      drawSortCanvas(canvas, { ...currentFrame, previousItems: previousFrame.items, transition })
+      drawSortVisual(svg, { ...currentFrame, previousItems: previousFrame.items, transition })
       if (segment !== lastSegment) {
         status.textContent = currentFrame.status
         lastSegment = segment
@@ -552,7 +511,7 @@ function initializeSortLab () {
         return
       }
 
-      drawSortCanvas(canvas, { ...currentFrame, activeId: null, previousItems: currentFrame.items, transition: 1 })
+      drawSortVisual(svg, { ...currentFrame, activeId: null, previousItems: currentFrame.items, transition: 1 })
       status.textContent = completeSortStatus
       hint.textContent = 'Click to replay'
       lab.removeAttribute('aria-busy')
@@ -588,10 +547,10 @@ function initializeSortLab () {
 }
 
 function redrawVisuals () {
-  const graphCanvas = document.querySelector('.hero-canvas')
-  if (graphCanvas) drawDijkstra(graphCanvas, graphCanvas._graphProgress ?? 1)
-  const sortCanvas = document.querySelector('.sort-canvas')
-  if (sortCanvas) drawSortCanvas(sortCanvas, sortCanvas._sortState)
+  const graphVisual = document.querySelector('.hero-visual')
+  if (graphVisual) drawDijkstra(graphVisual, graphVisual._graphProgress ?? 1)
+  const sortVisual = document.querySelector('.sort-visual')
+  if (sortVisual) drawSortVisual(sortVisual, sortVisual._sortState)
 }
 
 function initializeAnimations () {

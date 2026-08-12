@@ -390,10 +390,103 @@ summary:focus-visible {
   outline-offset: -2px;
 }
 
-.hero-canvas {
+.hero-visual {
   width: 100%;
   height: 100%;
   display: block;
+  overflow: visible;
+}
+
+.graph-kicker,
+.graph-status,
+.graph-weight,
+.graph-node text {
+  font-family: "Geist Mono", monospace;
+  font-weight: 480;
+  dominant-baseline: middle;
+}
+
+.graph-kicker {
+  fill: var(--faint);
+  font-size: 10px;
+  text-anchor: start;
+}
+
+.graph-status {
+  fill: var(--muted);
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.graph-status[data-path-active="true"] {
+  fill: var(--accent);
+}
+
+.graph-edge {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.graph-edge-base {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.graph-edge-tree {
+  stroke: var(--muted);
+  stroke-width: 1.25;
+}
+
+.graph-edge-path {
+  stroke: var(--accent);
+  stroke-width: 2.7;
+}
+
+.graph-weight {
+  fill: var(--faint);
+  font-size: 9px;
+  paint-order: stroke fill;
+  stroke: var(--bg);
+  stroke-linejoin: round;
+  stroke-width: 2.5px;
+  text-anchor: middle;
+}
+
+.graph-node circle {
+  fill: var(--bg);
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.graph-node text {
+  fill: var(--ink);
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.graph-node[data-settled="true"] circle {
+  fill: var(--surface);
+  stroke: var(--ink);
+}
+
+.graph-node[data-path="true"] circle {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.graph-node[data-current="true"] circle {
+  fill: var(--accent);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.graph-node[data-current="true"] text {
+  fill: var(--bg);
+}
+
+.graph-path-head {
+  fill: var(--accent);
+  will-change: transform;
 }
 
 .section-shell {
@@ -594,11 +687,61 @@ summary:focus-visible {
   outline-offset: -2px;
 }
 
-.sort-canvas {
+.sort-visual {
   width: 100%;
   height: 100%;
   min-height: 0;
   display: block;
+  overflow: visible;
+}
+
+.sort-baseline,
+.sort-progress {
+  stroke-linecap: round;
+}
+
+.sort-baseline {
+  stroke: var(--line);
+  stroke-width: 1;
+  opacity: 0.72;
+}
+
+.sort-progress {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.sort-item rect {
+  fill: var(--line);
+}
+
+.sort-item text {
+  fill: var(--muted);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 480;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.sort-item[data-sorted="true"] {
+  opacity: 0.74;
+}
+
+.sort-item[data-sorted="true"] rect {
+  fill: var(--muted);
+}
+
+.sort-item[data-active="true"] {
+  opacity: 1;
+}
+
+.sort-item[data-active="true"] rect {
+  fill: var(--accent);
+}
+
+.sort-item[data-active="true"] text {
+  fill: var(--ink);
 }
 
 .tracks-copy {

@@ -1,3 +1,5 @@
+import { graphEdges, graphNodes } from '../lib/visualData.js'
+
 export default function Hero () {
   return (
     <section className='club-hero' aria-labelledby='hero-title'>
@@ -44,7 +46,39 @@ export default function Hero () {
         type='button'
         aria-label='Replay Dijkstra’s shortest-path animation from A to G'
       >
-        <canvas className='hero-canvas' aria-hidden='true' />
+        <svg className='hero-visual' aria-hidden='true' focusable='false'>
+          <text className='graph-kicker' data-graph-kicker>DIJKSTRA / RECONSTRUCT</text>
+          <g data-graph-edges>
+            {graphEdges.map((edge, index) => (
+              <g data-graph-edge={index} key={index}>
+                <line className='graph-edge graph-edge-base' data-edge-base />
+                <line className='graph-edge graph-edge-tree' data-edge-tree />
+              </g>
+            ))}
+          </g>
+          <path className='graph-edge graph-edge-path' data-graph-path />
+          <g data-graph-weights>
+            {graphEdges.map((edge, index) => (
+              <text className='graph-weight' data-edge-weight={index} key={`${edge.from}-${edge.to}`} />
+            ))}
+          </g>
+          <circle
+            className='graph-path-head'
+            data-graph-path-head
+            r='4.5'
+            opacity='0'
+            transform='translate(-100 -100)'
+          />
+          <g data-graph-nodes>
+            {graphNodes.map((node) => (
+              <g className='graph-node' data-graph-node={node.id} key={node.id}>
+                <circle />
+                <text>{node.id}</text>
+              </g>
+            ))}
+          </g>
+          <text className='graph-status' data-graph-status />
+        </svg>
       </button>
     </section>
   )
