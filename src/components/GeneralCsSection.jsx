@@ -15,7 +15,7 @@ export default function GeneralCsSection () {
       <div className='section-inner general-layout'>
         <div className='general-heading'>
           <h2 className='section-heading' id='general-heading'>
-            <span>Inside general</span>
+            <span>Inside</span>
             <span>computer science.</span>
           </h2>
           <p className='section-intro'>

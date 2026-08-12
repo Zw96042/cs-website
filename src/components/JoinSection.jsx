@@ -1,7 +1,7 @@
 const questions = [
   {
     question: 'Can I join if I am new to coding?',
-    answer: 'Yes. General CS sessions explain the foundation before the activity starts, and officers can help you get set up.'
+    answer: 'Yes. Computer Science sessions explain the foundation before the activity starts, and officers can help you get set up.'
   },
   {
     question: 'Do I have to choose one program?',
@@ -12,7 +12,7 @@ const questions = [
     answer: 'CP focuses on Java, algorithms, data structures, UIL contest strategy, and timed programming practice.'
   },
   {
-    question: 'What does General CS cover?',
+    question: 'What does Computer Science cover?',
     answer: 'Topics rotate through AI and machine learning, cybersecurity, computer vision, data science, computer graphics, game development, web development, and other areas members want to explore.'
   },
   {

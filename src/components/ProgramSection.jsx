@@ -1,7 +1,7 @@
 const meetingTracks = [
   {
     code: 'CS',
-    title: 'General Computer Science',
+    title: 'Computer Science',
     description: 'Follow a lesson and hands-on activity in AI/ML, cybersecurity, computer graphics, games, web development, data science, and more.'
   },
   {
@@ -18,7 +18,7 @@ export default function ProgramSection () {
         <div className='program-heading'>
           <h2 className='section-heading' id='program-heading'>Mondays split in two.</h2>
           <p className='section-intro'>
-            Students head straight to General CS or Competitive Programming after school. Both meet in Room 291A.
+            Students head straight to Computer Science or Competitive Programming after school. Both meet in Room 291A.
           </p>
         </div>
         <div className='program-choices'>
