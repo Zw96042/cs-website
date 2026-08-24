@@ -9,7 +9,13 @@ const events = [
     code: "Hack Club",
     date: "September 7, 2026",
     description:
-      "Join the CS Club officers as we teach how to build a website. You will learn about HTML, CSS, and JavaScript, and will be able to build a website from scratch. Free boba tea will be provided on completion!",
+      "Join the CS Club officers as we teach how to build a website. You will learn HTML/CSS/JavaScript, and will be able to build a website from scratch. Free boba tea will be provided on completion!",
+  },
+  {
+    code: "Lecture",
+    date: "TBD",
+    description:
+      "Join Ruiqi Li (former Westlake alumnus and CS club officer) and Autumn Liu, Turing scholars at UT, as they discuss the Turing program and their research and work at UT.",
   },
   {
     code: "Lecture",
