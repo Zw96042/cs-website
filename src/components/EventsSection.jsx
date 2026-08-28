@@ -13,15 +13,15 @@ const events = [
   },
   {
     code: "Lecture",
-    date: "TBD",
+    date: "September 29, 2026",
     description:
-      "Join Ruiqi Li (former Westlake alumnus and CS club officer) and Autumn Liu, Turing scholars at UT, as they discuss the Turing program and their research and work at UT.",
+      "ROOM 301 (MS CHONG'S ROOM, NOT MR. ROSIER'S ROOM): Join Dr. Calvin Lin, University Distinguished Teaching Professor at UT Austin with research interests in computer architecture, compilers, and security, leader of UT's NSF-funded effort to improve high school CS curricula, director of the Turing Scholars Honors Program, and the longtime coach of UT's Men's Ultimate Frisbee team, as he discusses computer architecture, CS at UT, and the Turing program.",
   },
   {
     code: "Lecture",
     date: "TBD",
     description:
-      "Join Dr. Calvin Lin, University Distinguished Teaching Professor at UT Austin with research interests in computer architecture, compilers, and security, leader of UT's NSF-funded effort to improve high school CS curricula, director of the Turing Scholars Honors Program, and the longtime coach of UT's Men's Ultimate Frisbee team, as he discusses computer architecture, CS at UT, and the Turing program.",
+      "Join Ruiqi Li (former Westlake alumnus and CS club officer) and Autumn Liu, Turing scholars at UT, as they discuss the Turing program and their research and work at UT.",
   },
 ];
 export default function EventsSection() {
