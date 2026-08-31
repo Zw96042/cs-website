@@ -23,20 +23,20 @@ const officers = [
     bio: 'Zach helps with UIL preparation and teaches competitive programming. He is most familiar with C++, Rusty C++, Java, and Python. He has spent more than 300 hours teaching and is always happy to explain a difficult problem or answer questions. Outside CS Club, Zach enjoys writing, conducting research, and working on the school’s robotics team.'
   },
   {
+    name: 'Advait Johari',
+    photo: advaitPhoto,
+    width: 624,
+    height: 876,
+    objectPosition: '50% 38%',
+    bio: 'Advait (Aadi) has a strong background in software development, with the most experience in Go, Python, Java, and Typescript, as well as robotics and AI. He will help with UIL preparation, competitive programming, and En4AC this year. Outside CS Club, he is involved in the school’s robotics team and enjoys building new projects and experimenting with the latest tools.'
+  },
+  {
     name: 'Rahil Desai',
     photo: rahilPhoto,
     width: 1030,
     height: 1125,
     objectPosition: '50% 42%',
     bio: 'Rahil will help with competitive programming and UIL preparation this year. He is most experienced with Python, Java, C++, and Go, and also has experience with AI, computer vision, and robotics. He enjoys building new projects, experimenting with AI tools, and finding ways to use technology to solve real-world problems.'
-  },
-  {
-    name: 'Advait Johari',
-    photo: advaitPhoto,
-    width: 624,
-    height: 876,
-    objectPosition: '50% 38%',
-    bio: 'Aadi has a strong background in software development, with the most experience in Go, Python, and Java, as well as robotics and AI. He will help with UIL preparation and competitive programming this year. Outside CS Club, he is involved in the school’s robotics team and enjoys building new projects and experimenting with the latest tools.'
   },
   {
     name: 'Kelly Zhou',

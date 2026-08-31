@@ -26,21 +26,24 @@ export default function ClubTracksSection () {
         <div className='logic-lab' data-sort-lab>
           <div className='logic-lab-head'>
             <p className='logic-lab-title'>Insertion sort</p>
-            <p className='logic-lab-hint'>Click to replay</p>
+            <button className='sort-trigger' type='button' aria-describedby='sort-status'>
+              <svg className='sort-restart-icon' viewBox='0 0 24 24' aria-hidden='true'>
+                <path d='M20 11a8 8 0 1 0-2.34 5.66' />
+                <path d='M20 5v6h-6' />
+              </svg>
+              <span className='sr-only'>Replay the insertion sort animation</span>
+            </button>
           </div>
-          <button className='sort-trigger' type='button' aria-describedby='sort-status'>
-            <svg className='sort-visual' aria-hidden='true' focusable='false'>
-              <line className='sort-baseline' data-sort-baseline />
-              <line className='sort-progress' data-sort-progress />
-              {sortValues.map((value, id) => (
-                <g className='sort-item' data-sort-item={id} data-value={value} key={id}>
-                  <rect />
-                  <text>{value}</text>
-                </g>
-              ))}
-            </svg>
-            <span className='sr-only'>Replay the insertion sort animation</span>
-          </button>
+          <svg className='sort-visual' aria-hidden='true' focusable='false'>
+            <line className='sort-baseline' data-sort-baseline />
+            <line className='sort-progress' data-sort-progress />
+            {sortValues.map((value, id) => (
+              <g className='sort-item' data-sort-item={id} data-value={value} key={id}>
+                <rect />
+                <text>{value}</text>
+              </g>
+            ))}
+          </svg>
           <div className='logic-lab-foot'>
             <p className='logic-lab-status' id='sort-status' aria-live='polite'>Ready / starts when in view</p>
             <p className='logic-lab-status'>O(n²) time / O(1) space</p>

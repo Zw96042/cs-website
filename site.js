@@ -171,7 +171,7 @@ function drawDijkstra (svg, progress = 1) {
   const completeSegments = segmentEnds.filter((end) => traveledDistance >= end).length;
 
   const kicker = svg.querySelector('[data-graph-kicker]');
-  setAttributes(kicker, { x: 10, y: 18, opacity: revealProgress });
+  setAttributes(kicker, { x: width / 2, y: 18, opacity: revealProgress });
 
   graph.edges.forEach((edge, index) => {
     const group = svg.querySelector(`[data-graph-edge="${index}"]`);
@@ -235,7 +235,6 @@ function drawDijkstra (svg, progress = 1) {
   const routeText = reversePath.slice(0, visibleNodes).join(' ← ');
   let status = '';
   if (reconstructProgress > 0) status = routeText;
-  if (reconstructProgress >= 1) status = `${routeText} / distance ${solution.distance}`;
   const statusLabel = svg.querySelector('[data-graph-status]');
   setAttributes(statusLabel, { x: width / 2, y: height - 8, opacity: revealProgress });
   setBooleanAttribute(statusLabel, 'data-path-active', reconstructProgress > 0);
@@ -440,7 +439,6 @@ function initializeSortLab () {
   const trigger = lab.querySelector('.sort-trigger');
   const svg = lab.querySelector('.sort-visual');
   const status = lab.querySelector('.logic-lab-status');
-  const hint = lab.querySelector('.logic-lab-hint');
   const initialFrame = sortFrames[0];
   drawSortVisual(svg, { ...initialFrame, previousItems: initialFrame.items, transition: 1 });
 
@@ -451,14 +449,12 @@ function initializeSortLab () {
     sortObserver?.disconnect();
     sortObserver = null;
     lab.setAttribute('aria-busy', 'true');
-    hint.textContent = 'Click to restart';
     status.textContent = reset ? 'Resetting / returning to start' : initialFrame.status;
 
     if (prefersReducedMotion.matches) {
       const finalFrame = sortFrames[sortFrames.length - 1];
       drawSortVisual(svg, { ...finalFrame, activeId: null, previousItems: finalFrame.items, transition: 1 });
       status.textContent = completeSortStatus;
-      hint.textContent = 'Click to replay';
       lab.removeAttribute('aria-busy');
       return;
     }
@@ -517,7 +513,6 @@ function initializeSortLab () {
 
       drawSortVisual(svg, { ...currentFrame, activeId: null, previousItems: currentFrame.items, transition: 1 });
       status.textContent = completeSortStatus;
-      hint.textContent = 'Click to replay';
       lab.removeAttribute('aria-busy');
       sortAnimation = 0;
     };
@@ -546,7 +541,6 @@ function initializeSortLab () {
     cancelAnimationFrame(sortAnimation);
     sortAnimation = 0;
     lab.removeAttribute('aria-busy');
-    hint.textContent = 'Click to replay';
   };
 }
 

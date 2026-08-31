@@ -32,8 +32,17 @@ export default function Hero () {
           <li>Free admission</li>
         </ul>
         <div className='hero-actions'>
+          <a
+            className='canvas-action'
+            href='https://eanes.instructure.com/enroll/CEEGDH'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <img className='canvas-action-logo' src='/canvas-logo.svg' alt='' />
+            Join Canvas
+          </a>
           <a className='text-action primary-action' href='#join'>
-            Join a meeting <span className='action-arrow' aria-hidden='true'>→</span>
+            Meeting times <span className='action-arrow' aria-hidden='true'>→</span>
           </a>
           <a className='text-action secondary-action' href='#programs'>
             Explore the programs <span className='action-arrow' aria-hidden='true'>→</span>
@@ -47,7 +56,7 @@ export default function Hero () {
         aria-label='Replay Dijkstra’s shortest-path animation from A to G'
       >
         <svg className='hero-visual' aria-hidden='true' focusable='false'>
-          <text className='graph-kicker' data-graph-kicker>DIJKSTRA / RECONSTRUCT</text>
+          <text className='graph-kicker' data-graph-kicker>DIJKSTRA'S ALGORITHM</text>
           <g data-graph-edges>
             {graphEdges.map((edge, index) => (
               <g data-graph-edge={index} key={index}>

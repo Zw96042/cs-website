@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canvas and Hack Club treatments</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000;
+      --ink: #f7f7f4;
+      --muted: #aaa9a3;
+      --faint: #797974;
+      --line: #262626;
+      --accent: #c5d5ff;
+      --canvas: #e72429;
+      font-family: Inter, Geist, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); }
+    main { width: min(calc(100% - 32px), 1180px); margin: 0 auto; padding: 48px 0 96px; }
+    .intro { max-width: 720px; margin-bottom: 42px; }
+    .eyebrow { margin: 0 0 10px; color: var(--faint); font: 600 11px/1.2 ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; }
+    h1 { margin: 0; font: 500 clamp(34px, 6vw, 56px)/.98 Georgia, serif; letter-spacing: -.035em; }
+    .intro p { margin: 18px 0 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+    .variant { border-top: 1px solid var(--line); padding: 46px 0 62px; }
+    .variant-head { display: flex; align-items: baseline; gap: 15px; margin-bottom: 28px; }
+    .label { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #555; font: 600 13px ui-monospace, monospace; }
+    .variant h2 { margin: 0; font-size: 16px; font-weight: 620; }
+    .variant-note { margin: 0 0 0 auto; color: var(--faint); font-size: 12px; }
+    .mock { border: 1px solid var(--line); }
+    .hero { padding: clamp(30px, 5vw, 66px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 44px; min-height: 570px; align-items: center; }
+    .hero h3 { max-width: 560px; margin: 0; font: 500 clamp(48px, 7vw, 82px)/.9 Georgia, serif; letter-spacing: -.05em; }
+    .lede { max-width: 540px; margin: 25px 0 0; color: var(--muted); font-size: 16px; line-height: 1.58; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 25px; border-block: 1px solid var(--line); }
+    .fact { padding: 14px 14px 15px 0; }
+    .fact + .fact { border-left: 1px solid var(--line); padding-left: 14px; }
+    .fact small { display: block; color: var(--faint); font-size: 10px; }
+    .fact strong { display: block; margin-top: 6px; font-size: 13px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 26px; }
+    .button { min-height: 46px; display: inline-flex; align-items: center; gap: 10px; padding: 0 17px; color: inherit; font-size: 13px; font-weight: 650; text-decoration: none; }
+    .canvas-icon { width: 21px; height: 21px; flex: 0 0 auto; }
+    .fill { background: var(--canvas); color: white; }
+    .outline { border: 1px solid #5f5f5f; }
+    .quiet { padding-inline: 0; border-bottom: 1px solid currentColor; }
+    .text-link { min-height: 44px; display: inline-flex; align-items: center; color: var(--muted); border-bottom: 1px solid transparent; font-size: 13px; text-decoration: none; }
+    .graph { min-height: 360px; position: relative; }
+    .graph svg { width: 100%; height: 100%; }
+    .graph line { stroke: #353535; stroke-width: 1; }
+    .graph circle { fill: #000; stroke: #8f8f8f; stroke-width: 1.5; }
+    .graph circle.hot { fill: var(--accent); stroke: var(--accent); }
+    .graph text { fill: #d7d7d3; font: 11px ui-monospace, monospace; text-anchor: middle; dominant-baseline: middle; }
+    .affiliation { border-top: 1px solid var(--line); padding: clamp(30px, 5vw, 60px); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hack-mark { display: flex; align-items: center; gap: 16px; }
+    .hack-logo { width: 68px; height: 68px; flex: 0 0 auto; }
+    .hack-title { margin: 0; font: 500 clamp(34px, 4vw, 54px)/1 Georgia, serif; letter-spacing: -.035em; }
+    .hack-meta { margin-top: 10px; color: var(--faint); font: 11px ui-monospace, monospace; letter-spacing: .04em; }
+    .affiliation p { max-width: 520px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .affiliation a { display: inline-block; margin-top: 16px; padding-bottom: 4px; border-bottom: 1px solid; color: var(--ink); font-size: 13px; text-decoration: none; }
+    .canvas-ribbon { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 24px; padding: 13px 0; border-block: 1px solid var(--line); }
+    .canvas-ribbon span { color: var(--muted); font-size: 12px; }
+    .canvas-ribbon .button { min-height: 40px; }
+    .brand-lockup { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 650; }
+    .brand-lockup .hack-logo { width: 40px; height: 40px; }
+    @media (max-width: 760px) {
+      .variant-head { align-items: center; flex-wrap: wrap; }
+      .variant-note { width: 100%; margin-left: 45px; }
+      .hero { grid-template-columns: 1fr; min-height: 0; }
+      .graph { min-height: 260px; }
+      .affiliation { grid-template-columns: 1fr; gap: 28px; }
+      .facts { grid-template-columns: 1fr; }
+      .fact + .fact { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
+      .canvas-ribbon { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <p class="eyebrow">Design selection</p>
+    <h1>Canvas access and Hack Club credit</h1>
+    <p>Each option keeps the current dark, editorial layout. The differences are placement and emphasis. All Canvas buttons use the supplied enrollment URL.</p>
+  </header>
+
+    <section>
+      <h2>Plan links</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>Local</th>
+            <td data-postplan-local><code>.plans/2026-08-30_join_canvas_hack_club_mocks.html</code></td>
+          </tr>
+          <tr>
+            <th>Hosted</th>
+            <td data-postplan-hosted><a href="https://postplan.johari-dev.com/j57c0xbwds0g1kqfjw9wky9xcd8dgc3x">https://postplan.johari-dev.com/j57c0xbwds0g1kqfjw9wky9xcd8dgc3x</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  <section class="variant">
+    <div class="variant-head"><span class="label">A</span><h2>Canvas as the main hero action</h2><p class="variant-note">Strongest enrollment emphasis</p></div>
+    <div class="mock">
+      <div class="hero">
+        <div>
+          <h3>Build what you<br>wish existed.</h3>
+          <p class="lede">Explore computer science through hands-on lessons, collaborative projects, and competition practice.</p>
+          <div class="facts"><div class="fact"><small>Date</small><strong>Every Monday</strong></div><div class="fact"><small>Time</small><strong>4:30-5:30</strong></div><div class="fact"><small>Location</small><strong>Room 291A</strong></div></div>
+          <div class="actions">
+            <a class="button fill" href="https://eanes.instructure.com/enroll/CEEGDH" target="_blank" rel="noopener noreferrer"><svg class="canvas-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="white"/><g fill="#e72429"><circle cx="16" cy="7" r="2.4"/><circle cx="22.4" cy="9.6" r="2.4"/><circle cx="25" cy="16" r="2.4"/><circle cx="22.4" cy="22.4" r="2.4"/><circle cx="16" cy="25" r="2.4"/><circle cx="9.6" cy="22.4" r="2.4"/><circle cx="7" cy="16" r="2.4"/><circle cx="9.6" cy="9.6" r="2.4"/><circle cx="16" cy="16" r="4"/></g></svg>Join Canvas <span>↗</span></a>
+            <a class="text-link" href="#">Join a meeting →</a><a class="text-link" href="#">Explore programs →</a>
+          </div>
+        </div>
+        <div class="graph"><svg viewBox="0 0 400 360" aria-hidden="true"><line x1="55" y1="98" x2="155" y2="48"/><line x1="55" y1="98" x2="125" y2="205"/><line x1="155" y1="48" x2="240" y2="125"/><line x1="125" y1="205" x2="240" y2="125"/><line x1="125" y1="205" x2="258" y2="285"/><line x1="240" y1="125" x2="340" y2="195"/><line x1="258" y1="285" x2="340" y2="195"/><circle cx="55" cy="98" r="18" class="hot"/><circle cx="155" cy="48" r="18"/><circle cx="125" cy="205" r="18"/><circle cx="240" cy="125" r="18"/><circle cx="258" cy="285" r="18"/><circle cx="340" cy="195" r="18"/><text x="55" y="98" fill="#000">A</text><text x="155" y="48">B</text><text x="125" y="205">C</text><text x="240" y="125">D</text><text x="258" y="285">E</text><text x="340" y="195">G</text></svg></div>
+      </div>
+      <div class="affiliation">
+        <div class="hack-mark"><svg class="hack-logo" viewBox="0 0 80 80" aria-hidden="true"><path fill="#ec3750" d="M18 8h8v64h-8z"/><path fill="#ec3750" d="M26 12c18-8 24 8 42 0v34c-18 8-24-8-42 0z"/><path fill="none" stroke="#fff" stroke-width="5" d="M32 20c11-3 18 5 29 1v16c-11 3-18-5-29-1z"/></svg><div><h3 class="hack-title">Affiliated with<br>Hack Club.</h3><div class="hack-meta">© HACK CLUB</div></div></div>
+        <div><p>Westlake CS is part of Hack Club's international network of student-led coding clubs.</p><a href="https://hackclub.com/" target="_blank" rel="noopener noreferrer">Visit Hack Club</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="variant">
+    <div class="variant-head"><span class="label">B</span><h2>Canvas grouped with the existing links</h2><p class="variant-note">Balanced and closest to the current hero</p></div>
+    <div class="mock">
+      <div class="hero">
+        <div>
+          <h3>Build what you<br>wish existed.</h3>
+          <p class="lede">Explore computer science through hands-on lessons, collaborative projects, and competition practice.</p>
+          <div class="facts"><div class="fact"><small>Date</small><strong>Every Monday</strong></div><div class="fact"><small>Time</small><strong>4:30-5:30</strong></div><div class="fact"><small>Location</small><strong>Room 291A</strong></div></div>
+          <div class="actions">
+            <a class="button outline" href="https://eanes.instructure.com/enroll/CEEGDH" target="_blank" rel="noopener noreferrer"><svg class="canvas-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#e72429"/><g fill="white"><circle cx="16" cy="7" r="2.4"/><circle cx="22.4" cy="9.6" r="2.4"/><circle cx="25" cy="16" r="2.4"/><circle cx="22.4" cy="22.4" r="2.4"/><circle cx="16" cy="25" r="2.4"/><circle cx="9.6" cy="22.4" r="2.4"/><circle cx="7" cy="16" r="2.4"/><circle cx="9.6" cy="9.6" r="2.4"/><circle cx="16" cy="16" r="4"/></g></svg>Join Canvas <span>↗</span></a>
+            <a class="button quiet" href="#">Join a meeting →</a><a class="text-link" href="#">Explore programs →</a>
+          </div>
+        </div>
+        <div class="graph"><svg viewBox="0 0 400 360" aria-hidden="true"><line x1="55" y1="98" x2="155" y2="48"/><line x1="55" y1="98" x2="125" y2="205"/><line x1="155" y1="48" x2="240" y2="125"/><line x1="125" y1="205" x2="240" y2="125"/><line x1="125" y1="205" x2="258" y2="285"/><line x1="240" y1="125" x2="340" y2="195"/><line x1="258" y1="285" x2="340" y2="195"/><circle cx="55" cy="98" r="18" class="hot"/><circle cx="155" cy="48" r="18"/><circle cx="125" cy="205" r="18"/><circle cx="240" cy="125" r="18"/><circle cx="258" cy="285" r="18"/><circle cx="340" cy="195" r="18"/><text x="55" y="98">A</text><text x="155" y="48">B</text><text x="125" y="205">C</text><text x="240" y="125">D</text><text x="258" y="285">E</text><text x="340" y="195">G</text></svg></div>
+      </div>
+      <div class="affiliation">
+        <div><div class="brand-lockup"><svg class="hack-logo" viewBox="0 0 80 80" aria-hidden="true"><path fill="#ec3750" d="M18 8h8v64h-8z"/><path fill="#ec3750" d="M26 12c18-8 24 8 42 0v34c-18 8-24-8-42 0z"/><path fill="none" stroke="#fff" stroke-width="5" d="M32 20c11-3 18 5 29 1v16c-11 3-18-5-29-1z"/></svg><span>© Hack Club</span></div><h3 class="hack-title" style="margin-top:20px">Affiliated with<br>Hack Club.</h3></div>
+        <div><p>Westlake CS is part of Hack Club's international network of student-led coding clubs.</p><a href="https://hackclub.com/" target="_blank" rel="noopener noreferrer">Visit Hack Club</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="variant">
+    <div class="variant-head"><span class="label">C</span><h2>Canvas in a dedicated course-access row</h2><p class="variant-note">Most informative, least button-heavy</p></div>
+    <div class="mock">
+      <div class="hero">
+        <div>
+          <h3>Build what you<br>wish existed.</h3>
+          <p class="lede">Explore computer science through hands-on lessons, collaborative projects, and competition practice.</p>
+          <div class="facts"><div class="fact"><small>Date</small><strong>Every Monday</strong></div><div class="fact"><small>Time</small><strong>4:30-5:30</strong></div><div class="fact"><small>Location</small><strong>Room 291A</strong></div></div>
+          <div class="canvas-ribbon"><span>Lessons, announcements, and club materials live on Canvas.</span><a class="button fill" href="https://eanes.instructure.com/enroll/CEEGDH" target="_blank" rel="noopener noreferrer"><svg class="canvas-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="white"/><g fill="#e72429"><circle cx="16" cy="7" r="2.4"/><circle cx="22.4" cy="9.6" r="2.4"/><circle cx="25" cy="16" r="2.4"/><circle cx="22.4" cy="22.4" r="2.4"/><circle cx="16" cy="25" r="2.4"/><circle cx="9.6" cy="22.4" r="2.4"/><circle cx="7" cy="16" r="2.4"/><circle cx="9.6" cy="9.6" r="2.4"/><circle cx="16" cy="16" r="4"/></g></svg>Join Canvas</a></div>
+          <div class="actions"><a class="button quiet" href="#">Join a meeting →</a><a class="text-link" href="#">Explore programs →</a></div>
+        </div>
+        <div class="graph"><svg viewBox="0 0 400 360" aria-hidden="true"><line x1="55" y1="98" x2="155" y2="48"/><line x1="55" y1="98" x2="125" y2="205"/><line x1="155" y1="48" x2="240" y2="125"/><line x1="125" y1="205" x2="240" y2="125"/><line x1="125" y1="205" x2="258" y2="285"/><line x1="240" y1="125" x2="340" y2="195"/><line x1="258" y1="285" x2="340" y2="195"/><circle cx="55" cy="98" r="18" class="hot"/><circle cx="155" cy="48" r="18"/><circle cx="125" cy="205" r="18"/><circle cx="240" cy="125" r="18"/><circle cx="258" cy="285" r="18"/><circle cx="340" cy="195" r="18"/><text x="55" y="98">A</text><text x="155" y="48">B</text><text x="125" y="205">C</text><text x="240" y="125">D</text><text x="258" y="285">E</text><text x="340" y="195">G</text></svg></div>
+      </div>
+      <div class="affiliation">
+        <div><p class="eyebrow">© HACK CLUB</p><h3 class="hack-title">Affiliated with<br>Hack Club.</h3></div>
+        <div class="hack-mark"><svg class="hack-logo" style="width:96px;height:96px" viewBox="0 0 80 80" aria-hidden="true"><path fill="#ec3750" d="M18 8h8v64h-8z"/><path fill="#ec3750" d="M26 12c18-8 24 8 42 0v34c-18 8-24-8-42 0z"/><path fill="none" stroke="#fff" stroke-width="5" d="M32 20c11-3 18 5 29 1v16c-11 3-18-5-29-1z"/></svg><div><p>Westlake CS is part of Hack Club's international network of student-led coding clubs.</p><a href="https://hackclub.com/" target="_blank" rel="noopener noreferrer">Visit Hack Club</a></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

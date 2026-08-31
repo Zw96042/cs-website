@@ -8,7 +8,9 @@ export default function AffiliationSection () {
             Westlake CS is part of Hack Club’s international network of student-led coding clubs. The affiliation connects members with a wider community, project resources, and events beyond Westlake, and provides us with innumerable opportunities for free merch, hackathons, and events.
           </p>
           <a className='text-action affiliation-link' href='https://hackclub.com/'>
-            Visit Hack Club
+            <img className='hack-club-logo' src='/hack-club-icon.svg' alt='' />
+            Visit Hack Club <span className='hack-club-copyright'>©</span>
+            <span className='action-arrow' aria-hidden='true'>↗</span>
           </a>
         </div>
       </div>
