@@ -14,7 +14,24 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App () {
-  useEffect(() => initializeAnimations(), []);
+  useEffect(() => {
+    const cleanupAnimations = initializeAnimations();
+    const scrollToHash = () => {
+      const id = window.location.hash.slice(1);
+      if (!id) return;
+
+      document.getElementById(decodeURIComponent(id))?.scrollIntoView();
+    };
+    const scrollFrame = window.requestAnimationFrame(scrollToHash);
+
+    window.addEventListener('hashchange', scrollToHash);
+
+    return () => {
+      cleanupAnimations();
+      window.cancelAnimationFrame(scrollFrame);
+      window.removeEventListener('hashchange', scrollToHash);
+    };
+  }, []);
 
   return (
     <div className='site-page'>

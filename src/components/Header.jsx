@@ -29,8 +29,8 @@ export default function Header ({ currentPage }) {
           <span className='brand-name'>Westlake Computer Science Club</span>
         </a>
         <nav className='site-nav' aria-label='Main navigation'>
-          <a className='nav-link' href='/#programs'>Programs</a>
           <a className='nav-link' href='/events/' aria-current={currentPage === 'events' ? 'page' : undefined}>Events</a>
+          <a className='nav-link' href='/#programs'>Programs</a>
           <a className='nav-link' href='/#hack-club'>
             Hack Club<span className='nav-copyright'>©</span>
           </a>

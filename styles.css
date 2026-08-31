@@ -216,7 +216,6 @@ a {
 .brand:focus-visible,
 .nav-link:focus-visible,
 .nav-join:focus-visible,
-.footer-links a:focus-visible,
 .canvas-action:focus-visible,
 .text-action:focus-visible,
 .hero-media:focus-visible,
@@ -643,14 +642,6 @@ summary:focus-visible {
   margin-block-end: 5px;
   color: #ff8f8f;
   font-weight: 650;
-}
-
-.event-number {
-  margin: 5px 0 0;
-  color: var(--faint);
-  font-family: "Geist Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.075em;
 }
 
 .event-preview-layout {
@@ -1175,21 +1166,9 @@ summary:focus-visible {
   font-size: 12px;
 }
 
-.footer-links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.footer-links a {
-  color: var(--muted);
-  text-underline-offset: 4px;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover,
   .nav-join:hover,
-  .footer-links a:hover,
   .secondary-action:hover {
     color: var(--ink);
   }
@@ -1368,10 +1347,6 @@ summary:focus-visible {
     margin-block-start: 0;
   }
 
-  .event-number {
-    display: none;
-  }
-
   .program-choice {
     grid-template-columns: 64px minmax(0, 1fr);
     gap: 20px;
@@ -1401,11 +1376,6 @@ summary:focus-visible {
     gap: 6px;
   }
 
-  .footer-links {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
-  }
 }
 
 @media (max-width: 520px) {

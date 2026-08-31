@@ -17,7 +17,7 @@ export default function EventsPage () {
             </header>
 
             <div className='event-ledger'>
-              {events.map((event, index) => (
+              {events.map((event) => (
                 <article className='event-ledger-item' key={`${event.dateLabel}-${event.title}`}>
                   <time className='event-date' dateTime={event.date ?? undefined}>
                     {event.dateLabel}
@@ -31,7 +31,6 @@ export default function EventsPage () {
                       {event.description}
                     </p>
                   </div>
-                  <p className='event-number' aria-hidden='true'>{String(index + 1).padStart(2, '0')} / {String(events.length).padStart(2, '0')}</p>
                 </article>
               ))}
             </div>
