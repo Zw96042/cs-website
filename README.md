@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/icon-512.png" alt="Westlake CS Club icon" width="128">
+</p>
+
 # Westlake CS Club
 
 The Westlake High School Computer Science Club website, built with React and Vite.

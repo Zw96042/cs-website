@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events section alternatives</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000;
+      --surface: #111;
+      --ink: #f7f7f4;
+      --muted: #aaa9a3;
+      --faint: #797974;
+      --line: #242424;
+      --accent: #c5d5ff;
+      --content: 1180px;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      width: min(calc(100% - 40px), var(--content));
+      margin-inline: auto;
+      padding: 46px 0 110px;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin-block-end: 48px;
+    }
+
+    .eyebrow,
+    .kind,
+    .date-code,
+    .event-count,
+    .month,
+    .mini-label {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      text-transform: uppercase;
+      letter-spacing: .075em;
+    }
+
+    .eyebrow {
+      margin: 0 0 11px;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 5.5vw, 62px);
+      font-weight: 500;
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+
+    .intro > p:last-child {
+      max-width: 62ch;
+      margin: 19px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .variant {
+      padding: 46px 0 68px;
+      border-block-start: 1px solid var(--line);
+    }
+
+    .variant-head {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-block-end: 25px;
+    }
+
+    .label {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #515151;
+      font: 600 12px/1 "SFMono-Regular", Consolas, monospace;
+    }
+
+    .variant-head h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 620;
+      letter-spacing: -.015em;
+    }
+
+    .variant-note {
+      margin: 0;
+      color: var(--faint);
+      font-size: 12px;
+    }
+
+    .mock {
+      border: 1px solid var(--line);
+      background: #0a0a0a;
+    }
+
+    .site-section {
+      padding: clamp(72px, 9vw, 118px) clamp(24px, 5vw, 64px);
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(44px, 5vw, 64px);
+      font-weight: 500;
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+
+    .section-intro {
+      max-width: 54ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.62;
+    }
+
+    .event-title {
+      margin: 0;
+      font-size: clamp(19px, 2vw, 26px);
+      font-weight: 560;
+      line-height: 1.17;
+      letter-spacing: -.028em;
+    }
+
+    .event-copy {
+      max-width: 52ch;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .kind {
+      margin: 0;
+      color: var(--faint);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .kind.hack { color: var(--accent); }
+
+    .date-large {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 3.5vw, 44px);
+      line-height: .94;
+      letter-spacing: -.035em;
+    }
+
+    .date-large small {
+      display: block;
+      margin-block-start: 8px;
+      color: var(--faint);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 520;
+      line-height: 1.2;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px 18px;
+      margin: 15px 0 0;
+      padding: 0;
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1.35;
+      list-style: none;
+    }
+
+    .meta li + li::before {
+      margin-inline-end: 18px;
+      color: #3d3d3d;
+      content: "/";
+    }
+
+    /* A: chronological ledger */
+    .ledger-head {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(340px, 1.15fr);
+      gap: clamp(48px, 8vw, 108px);
+      align-items: end;
+      margin-block-end: clamp(46px, 6vw, 72px);
+    }
+
+    .ledger-list { border-block: 1px solid var(--line); }
+
+    .ledger-event {
+      display: grid;
+      grid-template-columns: minmax(150px, .34fr) minmax(0, 1fr) auto;
+      gap: clamp(30px, 5vw, 72px);
+      align-items: start;
+      padding-block: clamp(30px, 3.5vw, 46px);
+    }
+
+    .ledger-event + .ledger-event { border-block-start: 1px solid var(--line); }
+
+    .ledger-event .kind { padding-block-start: 5px; }
+
+    .event-count {
+      margin: 5px 0 0;
+      color: #555;
+      font-size: 10px;
+    }
+
+    /* B: next event and compact list */
+    .split-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-block-end: clamp(44px, 6vw, 72px);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, .9fr) minmax(420px, 1.1fr);
+      gap: clamp(54px, 8vw, 108px);
+      align-items: start;
+    }
+
+    .featured-event {
+      padding-block: 28px 4px;
+      border-block-start: 1px solid var(--line);
+    }
+
+    .featured-event .event-title {
+      max-width: 18ch;
+      margin-block-start: 38px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4vw, 50px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .featured-event .event-copy { margin-block-start: 18px; }
+
+    .featured-date {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .upcoming { border-block: 1px solid var(--line); }
+
+    .upcoming-event {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: clamp(24px, 4vw, 48px);
+      padding-block: 28px;
+    }
+
+    .upcoming-event + .upcoming-event { border-block-start: 1px solid var(--line); }
+
+    .date-code {
+      margin: 2px 0 0;
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .upcoming-event .event-title { font-size: 19px; }
+
+    .upcoming-event .kind { margin-block-start: 9px; }
+
+    /* C: calendar columns */
+    .calendar-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-block-end: clamp(48px, 7vw, 78px);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-block: 1px solid var(--line);
+    }
+
+    .calendar-month {
+      min-width: 0;
+      padding: 28px clamp(22px, 3vw, 38px) 42px;
+    }
+
+    .calendar-month:first-child { padding-inline-start: 0; }
+    .calendar-month:last-child { padding-inline-end: 0; }
+    .calendar-month + .calendar-month { border-inline-start: 1px solid var(--line); }
+
+    .month {
+      margin: 0 0 45px;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .calendar-event + .calendar-event {
+      margin-block-start: 34px;
+      padding-block-start: 34px;
+      border-block-start: 1px solid var(--line);
+    }
+
+    .calendar-date {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      margin-block-end: 23px;
+    }
+
+    .calendar-day {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .calendar-dow {
+      color: var(--faint);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .calendar-event .event-title { font-size: 18px; }
+
+    /* D: date rail */
+    .rail-layout {
+      display: grid;
+      grid-template-columns: minmax(230px, .55fr) minmax(0, 1.45fr);
+      gap: clamp(56px, 10vw, 136px);
+      align-items: start;
+    }
+
+    .rail-copy { position: sticky; top: 30px; }
+
+    .rail-copy .section-intro { margin-block-start: 22px; }
+
+    .rail-list { border-block-start: 1px solid var(--line); }
+
+    .rail-event {
+      display: grid;
+      grid-template-columns: minmax(110px, .3fr) minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 68px);
+      padding-block: clamp(34px, 4.5vw, 54px);
+      border-block-end: 1px solid var(--line);
+    }
+
+    .rail-date {
+      display: flex;
+      gap: 9px;
+      align-items: baseline;
+    }
+
+    .rail-date strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .rail-date span {
+      color: var(--faint);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .rail-event .kind { margin-block-end: 11px; }
+
+    @media (max-width: 820px) {
+      .ledger-head,
+      .calendar-head,
+      .split-grid,
+      .rail-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .ledger-head,
+      .calendar-head { gap: 20px; }
+      .split-grid,
+      .rail-layout { gap: 52px; }
+      .calendar-grid { grid-template-columns: 1fr; }
+      .calendar-month { padding-inline: 0; }
+      .calendar-month + .calendar-month { border-block-start: 1px solid var(--line); border-inline-start: 0; }
+      .rail-copy { position: static; }
+    }
+
+    @media (max-width: 620px) {
+      main { width: min(calc(100% - 24px), var(--content)); padding-block-start: 30px; }
+      .variant-head { grid-template-columns: 34px 1fr; }
+      .variant-note { grid-column: 2; }
+      .site-section { padding-inline: 20px; }
+      .ledger-event { grid-template-columns: 1fr; gap: 17px; }
+      .ledger-event .kind { padding: 0; }
+      .event-count { display: none; }
+      .split-head { align-items: flex-start; flex-direction: column; }
+      .upcoming-event { grid-template-columns: 68px minmax(0, 1fr); gap: 20px; }
+      .rail-event { grid-template-columns: 82px minmax(0, 1fr); gap: 20px; }
+      .meta li + li::before { content: none; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <p class="eyebrow">Design selection</p>
+    <h1>A calmer events section.</h1>
+    <p>Four ways to turn the current blurbs into an event schedule. Each option uses the site's existing type scale, thin rules, muted body copy, and open spacing.</p>
+  </header>
+
+    <section>
+      <h2>Plan links</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>Local</th>
+            <td data-postplan-local><code>.plans/2026-08-31_events_section_mocks.html</code></td>
+          </tr>
+          <tr>
+            <th>Hosted</th>
+            <td data-postplan-hosted><a href="https://postplan.johari-dev.com/j572z2v0fhjnh8a2gj3nzexgtx8dhtcg">https://postplan.johari-dev.com/j572z2v0fhjnh8a2gj3nzexgtx8dhtcg</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  <section class="variant">
+    <div class="variant-head">
+      <span class="label">A</span>
+      <h2>Chronological ledger</h2>
+      <p class="variant-note">Balanced, direct, closest to the rest of the site</p>
+    </div>
+    <div class="mock">
+      <section class="site-section">
+        <div class="ledger-head">
+          <h3 class="section-title">Events.</h3>
+          <p class="section-intro">Guest talks, build sessions, and a closer look at studying computer science after Westlake.</p>
+        </div>
+        <div class="ledger-list">
+          <article class="ledger-event">
+            <p class="date-large">Aug 31<small>Monday, 2026</small></p>
+            <div><p class="kind">Lecture</p><h4 class="event-title">Transformer architecture with Joseph Zhang</h4><p class="event-copy">A Westlake alumnus and Stanford Math and CS student explains transformer architecture, university research, and life in computer science.</p><ul class="meta"><li>Guest lecture</li><li>Q&amp;A</li></ul></div>
+            <p class="event-count">01 / 04</p>
+          </article>
+          <article class="ledger-event">
+            <p class="date-large">Sep 07<small>Monday, 2026</small></p>
+            <div><p class="kind hack">Hack Club</p><h4 class="event-title">Build a website from scratch</h4><p class="event-copy">Learn the basics of HTML, CSS, and JavaScript with the CS Club officers. Finish the site and get free boba.</p><ul class="meta"><li>Hands-on workshop</li><li>Beginner friendly</li></ul></div>
+            <p class="event-count">02 / 04</p>
+          </article>
+          <article class="ledger-event">
+            <p class="date-large">Sep 29<small>Tuesday, 2026</small></p>
+            <div><p class="kind">Lecture</p><h4 class="event-title">Computer architecture and CS at UT</h4><p class="event-copy">Dr. Calvin Lin discusses computer architecture, the Turing Scholars program, and studying computer science at UT Austin.</p><ul class="meta"><li>Room 301, Ms. Chong's room</li><li>Guest lecture</li></ul></div>
+            <p class="event-count">03 / 04</p>
+          </article>
+          <article class="ledger-event">
+            <p class="date-large">TBD<small>Date to come</small></p>
+            <div><p class="kind">Lecture</p><h4 class="event-title">Inside the Turing Scholars program</h4><p class="event-copy">Westlake alumni Ruiqi Li and Autumn Liu share their research, work, and experience as Turing Scholars at UT Austin.</p><ul class="meta"><li>Alumni talk</li><li>Q&amp;A</li></ul></div>
+            <p class="event-count">04 / 04</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="variant">
+    <div class="variant-head">
+      <span class="label">B</span>
+      <h2>Next event with upcoming list</h2>
+      <p class="variant-note">Clear priority, shortest page length</p>
+    </div>
+    <div class="mock">
+      <section class="site-section">
+        <div class="split-head"><h3 class="section-title">Events.</h3><p class="event-count">Fall 2026 / 4 events</p></div>
+        <div class="split-grid">
+          <article class="featured-event">
+            <div class="featured-date"><p class="date-large">Aug 31<small>Monday, 2026</small></p><p class="kind">Next / Lecture</p></div>
+            <h4 class="event-title">Transformer architecture with Joseph Zhang</h4>
+            <p class="event-copy">A Westlake alumnus and Stanford Math and CS student explains transformer architecture, university research, and life in computer science.</p>
+            <ul class="meta"><li>Guest lecture</li><li>Q&amp;A</li></ul>
+          </article>
+          <div class="upcoming">
+            <article class="upcoming-event"><p class="date-code">Sep 07<br>2026</p><div><h4 class="event-title">Build a website from scratch</h4><p class="kind hack">Hack Club / Workshop</p></div></article>
+            <article class="upcoming-event"><p class="date-code">Sep 29<br>2026</p><div><h4 class="event-title">Computer architecture and CS at UT</h4><p class="kind">Lecture / Room 301</p></div></article>
+            <article class="upcoming-event"><p class="date-code">TBD</p><div><h4 class="event-title">Inside the Turing Scholars program</h4><p class="kind">Lecture / Alumni talk</p></div></article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="variant">
+    <div class="variant-head">
+      <span class="label">C</span>
+      <h2>Semester calendar</h2>
+      <p class="variant-note">Easy to scan by month, more visual structure</p>
+    </div>
+    <div class="mock">
+      <section class="site-section">
+        <div class="calendar-head"><h3 class="section-title">Events.</h3><p class="section-intro">Talks and workshops outside the regular Monday program.</p></div>
+        <div class="calendar-grid">
+          <section class="calendar-month">
+            <h4 class="month">August 2026</h4>
+            <article class="calendar-event"><div class="calendar-date"><span class="calendar-day">31</span><span class="calendar-dow">Mon</span></div><p class="kind">Lecture</p><h5 class="event-title">Transformer architecture with Joseph Zhang</h5><p class="event-copy">Stanford, university research, and a Q&amp;A on computer science.</p></article>
+          </section>
+          <section class="calendar-month">
+            <h4 class="month">September 2026</h4>
+            <article class="calendar-event"><div class="calendar-date"><span class="calendar-day">07</span><span class="calendar-dow">Mon</span></div><p class="kind hack">Hack Club</p><h5 class="event-title">Build a website from scratch</h5><p class="event-copy">HTML, CSS, JavaScript, and free boba when you finish.</p></article>
+            <article class="calendar-event"><div class="calendar-date"><span class="calendar-day">29</span><span class="calendar-dow">Tue</span></div><p class="kind">Lecture</p><h5 class="event-title">Computer architecture and CS at UT</h5><p class="event-copy">Dr. Calvin Lin on architecture, Turing Scholars, and UT Austin.</p><ul class="meta"><li>Room 301</li></ul></article>
+          </section>
+          <section class="calendar-month">
+            <h4 class="month">Date to come</h4>
+            <article class="calendar-event"><div class="calendar-date"><span class="calendar-day">TBD</span></div><p class="kind">Lecture</p><h5 class="event-title">Inside the Turing Scholars program</h5><p class="event-copy">Westlake alumni Ruiqi Li and Autumn Liu share their research and work at UT Austin.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="variant">
+    <div class="variant-head">
+      <span class="label">D</span>
+      <h2>Title rail with roomy agenda</h2>
+      <p class="variant-note">Most open layout, strongest desktop rhythm</p>
+    </div>
+    <div class="mock">
+      <section class="site-section rail-layout">
+        <div class="rail-copy"><h3 class="section-title">Events.</h3><p class="section-intro">Guest talks, build sessions, and honest conversations about studying computer science.</p></div>
+        <div class="rail-list">
+          <article class="rail-event"><div class="rail-date"><strong>31</strong><span>Aug<br>2026</span></div><div><p class="kind">Lecture</p><h4 class="event-title">Transformer architecture with Joseph Zhang</h4><p class="event-copy">A Westlake alumnus and Stanford Math and CS student explains transformer architecture and university research.</p><ul class="meta"><li>Guest lecture</li><li>Q&amp;A</li></ul></div></article>
+          <article class="rail-event"><div class="rail-date"><strong>07</strong><span>Sep<br>2026</span></div><div><p class="kind hack">Hack Club</p><h4 class="event-title">Build a website from scratch</h4><p class="event-copy">Learn HTML, CSS, and JavaScript with the officers. Finish the site and get free boba.</p><ul class="meta"><li>Workshop</li><li>Beginner friendly</li></ul></div></article>
+          <article class="rail-event"><div class="rail-date"><strong>29</strong><span>Sep<br>2026</span></div><div><p class="kind">Lecture</p><h4 class="event-title">Computer architecture and CS at UT</h4><p class="event-copy">Dr. Calvin Lin discusses computer architecture, UT Austin, and the Turing Scholars program.</p><ul class="meta"><li>Room 301, Ms. Chong's room</li></ul></div></article>
+          <article class="rail-event"><div class="rail-date"><strong>TBD</strong></div><div><p class="kind">Lecture</p><h4 class="event-title">Inside the Turing Scholars program</h4><p class="event-copy">Westlake alumni Ruiqi Li and Autumn Liu share their research, work, and experience at UT Austin.</p><ul class="meta"><li>Alumni talk</li><li>Q&amp;A</li></ul></div></article>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+</body>
+</html>

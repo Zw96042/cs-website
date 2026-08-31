@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function Header () {
+export default function Header ({ currentPage }) {
   const [isCondensed, setIsCondensed] = useState(false);
 
   useEffect(() => {
@@ -25,16 +25,17 @@ export default function Header () {
   return (
     <header className='site-header' data-condensed={isCondensed ? '' : undefined}>
       <div className='header-inner'>
-        <a className='brand' href='#club-content' aria-label='Westlake High School CS home'>
+        <a className='brand' href='/' aria-label='Westlake High School CS home'>
           <span className='brand-name'>Westlake Computer Science Club</span>
         </a>
         <nav className='site-nav' aria-label='Main navigation'>
-          <a className='nav-link' href='#programs'>Programs</a>
-          <a className='nav-link' href='#hack-club'>
+          <a className='nav-link' href='/#programs'>Programs</a>
+          <a className='nav-link' href='/events/' aria-current={currentPage === 'events' ? 'page' : undefined}>Events</a>
+          <a className='nav-link' href='/#hack-club'>
             Hack Club<span className='nav-copyright'>©</span>
           </a>
-          <a className='nav-link' href='#officers'>Officers</a>
-          <a className='nav-join' href='#join'>
+          <a className='nav-link' href='/#officers'>Officers</a>
+          <a className='nav-join' href='/#join'>
             Join us <span className='action-arrow' aria-hidden='true'>→</span>
           </a>
         </nav>

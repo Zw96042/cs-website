@@ -216,6 +216,7 @@ a {
 .brand:focus-visible,
 .nav-link:focus-visible,
 .nav-join:focus-visible,
+.footer-links a:focus-visible,
 .canvas-action:focus-visible,
 .text-action:focus-visible,
 .hero-media:focus-visible,
@@ -551,6 +552,126 @@ summary:focus-visible {
   font-size: 17px;
   line-height: 1.62;
   text-wrap: pretty;
+}
+
+.events-page-section {
+  padding-block: clamp(88px, 10vw, 148px);
+}
+
+.events-page-layout {
+  display: grid;
+  gap: clamp(48px, 6vw, 76px);
+}
+
+.events-page-heading {
+  display: block;
+}
+
+.event-ledger {
+  border-block: 1px solid var(--line);
+}
+
+.event-ledger-item {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr) auto;
+  gap: clamp(30px, 5vw, 72px);
+  align-items: start;
+  padding-block: clamp(30px, 3.5vw, 46px);
+}
+
+.event-ledger-item + .event-ledger-item {
+  border-block-start: 1px solid var(--line);
+}
+
+.event-date {
+  color: var(--ink);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+}
+
+.event-date span {
+  display: block;
+  margin-block-start: 8px;
+  color: var(--faint);
+  font-family: "Geist", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 520;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.event-type {
+  margin: 4px 0 11px;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.event-type-hack-club {
+  color: var(--accent);
+}
+
+.event-details h2,
+.event-details h3 {
+  margin: 0;
+  font-size: clamp(19px, 2vw, 26px);
+  font-weight: 560;
+  line-height: 1.17;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+}
+
+.event-description {
+  max-width: 52ch;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.event-location {
+  display: flex;
+  margin-block-end: 5px;
+  color: #ff8f8f;
+  font-weight: 650;
+}
+
+.event-number {
+  margin: 5px 0 0;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.075em;
+}
+
+.event-preview-layout {
+  display: grid;
+  gap: clamp(42px, 5vw, 64px);
+}
+
+.event-preview-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.event-preview-link {
+  flex: 0 0 auto;
+  margin-block-end: 3px;
+}
+
+.event-preview-item {
+  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
 }
 
 .affiliation-section {
@@ -1054,9 +1175,21 @@ summary:focus-visible {
   font-size: 12px;
 }
 
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-underline-offset: 4px;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover,
   .nav-join:hover,
+  .footer-links a:hover,
   .secondary-action:hover {
     color: var(--ink);
   }
@@ -1220,6 +1353,25 @@ summary:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .event-ledger-item {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .event-preview-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .event-type {
+    margin-block-start: 0;
+  }
+
+  .event-number {
+    display: none;
+  }
+
   .program-choice {
     grid-template-columns: 64px minmax(0, 1fr);
     gap: 20px;
@@ -1244,6 +1396,12 @@ summary:focus-visible {
   }
 
   .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-links {
     align-items: flex-start;
     flex-direction: column;
     gap: 6px;
