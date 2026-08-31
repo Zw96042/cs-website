@@ -175,6 +175,15 @@ a {
   letter-spacing: -0.018em;
 }
 
+.nav-copyright {
+  margin-inline-start: 0.22em;
+  color: inherit;
+  font-size: 0.95em;
+  font-weight: inherit;
+  line-height: 0;
+  vertical-align: super;
+}
+
 .site-nav {
   display: flex;
   align-items: center;
@@ -562,6 +571,16 @@ summary:focus-visible {
   font-size: 16px;
   line-height: 1.65;
   text-wrap: pretty;
+}
+
+.affiliation-heading-copyright {
+  margin-inline-start: 0.18em;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.4em;
+  font-weight: inherit;
+  letter-spacing: 0;
+  vertical-align: super;
 }
 
 .affiliation-link {

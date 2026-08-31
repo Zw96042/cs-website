@@ -30,7 +30,9 @@ export default function Header () {
         </a>
         <nav className='site-nav' aria-label='Main navigation'>
           <a className='nav-link' href='#programs'>Programs</a>
-          <a className='nav-link' href='#hack-club'>Hack Club</a>
+          <a className='nav-link' href='#hack-club'>
+            Hack Club<span className='nav-copyright'>©</span>
+          </a>
           <a className='nav-link' href='#officers'>Officers</a>
           <a className='nav-join' href='#join'>
             Join us <span className='action-arrow' aria-hidden='true'>→</span>
