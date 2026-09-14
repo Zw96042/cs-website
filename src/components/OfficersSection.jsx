@@ -81,16 +81,25 @@ function Officer ({ officer }) {
 
 export default function OfficersSection () {
   return (
-    <section className='section-shell officers-section' id='officers' aria-labelledby='officers-heading'>
+    <section
+      className='section-shell officers-section'
+      id='officers'
+      aria-labelledby='officers-heading'
+    >
       <div className='section-inner'>
         <div className='officers-header'>
-          <h2 className='section-heading' id='officers-heading'>The people who keep it moving.</h2>
+          <h2 className='section-heading' id='officers-heading'>
+            The people who keep it moving.
+          </h2>
           <p className='section-intro'>
-            Student officers plan the sessions, support projects, and make the club easier to join.
+            Student officers plan the sessions, support projects, and make the
+            club easier to join.
           </p>
         </div>
         <div className='officer-grid'>
-          {officers.map((officer) => <Officer key={officer.name} officer={officer} />)}
+          {officers.map((officer) => (
+            <Officer key={officer.name} officer={officer} />
+          ))}
         </div>
       </div>
     </section>

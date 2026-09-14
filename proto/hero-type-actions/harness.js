@@ -2,7 +2,9 @@ const variants = window.heroVariants;
 const stage = document.getElementById('stage');
 const picker = document.querySelector('.proto-picker');
 const highlight = picker.querySelector('.proto-picker-highlight');
-const items = [...picker.querySelectorAll('.proto-picker-item:not(.proto-picker-replay)')];
+const items = [
+  ...picker.querySelectorAll('.proto-picker-item:not(.proto-picker-replay)')
+];
 let current = 0;
 
 function moveHighlight () {
@@ -12,9 +14,9 @@ function moveHighlight () {
   if (picker.scrollWidth > picker.clientWidth) {
     const minimum = picker.scrollLeft + 4;
     const maximum = picker.scrollLeft + picker.clientWidth - 4;
-    if (el.offsetLeft < minimum) picker.scrollLeft = Math.max(0, el.offsetLeft - 4);
-    else if (el.offsetLeft + el.offsetWidth > maximum) {
-      picker.scrollLeft = el.offsetLeft + el.offsetWidth - picker.clientWidth + 4;
+    if (el.offsetLeft < minimum) { picker.scrollLeft = Math.max(0, el.offsetLeft - 4); } else if (el.offsetLeft + el.offsetWidth > maximum) {
+      picker.scrollLeft =
+        el.offsetLeft + el.offsetWidth - picker.clientWidth + 4;
     }
   }
 }
@@ -70,25 +72,34 @@ items.forEach((el, i) => el.addEventListener('click', () => setActive(i)));
 window.addEventListener('resize', moveHighlight);
 
 document.addEventListener('keydown', (event) => {
-  if (/^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName) || event.target.isContentEditable) return;
+  if (
+    /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName) ||
+    event.target.isContentEditable
+  ) { return; }
   if (event.metaKey || event.ctrlKey || event.altKey) return;
   const number = parseInt(event.key, 10);
-  if (number >= 1 && number <= Math.min(variants.length, 9)) setActive(number - 1);
-  else if (event.key === '0' && variants.length >= 10) setActive(9);
+  if (number >= 1 && number <= Math.min(variants.length, 9)) { setActive(number - 1); } else if (event.key === '0' && variants.length >= 10) setActive(9);
   else if (event.key === '-' && variants.length >= 11) setActive(10);
   else if (event.key === '=' && variants.length >= 12) setActive(11);
   else if (event.key === '[' && variants.length >= 13) setActive(12);
   else if (event.key === ']' && variants.length >= 14) setActive(13);
   else if (event.key === '\\' && variants.length >= 15) setActive(14);
-  else if (event.key === 'ArrowRight') setActive((current + 1) % variants.length);
-  else if (event.key === 'ArrowLeft') setActive((current - 1 + variants.length) % variants.length);
-  else if (event.key === 'r' || event.key === 'R') {
+  else if (event.key === 'ArrowRight') { setActive((current + 1) % variants.length); } else if (event.key === 'ArrowLeft') { setActive((current - 1 + variants.length) % variants.length); } else if (event.key === 'r' || event.key === 'R') {
     if (stage.querySelector('.hero-canvas')) playGraph();
     else if (stage.querySelector('.letter-graph-canvas')) playLetterGraph();
     else replayConcept();
   }
 });
 
-const requestedVariant = parseInt(new URLSearchParams(location.search).get('v'), 10);
-setActive(requestedVariant >= 1 && requestedVariant <= variants.length ? requestedVariant - 1 : 0);
-requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
+const requestedVariant = parseInt(
+  new URLSearchParams(location.search).get('v'),
+  10
+);
+setActive(
+  requestedVariant >= 1 && requestedVariant <= variants.length
+    ? requestedVariant - 1
+    : 0
+);
+requestAnimationFrame(() =>
+  requestAnimationFrame(() => picker.setAttribute('data-ready', ''))
+);

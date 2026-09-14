@@ -9,7 +9,9 @@ export default function Hero () {
           <span>wish existed.</span>
         </h1>
         <p className='hero-lede'>
-          Explore computer science through hands-on lessons, collaborative projects, and competition practice in everything from AI to algorithms.
+          Explore computer science through hands-on lessons, collaborative
+          projects, and competition practice in everything from AI to
+          algorithms.
         </p>
         <dl className='hero-meeting' aria-label='Meeting details'>
           <div>
@@ -42,10 +44,16 @@ export default function Hero () {
             Join Canvas
           </a>
           <a className='text-action primary-action' href='#join'>
-            Meeting times <span className='action-arrow' aria-hidden='true'>→</span>
+            Meeting times{' '}
+            <span className='action-arrow' aria-hidden='true'>
+              →
+            </span>
           </a>
           <a className='text-action secondary-action' href='#programs'>
-            Explore the programs <span className='action-arrow' aria-hidden='true'>→</span>
+            Explore the programs{' '}
+            <span className='action-arrow' aria-hidden='true'>
+              →
+            </span>
           </a>
         </div>
       </div>
@@ -56,7 +64,9 @@ export default function Hero () {
         aria-label='Replay Dijkstra’s shortest-path animation from A to G'
       >
         <svg className='hero-visual' aria-hidden='true' focusable='false'>
-          <text className='graph-kicker' data-graph-kicker>DIJKSTRA'S ALGORITHM</text>
+          <text className='graph-kicker' data-graph-kicker>
+            DIJKSTRA'S ALGORITHM
+          </text>
           <g data-graph-edges>
             {graphEdges.map((edge, index) => (
               <g data-graph-edge={index} key={index}>
@@ -68,7 +78,11 @@ export default function Hero () {
           <path className='graph-edge graph-edge-path' data-graph-path />
           <g data-graph-weights>
             {graphEdges.map((edge, index) => (
-              <text className='graph-weight' data-edge-weight={index} key={`${edge.from}-${edge.to}`} />
+              <text
+                className='graph-weight'
+                data-edge-weight={index}
+                key={`${edge.from}-${edge.to}`}
+              />
             ))}
           </g>
           <circle

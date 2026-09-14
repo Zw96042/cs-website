@@ -7,27 +7,48 @@ import { events } from '../lib/events.js';
 export default function EventsPage () {
   return (
     <div className='site-page'>
-      <a className='skip-link' href='#events-content'>Skip to events</a>
+      <a className='skip-link' href='#events-content'>
+        Skip to events
+      </a>
       <Header currentPage='events' />
       <main className='events-main' id='events-content'>
-        <section className='events-page-section' aria-labelledby='events-heading'>
+        <section
+          className='events-page-section'
+          aria-labelledby='events-heading'
+        >
           <div className='section-inner events-page-layout'>
             <header className='events-page-heading'>
-              <h1 className='section-heading' id='events-heading'>Events.</h1>
+              <h1 className='section-heading' id='events-heading'>
+                Events.
+              </h1>
             </header>
 
             <div className='event-ledger'>
               {events.map((event) => (
-                <article className='event-ledger-item' key={`${event.dateLabel}-${event.title}`}>
-                  <time className='event-date' dateTime={event.date ?? undefined}>
+                <article
+                  className='event-ledger-item'
+                  key={`${event.dateLabel}-${event.title}`}
+                >
+                  <time
+                    className='event-date'
+                    dateTime={event.date ?? undefined}
+                  >
                     {event.dateLabel}
                     <span>{event.dayLabel}</span>
                   </time>
                   <div className='event-details'>
-                    <p className={`event-type${event.type === 'Hack Club' ? ' event-type-hack-club' : ''}`}>{event.type}</p>
+                    <p
+                      className={`event-type${event.type === 'Hack Club' ? ' event-type-hack-club' : ''}`}
+                    >
+                      {event.type}
+                    </p>
                     <h2>{event.title}</h2>
                     <p className='event-description'>
-                      {event.location && <strong className='event-location'>{event.location}</strong>}
+                      {event.location && (
+                        <strong className='event-location'>
+                          {event.location}
+                        </strong>
+                      )}
                       {event.description}
                     </p>
                   </div>

@@ -1,7 +1,10 @@
 window.heroVariants.push({
   name: 'Blueprint',
   axis: 'A pale technical field with restrained type and a single-source traversal.',
-  render: () => window.prototypeSceneMarkup('concept-blueprint', `
+  render: () =>
+    window.prototypeSceneMarkup(
+      'concept-blueprint',
+      `
     <div class="blueprint-copy">
       <h1 class="prototype-title" id="hero-title">See the whole system.</h1>
       <div class="blueprint-support">
@@ -12,5 +15,6 @@ window.heroVariants.push({
     <button class="letter-graph-media blueprint-graph" type="button" data-graph-style="blueprint" data-traversal="left" data-graph-label="BFS / SYSTEM BLUEPRINT" aria-label="Replay a left-to-right breadth-first traversal revealing CS CLUB">
       <canvas class="letter-graph-canvas" aria-hidden="true"></canvas>
     </button>
-  `)
+  `
+    )
 });

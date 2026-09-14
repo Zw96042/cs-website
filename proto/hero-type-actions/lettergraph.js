@@ -40,8 +40,14 @@ function createLetterGraphModel () {
         kind: 'field',
         column,
         row,
-        x: 0.025 + (column / (letterGraphFieldColumns - 1)) * 0.95 + (random() - 0.5) * 0.008,
-        y: 0.105 + (row / (letterGraphFieldRows - 1)) * 0.73 + (random() - 0.5) * 0.016
+        x:
+          0.025 +
+          (column / (letterGraphFieldColumns - 1)) * 0.95 +
+          (random() - 0.5) * 0.008,
+        y:
+          0.105 +
+          (row / (letterGraphFieldRows - 1)) * 0.73 +
+          (random() - 0.5) * 0.016
       });
     }
   }
@@ -50,12 +56,20 @@ function createLetterGraphModel () {
   for (let row = 0; row < letterGraphFieldRows; row += 1) {
     for (let column = 0; column < letterGraphFieldColumns; column += 1) {
       const current = fieldIndex(column, row);
-      if (column + 1 < letterGraphFieldColumns) addEdge(current, fieldIndex(column + 1, row), 'field');
-      if (row + 1 < letterGraphFieldRows) addEdge(current, fieldIndex(column, row + 1), 'field');
-      if (row + 1 < letterGraphFieldRows && column + 1 < letterGraphFieldColumns && (column + row * 2) % 3 === 0) {
+      if (column + 1 < letterGraphFieldColumns) { addEdge(current, fieldIndex(column + 1, row), 'field'); }
+      if (row + 1 < letterGraphFieldRows) { addEdge(current, fieldIndex(column, row + 1), 'field'); }
+      if (
+        row + 1 < letterGraphFieldRows &&
+        column + 1 < letterGraphFieldColumns &&
+        (column + row * 2) % 3 === 0
+      ) {
         addEdge(current, fieldIndex(column + 1, row + 1), 'field');
       }
-      if (row + 1 < letterGraphFieldRows && column > 0 && (column * 2 + row) % 5 === 0) {
+      if (
+        row + 1 < letterGraphFieldRows &&
+        column > 0 &&
+        (column * 2 + row) % 5 === 0
+      ) {
         addEdge(current, fieldIndex(column - 1, row + 1), 'field');
       }
     }
@@ -77,7 +91,12 @@ function createLetterGraphModel () {
       [...row].forEach((cell, gridX) => {
         if (cell !== '1') return;
         const nodeIndex = nodes.length;
-        nodes.push({ kind: 'glyph', gridX: cursor + gridX, gridY, letterIndex });
+        nodes.push({
+          kind: 'glyph',
+          gridX: cursor + gridX,
+          gridY,
+          letterIndex
+        });
         nodeByCell.set(`${gridX}:${gridY}`, nodeIndex);
       });
     });
@@ -105,9 +124,20 @@ function createLetterGraphModel () {
   nodes.slice(glyphOffset).forEach((node, localIndex) => {
     const normalizedX = 0.06 + (node.gridX / totalColumns) * 0.88;
     const normalizedY = 0.27 + (node.gridY / 6) * 0.46;
-    const column = Math.round(((normalizedX - 0.025) / 0.95) * (letterGraphFieldColumns - 1));
-    const row = Math.round(((normalizedY - 0.105) / 0.73) * (letterGraphFieldRows - 1));
-    addEdge(glyphOffset + localIndex, fieldIndex(clamp(column, 0, letterGraphFieldColumns - 1), clamp(row, 0, letterGraphFieldRows - 1)), 'bridge');
+    const column = Math.round(
+      ((normalizedX - 0.025) / 0.95) * (letterGraphFieldColumns - 1)
+    );
+    const row = Math.round(
+      ((normalizedY - 0.105) / 0.73) * (letterGraphFieldRows - 1)
+    );
+    addEdge(
+      glyphOffset + localIndex,
+      fieldIndex(
+        clamp(column, 0, letterGraphFieldColumns - 1),
+        clamp(row, 0, letterGraphFieldRows - 1)
+      ),
+      'bridge'
+    );
   });
 
   const adjacency = Array.from({ length: nodes.length }, () => []);
@@ -120,7 +150,9 @@ function createLetterGraphModel () {
     const distances = new Array(nodes.length).fill(Infinity);
     const parentEdges = new Array(nodes.length).fill(-1);
     const queue = [...new Set(startNodes)];
-    queue.forEach((nodeIndex) => { distances[nodeIndex] = 0; });
+    queue.forEach((nodeIndex) => {
+      distances[nodeIndex] = 0;
+    });
 
     for (let cursorIndex = 0; cursorIndex < queue.length; cursorIndex += 1) {
       const nodeIndex = queue[cursorIndex];
@@ -136,7 +168,9 @@ function createLetterGraphModel () {
 
     return {
       distances,
-      levels: edges.map((edge) => Math.max(distances[edge.from], distances[edge.to])),
+      levels: edges.map((edge) =>
+        Math.max(distances[edge.from], distances[edge.to])
+      ),
       parentEdgeSet: new Set(parentEdges.filter((edgeIndex) => edgeIndex >= 0)),
       maxDistance: Math.max(...distances),
       startNodes: queue.slice(0, startNodes.length)
@@ -176,7 +210,7 @@ let letterGraphPositionCache = { key: '', positions: [] };
 
 function currentLetterGraphPositions (width, height) {
   const key = `${width}:${height}`;
-  if (letterGraphPositionCache.key === key) return letterGraphPositionCache.positions;
+  if (letterGraphPositionCache.key === key) { return letterGraphPositionCache.positions; }
 
   const compact = width < 520;
   const glyphLeft = width * (compact ? 0.03 : 0.06);
@@ -186,7 +220,9 @@ function currentLetterGraphPositions (width, height) {
   const positions = letterGraphModel.nodes.map((node) => {
     if (node.kind === 'field') return { x: node.x * width, y: node.y * height };
     return {
-      x: glyphLeft + (node.gridX / letterGraphModel.totalColumns) * (glyphRight - glyphLeft),
+      x:
+        glyphLeft +
+        (node.gridX / letterGraphModel.totalColumns) * (glyphRight - glyphLeft),
       y: glyphTop + (node.gridY / 6) * (glyphBottom - glyphTop)
     };
   });
@@ -216,14 +252,55 @@ function drawLetterGraph (canvas, progress = 1) {
   const { context, width, height, colors } = canvasFrame(canvas);
   const media = canvas.closest('.letter-graph-media');
   const graphStyles = getComputedStyle(media);
-  const graphColor = (property, fallback) => graphStyles.getPropertyValue(property).trim() || fallback;
+  const graphColor = (property, fallback) =>
+    graphStyles.getPropertyValue(property).trim() || fallback;
   const graphStyle = media.dataset.graphStyle || 'constellation';
   const visualStyles = {
-    constellation: { edgeAlpha: 0.18, edgeWidth: 0.62, nodeAlpha: 0.62, nodeRadius: 0.84, glyphWidth: 1.55, frontierWidth: 1.05, pointShape: 'circle' },
-    blueprint: { edgeAlpha: 0.26, edgeWidth: 0.58, nodeAlpha: 0.7, nodeRadius: 0.7, glyphWidth: 1.45, frontierWidth: 1, pointShape: 'circle' },
-    meridian: { edgeAlpha: 0.15, edgeWidth: 0.66, nodeAlpha: 0.72, nodeRadius: 0.78, glyphWidth: 1.7, frontierWidth: 1.15, pointShape: 'circle' },
-    offset: { edgeAlpha: 0.2, edgeWidth: 0.56, nodeAlpha: 0.58, nodeRadius: 0.72, glyphWidth: 1.65, frontierWidth: 1, pointShape: 'square' },
-    gridline: { edgeAlpha: 0.22, edgeWidth: 0.52, nodeAlpha: 0.76, nodeRadius: 0.68, glyphWidth: 1.4, frontierWidth: 0.95, pointShape: 'square' }
+    constellation: {
+      edgeAlpha: 0.18,
+      edgeWidth: 0.62,
+      nodeAlpha: 0.62,
+      nodeRadius: 0.84,
+      glyphWidth: 1.55,
+      frontierWidth: 1.05,
+      pointShape: 'circle'
+    },
+    blueprint: {
+      edgeAlpha: 0.26,
+      edgeWidth: 0.58,
+      nodeAlpha: 0.7,
+      nodeRadius: 0.7,
+      glyphWidth: 1.45,
+      frontierWidth: 1,
+      pointShape: 'circle'
+    },
+    meridian: {
+      edgeAlpha: 0.15,
+      edgeWidth: 0.66,
+      nodeAlpha: 0.72,
+      nodeRadius: 0.78,
+      glyphWidth: 1.7,
+      frontierWidth: 1.15,
+      pointShape: 'circle'
+    },
+    offset: {
+      edgeAlpha: 0.2,
+      edgeWidth: 0.56,
+      nodeAlpha: 0.58,
+      nodeRadius: 0.72,
+      glyphWidth: 1.65,
+      frontierWidth: 1,
+      pointShape: 'square'
+    },
+    gridline: {
+      edgeAlpha: 0.22,
+      edgeWidth: 0.52,
+      nodeAlpha: 0.76,
+      nodeRadius: 0.68,
+      glyphWidth: 1.4,
+      frontierWidth: 0.95,
+      pointShape: 'square'
+    }
   };
   const visuals = visualStyles[graphStyle] || visualStyles.constellation;
   const palette = {
@@ -233,7 +310,9 @@ function drawLetterGraph (canvas, progress = 1) {
     label: graphColor('--graph-label', colors.faint),
     muted: graphColor('--graph-muted', colors.muted)
   };
-  const traversalModel = letterGraphModel.traversals[media.dataset.traversal || 'left'] || letterGraphModel.traversals.left;
+  const traversalModel =
+    letterGraphModel.traversals[media.dataset.traversal || 'left'] ||
+    letterGraphModel.traversals.left;
   const positions = currentLetterGraphPositions(width, height);
   const traversal = clamp(progress / 0.9);
   const level = traversal * (traversalModel.maxDistance + 1);
@@ -249,28 +328,58 @@ function drawLetterGraph (canvas, progress = 1) {
   });
 
   letterGraphModel.edges.forEach((edge) => {
-    if (edge.kind === 'glyph' || !traversalModel.parentEdgeSet.has(edge.index)) return;
+    if (edge.kind === 'glyph' || !traversalModel.parentEdgeSet.has(edge.index)) { return; }
     const age = level - traversalModel.levels[edge.index];
     if (age >= 0 && age <= 2.6) activeTreeEdges.push(edge);
   });
 
-  drawEdgeBatch(context, letterGraphModel.edges, positions, palette.line, compact ? visuals.edgeAlpha * 1.18 : visuals.edgeAlpha, compact ? visuals.edgeWidth * 0.8 : visuals.edgeWidth);
-  drawEdgeBatch(context, activeTreeEdges, positions, palette.accent, 0.76 * frontierFade, compact ? visuals.frontierWidth * 0.8 : visuals.frontierWidth);
+  drawEdgeBatch(
+    context,
+    letterGraphModel.edges,
+    positions,
+    palette.line,
+    compact ? visuals.edgeAlpha * 1.18 : visuals.edgeAlpha,
+    compact ? visuals.edgeWidth * 0.8 : visuals.edgeWidth
+  );
+  drawEdgeBatch(
+    context,
+    activeTreeEdges,
+    positions,
+    palette.accent,
+    0.76 * frontierFade,
+    compact ? visuals.frontierWidth * 0.8 : visuals.frontierWidth
+  );
 
   letterGraphModel.glyphEdges.forEach((edgeIndex) => {
     const edge = letterGraphModel.edges[edgeIndex];
-    const edgeProgress = easeOutCubic(clamp(level - traversalModel.levels[edgeIndex]));
+    const edgeProgress = easeOutCubic(
+      clamp(level - traversalModel.levels[edgeIndex])
+    );
     if (edgeProgress <= 0) return;
-    traceLine(context, positions[edge.from], positions[edge.to], edgeProgress, palette.accent, compact ? visuals.glyphWidth * 0.76 : visuals.glyphWidth);
+    traceLine(
+      context,
+      positions[edge.from],
+      positions[edge.to],
+      edgeProgress,
+      palette.accent,
+      compact ? visuals.glyphWidth * 0.76 : visuals.glyphWidth
+    );
   });
 
   context.save();
   const nodeRadius = compact ? visuals.nodeRadius * 0.75 : visuals.nodeRadius;
-  context.globalAlpha = compact ? Math.min(1, visuals.nodeAlpha * 1.08) : visuals.nodeAlpha;
+  context.globalAlpha = compact
+    ? Math.min(1, visuals.nodeAlpha * 1.08)
+    : visuals.nodeAlpha;
   context.fillStyle = palette.node;
   if (visuals.pointShape === 'square') {
     positions.forEach((position) => {
-      context.fillRect(position.x - nodeRadius, position.y - nodeRadius, nodeRadius * 2, nodeRadius * 2);
+      context.fillRect(
+        position.x - nodeRadius,
+        position.y - nodeRadius,
+        nodeRadius * 2,
+        nodeRadius * 2
+      );
     });
   } else {
     context.beginPath();
@@ -289,7 +398,13 @@ function drawLetterGraph (canvas, progress = 1) {
     const frontier = level - distance < 1.7 && frontierFade > 0;
     if (!frontier && node.kind !== 'glyph') return;
     context.beginPath();
-    context.arc(position.x, position.y, frontier ? (compact ? 1.35 : 1.75) : (compact ? 0.95 : 1.25), 0, Math.PI * 2);
+    context.arc(
+      position.x,
+      position.y,
+      frontier ? (compact ? 1.35 : 1.75) : compact ? 0.95 : 1.25,
+      0,
+      Math.PI * 2
+    );
     context.globalAlpha = frontier ? 0.95 * frontierFade : 0.82;
     context.fillStyle = palette.accent;
     context.fill();
@@ -315,17 +430,26 @@ function drawLetterGraph (canvas, progress = 1) {
     }
   });
 
-  const graphLabel = media.dataset.graphLabel || 'BREADTH-FIRST SEARCH / FIXED GRAPH';
-  if (graphLabel !== 'none') drawLabel(context, graphLabel, 10, 18, palette.label, { size: 10 });
-  const status = traversal >= 1
-    ? compact
-      ? `${letterGraphModel.nodes.length} nodes / found: CS CLUB / replay`
-      : `${letterGraphModel.nodes.length} fixed nodes / path found: CS CLUB / click to replay`
-    : `visited ${visitedCount}/${letterGraphModel.nodes.length} / queue ${queueCount}`;
-  drawLabel(context, status, width / 2, height - 44, traversal >= 1 ? palette.accent : palette.muted, {
-    align: 'center',
-    size: compact ? 8 : 10
-  });
+  const graphLabel =
+    media.dataset.graphLabel || 'BREADTH-FIRST SEARCH / FIXED GRAPH';
+  if (graphLabel !== 'none') { drawLabel(context, graphLabel, 10, 18, palette.label, { size: 10 }); }
+  const status =
+    traversal >= 1
+      ? compact
+        ? `${letterGraphModel.nodes.length} nodes / found: CS CLUB / replay`
+        : `${letterGraphModel.nodes.length} fixed nodes / path found: CS CLUB / click to replay`
+      : `visited ${visitedCount}/${letterGraphModel.nodes.length} / queue ${queueCount}`;
+  drawLabel(
+    context,
+    status,
+    width / 2,
+    height - 44,
+    traversal >= 1 ? palette.accent : palette.muted,
+    {
+      align: 'center',
+      size: compact ? 8 : 10
+    }
+  );
 
   canvas._letterGraphProgress = progress;
 }

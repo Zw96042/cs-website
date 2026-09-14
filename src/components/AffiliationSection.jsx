@@ -1,15 +1,15 @@
-export default function AffiliationSection() {
+export default function AffiliationSection () {
   return (
     <section
-      className="section-shell affiliation-section"
-      id="hack-club"
-      aria-labelledby="affiliation-heading"
+      className='section-shell affiliation-section'
+      id='hack-club'
+      aria-labelledby='affiliation-heading'
     >
-      <div className="section-inner affiliation-layout">
-        <h2 className="section-heading" id="affiliation-heading">
+      <div className='section-inner affiliation-layout'>
+        <h2 className='section-heading' id='affiliation-heading'>
           Affiliated with Hack Club
         </h2>
-        <div className="affiliation-copy">
+        <div className='affiliation-copy'>
           <p>
             Westlake CS is part of Hack Club’s international network of
             student-led coding clubs. The affiliation connects members with a
@@ -18,12 +18,12 @@ export default function AffiliationSection() {
             hackathons, and events.
           </p>
           <a
-            className="text-action affiliation-link"
-            href="https://hackclub.com/"
+            className='text-action affiliation-link'
+            href='https://hackclub.com/'
           >
-            <img className="hack-club-logo" src="/hack-club-icon.svg" alt="" />
+            <img className='hack-club-logo' src='/hack-club-icon.svg' alt='' />
             Visit Hack Club
-            <span className="action-arrow" aria-hidden="true">
+            <span className='action-arrow' aria-hidden='true'>
               ↗
             </span>
           </a>
