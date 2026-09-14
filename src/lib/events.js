@@ -10,8 +10,8 @@ export const events = [
   },
   {
     type: "Hack Club",
-    date: "2026-09-07",
-    dateLabel: "Sep 07",
+    date: "TBD",
+    dateLabel: "TBD",
     dayLabel: "Monday, 2026",
     title: "Build a website from scratch",
     description:
@@ -26,6 +26,15 @@ export const events = [
     location: "Room 301, Ms. Chong's room.",
     description:
       "Dr. Calvin Lin discusses computer architecture, the Turing Scholars program, and studying computer science at UT Austin.",
+  },
+  {
+    type: "Guest Speaker",
+    date: "2026-10-05",
+    dateLabel: "Oct 05",
+    dayLabel: "Monday, 2026",
+    title: "Quantum computing with HitoMatch",
+    description:
+      "Anna White, President of Dikan Quantum Corporation & Executive Director, HitoMatch Foundation, discusses quantum computing and CS education.",
   },
 ];
 
@@ -50,5 +59,5 @@ export function getUpcomingEvents(now = new Date()) {
   const today = getClubDateKey(now);
   return events
     .filter((event) => event.date !== null && event.date >= today)
-    .slice(0, 2);
+    .slice(0, 3);
 }
