@@ -9,7 +9,6 @@ export default function Contests() {
         <h1 className="section-heading" id="contests-heading">
           Contests.
         </h1>
-        <p>Tryouts for contests will commence September 14.</p>
       </header>
 
       <div className="contest-ledger">

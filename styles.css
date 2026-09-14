@@ -669,16 +669,12 @@ summary:focus-visible {
   display: block;
 }
 
-.contest-ledger {
-  border-block: 1px solid var(--line);
-}
-
 .contest-ledger-item {
   display: grid;
   grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr) auto;
   gap: clamp(30px, 5vw, 72px);
   align-items: start;
-  padding-block: clamp(30px, 3.5vw, 46px);
+  padding-block: clamp(15px, 1.5vw, 23px);
 }
 
 .contest-date {
@@ -712,7 +708,6 @@ summary:focus-visible {
 }
 
 .contest-description {
-  max-width: 52ch;
   margin: 10px 0 0;
   color: var(--muted);
   font-size: 14px;
