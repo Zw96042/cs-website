@@ -6,3 +6,7 @@ dist/
 node_modules/
 flake.lock
 .direnv/
+
+# Reproducible importer working files
+work/
+__pycache__/

@@ -79,6 +79,7 @@ a {
   --accent: #c5d5ff;
   --accent-ink: #111214;
   --content: 1180px;
+  --page-gutter: clamp(24px, 4vw, 56px);
   --section-space: clamp(88px, 10vw, 148px);
   min-height: 100dvh;
   overflow: clip;
@@ -148,7 +149,7 @@ a {
 .section-inner,
 .club-hero,
 .footer-inner {
-  width: min(calc(100% - 40px), var(--content));
+  width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), var(--content));
   margin-inline: auto;
 }
 
@@ -175,6 +176,10 @@ a {
   letter-spacing: -0.018em;
 }
 
+.brand-name-compact {
+  display: none;
+}
+
 .nav-copyright {
   margin-inline-start: 0.22em;
   color: inherit;
@@ -187,12 +192,26 @@ a {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   white-space: nowrap;
 }
 
+.section-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 20px;
+  margin-inline: 10px;
+  background: var(--line);
+}
+
 .nav-link,
-.nav-join {
+.nav-page-link,
+.nav-back-link,
+.nav-current-page {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -203,30 +222,41 @@ a {
   font-weight: 520;
   text-decoration: none;
   transition:
-    color 150ms ease,
-    transform 150ms var(--ease-out);
+    color 150ms ease;
 }
 
-.nav-join {
+.nav-page-link,
+.nav-current-page {
   gap: 7px;
   color: var(--ink);
   font-weight: 610;
 }
 
+.nav-current-page {
+  text-decoration-color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.nav-back-link {
+  gap: 7px;
+}
+
 .brand:focus-visible,
 .nav-link:focus-visible,
-.nav-join:focus-visible,
+.nav-page-link:focus-visible,
+.nav-back-link:focus-visible,
+.nav-current-page:focus-visible,
 .canvas-action:focus-visible,
 .text-action:focus-visible,
 .hero-media:focus-visible,
 .sort-trigger:focus-visible,
 summary:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-.nav-link:active,
-.nav-join:active,
 .canvas-action:active,
 .text-action:active {
   transform: scale(0.96);
@@ -559,27 +589,104 @@ summary:focus-visible {
 
 .events-page-layout {
   display: grid;
-  gap: clamp(48px, 6vw, 76px);
+  gap: clamp(64px, 8vw, 104px);
 }
 
 .events-page-heading {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(320px, 5fr);
+  gap: clamp(48px, 8vw, 120px);
+  align-items: end;
+}
+
+.events-page-heading .section-intro {
+  max-width: 56ch;
+  margin: 0;
+  justify-self: end;
+}
+
+.events-page-kicker {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  font-weight: 620;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.events-schedule,
+.events-unscheduled {
+  display: grid;
+  gap: clamp(24px, 3vw, 38px);
+}
+
+.events-schedule-heading {
+  min-height: 40px;
+}
+
+.events-schedule-heading h2 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.events-schedule-heading div p {
+  margin-block-start: 8px;
+  font-family: "Geist", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 450;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.event-month {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.22fr) minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 72px);
+  align-items: start;
+}
+
+.event-month + .event-month {
+  margin-block-start: clamp(24px, 3vw, 40px);
+}
+
+.event-month-heading {
+  padding-block-start: clamp(8px, 1vw, 14px);
+}
+
+.event-month-heading h3 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.events-empty {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .event-ledger {
-  border-block: 1px solid var(--line);
+  display: grid;
+  gap: clamp(26px, 3vw, 42px);
 }
 
 .event-ledger-item {
   display: grid;
-  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
   gap: clamp(30px, 5vw, 72px);
   align-items: start;
-  padding-block: clamp(30px, 3.5vw, 46px);
-}
-
-.event-ledger-item + .event-ledger-item {
-  border-block-start: 1px solid var(--line);
+  padding-block: clamp(8px, 1vw, 14px);
 }
 
 .event-date {
@@ -592,7 +699,16 @@ summary:focus-visible {
   text-decoration: none;
 }
 
-.event-date span {
+.event-date-range {
+  display: flex;
+  align-items: baseline;
+}
+
+.event-date-tbd {
+  display: block;
+}
+
+.event-day-label {
   display: block;
   margin-block-start: 8px;
   color: var(--faint);
@@ -605,27 +721,37 @@ summary:focus-visible {
 }
 
 .event-type {
-  margin: 4px 0 11px;
+  margin: 3px 0 10px;
   color: var(--faint);
-  font-family: "Geist Mono", monospace;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.075em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 620;
+  letter-spacing: -0.01em;
 }
 
-.event-type-hack-club {
+.event-type[data-event-track="hack-club"],
+.event-type[data-event-track="competitive-programming"] {
   color: var(--accent);
 }
 
 .event-details h2,
-.event-details h3 {
+.event-details h3,
+.event-details h4 {
   margin: 0;
   font-size: clamp(19px, 2vw, 26px);
   font-weight: 560;
   line-height: 1.17;
   letter-spacing: -0.028em;
   text-wrap: balance;
+}
+
+.event-credential {
+  max-width: 52ch;
+  margin: 9px 0 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 620;
+  line-height: 1.45;
+  text-wrap: pretty;
 }
 
 .event-description {
@@ -639,9 +765,41 @@ summary:focus-visible {
 
 .event-location {
   display: flex;
-  margin-block-end: 5px;
-  color: #ff8f8f;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.event-location span {
+  color: var(--accent);
+  font-size: 11px;
   font-weight: 650;
+}
+
+.event-location strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.event-signup-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 12px;
+  margin: 15px 0 0;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.event-signup-note span {
+  color: var(--accent);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
 }
 
 .event-preview-layout {
@@ -1168,7 +1326,8 @@ summary:focus-visible {
 
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover,
-  .nav-join:hover,
+  .nav-page-link:hover,
+  .nav-back-link:hover,
   .secondary-action:hover {
     color: var(--ink);
   }
@@ -1187,13 +1346,23 @@ summary:focus-visible {
     color: var(--ink);
   }
 
-  .text-action:hover .action-arrow,
-  .nav-join:hover .action-arrow {
+  .text-action:hover .action-arrow {
+    transform: translateX(3px);
+  }
+
+  .nav-page-link:hover .action-arrow {
     transform: translateX(3px);
   }
 
   .officer:hover .officer-photo {
     transform: scale(1.018);
+  }
+}
+
+@media (max-width: 1040px) {
+  .section-nav,
+  .nav-divider {
+    display: none;
   }
 }
 
@@ -1257,52 +1426,36 @@ summary:focus-visible {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     row-gap: 42px;
   }
+
+  .events-page-heading,
+  .event-month {
+    grid-template-columns: 1fr;
+  }
+
+  .events-page-heading {
+    gap: 28px;
+  }
+
+  .events-page-heading .section-intro {
+    justify-self: start;
+  }
+
+  .event-month {
+    gap: 0;
+  }
+
+  .event-month-heading {
+    padding-block: 0 16px;
+  }
 }
 
 @media (max-width: 700px) {
+  .site-page {
+    --page-gutter: 16px;
+  }
+
   .site-header {
-    height: calc(64px + env(safe-area-inset-top));
     padding-block-start: env(safe-area-inset-top);
-    border-block-end-color: transparent;
-    background: transparent;
-    isolation: isolate;
-  }
-
-  .site-header::before {
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 0;
-    height: 100%;
-    border-block-end: 1px solid var(--line);
-    background: var(--bg);
-    content: "";
-    pointer-events: none;
-    transition: height 180ms var(--ease-move);
-  }
-
-  .site-header[data-condensed]::before {
-    height: calc(56px + env(safe-area-inset-top));
-  }
-
-  .site-header .header-inner {
-    position: relative;
-    z-index: 1;
-    transition: transform 180ms var(--ease-move);
-  }
-
-  .site-header[data-condensed] .header-inner {
-    transform: translateY(-4px);
-  }
-
-  .header-inner,
-  .section-inner,
-  .club-hero,
-  .footer-inner {
-    width: min(calc(100% - 32px), var(--content));
-  }
-
-  .site-nav .nav-link {
-    display: none;
   }
 
   .hero-title {
@@ -1347,6 +1500,10 @@ summary:focus-visible {
     margin-block-start: 0;
   }
 
+  .events-page-section {
+    padding-block: clamp(72px, 18vw, 104px);
+  }
+
   .program-choice {
     grid-template-columns: 64px minmax(0, 1fr);
     gap: 20px;
@@ -1385,6 +1542,18 @@ summary:focus-visible {
 }
 
 @media (max-width: 420px) {
+  .header-inner {
+    gap: 12px;
+  }
+
+  .brand-name-full {
+    display: none;
+  }
+
+  .brand-name-compact {
+    display: inline;
+  }
+
   .hero-title > span {
     white-space: normal;
   }

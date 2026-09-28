@@ -1,0 +1,379 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "75c13701a28a84583261519645f90d57f554bec719d5254cc113451f7a075f33",
+    "source": "2026_District_MC.pdf",
+    "page": 9,
+    "gid": 4670,
+    "font": "CambriaMath",
+    "text": "["
+  },
+  {
+    "id": 1,
+    "fingerprint": "b90d9dd704ea83f0fd44f2d5ade6446e1e54a887a6abbfbf5fef02c20826d320",
+    "source": "2026_District_MC.pdf",
+    "page": 9,
+    "gid": 4671,
+    "font": "CambriaMath",
+    "text": "]"
+  },
+  {
+    "id": 2,
+    "fingerprint": "0fe28434122d359a2f21c55e680960726d8f2e381860c94fe7e2ccbed24efe89",
+    "source": "2026_District_MC.pdf",
+    "page": 9,
+    "gid": 4667,
+    "font": "CambriaMath",
+    "text": ")"
+  },
+  {
+    "id": 3,
+    "fingerprint": "90022c3f0940b5dbd0393bd36f7ebe4c9b76afa12c0c88e711ee73bbc255f478",
+    "source": "2026_District_MC.pdf",
+    "page": 13,
+    "gid": 2876,
+    "font": "CambriaMath",
+    "text": "8"
+  },
+  {
+    "id": 4,
+    "fingerprint": "28f5e44cd3cd66b7f2e62574e868b893b7bfa26d009ebc1ec152f826b1db4483",
+    "source": "2026_District_MC.pdf",
+    "page": 13,
+    "gid": 2869,
+    "font": "CambriaMath",
+    "text": "1"
+  },
+  {
+    "id": 5,
+    "fingerprint": "e8728b76172193016cea89883e3e839a0c1dc8a6bdc67d6c6ed56c73d8c6e40f",
+    "source": "2026_District_MC.pdf",
+    "page": 13,
+    "gid": 2868,
+    "font": "CambriaMath",
+    "text": "0"
+  },
+  {
+    "id": 6,
+    "fingerprint": "cbe1a850732feb7a44ca8462dc6c52f6e7d5cb063346d83e5c3bb53ffa2460e3",
+    "source": "2025_Regional_MC.pdf",
+    "page": 8,
+    "gid": 1827,
+    "font": "CambriaMath",
+    "text": "A"
+  },
+  {
+    "id": 7,
+    "fingerprint": "e078c9ed0d25e499aebd57f4745e2cc74ca5add4bd0783d9ece2daeff34387e0",
+    "source": "2025_Regional_MC.pdf",
+    "page": 8,
+    "gid": 1828,
+    "font": "CambriaMath",
+    "text": "B"
+  },
+  {
+    "id": 8,
+    "fingerprint": "873efa01a45c2274444cee849f0634b46790515a88a48cd830af24fad4d7176e",
+    "source": "2025_Regional_MC.pdf",
+    "page": 8,
+    "gid": 3364,
+    "font": "CambriaMath",
+    "text": null,
+    "accent": "overline"
+  },
+  {
+    "id": 9,
+    "fingerprint": "f91b2cd243d22d340866c877c6d9f97d95854d2944db61cb2603b24b1d7a9c22",
+    "source": "2025_Regional_MC.pdf",
+    "page": 8,
+    "gid": 1829,
+    "font": "CambriaMath",
+    "text": "C"
+  },
+  {
+    "id": 10,
+    "fingerprint": "d18806e1cba7d21be2af927b8c79e451f4f11d0825dfcc78746b74365c020410",
+    "source": "2025_Regional_MC.pdf",
+    "page": 8,
+    "gid": 1830,
+    "font": "CambriaMath",
+    "text": "D"
+  },
+  {
+    "id": 11,
+    "fingerprint": "04142cf83aeb2b634e5d87404e404410de6902064a32b35a3f4dc1fd0d659bcd",
+    "source": "2025_Regional_MC.pdf",
+    "page": 10,
+    "gid": 2281,
+    "font": "CambriaMath",
+    "text": "O"
+  },
+  {
+    "id": 12,
+    "fingerprint": "495512bbbe99a7e86d018262fa70d8df7bfe501c2b8e77635b57674597c215dd",
+    "source": "2025_Regional_MC.pdf",
+    "page": 10,
+    "gid": 4666,
+    "font": "CambriaMath",
+    "text": "("
+  },
+  {
+    "id": 13,
+    "fingerprint": "94668e80f47a5af553286356923f039e6157cd44f5e49553d1f1628a3846f6d8",
+    "source": "2025_Regional_MC.pdf",
+    "page": 10,
+    "gid": 1866,
+    "font": "CambriaMath",
+    "text": "n"
+  },
+  {
+    "id": 14,
+    "fingerprint": "76dd3abd5c8f2a9e37591562feb22626ab65296ca4c871059139f42de69d86d9",
+    "source": "2025_Regional_MC.pdf",
+    "page": 10,
+    "gid": 2870,
+    "font": "CambriaMath",
+    "text": "2"
+  },
+  {
+    "id": 15,
+    "fingerprint": "fb00e56e8c3843348948a5e14880fe24a746eccbb2b2b9aacfc86d940344cac0",
+    "source": "2025_Regional_MC.pdf",
+    "page": 10,
+    "gid": 3435,
+    "font": "CambriaMath",
+    "text": "("
+  },
+  {
+    "id": 16,
+    "fingerprint": "3bbed77b7eb03ee3dc936aa6b607927b828349d9fac6bea3dffc36e0a30f5672",
+    "source": "2025_Regional_MC.pdf",
+    "page": 10,
+    "gid": 3439,
+    "font": "CambriaMath",
+    "text": ")"
+  },
+  {
+    "id": 17,
+    "fingerprint": "fe40391d13ded4524083f966b82631ed649ad62da782aefee381ac5273daf457",
+    "source": "2025_Regional_MC.pdf",
+    "page": 11,
+    "gid": 1865,
+    "font": "CambriaMath",
+    "text": "m"
+  },
+  {
+    "id": 18,
+    "fingerprint": "56ce0312de81498087d39208814371da81b6baa445c0170cb94c5d164f9f7629",
+    "source": "2025_Regional_MC.pdf",
+    "page": 11,
+    "gid": 2196,
+    "font": "CambriaMath",
+    "text": "n"
+  },
+  {
+    "id": 19,
+    "fingerprint": "b6a5d407eda405add963c5bd40a12d790d04edc700f02f34c02c695cf8989f1d",
+    "source": "2025_Regional_MC.pdf",
+    "page": 11,
+    "gid": 2195,
+    "font": "CambriaMath",
+    "text": "m"
+  },
+  {
+    "id": 20,
+    "fingerprint": "c3bd69bc2c867ad23dedd846d881a417dd0c7eab987d66e25610c8e490c65dab",
+    "source": "2025_Regional_MC.pdf",
+    "page": 11,
+    "gid": 1848,
+    "font": "CambriaMath",
+    "text": "V"
+  },
+  {
+    "id": 21,
+    "fingerprint": "7ad9eac2ca067c9b0cf69ebce985b4248636735b1afcd6c7406469ac9065391d",
+    "source": "2026_InvA_MC.pdf",
+    "page": 6,
+    "gid": 1840,
+    "font": "CambriaMath",
+    "text": "N"
+  },
+  {
+    "id": 22,
+    "fingerprint": "ba51f25dac7ed77b69dae869443bff922a2d99e267e87c0305ed643291476aaf",
+    "source": "2026_InvA_MC.pdf",
+    "page": 6,
+    "gid": 1864,
+    "font": "CambriaMath",
+    "text": "l"
+  },
+  {
+    "id": 23,
+    "fingerprint": "18c01e6ba8775cfe9d489597adcff4f5d7cee71c77393b400f80b4c63cbbd064",
+    "source": "2026_InvA_MC.pdf",
+    "page": 6,
+    "gid": 1867,
+    "font": "CambriaMath",
+    "text": "o"
+  },
+  {
+    "id": 24,
+    "fingerprint": "db8bffefca3fc02d91437bf8e906fc8552fc8b4d87f9f6977db7e79b70857f25",
+    "source": "2026_InvA_MC.pdf",
+    "page": 6,
+    "gid": 1859,
+    "font": "CambriaMath",
+    "text": "g"
+  },
+  {
+    "id": 25,
+    "fingerprint": "d904c9718b11fa84e76c180ab3dadb7f04e50fd529026de22fefd79432200f7d",
+    "source": "2026_InvA_MC.pdf",
+    "page": 8,
+    "gid": 1833,
+    "font": "CambriaMath",
+    "text": "G"
+  },
+  {
+    "id": 26,
+    "fingerprint": "716097f4fc24e1d822252a4c98e10086957356a431b03e5085bce030bc5d2e22",
+    "source": "2026_InvA_MC.pdf",
+    "page": 8,
+    "gid": 1832,
+    "font": "CambriaMath",
+    "text": "F"
+  },
+  {
+    "id": 27,
+    "fingerprint": "73c8052eb19c809d1e9007166e923ddaa62d1830157d1ac241d71a59c81fb83f",
+    "source": "2026_InvA_MC.pdf",
+    "page": 8,
+    "gid": 1835,
+    "font": "CambriaMath",
+    "text": "I"
+  },
+  {
+    "id": 28,
+    "fingerprint": "e0c82e540d4a53b21cefcb6377e05312e41dcae964aa4da115ad360bbdd99f76",
+    "source": "2026_InvA_MC.pdf",
+    "page": 8,
+    "gid": 1834,
+    "font": "CambriaMath",
+    "text": "H"
+  },
+  {
+    "id": 29,
+    "fingerprint": "e7bb50899229318aecc8aa6d50c61a1c7fd219d884666eb021faa7950b13560d",
+    "source": "2026_InvA_MC.pdf",
+    "page": 8,
+    "gid": 1831,
+    "font": "CambriaMath",
+    "text": "E"
+  },
+  {
+    "id": 30,
+    "fingerprint": "90ff6e959fe6a942058a212eff0419be42ebd564388e61ad92742b65abfb2c7a",
+    "source": "2025_State_MC.pdf",
+    "page": 8,
+    "gid": 2871,
+    "font": "CambriaMath",
+    "text": "3"
+  },
+  {
+    "id": 31,
+    "fingerprint": "84abdd5fc286a6900d4bcf39bd78da08a570bf275bc9688373be5252d9d823bc",
+    "source": "2025_State_MC.pdf",
+    "page": 15,
+    "gid": 1875,
+    "font": "CambriaMath",
+    "text": "w"
+  },
+  {
+    "id": 32,
+    "fingerprint": "8fbc6fe37c4598f4501439ffb36ef1f0cbb9f4faa68173003900e1e62fdbf4ac",
+    "source": "2026_InvB_MC.pdf",
+    "page": 4,
+    "gid": 1839,
+    "font": "CambriaMath",
+    "text": "M"
+  },
+  {
+    "id": 33,
+    "fingerprint": "4104f34f2ea36b7f16bafc2417c4d4d27127fae95b6163d8a017bc9ec3f06c0a",
+    "source": "2026_InvB_MC.pdf",
+    "page": 10,
+    "gid": 1873,
+    "font": "CambriaMath",
+    "text": "u"
+  },
+  {
+    "id": 34,
+    "fingerprint": "e67ebe2cc25419e415fc8737631e769cecb724102d3e82c312b6b6e5ed376b4c",
+    "source": "2026_InvB_MC.pdf",
+    "page": 10,
+    "gid": 1874,
+    "font": "CambriaMath",
+    "text": "v"
+  },
+  {
+    "id": 35,
+    "fingerprint": "74253c8ad80d9404341f78bf5dd1687f2c74e45a45c5764a0502a2de6d7f8ea0",
+    "source": "2026_InvB_MC.pdf",
+    "page": 10,
+    "gid": 1863,
+    "font": "CambriaMath",
+    "text": "k"
+  },
+  {
+    "id": 36,
+    "fingerprint": "57a7ecc765eb4ad7a8d40c911d2d9aa70a526ca8d9cf0def13b456d0ba962c26",
+    "source": "2025_District_MC.pdf",
+    "page": 6,
+    "gid": 1836,
+    "font": "CambriaMath",
+    "text": "J"
+  },
+  {
+    "id": 37,
+    "fingerprint": "6afa594b5ca84dc52874958f3075beeeb1a14cd2526462c11128fcd00fad957a",
+    "source": "2025_District_MC.pdf",
+    "page": 7,
+    "gid": 3365,
+    "font": "CambriaMath",
+    "text": null,
+    "accent": "overline"
+  },
+  {
+    "id": 38,
+    "fingerprint": "1a715bfe19d2ed60d22bfa7dbddefd6ae748af4c1b95719aaec545ab660f131f",
+    "source": "2026_State_MC.pdf",
+    "page": 11,
+    "gid": 2874,
+    "font": "CambriaMath",
+    "text": "6"
+  },
+  {
+    "id": 39,
+    "fingerprint": "ee48dc7c4e62ca819f23cf3977156abf3fa876004b7432d29c80a46b4cfd9a61",
+    "source": "2026_Regional_MC.pdf",
+    "page": 9,
+    "gid": 3041,
+    "font": "CambriaMath",
+    "text": "n"
+  },
+  {
+    "id": 30,
+    "fingerprint": "e43b5470fa3d29d6b1fc415b1bcc685a4a1e7ba9bb82200abe46bfd013fe58e6",
+    "source": "2026_InvA_MC.pdf",
+    "page": 11,
+    "gid": 1876,
+    "origin": [
+      273.35986328125,
+      184.56024169921875
+    ],
+    "font": "CambriaMath",
+    "name": "uniF020",
+    "raw": 32,
+    "text": "x"
+  }
+]

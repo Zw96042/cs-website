@@ -1,0 +1,15 @@
+opnd | A
+opnd | CA
+opnd | FFFF
+opnd & 0
+opnd & FFFF0000
+opnd ^ 8003
+opnd ^ CB8E
+This can not be done with a single bitwise operator.
+This can not be done with a single bitwise operator.
+This can not be done with a single bitwise operator.
+opnd | FFFFFFFE
+opnd & 0
+opnd ^ FFFFFFFE
+opnd & 1
+opnd & 7FFFFFFE

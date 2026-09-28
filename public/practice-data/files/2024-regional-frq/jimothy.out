@@ -1,0 +1,90 @@
+TEST CASE #1:
+PRE-ORDER TRAVERSAL: Never Gonna Give You Up
+IN-ORDER TRAVERSAL: Give Gonna Never Up You
+POST-ORDER TRAVERSAL: Give Gonna Up You Never
+REVERSE-ORDER TRAVERSAL: You Up Never Gonna Give
+TEST CASE #2:
+PRE-ORDER TRAVERSAL: Somewhere Over High Rainbow The Way Up
+IN-ORDER TRAVERSAL: High Over Rainbow Somewhere The Up Way
+POST-ORDER TRAVERSAL: High Rainbow Over Up Way The Somewhere
+REVERSE-ORDER TRAVERSAL: Way Up The Somewhere Rainbow Over High
+TEST CASE #3:
+PRE-ORDER TRAVERSAL: Dont Believing Stop
+IN-ORDER TRAVERSAL: Believing Dont Stop
+POST-ORDER TRAVERSAL: Believing Stop Dont
+REVERSE-ORDER TRAVERSAL: Stop Dont Believing
+TEST CASE #4:
+PRE-ORDER TRAVERSAL: Hello Its Me
+IN-ORDER TRAVERSAL: Hello Its Me
+POST-ORDER TRAVERSAL: Me Its Hello
+REVERSE-ORDER TRAVERSAL: Me Its Hello
+TEST CASE #5:
+PRE-ORDER TRAVERSAL: I After All Was If These Like Meet To Wondering Years Youd
+IN-ORDER TRAVERSAL: After All I If Like Meet These To Was Wondering Years Youd
+POST-ORDER TRAVERSAL: All After Meet Like To These If Youd Years Wondering Was I
+REVERSE-ORDER TRAVERSAL: Youd Years Wondering Was To These Meet Like If I All After
+TEST CASE #6:
+PRE-ORDER TRAVERSAL: Somebody Once Me Macaroni Told The World Was
+IN-ORDER TRAVERSAL: Macaroni Me Once Somebody The Told Was World
+POST-ORDER TRAVERSAL: Macaroni Me Once The Was World Told Somebody
+REVERSE-ORDER TRAVERSAL: World Was Told The Somebody Once Me Macaroni
+TEST CASE #7:
+PRE-ORDER TRAVERSAL: K A D B C E G F H I J S Q O M L N P R W U T V Y X Z
+IN-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+POST-ORDER TRAVERSAL: C B F J I H G E D A L N M P O R Q T V U X Z Y W S K
+REVERSE-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+TEST CASE #8:
+PRE-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+IN-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+POST-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+REVERSE-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+TEST CASE #9:
+PRE-ORDER TRAVERSAL: eij bvcx weofi wefnn fsverter fds pwqeork poiuy lkjh gfds lkjh mnbv qmler rew xcvm
+IN-ORDER TRAVERSAL: bvcx eij fds fsverter gfds lkjh lkjh mnbv poiuy pwqeork qmler rew wefnn weofi xcvm
+POST-ORDER TRAVERSAL: bvcx fds lkjh gfds mnbv lkjh poiuy rew qmler pwqeork fsverter wefnn xcvm weofi eij
+REVERSE-ORDER TRAVERSAL: xcvm weofi wefnn rew qmler pwqeork poiuy mnbv lkjh lkjh gfds fsverter fds eij bvcx
+TEST CASE #10:
+PRE-ORDER TRAVERSAL: M F A B C D E G H I J K L N O P Q R S T U V W X Y Z
+IN-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+POST-ORDER TRAVERSAL: E D C B A L K J I H G F Z Y X W V U T S R Q P O N M
+REVERSE-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+TEST CASE #11:
+PRE-ORDER TRAVERSAL: YUI CVBN ASDFGHJK RINIM RIMV IKMNGTRD QWERTYUI MNBVCXRTYUIK LKJUIOPOIUH JNBVCFRTREDSXCV OKJGRDCVHJI UNVME UIKMNBG ZXCVBN
+IN-ORDER TRAVERSAL: ASDFGHJK CVBN IKMNGTRD JNBVCFRTREDSXCV LKJUIOPOIUH MNBVCXRTYUIK OKJGRDCVHJI QWERTYUI RIMV RINIM UIKMNBG UNVME YUI ZXCVBN
+POST-ORDER TRAVERSAL: ASDFGHJK JNBVCFRTREDSXCV LKJUIOPOIUH OKJGRDCVHJI MNBVCXRTYUIK QWERTYUI IKMNGTRD RIMV UIKMNBG UNVME RINIM CVBN ZXCVBN YUI
+REVERSE-ORDER TRAVERSAL: ZXCVBN YUI UNVME UIKMNBG RINIM RIMV QWERTYUI OKJGRDCVHJI MNBVCXRTYUIK LKJUIOPOIUH JNBVCFRTREDSXCV IKMNGTRD CVBN ASDFGHJK
+TEST CASE #12:
+PRE-ORDER TRAVERSAL: Somebody Once Me Macaroni I Aint In Sharpest Shed Told The The The World Was Tool
+IN-ORDER TRAVERSAL: Aint I In Macaroni Me Once Sharpest Shed Somebody The The The Told Tool Was World
+POST-ORDER TRAVERSAL: Aint In I Macaroni Me Shed Sharpest Once The The The Tool Was World Told Somebody
+REVERSE-ORDER TRAVERSAL: World Was Tool Told The The The Somebody Shed Sharpest Once Me Macaroni In I Aint
+TEST CASE #13:
+PRE-ORDER TRAVERSAL: E A B C D F G H I J K L M N O P Q R S T U V W X Y Z
+IN-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+POST-ORDER TRAVERSAL: D C B A Z Y X W V U T S R Q P O N M L K J I H G F E
+REVERSE-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+TEST CASE #14:
+PRE-ORDER TRAVERSAL: L A B C D E F G H I J K M N O P Q R S T U V W X Y Z
+IN-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+POST-ORDER TRAVERSAL: K J I H G F E D C B A Z Y X W V U T S R Q P O N M L
+REVERSE-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+TEST CASE #15:
+PRE-ORDER TRAVERSAL: A B U C N E D F G H I J K L M O P Q R S T V W X Y Z
+IN-ORDER TRAVERSAL: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+POST-ORDER TRAVERSAL: D M L K J I H G F E T S R Q P O N C Z Y X W V U B A
+REVERSE-ORDER TRAVERSAL: Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+TEST CASE #16:
+PRE-ORDER TRAVERSAL: qwer iop asd asd gdfg cvb bnm fgh dfg ert hfg ghj hghj hjk iop kjk jkl ljk qwe wert rt rty rty tyu sdf sdf sdf tyu tyui uio uio vbn wer yui xcv yui zxc
+IN-ORDER TRAVERSAL: asd asd bnm cvb dfg ert fgh gdfg ghj hfg hghj hjk iop iop jkl kjk ljk qwe qwer rt rty rty sdf sdf sdf tyu tyu tyui uio uio vbn wer wert xcv yui yui zxc
+POST-ORDER TRAVERSAL: asd bnm ert dfg fgh cvb ghj iop hjk hghj hfg gdfg asd jkl qwe ljk kjk iop rty sdf sdf tyu sdf uio wer vbn uio tyui tyu rty rt yui xcv zxc yui wert qwer
+REVERSE-ORDER TRAVERSAL: zxc yui yui xcv wert wer vbn uio uio tyui tyu tyu sdf sdf sdf rty rty rt qwer qwe ljk kjk jkl iop iop hjk hghj hfg ghj gdfg fgh ert dfg cvb bnm asd asd
+TEST CASE #17:
+PRE-ORDER TRAVERSAL: A
+IN-ORDER TRAVERSAL: A
+POST-ORDER TRAVERSAL: A
+REVERSE-ORDER TRAVERSAL: A
+TEST CASE #18:
+PRE-ORDER TRAVERSAL: B A C
+IN-ORDER TRAVERSAL: A B C
+POST-ORDER TRAVERSAL: A C B
+REVERSE-ORDER TRAVERSAL: C B A

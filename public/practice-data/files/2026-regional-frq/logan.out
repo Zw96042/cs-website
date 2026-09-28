@@ -1,0 +1,44 @@
+--- Hazard Map Case 1 ---
+Grid:
+ 55 70 61 88 40
+ 72 68 70 59 90
+ 33 71 45 70 70
+
+Smelliest value: 90
+Location(s)  : (2,5)
+
+Danger map:
+. X . X .
+X . X . X
+. X . X X
+
+--- Hazard Map Case 2 ---
+Grid:
+ 10 50 90 20
+ 75 49 50 51
+ 50 50 50 50
+ 99 12 13 14
+
+Smelliest value: 99
+Location(s)  : (4,1)
+
+Danger map:
+. X X .
+X . X X
+X X X X
+X . . .
+
+--- Hazard Map Case 3 ---
+Grid:
+ 81 79 80 78 77100
+ 65 80 81 82 79 78
+ 90 91 50 49 80 81
+
+Smelliest value: 100
+Location(s)  : (1,6)
+
+Danger map:
+X . X . . X
+. X X X . .
+X X . . X X
+

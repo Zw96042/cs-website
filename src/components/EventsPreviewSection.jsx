@@ -1,7 +1,8 @@
-import { getUpcomingEvents } from '../lib/events.js';
+import EventItem from './EventItem.jsx';
+import { getEventPreview } from '../lib/events.js';
 
 export default function EventsPreviewSection () {
-  const upcomingEvents = getUpcomingEvents();
+  const upcomingEvents = getEventPreview();
 
   return (
     <section className='section-shell event-preview-section' id='events' aria-labelledby='event-preview-heading'>
@@ -13,24 +14,17 @@ export default function EventsPreviewSection () {
           </a>
         </header>
 
-        <div className='event-ledger event-preview-ledger'>
-          {upcomingEvents.map((event) => (
-            <article className='event-ledger-item event-preview-item' key={`${event.dateLabel}-${event.title}`}>
-              <time className='event-date' dateTime={event.date ?? undefined}>
-                {event.dateLabel}
-                <span>{event.dayLabel}</span>
-              </time>
-              <div className='event-details'>
-                <p className={`event-type${event.type === 'Hack Club' ? ' event-type-hack-club' : ''}`}>{event.type}</p>
-                <h3>{event.title}</h3>
-                <p className='event-description'>
-                  {event.location && <strong className='event-location'>{event.location}</strong>}
-                  {event.description}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
+        {upcomingEvents.length > 0
+          ? (
+            <div className='event-ledger event-preview-ledger'>
+              {upcomingEvents.map((event) => (
+                <EventItem event={event} headingLevel='h3' key={`${event.date}-${event.title}`} preview />
+              ))}
+            </div>
+            )
+          : (
+            <p className='events-empty'>No dated events are on the calendar yet. Check back after the next club meeting.</p>
+            )}
       </div>
     </section>
   );

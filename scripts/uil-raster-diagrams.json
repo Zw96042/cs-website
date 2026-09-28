@@ -1,0 +1,2956 @@
+{
+  "2025-district-mc": [
+    {
+      "source": "2025_District_MC.pdf",
+      "page": 6,
+      "questions": [
+        19,
+        20,
+        21
+      ],
+      "title": "Directed weighted graph",
+      "width": 520,
+      "height": 310,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 45,
+          "y": 90
+        },
+        {
+          "id": "B",
+          "x": 95,
+          "y": 235
+        },
+        {
+          "id": "C",
+          "x": 145,
+          "y": 165
+        },
+        {
+          "id": "D",
+          "x": 205,
+          "y": 235
+        },
+        {
+          "id": "E",
+          "x": 310,
+          "y": 210
+        },
+        {
+          "id": "F",
+          "x": 300,
+          "y": 285
+        },
+        {
+          "id": "G",
+          "x": 345,
+          "y": 90
+        },
+        {
+          "id": "H",
+          "x": 405,
+          "y": 170
+        },
+        {
+          "id": "I",
+          "x": 450,
+          "y": 95
+        },
+        {
+          "id": "J",
+          "x": 490,
+          "y": 285
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "G",
+          "weight": 2,
+          "directed": true
+        },
+        {
+          "from": "A",
+          "to": "C",
+          "weight": 8,
+          "directed": true
+        },
+        {
+          "from": "A",
+          "to": "B",
+          "weight": 8,
+          "directed": true
+        },
+        {
+          "from": "C",
+          "to": "B",
+          "weight": -1,
+          "directed": true
+        },
+        {
+          "from": "C",
+          "to": "D",
+          "weight": 3,
+          "directed": true
+        },
+        {
+          "from": "B",
+          "to": "D",
+          "weight": 2,
+          "directed": true
+        },
+        {
+          "from": "D",
+          "to": "E",
+          "weight": 2,
+          "directed": true
+        },
+        {
+          "from": "D",
+          "to": "F",
+          "weight": 5,
+          "directed": true
+        },
+        {
+          "from": "E",
+          "to": "F",
+          "weight": 2,
+          "directed": true
+        },
+        {
+          "from": "F",
+          "to": "J",
+          "weight": 5,
+          "directed": true
+        },
+        {
+          "from": "G",
+          "to": "I",
+          "weight": 5,
+          "directed": true
+        },
+        {
+          "from": "G",
+          "to": "E",
+          "weight": 11,
+          "directed": true
+        },
+        {
+          "from": "I",
+          "to": "H",
+          "weight": 1,
+          "directed": true
+        },
+        {
+          "from": "H",
+          "to": "E",
+          "weight": 3,
+          "directed": true
+        },
+        {
+          "from": "H",
+          "to": "J",
+          "weight": 12,
+          "directed": true
+        }
+      ]
+    }
+  ],
+  "2025-state-mc": [
+    {
+      "source": "2025_State_MC.pdf",
+      "page": 8,
+      "questions": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "title": "Weighted graph",
+      "width": 490,
+      "height": 250,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 30,
+          "y": 125
+        },
+        {
+          "id": "B",
+          "x": 105,
+          "y": 55
+        },
+        {
+          "id": "C",
+          "x": 225,
+          "y": 55
+        },
+        {
+          "id": "D",
+          "x": 365,
+          "y": 55
+        },
+        {
+          "id": "E",
+          "x": 450,
+          "y": 125
+        },
+        {
+          "id": "F",
+          "x": 360,
+          "y": 195
+        },
+        {
+          "id": "G",
+          "x": 230,
+          "y": 195
+        },
+        {
+          "id": "H",
+          "x": 105,
+          "y": 195
+        },
+        {
+          "id": "I",
+          "x": 165,
+          "y": 125
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B",
+          "weight": 4
+        },
+        {
+          "from": "A",
+          "to": "H",
+          "weight": 8
+        },
+        {
+          "from": "B",
+          "to": "H",
+          "weight": 11
+        },
+        {
+          "from": "B",
+          "to": "C",
+          "weight": 8
+        },
+        {
+          "from": "H",
+          "to": "I",
+          "weight": 7
+        },
+        {
+          "from": "I",
+          "to": "C",
+          "weight": 9
+        },
+        {
+          "from": "I",
+          "to": "G",
+          "weight": 6
+        },
+        {
+          "from": "H",
+          "to": "G",
+          "weight": 1
+        },
+        {
+          "from": "C",
+          "to": "D",
+          "weight": 7
+        },
+        {
+          "from": "C",
+          "to": "F",
+          "weight": 5
+        },
+        {
+          "from": "G",
+          "to": "F",
+          "weight": 2
+        },
+        {
+          "from": "D",
+          "to": "E",
+          "weight": 2
+        },
+        {
+          "from": "F",
+          "to": "E",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "source": "2025_State_MC.pdf",
+      "page": 15,
+      "questions": [
+        40
+      ],
+      "title": "Directed graph",
+      "width": 430,
+      "height": 300,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 70,
+          "y": 95
+        },
+        {
+          "id": "B",
+          "x": 350,
+          "y": 35
+        },
+        {
+          "id": "G",
+          "x": 225,
+          "y": 90
+        },
+        {
+          "id": "J",
+          "x": 115,
+          "y": 145
+        },
+        {
+          "id": "C",
+          "x": 135,
+          "y": 210
+        },
+        {
+          "id": "I",
+          "x": 35,
+          "y": 225
+        },
+        {
+          "id": "F",
+          "x": 175,
+          "y": 270
+        },
+        {
+          "id": "H",
+          "x": 275,
+          "y": 190
+        },
+        {
+          "id": "E",
+          "x": 390,
+          "y": 150
+        },
+        {
+          "id": "D",
+          "x": 385,
+          "y": 265
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B",
+          "directed": true
+        },
+        {
+          "from": "A",
+          "to": "G",
+          "directed": true
+        },
+        {
+          "from": "G",
+          "to": "B",
+          "directed": true
+        },
+        {
+          "from": "C",
+          "to": "G",
+          "directed": true
+        },
+        {
+          "from": "C",
+          "to": "J",
+          "directed": true
+        },
+        {
+          "from": "C",
+          "to": "I",
+          "directed": true
+        },
+        {
+          "from": "G",
+          "to": "H",
+          "directed": true
+        },
+        {
+          "from": "E",
+          "to": "H",
+          "directed": true
+        },
+        {
+          "from": "F",
+          "to": "C",
+          "directed": true
+        },
+        {
+          "from": "F",
+          "to": "H",
+          "directed": true
+        },
+        {
+          "from": "A",
+          "to": "J",
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "H",
+          "to": "D",
+          "directed": true,
+          "both": true
+        }
+      ]
+    }
+  ],
+  "2025-invitational-a-mc": [
+    {
+      "source": "2025_InvA_MC.pdf",
+      "page": 10,
+      "questions": [
+        40
+      ],
+      "title": "Undirected graph",
+      "width": 500,
+      "height": 290,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "N",
+          "x": 25,
+          "y": 80
+        },
+        {
+          "id": "M",
+          "x": 105,
+          "y": 55
+        },
+        {
+          "id": "L",
+          "x": 245,
+          "y": 35
+        },
+        {
+          "id": "O",
+          "x": 245,
+          "y": 90
+        },
+        {
+          "id": "I",
+          "x": 375,
+          "y": 85
+        },
+        {
+          "id": "H",
+          "x": 140,
+          "y": 145
+        },
+        {
+          "id": "J",
+          "x": 95,
+          "y": 180
+        },
+        {
+          "id": "B",
+          "x": 30,
+          "y": 180
+        },
+        {
+          "id": "E",
+          "x": 145,
+          "y": 225
+        },
+        {
+          "id": "D",
+          "x": 255,
+          "y": 185
+        },
+        {
+          "id": "A",
+          "x": 335,
+          "y": 185
+        },
+        {
+          "id": "G",
+          "x": 435,
+          "y": 220
+        },
+        {
+          "id": "K",
+          "x": 50,
+          "y": 245
+        },
+        {
+          "id": "F",
+          "x": 255,
+          "y": 245
+        },
+        {
+          "id": "C",
+          "x": 360,
+          "y": 260
+        }
+      ],
+      "edges": [
+        {
+          "from": "N",
+          "to": "M"
+        },
+        {
+          "from": "M",
+          "to": "L"
+        },
+        {
+          "from": "L",
+          "to": "O"
+        },
+        {
+          "from": "L",
+          "to": "I"
+        },
+        {
+          "from": "I",
+          "to": "D"
+        },
+        {
+          "from": "M",
+          "to": "H"
+        },
+        {
+          "from": "H",
+          "to": "D"
+        },
+        {
+          "from": "H",
+          "to": "J"
+        },
+        {
+          "from": "J",
+          "to": "B"
+        },
+        {
+          "from": "B",
+          "to": "K"
+        },
+        {
+          "from": "J",
+          "to": "E"
+        },
+        {
+          "from": "E",
+          "to": "K"
+        },
+        {
+          "from": "D",
+          "to": "F"
+        },
+        {
+          "from": "F",
+          "to": "C"
+        },
+        {
+          "from": "C",
+          "to": "G"
+        },
+        {
+          "from": "G",
+          "to": "A"
+        },
+        {
+          "from": "A",
+          "to": "D"
+        }
+      ]
+    }
+  ],
+  "2022-regional-mc": [
+    {
+      "source": "2022_Regional_MC.pdf",
+      "page": 14,
+      "questions": [
+        40
+      ],
+      "title": "Weighted undirected graph",
+      "width": 300,
+      "height": 230,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "TL",
+          "x": 55,
+          "y": 60,
+          "label": ""
+        },
+        {
+          "id": "TR",
+          "x": 245,
+          "y": 60,
+          "label": ""
+        },
+        {
+          "id": "BL",
+          "x": 55,
+          "y": 190,
+          "label": ""
+        },
+        {
+          "id": "BR",
+          "x": 245,
+          "y": 190,
+          "label": ""
+        }
+      ],
+      "edges": [
+        {
+          "from": "TL",
+          "to": "TR",
+          "weight": 7
+        },
+        {
+          "from": "TL",
+          "to": "BL",
+          "weight": 9
+        },
+        {
+          "from": "BL",
+          "to": "TR",
+          "weight": 5
+        },
+        {
+          "from": "TR",
+          "to": "BR",
+          "weight": 3
+        },
+        {
+          "from": "BL",
+          "to": "BR",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "2026-regional-mc": [
+    {
+      "source": "2026_Regional_MC.pdf",
+      "page": 10,
+      "questions": [
+        37,
+        38
+      ],
+      "title": "Undirected graph",
+      "width": 330,
+      "height": 280,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 165,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 100,
+          "y": 105
+        },
+        {
+          "id": "C",
+          "x": 255,
+          "y": 105
+        },
+        {
+          "id": "D",
+          "x": 45,
+          "y": 220
+        },
+        {
+          "id": "E",
+          "x": 145,
+          "y": 220
+        },
+        {
+          "id": "F",
+          "x": 280,
+          "y": 175
+        },
+        {
+          "id": "G",
+          "x": 215,
+          "y": 250
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "D"
+        },
+        {
+          "from": "B",
+          "to": "E"
+        },
+        {
+          "from": "E",
+          "to": "G"
+        },
+        {
+          "from": "C",
+          "to": "F"
+        },
+        {
+          "from": "F",
+          "to": "G"
+        }
+      ]
+    }
+  ],
+  "2026-state-mc": [
+    {
+      "source": "2026_State_MC.pdf",
+      "page": 11,
+      "questions": [
+        39,
+        40
+      ],
+      "title": "Weighted undirected graph",
+      "width": 460,
+      "height": 260,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "v0",
+          "x": 35,
+          "y": 130
+        },
+        {
+          "id": "v1",
+          "x": 125,
+          "y": 45
+        },
+        {
+          "id": "v2",
+          "x": 125,
+          "y": 205
+        },
+        {
+          "id": "v3",
+          "x": 240,
+          "y": 45
+        },
+        {
+          "id": "v4",
+          "x": 240,
+          "y": 205
+        },
+        {
+          "id": "v5",
+          "x": 355,
+          "y": 70
+        },
+        {
+          "id": "v6",
+          "x": 355,
+          "y": 205
+        }
+      ],
+      "edges": [
+        {
+          "from": "v0",
+          "to": "v1",
+          "weight": 4
+        },
+        {
+          "from": "v0",
+          "to": "v2",
+          "weight": 2
+        },
+        {
+          "from": "v1",
+          "to": "v2",
+          "weight": 1
+        },
+        {
+          "from": "v1",
+          "to": "v3",
+          "weight": 5
+        },
+        {
+          "from": "v2",
+          "to": "v3",
+          "weight": 8
+        },
+        {
+          "from": "v2",
+          "to": "v4",
+          "weight": 10
+        },
+        {
+          "from": "v3",
+          "to": "v4",
+          "weight": 2
+        },
+        {
+          "from": "v3",
+          "to": "v5",
+          "weight": 6
+        },
+        {
+          "from": "v4",
+          "to": "v5",
+          "weight": 2
+        },
+        {
+          "from": "v4",
+          "to": "v6",
+          "weight": 3
+        },
+        {
+          "from": "v5",
+          "to": "v6",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "2021-regional-mc": [
+    {
+      "source": "2021_Regional_MC.pdf",
+      "page": 7,
+      "questions": [
+        17
+      ],
+      "title": "Undirected graph",
+      "width": 250,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 135,
+          "y": 30
+        },
+        {
+          "id": "B",
+          "x": 65,
+          "y": 90
+        },
+        {
+          "id": "C",
+          "x": 210,
+          "y": 85
+        },
+        {
+          "id": "D",
+          "x": 95,
+          "y": 170
+        },
+        {
+          "id": "E",
+          "x": 195,
+          "y": 170
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "D"
+        },
+        {
+          "from": "D",
+          "to": "C"
+        },
+        {
+          "from": "C",
+          "to": "E"
+        },
+        {
+          "from": "D",
+          "to": "E"
+        }
+      ]
+    }
+  ],
+  "2009-district-2-mc": [
+    {
+      "source": "legacy-2009-district-2-mc.pdf",
+      "page": 8,
+      "questions": [
+        36
+      ],
+      "title": "Directed tree",
+      "width": 230,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "52",
+          "x": 115,
+          "y": 30
+        },
+        {
+          "id": "17",
+          "x": 75,
+          "y": 100
+        },
+        {
+          "id": "12",
+          "x": 175,
+          "y": 100
+        },
+        {
+          "id": "-8",
+          "x": 45,
+          "y": 165
+        },
+        {
+          "id": "15",
+          "x": 110,
+          "y": 165
+        }
+      ],
+      "edges": [
+        {
+          "from": "52",
+          "to": "17",
+          "directed": true
+        },
+        {
+          "from": "52",
+          "to": "12",
+          "directed": true
+        },
+        {
+          "from": "17",
+          "to": "-8",
+          "directed": true
+        },
+        {
+          "from": "17",
+          "to": "15",
+          "directed": true
+        }
+      ]
+    }
+  ],
+  "2010-utcs-invitational-mc": [
+    {
+      "source": "legacy-2010-utcs-invitational-mc.pdf",
+      "page": 8,
+      "questions": [
+        37
+      ],
+      "title": "Binary tree",
+      "width": 270,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "root",
+          "x": 135,
+          "y": 30,
+          "label": "R"
+        },
+        {
+          "id": "O",
+          "x": 65,
+          "y": 100,
+          "label": "O"
+        },
+        {
+          "id": "E",
+          "x": 205,
+          "y": 100,
+          "label": "E"
+        },
+        {
+          "id": "P",
+          "x": 30,
+          "y": 170,
+          "label": "P"
+        },
+        {
+          "id": "R",
+          "x": 170,
+          "y": 170,
+          "label": "R"
+        },
+        {
+          "id": "T",
+          "x": 240,
+          "y": 170,
+          "label": "T"
+        }
+      ],
+      "edges": [
+        {
+          "from": "root",
+          "to": "O",
+          "directed": true
+        },
+        {
+          "from": "root",
+          "to": "E",
+          "directed": true
+        },
+        {
+          "from": "O",
+          "to": "P",
+          "directed": true
+        },
+        {
+          "from": "E",
+          "to": "R",
+          "directed": true
+        },
+        {
+          "from": "E",
+          "to": "T",
+          "directed": true
+        }
+      ]
+    }
+  ],
+  "2021-invitational-b-mc": [
+    {
+      "source": "2021_InvB_MC.pdf",
+      "page": 12,
+      "questions": [
+        36
+      ],
+      "title": "Binary tree",
+      "width": 260,
+      "height": 230,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "5",
+          "x": 130,
+          "y": 25
+        },
+        {
+          "id": "3",
+          "x": 75,
+          "y": 95
+        },
+        {
+          "id": "8",
+          "x": 205,
+          "y": 95
+        },
+        {
+          "id": "1",
+          "x": 35,
+          "y": 170
+        },
+        {
+          "id": "4",
+          "x": 105,
+          "y": 170
+        },
+        {
+          "id": "6",
+          "x": 175,
+          "y": 145
+        },
+        {
+          "id": "7",
+          "x": 210,
+          "y": 200
+        }
+      ],
+      "edges": [
+        {
+          "from": "5",
+          "to": "3"
+        },
+        {
+          "from": "5",
+          "to": "8"
+        },
+        {
+          "from": "3",
+          "to": "1"
+        },
+        {
+          "from": "3",
+          "to": "4"
+        },
+        {
+          "from": "8",
+          "to": "6"
+        },
+        {
+          "from": "6",
+          "to": "7"
+        }
+      ]
+    }
+  ],
+  "2021-district-mc": [
+    {
+      "source": "2021_District_MC.pdf",
+      "page": 12,
+      "questions": [
+        37
+      ],
+      "title": "Binary search tree",
+      "width": 260,
+      "height": 220,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "M",
+          "x": 130,
+          "y": 25
+        },
+        {
+          "id": "D",
+          "x": 85,
+          "y": 80
+        },
+        {
+          "id": "T",
+          "x": 215,
+          "y": 80
+        },
+        {
+          "id": "B",
+          "x": 55,
+          "y": 135
+        },
+        {
+          "id": "N",
+          "x": 185,
+          "y": 135
+        },
+        {
+          "id": "A",
+          "x": 30,
+          "y": 195
+        },
+        {
+          "id": "P",
+          "x": 220,
+          "y": 195
+        }
+      ],
+      "edges": [
+        {
+          "from": "M",
+          "to": "D"
+        },
+        {
+          "from": "M",
+          "to": "T"
+        },
+        {
+          "from": "D",
+          "to": "B"
+        },
+        {
+          "from": "B",
+          "to": "A"
+        },
+        {
+          "from": "T",
+          "to": "N"
+        },
+        {
+          "from": "N",
+          "to": "P"
+        }
+      ]
+    }
+  ],
+  "2020-invitational-a-mc": [
+    {
+      "source": "2020_InvA_InvB_District_MC.pdf",
+      "page": 13,
+      "questions": [
+        37
+      ],
+      "title": "Binary search tree",
+      "width": 300,
+      "height": 220,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "M",
+          "x": 145,
+          "y": 25
+        },
+        {
+          "id": "E",
+          "x": 75,
+          "y": 85
+        },
+        {
+          "id": "S",
+          "x": 225,
+          "y": 85
+        },
+        {
+          "id": "B",
+          "x": 30,
+          "y": 165
+        },
+        {
+          "id": "J",
+          "x": 115,
+          "y": 165
+        },
+        {
+          "id": "R",
+          "x": 180,
+          "y": 165
+        },
+        {
+          "id": "Z",
+          "x": 255,
+          "y": 145
+        },
+        {
+          "id": "U",
+          "x": 225,
+          "y": 195
+        }
+      ],
+      "edges": [
+        {
+          "from": "M",
+          "to": "E"
+        },
+        {
+          "from": "M",
+          "to": "S"
+        },
+        {
+          "from": "E",
+          "to": "B"
+        },
+        {
+          "from": "E",
+          "to": "J"
+        },
+        {
+          "from": "S",
+          "to": "R"
+        },
+        {
+          "from": "S",
+          "to": "Z"
+        },
+        {
+          "from": "Z",
+          "to": "U"
+        }
+      ]
+    }
+  ],
+  "2020-district-mc": [
+    {
+      "source": "2020_InvA_InvB_District_MC.pdf",
+      "page": 43,
+      "questions": [
+        37
+      ],
+      "title": "Binary search tree",
+      "width": 260,
+      "height": 220,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "M",
+          "x": 130,
+          "y": 25
+        },
+        {
+          "id": "D",
+          "x": 85,
+          "y": 80
+        },
+        {
+          "id": "T",
+          "x": 215,
+          "y": 80
+        },
+        {
+          "id": "B",
+          "x": 55,
+          "y": 135
+        },
+        {
+          "id": "N",
+          "x": 185,
+          "y": 135
+        },
+        {
+          "id": "A",
+          "x": 30,
+          "y": 195
+        },
+        {
+          "id": "P",
+          "x": 220,
+          "y": 195
+        }
+      ],
+      "edges": [
+        {
+          "from": "M",
+          "to": "D"
+        },
+        {
+          "from": "M",
+          "to": "T"
+        },
+        {
+          "from": "D",
+          "to": "B"
+        },
+        {
+          "from": "B",
+          "to": "A"
+        },
+        {
+          "from": "T",
+          "to": "N"
+        },
+        {
+          "from": "N",
+          "to": "P"
+        }
+      ]
+    }
+  ],
+  "2019-invitational-a-mc": [
+    {
+      "source": "2019_InvA_MC.pdf",
+      "page": 10,
+      "questions": [
+        36
+      ],
+      "title": "Binary search tree",
+      "width": 250,
+      "height": 220,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "5",
+          "x": 130,
+          "y": 25
+        },
+        {
+          "id": "1",
+          "x": 55,
+          "y": 90
+        },
+        {
+          "id": "8",
+          "x": 205,
+          "y": 90
+        },
+        {
+          "id": "3",
+          "x": 80,
+          "y": 150
+        },
+        {
+          "id": "7",
+          "x": 180,
+          "y": 145
+        },
+        {
+          "id": "2",
+          "x": 55,
+          "y": 205
+        },
+        {
+          "id": "6",
+          "x": 150,
+          "y": 200
+        }
+      ],
+      "edges": [
+        {
+          "from": "5",
+          "to": "1"
+        },
+        {
+          "from": "5",
+          "to": "8"
+        },
+        {
+          "from": "1",
+          "to": "3"
+        },
+        {
+          "from": "3",
+          "to": "2"
+        },
+        {
+          "from": "8",
+          "to": "7"
+        },
+        {
+          "from": "7",
+          "to": "6"
+        }
+      ]
+    },
+    {
+      "source": "2019_InvA_MC.pdf",
+      "page": 10,
+      "questions": [
+        37
+      ],
+      "title": "Undirected graph",
+      "width": 240,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "B",
+          "x": 120,
+          "y": 25
+        },
+        {
+          "id": "A",
+          "x": 55,
+          "y": 100
+        },
+        {
+          "id": "F",
+          "x": 120,
+          "y": 100
+        },
+        {
+          "id": "C",
+          "x": 190,
+          "y": 100
+        },
+        {
+          "id": "E",
+          "x": 75,
+          "y": 170
+        },
+        {
+          "id": "D",
+          "x": 165,
+          "y": 170
+        }
+      ],
+      "edges": [
+        {
+          "from": "B",
+          "to": "A"
+        },
+        {
+          "from": "B",
+          "to": "F"
+        },
+        {
+          "from": "B",
+          "to": "C"
+        },
+        {
+          "from": "A",
+          "to": "E"
+        },
+        {
+          "from": "F",
+          "to": "E"
+        },
+        {
+          "from": "F",
+          "to": "D"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        }
+      ]
+    }
+  ],
+  "2019-state-mc": [
+    {
+      "source": "2019_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        40
+      ],
+      "title": "Undirected graph",
+      "width": 440,
+      "height": 210,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "0",
+          "x": 45,
+          "y": 35
+        },
+        {
+          "id": "1",
+          "x": 80,
+          "y": 80
+        },
+        {
+          "id": "2",
+          "x": 135,
+          "y": 75
+        },
+        {
+          "id": "6",
+          "x": 200,
+          "y": 35
+        },
+        {
+          "id": "5",
+          "x": 45,
+          "y": 175
+        },
+        {
+          "id": "3",
+          "x": 100,
+          "y": 135
+        },
+        {
+          "id": "4",
+          "x": 165,
+          "y": 175
+        },
+        {
+          "id": "7",
+          "x": 270,
+          "y": 40
+        },
+        {
+          "id": "8",
+          "x": 335,
+          "y": 40
+        },
+        {
+          "id": "9",
+          "x": 270,
+          "y": 120
+        },
+        {
+          "id": "10",
+          "x": 340,
+          "y": 120
+        },
+        {
+          "id": "11",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "id": "12",
+          "x": 340,
+          "y": 180
+        }
+      ],
+      "edges": [
+        {
+          "from": "0",
+          "to": "1"
+        },
+        {
+          "from": "0",
+          "to": "2"
+        },
+        {
+          "from": "0",
+          "to": "5"
+        },
+        {
+          "from": "0",
+          "to": "6"
+        },
+        {
+          "from": "5",
+          "to": "3"
+        },
+        {
+          "from": "3",
+          "to": "4"
+        },
+        {
+          "from": "4",
+          "to": "5"
+        },
+        {
+          "from": "4",
+          "to": "6"
+        },
+        {
+          "from": "7",
+          "to": "8"
+        },
+        {
+          "from": "9",
+          "to": "10"
+        },
+        {
+          "from": "9",
+          "to": "11"
+        },
+        {
+          "from": "9",
+          "to": "12"
+        },
+        {
+          "from": "11",
+          "to": "12"
+        }
+      ]
+    }
+  ],
+  "2018-invitational-b-mc": [
+    {
+      "source": "2018_InvB_MC.pdf",
+      "page": 10,
+      "questions": [
+        39
+      ],
+      "title": "Undirected graph",
+      "width": 250,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 65,
+          "y": 35
+        },
+        {
+          "id": "E",
+          "x": 160,
+          "y": 35
+        },
+        {
+          "id": "B",
+          "x": 35,
+          "y": 120
+        },
+        {
+          "id": "C",
+          "x": 115,
+          "y": 120
+        },
+        {
+          "id": "D",
+          "x": 195,
+          "y": 120
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "E"
+        },
+        {
+          "from": "E",
+          "to": "D"
+        },
+        {
+          "from": "E",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "D",
+          "via": [
+            {
+              "x": 115,
+              "y": 170
+            }
+          ]
+        }
+      ],
+      "excludeQuestions": [
+        38
+      ]
+    }
+  ],
+  "2018-state-mc": [
+    {
+      "source": "2018_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        36
+      ],
+      "title": "Expression tree",
+      "width": 210,
+      "height": 160,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "*",
+          "x": 105,
+          "y": 25
+        },
+        {
+          "id": "A",
+          "x": 45,
+          "y": 85
+        },
+        {
+          "id": "+",
+          "x": 165,
+          "y": 85
+        },
+        {
+          "id": "B",
+          "x": 130,
+          "y": 140
+        },
+        {
+          "id": "C",
+          "x": 195,
+          "y": 140
+        }
+      ],
+      "edges": [
+        {
+          "from": "*",
+          "to": "A"
+        },
+        {
+          "from": "*",
+          "to": "+"
+        },
+        {
+          "from": "+",
+          "to": "B"
+        },
+        {
+          "from": "+",
+          "to": "C"
+        }
+      ]
+    },
+    {
+      "source": "2018_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 210,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 105,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 45,
+          "y": 75
+        },
+        {
+          "id": "C",
+          "x": 165,
+          "y": 75
+        },
+        {
+          "id": "D",
+          "x": 45,
+          "y": 130
+        },
+        {
+          "id": "E",
+          "x": 165,
+          "y": 130
+        },
+        {
+          "id": "F",
+          "x": 105,
+          "y": 175
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "A",
+          "to": "F"
+        },
+        {
+          "from": "B",
+          "to": "D"
+        },
+        {
+          "from": "B",
+          "to": "E"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        },
+        {
+          "from": "C",
+          "to": "E"
+        },
+        {
+          "from": "D",
+          "to": "F"
+        },
+        {
+          "from": "E",
+          "to": "F"
+        }
+      ],
+      "choice": "A"
+    },
+    {
+      "source": "2018_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 210,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 105,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 45,
+          "y": 75
+        },
+        {
+          "id": "C",
+          "x": 165,
+          "y": 75
+        },
+        {
+          "id": "D",
+          "x": 45,
+          "y": 130
+        },
+        {
+          "id": "E",
+          "x": 165,
+          "y": 130
+        },
+        {
+          "id": "F",
+          "x": 105,
+          "y": 175
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "D"
+        },
+        {
+          "from": "B",
+          "to": "E"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        },
+        {
+          "from": "C",
+          "to": "E"
+        },
+        {
+          "from": "E",
+          "to": "F"
+        }
+      ],
+      "choice": "B"
+    },
+    {
+      "source": "2018_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 210,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 105,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 45,
+          "y": 75
+        },
+        {
+          "id": "C",
+          "x": 165,
+          "y": 75
+        },
+        {
+          "id": "D",
+          "x": 45,
+          "y": 130
+        },
+        {
+          "id": "E",
+          "x": 165,
+          "y": 130
+        },
+        {
+          "id": "F",
+          "x": 105,
+          "y": 175
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "D"
+        },
+        {
+          "from": "B",
+          "to": "E"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        },
+        {
+          "from": "C",
+          "to": "E"
+        },
+        {
+          "from": "D",
+          "to": "F"
+        },
+        {
+          "from": "E",
+          "to": "F"
+        }
+      ],
+      "choice": "C"
+    },
+    {
+      "source": "2018_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 210,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 105,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 45,
+          "y": 75
+        },
+        {
+          "id": "C",
+          "x": 165,
+          "y": 75
+        },
+        {
+          "id": "D",
+          "x": 45,
+          "y": 130
+        },
+        {
+          "id": "E",
+          "x": 165,
+          "y": 130
+        },
+        {
+          "id": "F",
+          "x": 105,
+          "y": 175
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "E"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        },
+        {
+          "from": "C",
+          "to": "E"
+        },
+        {
+          "from": "D",
+          "to": "F"
+        }
+      ],
+      "choice": "D"
+    },
+    {
+      "source": "2018_State_MC.pdf",
+      "page": 12,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 210,
+      "height": 200,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "F",
+          "x": 105,
+          "y": 25
+        },
+        {
+          "id": "E",
+          "x": 45,
+          "y": 75
+        },
+        {
+          "id": "D",
+          "x": 165,
+          "y": 75
+        },
+        {
+          "id": "C",
+          "x": 45,
+          "y": 130
+        },
+        {
+          "id": "B",
+          "x": 165,
+          "y": 130
+        },
+        {
+          "id": "A",
+          "x": 105,
+          "y": 175
+        }
+      ],
+      "edges": [
+        {
+          "from": "F",
+          "to": "E"
+        },
+        {
+          "from": "F",
+          "to": "D"
+        },
+        {
+          "from": "E",
+          "to": "C"
+        },
+        {
+          "from": "E",
+          "to": "B"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        },
+        {
+          "from": "A",
+          "to": "B"
+        }
+      ],
+      "choice": "E"
+    }
+  ],
+  "2017-district-mc": [
+    {
+      "source": "2017_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        34
+      ],
+      "title": "Binary tree option",
+      "width": 180,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "S",
+          "x": 90,
+          "y": 22
+        },
+        {
+          "id": "I",
+          "x": 60,
+          "y": 72
+        },
+        {
+          "id": "E",
+          "x": 30,
+          "y": 125
+        },
+        {
+          "id": "M",
+          "x": 100,
+          "y": 125
+        },
+        {
+          "id": "P",
+          "x": 75,
+          "y": 165
+        },
+        {
+          "id": "L",
+          "x": 130,
+          "y": 165
+        }
+      ],
+      "edges": [
+        {
+          "from": "S",
+          "to": "I"
+        },
+        {
+          "from": "I",
+          "to": "E"
+        },
+        {
+          "from": "I",
+          "to": "M"
+        },
+        {
+          "from": "M",
+          "to": "P"
+        },
+        {
+          "from": "M",
+          "to": "L"
+        }
+      ],
+      "choice": "A"
+    },
+    {
+      "source": "2017_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        34
+      ],
+      "title": "Binary tree option",
+      "width": 180,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "S",
+          "x": 90,
+          "y": 22
+        },
+        {
+          "id": "I",
+          "x": 60,
+          "y": 72
+        },
+        {
+          "id": "E",
+          "x": 30,
+          "y": 125
+        },
+        {
+          "id": "M",
+          "x": 100,
+          "y": 125
+        },
+        {
+          "id": "L",
+          "x": 75,
+          "y": 165
+        },
+        {
+          "id": "P",
+          "x": 130,
+          "y": 165
+        }
+      ],
+      "edges": [
+        {
+          "from": "S",
+          "to": "I"
+        },
+        {
+          "from": "I",
+          "to": "E"
+        },
+        {
+          "from": "I",
+          "to": "M"
+        },
+        {
+          "from": "M",
+          "to": "L"
+        },
+        {
+          "from": "M",
+          "to": "P"
+        }
+      ],
+      "choice": "B"
+    },
+    {
+      "source": "2017_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        34
+      ],
+      "title": "Binary tree option",
+      "width": 180,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "S",
+          "x": 90,
+          "y": 22
+        },
+        {
+          "id": "I",
+          "x": 55,
+          "y": 80
+        },
+        {
+          "id": "M",
+          "x": 125,
+          "y": 80
+        },
+        {
+          "id": "E",
+          "x": 25,
+          "y": 155
+        },
+        {
+          "id": "L",
+          "x": 105,
+          "y": 155
+        },
+        {
+          "id": "P",
+          "x": 155,
+          "y": 155
+        }
+      ],
+      "edges": [
+        {
+          "from": "S",
+          "to": "I"
+        },
+        {
+          "from": "S",
+          "to": "M"
+        },
+        {
+          "from": "I",
+          "to": "E"
+        },
+        {
+          "from": "M",
+          "to": "L"
+        },
+        {
+          "from": "M",
+          "to": "P"
+        }
+      ],
+      "choice": "C"
+    },
+    {
+      "source": "2017_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        34
+      ],
+      "title": "Binary tree option",
+      "width": 180,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "E",
+          "x": 90,
+          "y": 22
+        },
+        {
+          "id": "I",
+          "x": 55,
+          "y": 70
+        },
+        {
+          "id": "L",
+          "x": 25,
+          "y": 120
+        },
+        {
+          "id": "M",
+          "x": 110,
+          "y": 120
+        },
+        {
+          "id": "P",
+          "x": 85,
+          "y": 165
+        },
+        {
+          "id": "S",
+          "x": 140,
+          "y": 165
+        }
+      ],
+      "edges": [
+        {
+          "from": "E",
+          "to": "I"
+        },
+        {
+          "from": "I",
+          "to": "L"
+        },
+        {
+          "from": "I",
+          "to": "M"
+        },
+        {
+          "from": "M",
+          "to": "P"
+        },
+        {
+          "from": "M",
+          "to": "S"
+        }
+      ],
+      "choice": "D"
+    },
+    {
+      "source": "2017_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        34
+      ],
+      "title": "Binary tree option",
+      "width": 180,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "E",
+          "x": 50,
+          "y": 22
+        },
+        {
+          "id": "I",
+          "x": 25,
+          "y": 80
+        },
+        {
+          "id": "L",
+          "x": 115,
+          "y": 80
+        },
+        {
+          "id": "M",
+          "x": 90,
+          "y": 130
+        },
+        {
+          "id": "P",
+          "x": 145,
+          "y": 130
+        },
+        {
+          "id": "S",
+          "x": 160,
+          "y": 170
+        }
+      ],
+      "edges": [
+        {
+          "from": "E",
+          "to": "I"
+        },
+        {
+          "from": "E",
+          "to": "L"
+        },
+        {
+          "from": "L",
+          "to": "M"
+        },
+        {
+          "from": "L",
+          "to": "P"
+        },
+        {
+          "from": "P",
+          "to": "S"
+        }
+      ],
+      "choice": "E"
+    }
+  ],
+  "2018-district-mc": [
+    {
+      "source": "2018_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 150,
+      "height": 120,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 35,
+          "y": 60
+        },
+        {
+          "id": "B",
+          "x": 115,
+          "y": 60
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        }
+      ],
+      "choice": "A"
+    },
+    {
+      "source": "2018_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 170,
+      "height": 140,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 50,
+          "y": 35
+        },
+        {
+          "id": "B",
+          "x": 120,
+          "y": 35
+        },
+        {
+          "id": "C",
+          "x": 50,
+          "y": 105
+        },
+        {
+          "id": "D",
+          "x": 120,
+          "y": 105
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        },
+        {
+          "from": "B",
+          "to": "D"
+        }
+      ],
+      "choice": "B"
+    },
+    {
+      "source": "2018_District_MC.pdf",
+      "page": 10,
+      "questions": [
+        38
+      ],
+      "title": "Undirected graph option",
+      "width": 170,
+      "height": 140,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 50,
+          "y": 35
+        },
+        {
+          "id": "B",
+          "x": 120,
+          "y": 35
+        },
+        {
+          "id": "C",
+          "x": 50,
+          "y": 105
+        },
+        {
+          "id": "D",
+          "x": 120,
+          "y": 105
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B"
+        },
+        {
+          "from": "A",
+          "to": "C"
+        },
+        {
+          "from": "A",
+          "to": "D"
+        },
+        {
+          "from": "B",
+          "to": "C"
+        },
+        {
+          "from": "B",
+          "to": "D"
+        },
+        {
+          "from": "C",
+          "to": "D"
+        }
+      ],
+      "choice": "C"
+    }
+  ],
+  "2018-invitational-a-mc": [
+    {
+      "source": "2018_InvA_MC.pdf",
+      "page": 11,
+      "questions": [
+        35
+      ],
+      "title": "Binary tree option",
+      "width": 190,
+      "height": 160,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "1",
+          "x": 90,
+          "y": 25
+        },
+        {
+          "id": "3",
+          "x": 35,
+          "y": 80
+        },
+        {
+          "id": "5",
+          "x": 135,
+          "y": 80
+        },
+        {
+          "id": "8",
+          "x": 115,
+          "y": 140
+        },
+        {
+          "id": "9",
+          "x": 165,
+          "y": 140
+        }
+      ],
+      "edges": [
+        {
+          "from": "1",
+          "to": "3"
+        },
+        {
+          "from": "1",
+          "to": "5"
+        },
+        {
+          "from": "5",
+          "to": "8"
+        },
+        {
+          "from": "5",
+          "to": "9"
+        }
+      ],
+      "choice": "A"
+    },
+    {
+      "source": "2018_InvA_MC.pdf",
+      "page": 11,
+      "questions": [
+        35
+      ],
+      "title": "Binary tree option",
+      "width": 190,
+      "height": 160,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "9",
+          "x": 90,
+          "y": 25
+        },
+        {
+          "id": "5",
+          "x": 45,
+          "y": 80
+        },
+        {
+          "id": "8",
+          "x": 140,
+          "y": 80
+        },
+        {
+          "id": "3",
+          "x": 20,
+          "y": 140
+        },
+        {
+          "id": "1",
+          "x": 70,
+          "y": 140
+        }
+      ],
+      "edges": [
+        {
+          "from": "9",
+          "to": "5"
+        },
+        {
+          "from": "9",
+          "to": "8"
+        },
+        {
+          "from": "5",
+          "to": "3"
+        },
+        {
+          "from": "5",
+          "to": "1"
+        }
+      ],
+      "choice": "B"
+    },
+    {
+      "source": "2018_InvA_MC.pdf",
+      "page": 11,
+      "questions": [
+        35
+      ],
+      "title": "Binary tree option",
+      "width": 190,
+      "height": 160,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "1",
+          "x": 90,
+          "y": 25
+        },
+        {
+          "id": "3",
+          "x": 45,
+          "y": 80
+        },
+        {
+          "id": "5",
+          "x": 140,
+          "y": 80
+        },
+        {
+          "id": "8",
+          "x": 20,
+          "y": 140
+        },
+        {
+          "id": "9",
+          "x": 70,
+          "y": 140
+        }
+      ],
+      "edges": [
+        {
+          "from": "1",
+          "to": "3"
+        },
+        {
+          "from": "1",
+          "to": "5"
+        },
+        {
+          "from": "3",
+          "to": "8"
+        },
+        {
+          "from": "3",
+          "to": "9"
+        }
+      ],
+      "choice": "C"
+    },
+    {
+      "source": "2018_InvA_MC.pdf",
+      "page": 11,
+      "questions": [
+        35
+      ],
+      "title": "Binary tree option",
+      "width": 190,
+      "height": 160,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "5",
+          "x": 90,
+          "y": 25
+        },
+        {
+          "id": "3",
+          "x": 45,
+          "y": 80
+        },
+        {
+          "id": "8",
+          "x": 140,
+          "y": 80
+        },
+        {
+          "id": "1",
+          "x": 20,
+          "y": 140
+        },
+        {
+          "id": "9",
+          "x": 165,
+          "y": 140
+        }
+      ],
+      "edges": [
+        {
+          "from": "5",
+          "to": "3"
+        },
+        {
+          "from": "5",
+          "to": "8"
+        },
+        {
+          "from": "3",
+          "to": "1"
+        },
+        {
+          "from": "8",
+          "to": "9"
+        }
+      ],
+      "choice": "D"
+    },
+    {
+      "source": "2018_InvA_MC.pdf",
+      "page": 11,
+      "questions": [
+        35
+      ],
+      "title": "Binary tree option",
+      "width": 190,
+      "height": 195,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "1",
+          "x": 45,
+          "y": 25
+        },
+        {
+          "id": "8",
+          "x": 120,
+          "y": 75
+        },
+        {
+          "id": "3",
+          "x": 80,
+          "y": 130
+        },
+        {
+          "id": "9",
+          "x": 160,
+          "y": 130
+        },
+        {
+          "id": "5",
+          "x": 115,
+          "y": 175
+        }
+      ],
+      "edges": [
+        {
+          "from": "1",
+          "to": "8"
+        },
+        {
+          "from": "8",
+          "to": "3"
+        },
+        {
+          "from": "8",
+          "to": "9"
+        },
+        {
+          "from": "3",
+          "to": "5"
+        }
+      ],
+      "choice": "E"
+    },
+    {
+      "source": "2018_InvA_MC.pdf",
+      "page": 11,
+      "questions": [
+        36
+      ],
+      "title": "Directed weighted graph",
+      "width": 240,
+      "height": 190,
+      "radius": 12,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 120,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 200,
+          "y": 95
+        },
+        {
+          "id": "C",
+          "x": 120,
+          "y": 165
+        },
+        {
+          "id": "D",
+          "x": 40,
+          "y": 95
+        }
+      ],
+      "edges": [
+        {
+          "from": "D",
+          "to": "A",
+          "weight": 7,
+          "directed": true
+        },
+        {
+          "from": "A",
+          "to": "B",
+          "weight": 9,
+          "directed": true
+        },
+        {
+          "from": "B",
+          "to": "C",
+          "weight": 12,
+          "directed": true
+        },
+        {
+          "from": "C",
+          "to": "D",
+          "weight": 10,
+          "directed": true
+        }
+      ]
+    }
+  ]
+}

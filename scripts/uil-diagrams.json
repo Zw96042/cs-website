@@ -1,0 +1,280 @@
+{
+  "2026-invitational-a-mc": [
+    {
+      "source": "2026_InvA_MC.pdf",
+      "page": 8,
+      "questions": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "title": "Graph G",
+      "width": 430,
+      "height": 250,
+      "radius": 17,
+      "nodes": [
+        {
+          "id": "A",
+          "x": 40,
+          "y": 25
+        },
+        {
+          "id": "B",
+          "x": 165,
+          "y": 40
+        },
+        {
+          "id": "H",
+          "x": 180,
+          "y": 130
+        },
+        {
+          "id": "F",
+          "x": 55,
+          "y": 150
+        },
+        {
+          "id": "E",
+          "x": 160,
+          "y": 225
+        },
+        {
+          "id": "C",
+          "x": 315,
+          "y": 80
+        },
+        {
+          "id": "D",
+          "x": 300,
+          "y": 215
+        },
+        {
+          "id": "I",
+          "x": 400,
+          "y": 190
+        }
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B",
+          "weight": 6,
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "A",
+          "to": "H",
+          "weight": 8,
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "B",
+          "to": "C",
+          "weight": 10,
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "H",
+          "to": "C",
+          "weight": 7,
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "F",
+          "to": "H",
+          "weight": 9,
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "F",
+          "to": "E",
+          "weight": 7,
+          "directed": true,
+          "both": false
+        },
+        {
+          "from": "E",
+          "to": "H",
+          "weight": 4,
+          "directed": true,
+          "both": true
+        },
+        {
+          "from": "E",
+          "to": "D",
+          "weight": 5,
+          "directed": true,
+          "both": false
+        },
+        {
+          "from": "C",
+          "to": "D",
+          "weight": 9,
+          "directed": true,
+          "both": false
+        }
+      ]
+    },
+    {
+      "source": "2026_InvA_MC.pdf",
+      "page": 9,
+      "questions": [
+        39,
+        40
+      ],
+      "title": "Binary tree rooted at 16",
+      "width": 400,
+      "height": 230,
+      "nodes": [
+        {
+          "id": "16",
+          "x": 245,
+          "y": 20
+        },
+        {
+          "id": "8",
+          "x": 135,
+          "y": 66
+        },
+        {
+          "id": "24",
+          "x": 365,
+          "y": 66
+        },
+        {
+          "id": "4",
+          "x": 80,
+          "y": 112
+        },
+        {
+          "id": "12",
+          "x": 190,
+          "y": 112
+        },
+        {
+          "id": "20",
+          "x": 310,
+          "y": 112
+        },
+        {
+          "id": "2",
+          "x": 50,
+          "y": 158
+        },
+        {
+          "id": "10",
+          "x": 160,
+          "y": 158
+        },
+        {
+          "id": "14",
+          "x": 215,
+          "y": 158
+        },
+        {
+          "id": "18",
+          "x": 280,
+          "y": 158
+        },
+        {
+          "id": "1",
+          "x": 25,
+          "y": 204
+        },
+        {
+          "id": "3",
+          "x": 75,
+          "y": 204
+        },
+        {
+          "id": "9",
+          "x": 137,
+          "y": 204
+        },
+        {
+          "id": "13",
+          "x": 194,
+          "y": 204
+        },
+        {
+          "id": "15",
+          "x": 230,
+          "y": 204
+        },
+        {
+          "id": "17",
+          "x": 268,
+          "y": 204
+        }
+      ],
+      "edges": [
+        {
+          "from": "16",
+          "to": "8"
+        },
+        {
+          "from": "16",
+          "to": "24"
+        },
+        {
+          "from": "8",
+          "to": "4"
+        },
+        {
+          "from": "8",
+          "to": "12"
+        },
+        {
+          "from": "4",
+          "to": "2"
+        },
+        {
+          "from": "2",
+          "to": "1"
+        },
+        {
+          "from": "2",
+          "to": "3"
+        },
+        {
+          "from": "12",
+          "to": "10"
+        },
+        {
+          "from": "12",
+          "to": "14"
+        },
+        {
+          "from": "10",
+          "to": "9"
+        },
+        {
+          "from": "14",
+          "to": "13"
+        },
+        {
+          "from": "14",
+          "to": "15"
+        },
+        {
+          "from": "24",
+          "to": "20"
+        },
+        {
+          "from": "20",
+          "to": "18"
+        },
+        {
+          "from": "18",
+          "to": "17"
+        }
+      ]
+    }
+  ]
+}

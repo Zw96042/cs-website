@@ -1,0 +1,78 @@
+/* Native source diagrams (trees, graphs) for practice questions */
+
+.practice-page .pr-diagram {
+  min-width: 0;
+  max-width: 100%;
+  display: block;
+  margin: 0;
+}
+
+.practice-page .pr-diagram-scroll {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--pr-dg-max) + 34px);
+  display: block;
+  padding: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.practice-page .pr-diagram-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.practice-page .pr-diagram[data-inline] .pr-diagram-scroll {
+  padding: 12px;
+}
+
+/* Fills the frame up to a modest cap; never shrinks below the readable
+   minimum, so dense diagrams scroll inside the frame on narrow screens. */
+.practice-page .pr-diagram-svg {
+  width: clamp(var(--pr-dg-min), 100%, var(--pr-dg-max));
+  max-width: none;
+  height: auto;
+  aspect-ratio: var(--pr-dg-ratio);
+  display: block;
+  overflow: visible;
+}
+
+.practice-page .pr-diagram-svg path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.practice-page .pr-dg-fill-none { fill: none; }
+.practice-page .pr-dg-fill-ink { fill: var(--ink); }
+.practice-page .pr-dg-fill-surface { fill: var(--bg); }
+.practice-page .pr-dg-fill-muted { fill: var(--muted); }
+
+.practice-page .pr-dg-stroke-none { stroke: none; }
+.practice-page .pr-dg-stroke-ink { stroke: var(--ink); }
+.practice-page .pr-dg-stroke-muted { stroke: var(--muted); }
+
+.practice-page .pr-dg-label {
+  font-family: "Geist", Arial, sans-serif;
+  font-weight: 450;
+  font-kerning: normal;
+}
+
+.practice-page .pr-dg-text-ink { fill: var(--ink); }
+.practice-page .pr-dg-text-surface { fill: var(--bg); }
+
+.practice-page .pr-dg-bold { font-weight: 650; }
+.practice-page .pr-dg-italic { font-style: italic; }
+
+@media (forced-colors: active) {
+  .practice-page .pr-diagram-scroll { background: Canvas; }
+  .practice-page .pr-dg-fill-ink,
+  .practice-page .pr-dg-fill-muted,
+  .practice-page .pr-dg-text-ink { fill: CanvasText; }
+  .practice-page .pr-dg-fill-surface,
+  .practice-page .pr-dg-text-surface { fill: Canvas; }
+  .practice-page .pr-dg-stroke-ink,
+  .practice-page .pr-dg-stroke-muted { stroke: CanvasText; }
+}

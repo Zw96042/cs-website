@@ -5,8 +5,8 @@ export default function Hero () {
     <section className='club-hero' aria-labelledby='hero-title'>
       <div className='hero-copy'>
         <h1 className='hero-title' id='hero-title'>
-          <span>Build what you</span>
-          <span>wish existed.</span>
+          <span>Find your place in</span>
+          <span>computer science.</span>
         </h1>
         <p className='hero-lede'>
           Explore computer science through hands-on lessons, collaborative projects, and competition practice in everything from AI to algorithms.
@@ -40,9 +40,6 @@ export default function Hero () {
           >
             <img className='canvas-action-logo' src='/canvas-logo.svg' alt='' />
             Join Canvas
-          </a>
-          <a className='text-action primary-action' href='#join'>
-            Meeting times <span className='action-arrow' aria-hidden='true'>→</span>
           </a>
           <a className='text-action secondary-action' href='#programs'>
             Explore the programs <span className='action-arrow' aria-hidden='true'>→</span>

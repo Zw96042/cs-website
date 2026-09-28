@@ -1,0 +1,64 @@
+10
+2.3 4.6 -1.2 12
+3
+System432 true 2.3 4.6 1.2
+Tattooween false 2.7 10.6 11.2
+System431 true 3.2 6.4 2.1
+0 0 0 100
+2
+Hauth false 10 10 10
+Deygohbaw false 10 20 30
+6.5 7.8 9.1 7
+3
+Hauth false 10 10 10
+Olderon true 10 7 11
+Bespyn true 12 12 12
+0 0 0 10
+5
+Sys1 true 10 0 0
+Sys2 true 0 10 0
+Sys3 true 0 0 10
+Sys4 true 10 10 0
+Sys5 true 0 10 10
+0 0 0 10
+5
+Sys1 true 10 0 10
+Sys2 true 10 10 10
+Sys3 true 0 0 0
+Sys4 true 3 3 3
+Sys5 true 5 5 5
+0 0 0 10
+5
+Sys1 true 1 1 1
+Sys2 true 2 2 2
+Sys3 true 4 4 4
+Sys4 true 6 6 6
+Sys5 true 7 7 7
+0 0 0 10
+5
+Sys1 true 8 8 8
+Sys2 true 9 9 9
+Sys3 true -10 0 0
+Sys4 true -5 -5 -5
+Sys5 true 0 -10 -10
+0 0 0 10
+5
+Sys1 false 1 -1 1
+Sys2 false 0 0 1
+Sys3 false 0 1 0
+Sys4 false -3 3 1
+Sys5 false 5 1 -5
+0 0 0 1
+5
+Sys1 true 10 0 10
+Sys2 true 10 10 10
+Sys3 true 0 -9 0
+Sys4 true 3 3 3
+Sys5 true 5 5 5
+0 0 0 10
+5
+Sys1 true -100 100 100
+Sys2 true 109 10 10
+Sys3 true 0 90 -80
+Sys4 true 3 -73 3
+Sys5 true 5 5 -532

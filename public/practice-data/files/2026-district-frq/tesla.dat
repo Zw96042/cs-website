@@ -1,0 +1,47 @@
+46
+QUERY missing
+TOTAL
+LIST
+CATEGORY fake
+ADD fruit apple 100
+ADD fruit banana 200
+ADD fruit cherry 150
+QUERY apple
+QUERY banana
+QUERY cherry
+QUERY dragonfruit
+TOTAL
+LIST
+CATEGORY fruit
+CATEGORY vegetables
+ADD fruit apple 50
+QUERY apple
+CATEGORY fruit
+ADD dairy apple 999
+QUERY apple
+CATEGORY fruit
+CATEGORY dairy
+REMOVE apple 100
+QUERY apple
+REMOVE apple 50
+QUERY apple
+REMOVE apple 999
+QUERY apple
+TOTAL
+CATEGORY fruit
+ADD zzz last 10
+ADD aaa first 20
+ADD mmm middle 30
+LIST
+REMOVE banana 200
+REMOVE cherry 150
+REMOVE last 10
+REMOVE first 20
+REMOVE middle 30
+LIST
+TOTAL
+QUERY apple
+CATEGORY fruit
+ADD fruit apple 5
+QUERY apple
+TOTAL

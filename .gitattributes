@@ -1,0 +1,3 @@
+# Preserve supplied contest downloads byte for byte.
+public/practice-data/files/** -text -diff
+public/practice-data/sources/** -text -diff

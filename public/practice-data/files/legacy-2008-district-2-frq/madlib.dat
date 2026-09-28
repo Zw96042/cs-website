@@ -1,0 +1,31 @@
+2
+6
+car race
+sweater
+giraffe
+jumped
+ear
+cake
+Jerry came to me in the middle of the
+and wanted me to study for a
+in Computer Science. I told him that I had a
+and could not. Since then, I 
+and changed my
+. Studying is the most important
+that I do.
+7
+rock
+paper
+scissors
+possums
+shoes
+pig pen
+cruise ship
+For each
+, print the complete mad-lib story with the
+properly inserted. The story will be written in one 
+with no more that 40
+on a line and as many whole 
+(including contiguous punctuation) on a 
+as possible. There must be a
+on either side of the text that is inserted.

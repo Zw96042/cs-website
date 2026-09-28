@@ -1,0 +1,37 @@
+9
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+CS I->CS II,CS II->Data Structures and Algorithms,CS II->Computer Organization and Programming,CS II->Databases,CS I->Web Programming,Computer Organization and Programming->Computer Architecture,Data Structures and Algorithms->Theory of Algorithms,Data Structures and Algorithms->Compiler Design,Computer Organization and Programming->Compiler Design,Data Structures and Algorithms->Operating Systems,Computer Organization and Programming->Operating Systems,Data Structures and Algorithms->Software Engineering
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+--------------------
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design,Ethics
+CS I->CS II,CS II->Data Structures and Algorithms,CS II->Computer Organization and Programming,CS II->Databases,CS I->Web Programming,Computer Organization and Programming->Computer Architecture,Data Structures and Algorithms->Theory of Algorithms,Data Structures and Algorithms->Compiler Design,Computer Organization and Programming->Compiler Design,Data Structures and Algorithms->Operating Systems,Computer Organization and Programming->Operating Systems,Data Structures and Algorithms->Software Engineering
+Ethics,CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+--------------------
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design,Ethics
+CS I->CS II,CS II->Data Structures and Algorithms,CS II->Computer Organization and Programming,CS II->Databases,CS I->Web Programming,Computer Organization and Programming->Computer Architecture,Data Structures and Algorithms->Theory of Algorithms,Data Structures and Algorithms->Compiler Design,Computer Organization and Programming->Compiler Design,Data Structures and Algorithms->Operating Systems,Computer Organization and Programming->Operating Systems,Data Structures and Algorithms->Software Engineering
+Ethics,CS I,Databases,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+--------------------
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+CS I->CS II,CS II->Data Structures and Algorithms,CS II->Computer Organization and Programming,CS II->Databases,CS I->Web Programming,Computer Organization and Programming->Computer Architecture,Data Structures and Algorithms->Theory of Algorithms,Data Structures and Algorithms->Compiler Design,Computer Organization and Programming->Compiler Design,Data Structures and Algorithms->Operating Systems,Computer Organization and Programming->Operating Systems,Data Structures and Algorithms->Software Engineering
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Compiler Design,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture
+--------------------
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+CS I->CS II,CS II->Data Structures and Algorithms,CS II->Computer Organization and Programming,CS II->Databases,CS I->Web Programming,Computer Organization and Programming->Computer Architecture,Data Structures and Algorithms->Theory of Algorithms,Data Structures and Algorithms->Compiler Design,Computer Organization and Programming->Compiler Design,Data Structures and Algorithms->Operating Systems,Computer Organization and Programming->Operating Systems,Data Structures and Algorithms->Software Engineering
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture
+--------------------
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,Compiler Design
+CS I->CS II,CS II->Data Structures and Algorithms,CS II->Computer Organization and Programming,CS II->Databases,CS I->Web Programming,Computer Organization and Programming->Computer Architecture,Data Structures and Algorithms->Theory of Algorithms,Data Structures and Algorithms->Compiler Design,Computer Organization and Programming->Compiler Design,Data Structures and Algorithms->Operating Systems,Computer Organization and Programming->Operating Systems,Data Structures and Algorithms->Software Engineering
+CS I,Introduction to Programming and Problem Solving,CS II,Data Structures and Algorithms,Computer Organization and Programming,Web Programming,Theory of Algorithms,Databases,Operating Systems,Software Engineering,Computer Architecture,CS I
+--------------------
+1,2
+1->2
+1,2
+--------------------
+1,2,3
+1->2,2->3,3->1
+1,2,3
+--------------------
+1,2,3
+3->2,2->1
+3,2,1
+--------------------

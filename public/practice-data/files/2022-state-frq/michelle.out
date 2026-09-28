@@ -1,0 +1,56 @@
+Test case #1
+01:01 -> 2     xx
+02:04 -> 44    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+05:07 -> 38    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+08:12 -> 15    xxxxxxxxxxxxxxx
+13:50 -> 0     
+===============
+Test case #2
+01:05 -> 50    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+06:09 -> 46    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+10:12 -> 4     xxxx
+13:50 -> 0     
+===============
+Test case #3
+01:03 -> 40    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+04:05 -> 10    xxxxxxxxxx
+06:07 -> 35    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+08:09 -> 12    xxxxxxxxxxxx
+10:11 -> 2     xx
+12:50 -> 2     xx
+===============
+Test case #4
+01:02 -> 33    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+03:05 -> 33    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+06:09 -> 0     
+10:50 -> 35    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+===============
+Test case #5
+01:05 -> 0     
+06:10 -> 100   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+11:50 -> 0     
+===============
+Test case #6
+01:01 -> 3     xxx
+02:05 -> 73    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+06:10 -> 24    xxxxxxxxxxxxxxxxxxxxxxxx
+11:20 -> 1     x
+21:50 -> 0     
+===============
+Test case #7
+01:01 -> 3     xxx
+02:02 -> 19    xxxxxxxxxxxxxxxxxxx
+03:03 -> 20    xxxxxxxxxxxxxxxxxxxx
+04:04 -> 22    xxxxxxxxxxxxxxxxxxxxxx
+05:05 -> 13    xxxxxxxxxxxxx
+06:06 -> 10    xxxxxxxxxx
+07:07 -> 6     xxxxxx
+08:08 -> 2     xx
+09:09 -> 4     xxxx
+10:10 -> 1     x
+11:11 -> 1     x
+12:12 -> 0     
+13:15 -> 0     
+16:20 -> 0     
+21:50 -> 0     
+===============

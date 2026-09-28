@@ -1,10 +1,16 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-import '../styles.css';
+async function startApp () {
+  let Inspector = null
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+  if (import.meta.env.DEV) {
+    const { getSharedEngine, Lapse } = await import('@aiforui/lapse')
+    const engine = getSharedEngine()
+    engine.install()
+    engine.setCaptureMode('replay')
+    Inspector = Lapse
+  }
+
+  const { renderApp } = await import('./renderApp.jsx')
+  renderApp(Inspector)
+}
+
+startApp()

@@ -1,0 +1,248 @@
+GROUP ORDER: Tanaka
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  55.00
+Student #2 (Grade 12, REGULAR)   : $  40.00
+Student #3 (Grade 11, REGULAR)   : $  45.00
+------------------------------------------
+Group Total                      : $ 140.00
+
+
+GROUP ORDER: Rodriguez
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  49.50
+Student #2 (Grade 12, VIP)       : $  49.50
+Student #3 (Grade 11, VIP)       : $  54.00
+Student #4 (Grade 11, REGULAR)   : $  40.50
+Student #5 (Grade 10, VIP)       : $  58.50
+Student #6 (Grade 9, REGULAR)    : $  45.00
+------------------------------------------
+Group Total (Disc. Applied)      : $ 297.00
+
+
+GROUP ORDER: Okafor
+------------------------------------------
+Student #1 (Grade 11, REGULAR)   : $  45.00
+Student #2 (Grade 11, REGULAR)   : $  45.00
+------------------------------------------
+Group Total                      : $  90.00
+
+
+GROUP ORDER: Chen
+------------------------------------------
+Student #1 (Grade 9, VIP)        : $  65.00
+Student #2 (Grade 9, REGULAR)    : $  50.00
+Student #3 (Grade 10, VIP)       : $  65.00
+Student #4 (Grade 10, REGULAR)   : $  50.00
+------------------------------------------
+Group Total                      : $ 230.00
+
+
+GROUP ORDER: Patel
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  49.50
+Student #2 (Grade 12, VIP)       : $  49.50
+Student #3 (Grade 12, VIP)       : $  49.50
+Student #4 (Grade 12, VIP)       : $  49.50
+Student #5 (Grade 11, REGULAR)   : $  40.50
+Student #6 (Grade 11, REGULAR)   : $  40.50
+Student #7 (Grade 9, REGULAR)    : $  45.00
+Student #8 (Grade 9, REGULAR)    : $  45.00
+------------------------------------------
+Group Total (Disc. Applied)      : $ 369.00
+
+
+GROUP ORDER: Kowalski
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  55.00
+------------------------------------------
+Group Total                      : $  55.00
+
+
+GROUP ORDER: Nguyen
+------------------------------------------
+Student #1 (Grade 10, REGULAR)   : $  50.00
+Student #2 (Grade 10, REGULAR)   : $  50.00
+Student #3 (Grade 11, VIP)       : $  60.00
+------------------------------------------
+Group Total                      : $ 160.00
+
+
+GROUP ORDER: Mwangi
+------------------------------------------
+Student #1 (Grade 12, REGULAR)   : $  36.00
+Student #2 (Grade 12, REGULAR)   : $  36.00
+Student #3 (Grade 12, REGULAR)   : $  36.00
+Student #4 (Grade 12, REGULAR)   : $  36.00
+Student #5 (Grade 12, REGULAR)   : $  36.00
+------------------------------------------
+Group Total (Disc. Applied)      : $ 180.00
+
+
+GROUP ORDER: Dubois
+------------------------------------------
+Student #1 (Grade 11, VIP)       : $  60.00
+Student #2 (Grade 12, VIP)       : $  55.00
+------------------------------------------
+Group Total                      : $ 115.00
+
+
+GROUP ORDER: Al-Fayed
+------------------------------------------
+Student #1 (Grade 9, REGULAR)    : $  50.00
+Student #2 (Grade 10, REGULAR)   : $  50.00
+Student #3 (Grade 11, REGULAR)   : $  45.00
+Student #4 (Grade 12, REGULAR)   : $  40.00
+------------------------------------------
+Group Total                      : $ 185.00
+
+
+GROUP ORDER: Sharma
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  49.50
+Student #2 (Grade 11, VIP)       : $  54.00
+Student #3 (Grade 10, VIP)       : $  58.50
+Student #4 (Grade 9, VIP)        : $  58.50
+Student #5 (Grade 12, REGULAR)   : $  36.00
+Student #6 (Grade 11, REGULAR)   : $  40.50
+Student #7 (Grade 10, REGULAR)   : $  45.00
+Student #8 (Grade 9, REGULAR)    : $  45.00
+Student #9 (Grade 12, VIP)       : $  49.50
+------------------------------------------
+Group Total (Disc. Applied)      : $ 436.50
+
+
+GROUP ORDER: Gupta
+------------------------------------------
+Student #1 (Grade 11, REGULAR)   : $  45.00
+Student #2 (Grade 11, VIP)       : $  60.00
+Student #3 (Grade 10, REGULAR)   : $  50.00
+------------------------------------------
+Group Total                      : $ 155.00
+
+
+GROUP ORDER: Kim
+------------------------------------------
+Student #1 (Grade 12, REGULAR)   : $  40.00
+Student #2 (Grade 12, REGULAR)   : $  40.00
+------------------------------------------
+Group Total                      : $  80.00
+
+
+GROUP ORDER: Rossi
+------------------------------------------
+Student #1 (Grade 10, VIP)       : $  58.50
+Student #2 (Grade 10, VIP)       : $  58.50
+Student #3 (Grade 11, VIP)       : $  54.00
+Student #4 (Grade 11, VIP)       : $  54.00
+Student #5 (Grade 12, VIP)       : $  49.50
+Student #6 (Grade 12, VIP)       : $  49.50
+Student #7 (Grade 9, REGULAR)    : $  45.00
+------------------------------------------
+Group Total (Disc. Applied)      : $ 369.00
+
+
+GROUP ORDER: Santos
+------------------------------------------
+Student #1 (Grade 11, REGULAR)   : $  45.00
+Student #2 (Grade 12, REGULAR)   : $  40.00
+Student #3 (Grade 10, REGULAR)   : $  50.00
+Student #4 (Grade 9, REGULAR)    : $  50.00
+------------------------------------------
+Group Total                      : $ 185.00
+
+
+GROUP ORDER: Cohen
+------------------------------------------
+Student #1 (Grade 11, VIP)       : $  60.00
+------------------------------------------
+Group Total                      : $  60.00
+
+
+GROUP ORDER: Jensen
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  49.50
+Student #2 (Grade 12, VIP)       : $  49.50
+Student #3 (Grade 12, VIP)       : $  49.50
+Student #4 (Grade 12, VIP)       : $  49.50
+Student #5 (Grade 12, VIP)       : $  49.50
+Student #6 (Grade 12, REGULAR)   : $  36.00
+Student #7 (Grade 12, REGULAR)   : $  36.00
+Student #8 (Grade 12, REGULAR)   : $  36.00
+Student #9 (Grade 12, REGULAR)   : $  36.00
+Student #10 (Grade 12, REGULAR)  : $  36.00
+------------------------------------------
+Group Total (Disc. Applied)      : $ 427.50
+
+
+GROUP ORDER: Khan
+------------------------------------------
+Student #1 (Grade 9, VIP)        : $  65.00
+Student #2 (Grade 9, VIP)        : $  65.00
+Student #3 (Grade 10, VIP)       : $  65.00
+------------------------------------------
+Group Total                      : $ 195.00
+
+
+GROUP ORDER: Silva
+------------------------------------------
+Student #1 (Grade 11, REGULAR)   : $  45.00
+Student #2 (Grade 10, REGULAR)   : $  50.00
+------------------------------------------
+Group Total                      : $  95.00
+
+
+GROUP ORDER: Washington
+------------------------------------------
+Student #1 (Grade 12, VIP)       : $  49.50
+Student #2 (Grade 12, VIP)       : $  49.50
+Student #3 (Grade 11, VIP)       : $  54.00
+Student #4 (Grade 11, VIP)       : $  54.00
+Student #5 (Grade 10, VIP)       : $  58.50
+------------------------------------------
+Group Total (Disc. Applied)      : $ 265.50
+
+
+GROUP ORDER: Mensah
+------------------------------------------
+Student #1 (Grade 12, REGULAR)   : $  40.00
+Student #2 (Grade 11, REGULAR)   : $  45.00
+Student #3 (Grade 12, REGULAR)   : $  40.00
+Student #4 (Grade 11, REGULAR)   : $  45.00
+------------------------------------------
+Group Total                      : $ 170.00
+
+
+GROUP ORDER: Liu
+------------------------------------------
+Student #1 (Grade 9, VIP)        : $  65.00
+Student #2 (Grade 9, REGULAR)    : $  50.00
+------------------------------------------
+Group Total                      : $ 115.00
+
+
+GROUP ORDER: Ivanov
+------------------------------------------
+Student #1 (Grade 10, REGULAR)   : $  50.00
+Student #2 (Grade 11, REGULAR)   : $  45.00
+Student #3 (Grade 12, REGULAR)   : $  40.00
+------------------------------------------
+Group Total                      : $ 135.00
+
+
+GROUP ORDER: Suzuki
+------------------------------------------
+Student #1 (Grade 9, REGULAR)    : $  50.00
+------------------------------------------
+Group Total                      : $  50.00
+
+
+GROUP ORDER: Gomez
+------------------------------------------
+Student #1 (Grade 11, VIP)       : $  60.00
+Student #2 (Grade 12, VIP)       : $  55.00
+Student #3 (Grade 10, REGULAR)   : $  50.00
+Student #4 (Grade 9, REGULAR)    : $  50.00
+------------------------------------------
+Group Total                      : $ 215.00
+
+

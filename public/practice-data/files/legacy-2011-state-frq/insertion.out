@@ -1,0 +1,50 @@
+3 8 5 7 2 A 4 
+3 5 8 7 2 A 4 
+3 5 7 8 2 A 4 
+2 3 5 7 8 A 4 
+2 3 5 7 8 A 4 
+2 3 4 5 7 8 A 
+
+3 5 7 2 9 T A 2 5 
+3 5 7 2 9 T A 2 5 
+2 3 5 7 9 T A 2 5 
+2 3 5 7 9 T A 2 5 
+2 3 5 7 9 T A 2 5 
+2 3 5 7 9 T A 2 5 
+2 2 3 5 7 9 T A 5 
+2 2 3 5 5 7 9 T A 
+
+4 8 7 A K 2 T 
+4 7 8 A K 2 T 
+4 7 8 A K 2 T 
+4 7 8 K A 2 T 
+2 4 7 8 K A T 
+2 4 7 8 T K A 
+
+2 A 
+
+2 3 9 T J Q K A 
+2 3 9 T J Q K A 
+2 3 9 T J Q K A 
+2 3 9 T J Q K A 
+2 3 9 T J Q K A 
+2 3 9 T J Q K A 
+2 3 9 T J Q K A 
+
+K A Q J T 8 6 4 
+Q K A J T 8 6 4 
+J Q K A T 8 6 4 
+T J Q K A 8 6 4 
+8 T J Q K A 6 4 
+6 8 T J Q K A 4 
+4 6 8 T J Q K A 
+
+3 6 8 3 9 A 3 Q J 
+3 6 8 3 9 A 3 Q J 
+3 3 6 8 9 A 3 Q J 
+3 3 6 8 9 A 3 Q J 
+3 3 6 8 9 A 3 Q J 
+3 3 3 6 8 9 A Q J 
+3 3 3 6 8 9 Q A J 
+3 3 3 6 8 9 J Q A 
+

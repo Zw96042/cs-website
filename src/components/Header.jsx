@@ -1,43 +1,33 @@
-import { useEffect, useState } from 'react';
+const pageLinks = [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'events', label: 'Events', href: '/events/' },
+  { id: 'practice', label: 'Practice', href: '/practice/' }
+];
 
-export default function Header ({ currentPage }) {
-  const [isCondensed, setIsCondensed] = useState(false);
-
-  useEffect(() => {
-    let scrollFrame = 0;
-    const updateHeader = () => {
-      setIsCondensed(window.scrollY > 48);
-      scrollFrame = 0;
-    };
-    const handleScroll = () => {
-      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeader);
-    };
-
-    updateHeader();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.cancelAnimationFrame(scrollFrame);
-    };
-  }, []);
-
+export default function Header ({ currentPage = 'home' }) {
   return (
-    <header className='site-header' data-condensed={isCondensed ? '' : undefined}>
+    <header className='site-header'>
       <div className='header-inner'>
-        <a className='brand' href='/' aria-label='Westlake High School CS home'>
-          <span className='brand-name'>Westlake Computer Science Club</span>
+        <a
+          className='brand'
+          href='/'
+          aria-label='Westlake High School CS home'
+          aria-current={currentPage === 'home' ? 'page' : undefined}
+        >
+          <span className='brand-name brand-name-full'>Westlake Computer Science Club</span>
+          <span className='brand-name brand-name-compact' aria-hidden='true'>Westlake CS Club</span>
         </a>
         <nav className='site-nav' aria-label='Main navigation'>
-          <a className='nav-link' href='/events/' aria-current={currentPage === 'events' ? 'page' : undefined}>Events</a>
-          <a className='nav-link' href='/#programs'>Programs</a>
-          <a className='nav-link' href='/#hack-club'>
-            Hack Club<span className='nav-copyright'>©</span>
-          </a>
-          <a className='nav-link' href='/#officers'>Officers</a>
-          <a className='nav-join' href='/#join'>
-            Join us <span className='action-arrow' aria-hidden='true'>→</span>
-          </a>
+          {pageLinks.map((link) => (
+            <a
+              className={link.id === currentPage ? 'nav-current-page' : 'nav-link'}
+              href={link.href}
+              aria-current={link.id === currentPage ? 'page' : undefined}
+              key={link.id}
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
       </div>
     </header>

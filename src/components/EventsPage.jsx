@@ -1,10 +1,29 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import EventItem from './EventItem.jsx';
 import Footer from './Footer.jsx';
 import Header from './Header.jsx';
-import { events } from '../lib/events.js';
+import { formatEventDate, getScheduledEvents, getUnscheduledEvents } from '../lib/events.js';
+
+function groupEventsByMonth (events) {
+  return events.reduce((groups, event) => {
+    const currentGroup = groups[groups.length - 1];
+    const month = formatEventDate(event).monthLabel;
+
+    if (currentGroup?.month === month) {
+      currentGroup.events.push(event);
+      return groups;
+    }
+
+    return [...groups, { month, events: [event] }];
+  }, []);
+}
 
 export default function EventsPage () {
+  const scheduledEvents = getScheduledEvents();
+  const unscheduledEvents = getUnscheduledEvents();
+  const eventGroups = groupEventsByMonth(scheduledEvents);
+
   return (
     <div className='site-page'>
       <a className='skip-link' href='#events-content'>Skip to events</a>
@@ -13,27 +32,59 @@ export default function EventsPage () {
         <section className='events-page-section' aria-labelledby='events-heading'>
           <div className='section-inner events-page-layout'>
             <header className='events-page-heading'>
-              <h1 className='section-heading' id='events-heading'>Events.</h1>
+              <div>
+                <p className='events-page-kicker'>Fall 2026 schedule</p>
+                <h1 className='section-heading' id='events-heading'>Events.</h1>
+              </div>
+              <p className='section-intro'>
+                Guest lectures, build sessions, and competitions for Westlake students. Scheduled events stay in date order; talks without a final date appear separately.
+              </p>
             </header>
 
-            <div className='event-ledger'>
-              {events.map((event) => (
-                <article className='event-ledger-item' key={`${event.dateLabel}-${event.title}`}>
-                  <time className='event-date' dateTime={event.date ?? undefined}>
-                    {event.dateLabel}
-                    <span>{event.dayLabel}</span>
-                  </time>
-                  <div className='event-details'>
-                    <p className={`event-type${event.type === 'Hack Club' ? ' event-type-hack-club' : ''}`}>{event.type}</p>
-                    <h2>{event.title}</h2>
-                    <p className='event-description'>
-                      {event.location && <strong className='event-location'>{event.location}</strong>}
-                      {event.description}
-                    </p>
+            <section className='events-schedule' aria-labelledby='upcoming-events-heading'>
+              <header className='events-schedule-heading'>
+                <h2 id='upcoming-events-heading'>Upcoming</h2>
+              </header>
+
+              {eventGroups.length > 0
+                ? eventGroups.map((group) => {
+                  const monthId = `${group.month.toLowerCase()}-events`;
+
+                  return (
+                    <section className='event-month' aria-labelledby={monthId} key={group.month}>
+                      <header className='event-month-heading'>
+                        <h3 id={monthId}>{group.month}</h3>
+                      </header>
+                      <div className='event-ledger'>
+                        {group.events.map((event) => (
+                          <EventItem event={event} headingLevel='h4' key={`${event.date}-${event.title}`} monthContext />
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })
+                : (
+                  <p className='events-empty'>No dated events are on the calendar yet. Check back after the next club meeting.</p>
+                  )}
+            </section>
+
+            {unscheduledEvents.length > 0
+              ? (
+                <section className='events-unscheduled' aria-labelledby='unscheduled-events-heading'>
+                  <header className='events-schedule-heading'>
+                    <div>
+                      <h2 id='unscheduled-events-heading'>Dates in progress</h2>
+                      <p>Confirmed events whose timing is still being finalized.</p>
+                    </div>
+                  </header>
+                  <div className='event-ledger'>
+                    {unscheduledEvents.map((event) => (
+                      <EventItem event={event} headingLevel='h3' key={event.title} />
+                    ))}
                   </div>
-                </article>
-              ))}
-            </div>
+                </section>
+                )
+              : null}
           </div>
         </section>
         <Analytics />
