@@ -1,8 +1,16 @@
 export const events = [
   {
+    type: 'Guest Speaker',
+    track: 'guest-speaker',
+    date: '2026-08-31',
+    title: 'Transformer architecture with Joseph Zhang',
+    description:
+      'A Westlake alumnus and Stanford Math and CS student explains transformer architecture, university research, and life in computer science.'
+  },
+  {
     type: 'Hack Club',
     track: 'hack-club',
-    date: '2026-09-07',
+    date: null,
     title: 'Build a website from scratch',
     description: 'Learn the basics of HTML, CSS, and JavaScript with the CS Club officers. Finish the site and get free boba.'
   },
@@ -14,6 +22,14 @@ export const events = [
     credential: 'Director of UT Austin’s Turing Scholars Honors Program',
     location: 'Room 301 · Ms. Chong’s room',
     description: 'Dr. Calvin Lin shares an expert perspective on computer architecture, university research, and studying computer science at UT Austin.'
+  },
+  {
+    type: 'Guest Speaker',
+    track: 'guest-speaker',
+    date: '2026-10-05',
+    title: 'Quantum computing with HitoMatch',
+    description:
+      'Anna White, President of Dikan Quantum Corporation & Executive Director, HitoMatch Foundation, discusses quantum computing and CS education.'
   },
   {
     type: 'Competitive Programming',
@@ -31,13 +47,6 @@ export const events = [
     title: 'Seven Lakes',
     description: 'Competitive programming competition on October 17.',
     signupNote: 'Email the officers for signup.'
-  },
-  {
-    type: 'Guest Speaker',
-    track: 'guest-speaker',
-    date: null,
-    title: 'Inside the Turing Scholars program',
-    description: 'Westlake alumni Ruiqi Li and Autumn Liu share their research, work, and experience as Turing Scholars at UT Austin.'
   }
 ];
 

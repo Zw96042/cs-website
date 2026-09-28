@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { initializeAnimations } from './lib/animations.js';
 import AffiliationSection from './components/AffiliationSection.jsx';
+import Contests from './components/Contests.jsx';
 import Footer from './components/Footer.jsx';
 import EventsPreviewSection from './components/EventsPreviewSection.jsx';
 import GeneralCsSection from './components/GeneralCsSection.jsx';
@@ -42,6 +43,7 @@ export default function App () {
       <main className='club-main' id='club-content'>
         <Hero />
         <EventsPreviewSection />
+        <Contests />
         <ProgramSection />
         <GeneralCsSection />
         <ClubTracksSection />

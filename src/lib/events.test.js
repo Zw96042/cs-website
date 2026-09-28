@@ -3,19 +3,19 @@ import test from 'node:test';
 import { events, formatEventDate, getEventPreview, getScheduledEvents, getUnscheduledEvents } from './events.js';
 
 test('keeps events scheduled for today in the club timezone', () => {
-  const eventTitles = getEventPreview(new Date('2026-09-08T04:59:59Z')).map(({ title }) => title);
+  const eventTitles = getEventPreview(new Date('2026-09-30T04:59:59Z')).map(({ title }) => title);
 
   assert.deepEqual(eventTitles, [
-    'Build a website from scratch',
-    'Computer architecture and CS at UT'
+    'Computer architecture and CS at UT',
+    'Quantum computing with HitoMatch'
   ]);
 });
 
 test('drops an event when the next club calendar day starts', () => {
-  const eventTitles = getEventPreview(new Date('2026-09-08T05:00:00Z')).map(({ title }) => title);
+  const eventTitles = getEventPreview(new Date('2026-09-30T05:00:00Z')).map(({ title }) => title);
 
   assert.deepEqual(eventTitles, [
-    'Computer architecture and CS at UT',
+    'Quantum computing with HitoMatch',
     'Code Bash'
   ]);
 });
@@ -49,11 +49,18 @@ test('drops a multi-day competition on the next club calendar day', () => {
 test('keeps unscheduled events separate from the dated schedule', () => {
   const eventTitles = getUnscheduledEvents().map(({ title }) => title);
 
-  assert.deepEqual(eventTitles, ['Inside the Turing Scholars program']);
+  assert.deepEqual(eventTitles, ['Build a website from scratch']);
 });
 
 test('returns no homepage events after every scheduled event has passed', () => {
   const eventTitles = getEventPreview(new Date('2026-10-18T12:00:00Z')).map(({ title }) => title);
 
   assert.deepEqual(eventTitles, []);
+});
+
+
+test('keeps the latest schedule addition, reschedule and cancellation', () => {
+  assert.equal(events.find(e => e.title === 'Quantum computing with HitoMatch').date, '2026-10-05');
+  assert.equal(events.find(e => e.title === 'Build a website from scratch').date, null);
+  assert.ok(!events.some(e => e.title === 'Inside the Turing Scholars program'));
 });

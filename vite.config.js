@@ -5,7 +5,8 @@ import { resolve } from 'node:path';
 
 export default defineConfig({
   base: './',
-  plugins: [react(),
+  plugins: [
+    react(),
     legacy({
       targets: ['>0.3%', 'IE 11']
     })

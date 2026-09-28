@@ -1,7 +1,10 @@
 window.heroVariants.push({
   name: 'Semester',
   axis: 'The hero is a semester plan rather than a slogan, making momentum the message.',
-  render: () => window.prototypeSceneMarkup('concept-semester', `
+  render: () =>
+    window.prototypeSceneMarkup(
+      'concept-semester',
+      `
     <div class="semester-intro">
       <h1 class="prototype-title" id="hero-title">Fourteen weeks. One thing worth shipping.</h1>
       ${window.prototypeLedeMarkup('Start wherever you are. By demo night, you will have something real to show.')}
@@ -15,5 +18,6 @@ window.heroVariants.push({
       <button class="concept-replay-control" type="button" data-replay>Replay timeline <span aria-hidden="true">↻</span></button>
     </div>
     ${window.prototypeActionsMarkup({ modifier: 'semester-actions', primary: 'Start this semester', secondary: 'How meetings work', secondaryHref: '../../#about' })}
-  `)
+  `
+    )
 });

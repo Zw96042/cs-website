@@ -1,7 +1,10 @@
 window.heroVariants.push({
   name: 'Pairing',
   axis: 'A collaboration map makes the people between disciplines the central visual.',
-  render: () => window.prototypeSceneMarkup('concept-pairing', `
+  render: () =>
+    window.prototypeSceneMarkup(
+      'concept-pairing',
+      `
     <div class="pairing-copy">
       <h1 class="prototype-title" id="hero-title">Nobody ships alone.</h1>
       ${window.prototypeLedeMarkup('A designer sharpens the engineer. A hardware builder changes what the software can become.')}
@@ -16,5 +19,6 @@ window.heroVariants.push({
       <span class="pair-node pair-node-core"><b>Build team</b><small>one shared problem</small></span>
       <button class="concept-replay-control" type="button" data-replay>Replay connections <span aria-hidden="true">↻</span></button>
     </div>
-  `)
+  `
+    )
 });

@@ -53,7 +53,10 @@ window.prototypeActionsMarkup = function prototypeActionsMarkup ({
   `;
 };
 
-window.prototypeSceneMarkup = function prototypeSceneMarkup (modifier, heroMarkup) {
+window.prototypeSceneMarkup = function prototypeSceneMarkup (
+  modifier,
+  heroMarkup
+) {
   return `
     <div class="site-page proto-scene is-replaying ${modifier}">
       ${window.prototypeHeaderMarkup()}

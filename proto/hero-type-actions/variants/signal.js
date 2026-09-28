@@ -1,7 +1,10 @@
 window.heroVariants.push({
   name: 'Signal',
   axis: 'A hardware-first hero where a live signal becomes the visual language.',
-  render: () => window.prototypeSceneMarkup('concept-signal', `
+  render: () =>
+    window.prototypeSceneMarkup(
+      'concept-signal',
+      `
     <div class="signal-copy">
       <h1 class="prototype-title" id="hero-title">Software is only half the story.</h1>
       ${window.prototypeLedeMarkup('Write the code, wire the sensor, and see your idea leave the screen.')}
@@ -16,5 +19,6 @@ window.heroVariants.push({
       </svg>
       <button class="concept-replay-control" type="button" data-replay>Replay signal <span aria-hidden="true">↻</span></button>
     </div>
-  `)
+  `
+    )
 });

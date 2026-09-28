@@ -1,7 +1,10 @@
 window.heroVariants.push({
   name: 'Compiler',
   axis: 'An idea is treated as source material and compiled into a working project.',
-  render: () => window.prototypeSceneMarkup('concept-compiler', `
+  render: () =>
+    window.prototypeSceneMarkup(
+      'concept-compiler',
+      `
     <div class="compiler-copy">
       <h1 class="prototype-title" id="hero-title">Turn an idea into something that runs.</h1>
       ${window.prototypeActionsMarkup({ modifier: 'compiler-actions', primary: 'Bring an idea', secondary: 'See the process', secondaryHref: '../../#about' })}
@@ -13,5 +16,6 @@ window.heroVariants.push({
       <span class="compiler-result">project.status = <strong>"shipped"</strong></span>
       <button class="concept-replay-control" type="button" data-replay>Replay compile <span aria-hidden="true">↻</span></button>
     </div>
-  `)
+  `
+    )
 });
