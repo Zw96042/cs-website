@@ -396,8 +396,6 @@
   align-items: end;
   justify-content: space-between;
   gap: 12px 32px;
-  padding-block-start: clamp(40px, 5vw, 64px);
-  border-block-start: 1px solid var(--line);
 }
 
 .pr-library-head h2 {
@@ -417,22 +415,18 @@
   line-height: 1.5;
 }
 
-/* Filters: type, then the Year/Round pair, then the count. The pair is one
-   grid item so Round can never wrap away from Year. */
+/* Filters: Type, Year and Round as one row of matching selects, then the
+   count. The selects are one grid item so none can wrap away from the rest. */
 
 .pr-filters {
   margin-block-start: 28px;
   padding-block: 12px;
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
-  grid-template-areas: "type selects summary";
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "selects summary";
   align-items: center;
   gap: 12px 28px;
   border-block: 1px solid var(--line);
-}
-
-.pr-filter-type {
-  grid-area: type;
 }
 
 .pr-filter-selects {
@@ -450,74 +444,9 @@
   gap: 4px 18px;
 }
 
-/* Type: a native radio group drawn as separate outlined chips; the chosen one
-   fills with ink. No enclosing track, so there is no box inside a box. */
-
-.pr-type-filter {
-  min-inline-size: 0;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 6px;
-  border: 0;
-}
-
-.pr-type-option {
-  position: relative;
-  display: flex;
-}
-
-.pr-type-option input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.pr-type-label {
-  width: 100%;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding-inline: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--pr-radius);
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 560;
-  white-space: nowrap;
-  transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease;
-}
-
-.pr-type-count {
-  color: var(--faint);
-  font-family: "Geist Mono", monospace;
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
-}
-
-.pr-type-option input:checked + .pr-type-label {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.pr-type-option input:checked + .pr-type-label .pr-type-count {
-  color: inherit;
-  opacity: 0.62;
-}
-
-.pr-type-option input:focus-visible + .pr-type-label {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+/* Wide enough for "Programming FRQ", so choosing a type never shifts the row. */
+.pr-select-type .pr-select-button {
+  min-width: 172px;
 }
 
 .pr-select {
@@ -626,6 +555,19 @@
   text-overflow: ellipsis;
 }
 
+/* The label takes the free space, so counts line up on the right. */
+.pr-select-menu [role="option"] > span:first-child {
+  flex: 1 1 auto;
+}
+
+.pr-select-count {
+  flex: 0 0 auto;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
 .pr-select-menu [role="option"][data-active] {
   background: var(--line);
   color: var(--ink);
@@ -634,12 +576,6 @@
 .pr-select-menu [role="option"][aria-selected="true"] {
   color: var(--ink);
   font-weight: 600;
-}
-
-.pr-select-menu [role="option"][aria-selected="true"]::after {
-  color: var(--faint);
-  content: "✓";
-  font-size: 11px;
 }
 
 .pr-select-block {
@@ -1931,8 +1867,7 @@ pre.pr-code-block code {
 
   .pr-link-button:hover:not(:disabled),
   .pr-ws-meta .text-action:hover,
-  .pr-resource-link:hover,
-  .pr-type-option:hover input:not(:checked) + .pr-type-label {
+  .pr-resource-link:hover {
     border-color: var(--muted);
     background: var(--surface);
     color: var(--ink);
@@ -1972,17 +1907,18 @@ pre.pr-code-block code {
   }
 }
 
-/* Intermediate filters: type on its own row, Year and Round stay paired */
+/* Intermediate filters: the three selects keep their row, the count moves
+   under them */
 
 @media (max-width: 1080px) {
   .pr-filters {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "type type"
-      "selects summary";
+      "selects"
+      "summary";
   }
 
-  .pr-filter-type {
+  .pr-filter-summary {
     justify-self: start;
   }
 }
@@ -2137,8 +2073,38 @@ pre.pr-code-block code {
   }
 }
 
-/* Narrow: a deliberate stack; the type options on one line, Year and Round
-   as a two-column pair, count and reset on their own line. */
+/* Narrow filters: labels sit above their selects; Type spans the row, Year
+   and Round stay a two-column pair beneath it. */
+
+@media (max-width: 760px) {
+  .pr-filter-selects {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+
+  .pr-filter-selects .pr-select {
+    min-width: 0;
+    display: grid;
+    gap: 6px;
+  }
+
+  .pr-filter-selects .pr-select-type {
+    grid-column: 1 / -1;
+  }
+
+  .pr-filter-selects .pr-select-control,
+  .pr-filter-selects .pr-select-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .pr-filter-selects .pr-select-menu {
+    inset-inline-end: 0;
+  }
+}
+
+/* Narrow: a deliberate stack, count and reset on their own line. */
 
 @media (max-width: 640px) {
   .pr-hero {
@@ -2176,51 +2142,7 @@ pre.pr-code-block code {
   }
 
   .pr-filters {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "type"
-      "selects"
-      "summary";
     gap: 12px;
-  }
-
-  /* Three equal chips across; the count drops under its label so the
-     longest name still fits at 390px without wrapping the row. */
-  .pr-filter-type {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .pr-type-label {
-    flex-direction: column;
-    gap: 3px;
-    padding: 6px;
-    font-size: 12px;
-    line-height: 1.2;
-    text-align: center;
-    white-space: normal;
-  }
-
-  .pr-filter-selects {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .pr-filter-selects .pr-select {
-    min-width: 0;
-    display: grid;
-    gap: 6px;
-  }
-
-  .pr-filter-selects .pr-select-control,
-  .pr-filter-selects .pr-select-button {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .pr-filter-selects .pr-select-menu {
-    inset-inline-end: 0;
   }
 
   .pr-filter-summary {

@@ -180,47 +180,307 @@ a {
   display: none;
 }
 
+/* Header pages sit in one rounded group. Each whole page link is also its menu
+   trigger, opening into one shared, resizing viewport. */
 .site-nav {
+  --nav-item-pad: 12px;
+  position: relative;
+}
+
+/* The list and items stay unpositioned: Radix measures the open link's offsetLeft
+   against the List's own relative wrapper to place the indicator. */
+.site-nav-list {
+  isolation: isolate;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  margin: 0;
+  padding: 0 4px;
+  list-style: none;
   white-space: nowrap;
 }
 
-/* Header pages are contained tabs: a 44px target around a 34px surface.
-   The current page is filled, so no underline is needed. */
-.site-nav .nav-link {
+.site-nav-list::before {
+  position: absolute;
+  inset: 4px 0;
+  z-index: -1;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  content: "";
+}
+
+.site-nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav-list .site-nav-trigger {
   position: relative;
   isolation: isolate;
-  padding-inline: 14px;
+  padding-inline: var(--nav-item-pad);
   font-weight: 560;
 }
 
-.site-nav .nav-link::before {
+/* A 32px chip inside the 44px link; the current page is filled, not underlined. */
+.site-nav-trigger::before {
   position: absolute;
-  inset: 5px 0;
+  inset: 6px 0;
   z-index: -1;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: 8px;
   content: "";
   transition:
     background-color 150ms ease,
     border-color 150ms ease;
 }
 
-.site-nav .nav-link[aria-current="page"] {
-  color: var(--ink);
-  font-weight: 610;
-}
-
-.site-nav .nav-link[aria-current="page"]::before {
+.site-nav-trigger[aria-current="page"]::before {
   border-color: var(--line);
   background: var(--surface-raised);
 }
 
-.site-nav .nav-link:focus-visible {
-  outline-offset: -1px;
-  border-radius: 6px;
+.site-nav-trigger:not([aria-current])[data-state="open"]::before {
+  background: var(--surface);
+}
+
+.site-nav-list .site-nav-trigger[aria-current="page"],
+.site-nav-list .site-nav-trigger[data-state="open"] {
+  color: var(--ink);
+}
+
+.site-nav-list .site-nav-trigger[aria-current="page"] {
+  font-weight: 610;
+}
+
+.site-nav-list .site-nav-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+  border-radius: 10px;
+}
+
+/* Radix sizes the indicator to the open link and slides it between links, so the
+   centered arrow always points at the middle of the open item. */
+.site-nav-indicator {
+  top: 100%;
+  z-index: 2;
+  height: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 240ms var(--ease-out),
+    width 240ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+
+.site-nav-indicator[data-state="visible"] {
+  opacity: 1;
+}
+
+.site-nav-arrow {
+  width: 10px;
+  height: 10px;
+  border-start-start-radius: 2px;
+  background: var(--surface-raised);
+  box-shadow: -1px -1px 0 var(--line);
+  transform: translateY(50%) rotate(45deg);
+}
+
+/* Panels open just below the header's bottom rule, aligned to the nav's end. */
+.site-nav-viewport-position {
+  position: absolute;
+  top: calc(100% + 18px);
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* The viewport stays mounted, so opening and closing are transitions that reverse
+   from wherever they are when the pointer changes its mind. */
+.site-nav-viewport {
+  position: relative;
+  width: var(--radix-navigation-menu-viewport-width);
+  height: var(--radix-navigation-menu-viewport-height);
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface-raised);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 18px 40px -18px rgb(0 0 0 / 45%);
+  transform-origin: top right;
+  transition:
+    width 250ms var(--ease-out),
+    height 250ms var(--ease-out),
+    opacity 200ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    visibility 0s;
+}
+
+.site-nav-viewport[data-state="closed"] {
+  opacity: 0;
+  transform: translateY(-4px) scale(0.98);
+  visibility: hidden;
+  transition:
+    width 250ms var(--ease-out),
+    height 250ms var(--ease-out),
+    opacity 200ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    visibility 0s linear 220ms;
+}
+
+.site-nav-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px;
+}
+
+.site-nav-panel[data-motion="from-start"] {
+  animation: site-nav-from-start 220ms var(--ease-out);
+}
+
+.site-nav-panel[data-motion="from-end"] {
+  animation: site-nav-from-end 220ms var(--ease-out);
+}
+
+.site-nav-panel[data-motion="to-start"] {
+  animation: site-nav-to-start 220ms var(--ease-out) forwards;
+}
+
+.site-nav-panel[data-motion="to-end"] {
+  animation: site-nav-to-end 220ms var(--ease-out) forwards;
+}
+
+.site-nav-panel-home {
+  width: min(372px, calc(100vw - var(--page-gutter) - var(--page-gutter)));
+}
+
+.site-nav-panel-events {
+  width: min(344px, calc(100vw - var(--page-gutter) - var(--page-gutter)));
+}
+
+.site-nav-panel-practice {
+  width: min(320px, calc(100vw - var(--page-gutter) - var(--page-gutter)));
+}
+
+.site-nav-sections,
+.site-nav-events,
+.site-nav-practice {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.site-nav-panel-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-inline: 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 520;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.site-nav-panel-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.site-nav-events .site-nav-panel-link {
+  gap: 12px;
+  color: var(--ink);
+}
+
+.site-nav-event-date {
+  flex: none;
+  min-width: 64px;
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.site-nav-event-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-nav-practice .site-nav-panel-link {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding-block: 8px;
+}
+
+.site-nav-practice-label {
+  color: var(--ink);
+}
+
+.site-nav-practice-detail {
+  color: var(--faint);
+  font-size: 12px;
+  font-weight: 450;
+}
+
+.site-nav-empty {
+  margin: 0;
+  padding: 13px 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.site-nav-panel-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-block-start: 4px;
+  padding-block-start: 4px;
+  border-block-start: 1px solid var(--line);
+}
+
+@keyframes site-nav-from-start {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes site-nav-from-end {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+@keyframes site-nav-to-start {
+  to {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes site-nav-to-end {
+  to {
+    opacity: 0;
+    transform: translateX(10px);
+  }
 }
 
 .section-nav {
@@ -282,7 +542,8 @@ summary:focus-visible {
   transform: scale(0.96);
 }
 
-.club-main [id] {
+.club-main [id],
+.events-main [id] {
   scroll-margin-top: 84px;
 }
 
@@ -1416,8 +1677,29 @@ summary:focus-visible {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .site-nav .nav-link:not([aria-current="page"]):hover::before {
+  .site-nav-trigger:not([aria-current]):hover::before {
     background: var(--surface);
+  }
+
+  /* Keeps an open link hovered across the 18px gap down to its panel. */
+  .site-nav-trigger[data-state="open"]::after {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline: 0;
+    height: 18px;
+    content: "";
+  }
+
+  .site-nav-panel-link:hover {
+    color: var(--ink);
+  }
+
+  .site-nav-panel-link:hover {
+    background: var(--line);
+  }
+
+  .site-nav-panel-link:hover .action-arrow {
+    transform: translateX(3px);
   }
 
   .nav-link:hover,
@@ -1636,19 +1918,9 @@ summary:focus-visible {
   }
 }
 
-@media (max-width: 420px) {
-  .header-inner {
-    gap: 12px;
-  }
-
-  .site-nav {
-    gap: 2px;
-  }
-
-  .site-nav .nav-link {
-    padding-inline: 10px;
-  }
-
+/* The header keeps one 64px row down to 360px: the brand shortens and the nav
+   tightens around its three 44px-tall links. */
+@media (max-width: 600px) {
   .brand-name-full {
     display: none;
   }
@@ -1656,7 +1928,24 @@ summary:focus-visible {
   .brand-name-compact {
     display: inline;
   }
+}
 
+@media (max-width: 480px) {
+  .header-inner {
+    gap: 12px;
+  }
+
+  .site-nav {
+    --nav-item-pad: 10px;
+  }
+
+  .site-nav-list {
+    gap: 0;
+    padding-inline: 2px;
+  }
+}
+
+@media (max-width: 420px) {
   .hero-title > span {
     white-space: normal;
   }

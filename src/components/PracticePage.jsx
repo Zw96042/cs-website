@@ -1,4 +1,11 @@
-import { getNavigationTarget } from '../lib/navigation.js';
+import {
+  getArchiveRequest,
+  getInitialArchiveFilters,
+  getNavigationTarget,
+  getPage,
+  getSavedArchiveFilters,
+  withArchiveFilters
+} from '../lib/navigation.js';
 import { useEffect, useId, useRef, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -67,6 +74,16 @@ function readTestParam () {
     return new URLSearchParams(window.location.search).get('test') || null;
   } catch {
     return null;
+  }
+}
+
+// A history entry the archive already showed keeps its filters; header links such
+// as ?type=mc choose the Type for a new one.
+function readArchiveFilters () {
+  try {
+    return getInitialArchiveFilters(window.location.search, window.history.state);
+  } catch {
+    return getInitialArchiveFilters('', null);
   }
 }
 
@@ -240,9 +257,7 @@ export default function PracticePage ({ embedded = false, onReady }) {
   const [selectedId, setSelectedId] = useState(readTestParam);
   const [testLoad, setTestLoad] = useState({ id: null, status: 'idle', data: null, error: '' });
   const [testAttempt, setTestAttempt] = useState(0);
-  const [archiveMode, setArchiveMode] = useState('all');
-  const [archiveYear, setArchiveYear] = useState('all');
-  const [archiveRound, setArchiveRound] = useState('all');
+  const [archive, setArchive] = useState(readArchiveFilters);
   const progressRef = useRef(progress);
   const testCache = useRef(new Map());
   const navigated = useRef(false);
@@ -256,18 +271,39 @@ export default function PracticePage ({ embedded = false, onReady }) {
   useEffect(() => {
     const flush = () => writeProgress(progressRef.current);
     const syncFromUrl = () => {
+      if (getPage(window.location.pathname) !== 'practice') return;
       navigated.current = true;
       setSelectedId(readTestParam());
+      // Back and Forward restore the filters saved on an archive entry. Other entries
+      // keep the current filters; the copy saves them on the entry (see below).
+      const saved = getSavedArchiveFilters(window.history.state);
+      setArchive((current) => saved || { ...current });
+    };
+    // Type links reset the archive on click rather than on popstate, so returning to
+    // a ?type= entry restores it, and a link to the current URL still applies.
+    const requestArchive = (event) => {
+      const request = getArchiveRequest(event, event.target.closest?.('a[href]'), window.location.href);
+      if (request) setArchive(request);
     };
 
     window.addEventListener('pagehide', flush);
     window.addEventListener('popstate', syncFromUrl);
+    document.addEventListener('click', requestArchive);
     return () => {
       flush();
       window.removeEventListener('pagehide', flush);
       window.removeEventListener('popstate', syncFromUrl);
+      document.removeEventListener('click', requestArchive);
     };
   }, []);
+
+  // Save the archive's filters on its history entry so returning to it restores them.
+  useEffect(() => {
+    if (selectedId) return;
+    try {
+      window.history.replaceState(withArchiveFilters(window.history.state, archive), '');
+    } catch { /* Without saved state, Back keeps the current filters. */ }
+  }, [archive, selectedId]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -338,6 +374,9 @@ export default function PracticePage ({ embedded = false, onReady }) {
     const url = new URL(window.location.href);
     if (testId) url.searchParams.set('test', testId);
     else url.searchParams.delete('test');
+    // A type request belongs to the link that made it; the entries pushed here carry
+    // their filters in history state instead.
+    url.searchParams.delete('type');
     url.hash = '';
     window.history.pushState({}, '', url);
     navigated.current = true;
@@ -358,9 +397,7 @@ export default function PracticePage ({ embedded = false, onReady }) {
 
   // The hero's mode links filter the archive, then move focus to it.
   const browseArchive = (mode) => {
-    setArchiveMode(mode);
-    setArchiveYear('all');
-    setArchiveRound('all');
+    setArchive({ mode, year: 'all', round: 'all' });
     const heading = document.getElementById('library-heading');
     heading?.focus({ preventScroll: true });
     heading?.scrollIntoView({ block: 'start' });
@@ -387,12 +424,12 @@ export default function PracticePage ({ embedded = false, onReady }) {
         <Library
           manifest={manifest}
           progress={progress}
-          mode={archiveMode}
-          onModeChange={setArchiveMode}
-          year={archiveYear}
-          onYearChange={setArchiveYear}
-          round={archiveRound}
-          onRoundChange={setArchiveRound}
+          mode={archive.mode}
+          onModeChange={(mode) => setArchive((current) => ({ ...current, mode }))}
+          year={archive.year}
+          onYearChange={(year) => setArchive((current) => ({ ...current, year }))}
+          round={archive.round}
+          onRoundChange={(round) => setArchive((current) => ({ ...current, round }))}
           onOpen={navigate}
           onRetry={() => setManifestAttempt((attempt) => attempt + 1)}
         />
@@ -635,6 +672,15 @@ function Select ({ label, value, options, onChange, className = '' }) {
                   onClick={() => choose(index)}
                 >
                   <span>{option.label}</span>
+                  {option.count !== undefined
+                    ? (
+                      <span className='pr-select-count'>
+                        <span className='sr-only'>, </span>
+                        {option.count}
+                        <span className='sr-only'> {option.count === 1 ? 'test' : 'tests'}</span>
+                      </span>
+                      )
+                    : null}
                 </li>
               ))}
             </ul>
@@ -846,7 +892,7 @@ function Library ({ manifest, progress, mode, onModeChange: setMode, year, onYea
   const matchesPlace = (item) =>
     (year === 'all' || String(item.year) === year) &&
     (round === 'all' || item.contest === round);
-  // Type counts follow the Year/Round choice, so each option says what it would show.
+  // Type counts in its menu follow the Year/Round choice, so each option says what it would show.
   const placeTests = tests.filter(matchesPlace);
   const filtered = placeTests.filter((test) => mode === 'all' || test.mode === mode);
   // Supplementary files are all programming material.
@@ -900,30 +946,18 @@ function Library ({ manifest, progress, mode, onModeChange: setMode, year, onYea
     body = (
       <>
         <div className='pr-filters'>
-          <fieldset className='pr-type-filter pr-filter-type'>
-            <legend className='sr-only'>Test type</legend>
-            {[['all', 'All types'], ['mc', MODE_LABELS.mc], ['frq', MODE_LABELS.frq]].map(([value, label]) => (
-              <label className='pr-type-option' key={value}>
-                <input
-                  type='radio'
-                  name='practice-mode-filter'
-                  value={value}
-                  checked={mode === value}
-                  onChange={() => setMode(value)}
-                />
-                <span className='pr-type-label'>
-                  {label}
-                  <span className='pr-type-count'>
-                    <span className='sr-only'>, </span>
-                    {value === 'all' ? placeTests.length : placeTests.filter((test) => test.mode === value).length}
-                    <span className='sr-only'> tests</span>
-                  </span>
-                </span>
-              </label>
-            ))}
-          </fieldset>
-
           <div className='pr-filter-selects'>
+            <Select
+              className='pr-select-type'
+              label='Type'
+              value={mode}
+              options={[['all', 'All types'], ['mc', MODE_LABELS.mc], ['frq', MODE_LABELS.frq]].map(([value, label]) => ({
+                value,
+                label,
+                count: value === 'all' ? placeTests.length : placeTests.filter((test) => test.mode === value).length
+              }))}
+              onChange={setMode}
+            />
             <Select
               label='Year'
               value={year}

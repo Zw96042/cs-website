@@ -10,6 +10,7 @@
     "test": "node --test src/lib/*.test.js"
   },
   "dependencies": {
+    "@radix-ui/react-navigation-menu": "^1.2.22",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "@vitejs/plugin-legacy": "^8.2.3",
