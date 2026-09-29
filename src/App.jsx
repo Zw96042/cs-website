@@ -14,7 +14,7 @@ import ClubTracksSection from './components/ClubTracksSection.jsx';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
-export default function App () {
+export default function App ({ embedded = false }) {
   useEffect(() => {
     const cleanupAnimations = initializeAnimations();
     const scrollToHash = () => {
@@ -34,25 +34,29 @@ export default function App () {
     };
   }, []);
 
+  const content = (
+    <main className='club-main' id='club-content'>
+      <Hero />
+      <EventsPreviewSection />
+      <Contests />
+      <ProgramSection />
+      <GeneralCsSection />
+      <ClubTracksSection />
+      <AffiliationSection />
+      <OfficersSection />
+      <JoinSection />
+      {!embedded && <Analytics />}
+      {!embedded && <SpeedInsights />}
+    </main>
+  );
+
+  if (embedded) return content;
+
   return (
     <div className='site-page'>
-      <a className='skip-link' href='#club-content'>
-        Skip to content
-      </a>
+      <a className='skip-link' href='#club-content'>Skip to content</a>
       <Header />
-      <main className='club-main' id='club-content'>
-        <Hero />
-        <EventsPreviewSection />
-        <Contests />
-        <ProgramSection />
-        <GeneralCsSection />
-        <ClubTracksSection />
-        <AffiliationSection />
-        <OfficersSection />
-        <JoinSection />
-        <Analytics />
-        <SpeedInsights />
-      </main>
+      {content}
       <Footer />
     </div>
   );

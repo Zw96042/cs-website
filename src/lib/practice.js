@@ -1,5 +1,12 @@
 export const PROGRESS_KEY = 'westlake-uil-practice-v1';
 
+// PDF cell padding is not part of a code sample; keep indentation and
+// deliberate blank lines within the sample intact.
+export function trimCodePadding (value) {
+  return String(value ?? '').replace(/\r\n?/g, '\n')
+    .replace(/^(?:[\t ]*\n)+|(?:\n[\t ]*)+$/g, '');
+}
+
 export function normalizeAnswer (value) {
   return String(value ?? '').normalize('NFKC').replace(/[−–]/g, '-').trim().replace(/\s+/g, ' ').toUpperCase();
 }

@@ -39,6 +39,34 @@ def contest_name(filename):
 
 shared_cells = uil.native.shared_code_cells
 
+
+def repair_2003_state_matrix(content):
+    """Join the 2003 State Q34 table, whose PDF mixes fonts by cell type."""
+    start = next((index for index, block in enumerate(content)
+                  if block.get('type') == 'code' and block.get('text', '').endswith('[0]')
+                  and re.findall(r'\[(\d)\]', block.get('text', '').splitlines()[0]) == list('01234567')), None)
+    if start is None or len(content) < start + 16:
+        return content
+    rows = []
+    for index in range(8):
+        if index:
+            label_block = content[start + 2 * index]
+            if label_block.get('type') != 'code' or label_block.get('text') != f'[{index}]':
+                return content
+        values_block = content[start + 1 + 2 * index]
+        if values_block.get('type') != 'paragraph':
+            return content
+        values = ''.join(run.get('text', '') for run in values_block.get('runs', [])).split()
+        if len(values) != 8 or any(not value.isdigit() for value in values):
+            return content
+        rows.append([str(index), *values])
+    table = ['      ' + ''.join(f'[{column}]'.center(6) for column in range(8))]
+    table.extend(
+        f'[{row[0]}]'.ljust(6) + ''.join(str(value).center(6) for value in row[1:])
+        for row in rows
+    )
+    return [*content[:start], {'type': 'code', 'text': '\n'.join(table)}, *content[start + 16:]]
+
 def import_packet(source, converted, year, contest):
     doc = pdf.open(converted)
     slug = re.sub(r'[^a-z0-9]+', '-', contest.lower()).strip('-')
@@ -86,6 +114,8 @@ def import_packet(source, converted, year, contest):
         cell = next((cell for cell in contexts[pno] if cell[0] - 3 <= top < cell[1] - 3), None)
         content, choices = uil.native_written(doc[pno], page_items, top, bottom, list('ABCDE'), test_id, number,
                                                legacy=True, right_context=cell[3] if cell else None)
+        if test_id == '2003-state-mc' and number == 34:
+            content = repair_2003_state_matrix(content)
         if cell:
             first_header = min(y for _, cp, y in headers if cp == pno and cell[0] - 3 <= y < cell[1] - 3)
             intro = [item for item in page_items if cell[0] <= item['rect'].y0 < first_header - 2

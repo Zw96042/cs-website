@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-The Vite server prints the local URL when it starts. The production homepage is at `/`; the design prototype gallery remains available at `/proto/hero-type-actions/` during development.
+The Vite server prints the local URL when it starts. Home (`/`), Events (`/events/`), and Practice (`/practice/`) share a persistent navigation header and switch through browser history without a full page reload. Each URL also works as a direct entry page. The design prototype gallery remains available at `/proto/hero-type-actions/` during development.
 
 ## Production build
 

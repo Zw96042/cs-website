@@ -9,6 +9,7 @@
   --pr-wrong: #f0a39c;
   --pr-wide: 1440px;
   --pr-sticky-top: 88px;
+  --pr-radius: 6px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -48,7 +49,9 @@
   line-height: 1.5;
 }
 
-/* Buttons and links */
+/* Buttons and links: three contained levels shared by every practice action.
+   Primary is filled ink, the default sits on a surface, and the link button
+   is an outlined quiet control for secondary actions (PDF, Clear, Start over). */
 
 .pr-button {
   appearance: none;
@@ -59,8 +62,8 @@
   gap: 8px;
   padding-inline: 16px;
   border: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
+  border-radius: var(--pr-radius);
+  background: var(--surface);
   color: var(--ink);
   font: inherit;
   font-size: 13px;
@@ -90,21 +93,35 @@
   transform: scale(0.97);
 }
 
-.pr-link-button {
+.pr-link-button,
+.pr-ws-meta .text-action {
   appearance: none;
   min-height: 44px;
-  padding: 0;
-  border: 0;
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-inline: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--pr-radius);
+  background: transparent;
   color: var(--muted);
   font: inherit;
   font-size: 13px;
   font-weight: 560;
-  text-decoration: underline;
-  text-decoration-color: var(--line);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 5px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.pr-link-button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
 }
 
 .pr-inline-link {
@@ -156,71 +173,194 @@
 
 /* Hero */
 
+/* An oversized title, the intro and resume set
+   against its baseline; below, each mode as a ruled column led by a small
+   schematic of how it works (answer sheet and clock, run and compare),
+   dropped on narrow screens. */
+
 .pr-hero {
-  padding-block: clamp(72px, 9vw, 128px) clamp(56px, 7vw, 96px);
+  padding-block: clamp(24px, 3.5vw, 48px) clamp(40px, 5vw, 64px);
 }
 
-.pr-hero-inner {
+.pr-hero-top {
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(320px, 5fr);
-  gap: clamp(48px, 8vw, 120px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  gap: 20px clamp(40px, 6vw, 96px);
   align-items: end;
 }
 
-.pr-hero-meta {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 560;
-}
-
 .pr-hero-title {
-  margin-block-start: 14px;
+  max-width: none;
+  font-size: clamp(60px, 9.5vw, 140px);
+  line-height: 0.84;
+  letter-spacing: -0.045em;
 }
 
-.pr-hero-copy .section-intro {
-  max-width: 50ch;
+.pr-hero-side {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
 }
 
-.pr-modes {
+.pr-hero-intro {
+  max-width: 40ch;
   margin: 0;
-  border-block: 1px solid var(--line);
-}
-
-.pr-modes > div {
-  padding-block: 18px;
-}
-
-.pr-modes > div + div {
-  border-block-start: 1px solid var(--line);
-}
-
-.pr-modes dt {
-  font-size: 14px;
-  font-weight: 620;
-  letter-spacing: -0.012em;
-}
-
-.pr-modes dd {
-  max-width: 48ch;
-  margin: 6px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   text-wrap: pretty;
 }
 
-.pr-hero-note {
-  margin: 18px 0 0;
+.pr-modes {
+  margin: clamp(28px, 3vw, 40px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block: 1px solid var(--line);
+  list-style: none;
+}
+
+.pr-mode {
+  padding-block: clamp(20px, 2vw, 24px);
+  padding-inline-end: clamp(24px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  align-content: start;
+}
+
+.pr-mode + .pr-mode {
+  padding-inline: clamp(24px, 4vw, 56px) 0;
+  border-inline-start: 1px solid var(--line);
+}
+
+.pr-mode-body {
+  display: grid;
+  justify-items: start;
+}
+
+/* Mode schematics */
+
+.pr-fig {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+}
+
+.pr-fig-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 12px;
+  border-block-end: 1px solid var(--line);
   color: var(--faint);
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 11px;
+}
+
+.pr-fig-clock {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-sheet,
+.pr-term {
+  min-height: 112px;
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.pr-sheet {
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  list-style: none;
+}
+
+.pr-sheet li {
+  display: grid;
+  grid-template-columns: 2ch repeat(5, 20px) minmax(1ch, 1fr);
+  align-items: center;
+  gap: 6px;
+}
+
+.pr-sheet-num {
+  color: var(--faint);
+}
+
+.pr-bubble {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--faint);
+  font-size: 10px;
+  line-height: 1;
+}
+
+.pr-bubble[data-marked] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.pr-sheet-mark {
+  justify-self: end;
+  color: var(--ink);
+}
+
+/* Block, not grid: the pre's text runs must stay one inline flow. */
+.pr-term {
+  padding-block: 18px;
+  overflow-x: auto;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.75;
+  white-space: pre;
+}
+
+.pr-term-prompt,
+.pr-term-dim {
+  color: var(--faint);
+}
+
+.pr-mode-name {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.pr-mode-copy {
+  max-width: 46ch;
+  margin: 8px 0 16px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
 .pr-resume {
-  margin-block-start: 24px;
+  width: 100%;
+  padding-block-start: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px 24px;
+  border-block-start: 1px solid var(--line);
+}
+
+.pr-resume-copy {
+  min-width: 0;
   display: grid;
-  justify-items: start;
   gap: 4px;
 }
 
@@ -239,7 +379,7 @@
 }
 
 .pr-resume-status {
-  margin: 0 0 12px;
+  margin: 0;
   color: var(--muted);
   font-size: 13px;
 }
@@ -262,6 +402,7 @@
 
 .pr-library-head h2 {
   margin: 0;
+  scroll-margin-top: 96px;
   font-family: "Newsreader", Georgia, serif;
   font-size: clamp(28px, 3.2vw, 40px);
   font-weight: 500;
@@ -309,20 +450,24 @@
   gap: 4px 18px;
 }
 
-.pr-segmented {
+/* Type: a native radio group drawn as separate outlined chips; the chosen one
+   fills with ink. No enclosing track, so there is no box inside a box. */
+
+.pr-type-filter {
   min-inline-size: 0;
   margin: 0;
-  padding: 3px;
-  display: inline-flex;
-  border: 1px solid var(--line);
+  padding: 0;
+  display: flex;
+  gap: 6px;
+  border: 0;
 }
 
-.pr-segment {
+.pr-type-option {
   position: relative;
-  display: inline-flex;
+  display: flex;
 }
 
-.pr-segment input {
+.pr-type-option input {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -332,28 +477,47 @@
   cursor: pointer;
 }
 
-.pr-segment span {
-  min-height: 38px;
+.pr-type-label {
+  width: 100%;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
-  padding-inline: 13px;
+  justify-content: center;
+  gap: 7px;
+  padding-inline: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--pr-radius);
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 560;
   white-space: nowrap;
-  transition: color 150ms ease, background-color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
 }
 
-.pr-segment input:checked + span {
-  background: var(--surface-raised);
-  box-shadow: inset 0 0 0 1px var(--line);
-  color: var(--ink);
-  font-weight: 610;
+.pr-type-count {
+  color: var(--faint);
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
 }
 
-.pr-segment input:focus-visible + span {
+.pr-type-option input:checked + .pr-type-label {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.pr-type-option input:checked + .pr-type-label .pr-type-count {
+  color: inherit;
+  opacity: 0.62;
+}
+
+.pr-type-option input:focus-visible + .pr-type-label {
   outline: 2px solid var(--accent);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 
 .pr-select {
@@ -386,8 +550,8 @@
   gap: 12px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
+  border-radius: var(--pr-radius);
+  background: var(--surface);
   color: var(--ink);
   font: inherit;
   font-size: 13px;
@@ -430,6 +594,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   border: 1px solid var(--line);
+  border-radius: var(--pr-radius);
   background: var(--surface-raised);
   box-shadow: 0 12px 28px rgb(0 0 0 / 28%);
   list-style: none;
@@ -447,6 +612,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 0 10px;
+  border-radius: 4px;
   color: var(--muted);
   font-size: 13px;
   font-weight: 540;
@@ -607,15 +773,11 @@
 }
 
 .pr-entry-actions {
-  margin-block-start: 6px;
+  margin-block-start: 12px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0 22px;
-}
-
-.pr-entry-actions .text-action {
-  min-height: 44px;
+  gap: 8px;
 }
 
 .pr-resources {
@@ -628,17 +790,24 @@
   list-style: none;
 }
 
+/* Downloads read as quiet outlined controls; long file titles may wrap. */
 .pr-resource-link {
+  max-width: 100%;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--pr-radius);
   color: var(--ink);
   font-size: 13px;
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--line);
-  text-underline-offset: 5px;
+  font-weight: 580;
+  line-height: 1.3;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 
 .pr-resource-note {
@@ -681,7 +850,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0 22px;
+  gap: 8px;
 }
 
 /* Start panel */
@@ -1007,12 +1176,12 @@
 .pr-sidebar-actions {
   display: grid;
   justify-items: start;
-  gap: 4px;
+  gap: 8px;
   padding-block-start: 16px;
   border-block-start: 1px solid var(--line);
 }
 
-.pr-sidebar-actions .pr-button {
+.pr-sidebar-actions :is(.pr-button, .pr-link-button) {
   width: 100%;
 }
 
@@ -1559,15 +1728,21 @@ pre.pr-code-block code {
   overflow-wrap: anywhere;
 }
 
-.pr-file-row a {
+.pr-file-row a,
+.pr-file-view summary {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  padding-inline: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--pr-radius);
   color: var(--ink);
   font-size: 12px;
   font-weight: 600;
-  text-decoration-color: var(--line);
-  text-underline-offset: 4px;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 
 .pr-files .pr-field-hint {
@@ -1576,15 +1751,8 @@ pre.pr-code-block code {
 
 .pr-file-view summary {
   width: fit-content;
-  min-height: 36px;
-  display: flex;
-  align-items: center;
   color: var(--muted);
-  font-size: 12px;
   font-weight: 560;
-  text-decoration: underline;
-  text-decoration-color: var(--line);
-  text-underline-offset: 4px;
   cursor: pointer;
   list-style: none;
 }
@@ -1748,7 +1916,7 @@ pre.pr-code-block code {
 @media (hover: hover) and (pointer: fine) {
   .pr-button:hover:not(:disabled) {
     border-color: var(--muted);
-    background: var(--surface);
+    background: var(--surface-raised);
   }
 
   .pr-button[data-variant="primary"]:hover:not(:disabled) {
@@ -1757,19 +1925,30 @@ pre.pr-code-block code {
     opacity: 0.88;
   }
 
-  .pr-link-button:hover,
   .pr-back:hover {
     color: var(--ink);
   }
 
-  .pr-link-button:hover,
-  .pr-inline-link:hover,
+  .pr-link-button:hover:not(:disabled),
+  .pr-ws-meta .text-action:hover,
   .pr-resource-link:hover,
-  .pr-file-row a:hover {
+  .pr-type-option:hover input:not(:checked) + .pr-type-label {
+    border-color: var(--muted);
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .pr-file-row a:hover,
+  .pr-file-view summary:hover {
+    border-color: var(--muted);
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .pr-inline-link:hover {
     text-decoration-color: currentColor;
   }
 
-  .pr-segment:hover span,
   .pr-pbtn:hover {
     color: var(--ink);
   }
@@ -1785,6 +1964,11 @@ pre.pr-code-block code {
 
   .pr-select-button:hover {
     border-color: var(--muted);
+  }
+
+  /* The shared text-action nudges its arrow; contained controls stay still. */
+  .pr-ws-meta .text-action:hover .action-arrow {
+    transform: none;
   }
 }
 
@@ -1910,7 +2094,7 @@ pre.pr-code-block code {
     gap: 8px 20px;
   }
 
-  .pr-sidebar-actions .pr-button {
+  .pr-sidebar-actions :is(.pr-button, .pr-link-button) {
     width: auto;
   }
 
@@ -1924,9 +2108,13 @@ pre.pr-code-block code {
 }
 
 @media (max-width: 900px) {
-  .pr-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .pr-hero-top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .pr-hero-side {
+    max-width: 560px;
   }
 
   .pr-year {
@@ -1949,10 +2137,44 @@ pre.pr-code-block code {
   }
 }
 
-/* Narrow: a deliberate stack; type as three equal segments, Year and Round
+/* Narrow: a deliberate stack; the type options on one line, Year and Round
    as a two-column pair, count and reset on their own line. */
 
 @media (max-width: 640px) {
+  .pr-hero {
+    padding-block: 20px 36px;
+  }
+
+  .pr-hero-top {
+    gap: 16px;
+  }
+
+  .pr-hero-side {
+    gap: 16px;
+  }
+
+  .pr-modes {
+    margin-block-start: 28px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The title carries the identity here; the schematics would push both
+     browse actions past the first screen. */
+  .pr-fig {
+    display: none;
+  }
+
+  .pr-mode,
+  .pr-mode + .pr-mode {
+    padding-block: 18px 14px;
+    padding-inline: 0;
+  }
+
+  .pr-mode + .pr-mode {
+    border-block-start: 1px solid var(--line);
+    border-inline-start: 0;
+  }
+
   .pr-filters {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
@@ -1962,17 +2184,18 @@ pre.pr-code-block code {
     gap: 12px;
   }
 
+  /* Three equal chips across; the count drops under its label so the
+     longest name still fits at 390px without wrapping the row. */
   .pr-filter-type {
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .pr-filter-type .pr-segment span {
-    width: 100%;
-    min-height: 44px;
-    justify-content: center;
-    padding-inline: 6px;
+  .pr-type-label {
+    flex-direction: column;
+    gap: 3px;
+    padding: 6px;
+    font-size: 12px;
     line-height: 1.2;
     text-align: center;
     white-space: normal;

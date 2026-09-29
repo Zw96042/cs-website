@@ -202,6 +202,34 @@ test('legacy native questions retain complete shared code and mathematical basel
   assert.ok(!code(packet('2007-invitational-b').questions[1]).includes('String s1'));
 });
 
+test('2003 State Q34 keeps its source matrix aligned and the shared path function complete', () => {
+  const packet = readJSON('/practice-data/2003-state-mc.json');
+  const code = q => q.content.filter(block => block.type === 'code').map(block => block.text);
+  const source33 = code(packet.questions[32]).find(text => text.includes('bool path('));
+  const source34 = code(packet.questions[33]).find(text => text.includes('bool path('));
+  assert.equal(source33, source34, 'Shared path function must remain complete and belong to Q33 and Q34');
+  assert.ok(source34.includes('found[i]=true;'));
+  assert.ok(source34.includes('return false;'));
+  assert.ok(source34.trimEnd().endsWith('}'));
+  const matrix = code(packet.questions[33]).find(text => /^\s+\[0\]/.test(text));
+  assert.ok(matrix, 'Q34 matrix should be one aligned native code block');
+  const lines = matrix.split('\n');
+  for (let column = 0; column < 8; column++) {
+    const center = lines[0].indexOf(`[${column}]`) + 1;
+    for (const row of lines.slice(1)) assert.match(row[center], /\d/, 'Header and data cell centers must align');
+  }
+  assert.deepEqual(matrix.split('\n').slice(1).map(row => row.trim().split(/\s+/).slice(1)), [
+    ['0', '3', '0', '0', '7', '8', '0', '4'],
+    ['0', '0', '0', '2', '7', '7', '7', '0'],
+    ['0', '2', '0', '7', '3', '5', '0', '2'],
+    ['6', '0', '1', '0', '1', '0', '0', '1'],
+    ['8', '2', '2', '2', '0', '1', '0', '1'],
+    ['0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0'],
+    ['4', '7', '0', '4', '8', '8', '0', '0']
+  ]);
+});
+
 
 test('native graphs belong to their questions, retain directions and use text options', () => {
   const questions = readJSON('/practice-data/2026-invitational-a-mc.json').questions;

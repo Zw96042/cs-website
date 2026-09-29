@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import SiteApp from './SiteApp.jsx'
 import '../styles.css'
 
 export function renderApp (Inspector) {
   createRoot(document.getElementById('root')).render(
     <StrictMode>
-      <App />
+      <SiteApp />
       {Inspector ? <Inspector /> : null}
     </StrictMode>
   )

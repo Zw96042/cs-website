@@ -187,6 +187,42 @@ a {
   white-space: nowrap;
 }
 
+/* Header pages are contained tabs: a 44px target around a 34px surface.
+   The current page is filled, so no underline is needed. */
+.site-nav .nav-link {
+  position: relative;
+  isolation: isolate;
+  padding-inline: 14px;
+  font-weight: 560;
+}
+
+.site-nav .nav-link::before {
+  position: absolute;
+  inset: 5px 0;
+  z-index: -1;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  content: "";
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.site-nav .nav-link[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 610;
+}
+
+.site-nav .nav-link[aria-current="page"]::before {
+  border-color: var(--line);
+  background: var(--surface-raised);
+}
+
+.site-nav .nav-link:focus-visible {
+  outline-offset: -1px;
+  border-radius: 6px;
+}
+
 .section-nav {
   display: flex;
   align-items: center;
@@ -221,13 +257,6 @@ a {
   gap: 7px;
   color: var(--ink);
   font-weight: 610;
-}
-
-.nav-current-page {
-  text-decoration-color: var(--accent);
-  text-decoration-line: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
 }
 
 .nav-back-link {
@@ -1387,6 +1416,10 @@ summary:focus-visible {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .site-nav .nav-link:not([aria-current="page"]):hover::before {
+    background: var(--surface);
+  }
+
   .nav-link:hover,
   .nav-page-link:hover,
   .nav-back-link:hover,
@@ -1606,6 +1639,14 @@ summary:focus-visible {
 @media (max-width: 420px) {
   .header-inner {
     gap: 12px;
+  }
+
+  .site-nav {
+    gap: 2px;
+  }
+
+  .site-nav .nav-link {
+    padding-inline: 10px;
   }
 
   .brand-name-full {

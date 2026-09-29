@@ -1,3 +1,4 @@
+import { getNavigationTarget } from '../lib/navigation.js';
 import { useEffect, useId, useRef, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -11,7 +12,8 @@ import {
   compareOutputs,
   hasExpired,
   saveProgress,
-  scoreAnswers
+  scoreAnswers,
+  trimCodePadding
 } from '../lib/practice.js';
 
 const MANIFEST_URL = '/practice-data/manifest.json';
@@ -229,7 +231,7 @@ function solutionFileName (problem) {
   return `${base}.java`;
 }
 
-export default function PracticePage () {
+export default function PracticePage ({ embedded = false, onReady }) {
   const [progress, setProgress] = useState(readProgress);
   const [saveFailed, setSaveFailed] = useState(false);
   const [manifest, setManifest] = useState({ status: 'loading', tests: [], resources: [], error: '' });
@@ -237,6 +239,9 @@ export default function PracticePage () {
   const [selectedId, setSelectedId] = useState(readTestParam);
   const [testLoad, setTestLoad] = useState({ id: null, status: 'idle', data: null, error: '' });
   const [testAttempt, setTestAttempt] = useState(0);
+  const [archiveMode, setArchiveMode] = useState('all');
+  const [archiveYear, setArchiveYear] = useState('all');
+  const [archiveRound, setArchiveRound] = useState('all');
   const progressRef = useRef(progress);
   const testCache = useRef(new Map());
   const navigated = useRef(false);
@@ -257,6 +262,7 @@ export default function PracticePage () {
     window.addEventListener('pagehide', flush);
     window.addEventListener('popstate', syncFromUrl);
     return () => {
+      flush();
       window.removeEventListener('pagehide', flush);
       window.removeEventListener('popstate', syncFromUrl);
     };
@@ -319,6 +325,14 @@ export default function PracticePage () {
       : base;
   }, [selectedTest]);
 
+  // Restore cross-page history only after the archive or test has its full layout.
+  const contentReady = manifest.status === 'error' || (manifest.status === 'ready' && (
+    !selectedId || !selectedTest || (testLoad.id === selectedId && ['ready', 'error'].includes(testLoad.status))
+  ));
+  useEffect(() => {
+    if (contentReady) onReady?.();
+  }, [contentReady, onReady, selectedId]);
+
   const navigate = (testId) => {
     const url = new URL(window.location.href);
     if (testId) url.searchParams.set('test', testId);
@@ -327,7 +341,7 @@ export default function PracticePage () {
     window.history.pushState({}, '', url);
     navigated.current = true;
     setSelectedId(testId);
-    window.scrollTo(0, 0);
+    window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
   };
 
   const updateSession = (testId, change) => setProgress((current) => {
@@ -340,6 +354,16 @@ export default function PracticePage () {
     else delete sessions[testId];
     return { ...current, sessions };
   });
+
+  // The hero's mode links filter the archive, then move focus to it.
+  const browseArchive = (mode) => {
+    setArchiveMode(mode);
+    setArchiveYear('all');
+    setArchiveRound('all');
+    const heading = document.getElementById('library-heading');
+    heading?.focus({ preventScroll: true });
+    heading?.scrollIntoView({ block: 'start' });
+  };
 
   const setDraft = (problemId, value) => setProgress((current) => {
     const drafts = { ...current.drafts };
@@ -356,11 +380,18 @@ export default function PracticePage () {
           tests={manifest.tests}
           progress={progress}
           onOpen={navigate}
+          onBrowse={browseArchive}
           autoFocus={navigated.current}
         />
         <Library
           manifest={manifest}
           progress={progress}
+          mode={archiveMode}
+          onModeChange={setArchiveMode}
+          year={archiveYear}
+          onYearChange={setArchiveYear}
+          round={archiveRound}
+          onRoundChange={setArchiveRound}
           onOpen={navigate}
           onRetry={() => setManifestAttempt((attempt) => attempt + 1)}
         />
@@ -421,22 +452,27 @@ export default function PracticePage () {
       : <WrittenWorkspace {...shared} key={test.id} />;
   }
 
+  const main = (
+    <main className='practice-main' id='practice-content' tabIndex={-1}>
+      {saveFailed
+        ? (
+          <p className='pr-wide pr-save-warning' role='status'>
+            Progress can’t be saved in this browser right now; storage may be full or turned off. Keep this tab open to continue where you are.
+          </p>
+          )
+        : null}
+      {content}
+      {!embedded && <><Analytics /><SpeedInsights /></>}
+    </main>
+  );
+
+  if (embedded) return main;
+
   return (
     <div className='site-page practice-page'>
       <a className='skip-link' href='#practice-content'>Skip to practice</a>
       <Header currentPage='practice' />
-      <main className='practice-main' id='practice-content'>
-        {saveFailed
-          ? (
-            <p className='pr-wide pr-save-warning' role='status'>
-              Progress can’t be saved in this browser right now; storage may be full or turned off. Keep this tab open to continue where you are.
-            </p>
-            )
-          : null}
-        {content}
-        <Analytics />
-        <SpeedInsights />
-      </main>
+      {main}
       <Footer />
     </div>
   );
@@ -448,6 +484,7 @@ function BackLink ({ onBack }) {
       className='pr-back'
       href={window.location.pathname}
       onClick={(event) => {
+        if (!getNavigationTarget(event, event.currentTarget, window.location.href)) return;
         event.preventDefault();
         onBack();
       }}
@@ -629,8 +666,8 @@ function ContentBlocks ({ blocks, inline = false }) {
     if (block.type === 'diagram') return <PracticeDiagram block={block} inline={inline} key={index} />;
     if (block.type === 'code') {
       return inline
-        ? <code className='pr-code-block' key={index}>{String(block.text ?? '')}</code>
-        : <pre className='pr-code-block' key={index}><code>{String(block.text ?? '')}</code></pre>;
+        ? <code className='pr-code-block' key={index}>{trimCodePadding(block.text)}</code>
+        : <pre className='pr-code-block' key={index}><code>{trimCodePadding(block.text)}</code></pre>;
     }
     if (block.type === 'figure') {
       if (!block.url) return null;
@@ -658,7 +695,67 @@ function Prompt ({ item }) {
   );
 }
 
-function PracticeHero ({ tests, progress, onOpen, autoFocus }) {
+// Schematic figures for the two modes. They illustrate the workflow, not real
+// questions, so they're hidden from assistive tech; the copy carries the meaning.
+const SHEET_ROWS = [
+  { marked: 1, mark: '✓' },
+  { marked: 3, mark: '✓' },
+  { marked: 0, mark: '×' },
+  { marked: -1, mark: '' }
+];
+
+function AnswerSheetFigure () {
+  return (
+    <div className='pr-fig pr-fig-sheet' aria-hidden='true'>
+      <div className='pr-fig-bar'>
+        <span>answer sheet</span>
+        <span className='pr-fig-clock'>45:00</span>
+      </div>
+      <ol className='pr-sheet'>
+        {SHEET_ROWS.map((row, index) => (
+          <li key={index}>
+            <span className='pr-sheet-num'>{index + 1}</span>
+            {['A', 'B', 'C', 'D', 'E'].map((letter, choice) => (
+              <span className='pr-bubble' data-marked={choice === row.marked ? '' : undefined} key={letter}>{letter}</span>
+            ))}
+            <span className='pr-sheet-mark'>{row.mark}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function JudgeRunFigure () {
+  return (
+    <div className='pr-fig pr-fig-term' aria-hidden='true'>
+      <div className='pr-fig-bar'>
+        <span>your terminal</span>
+        <span>Java</span>
+      </div>
+      <pre className='pr-term'>
+        <span className='pr-term-prompt'>$ </span>javac Solution.java{'\n'}
+        <span className='pr-term-prompt'>$ </span>java Solution{'\n'}
+        <span className='pr-term-dim'>paste output → compare with judge</span>
+      </pre>
+    </div>
+  );
+}
+
+const HERO_MODES = [
+  {
+    mode: 'mc',
+    Figure: AnswerSheetFigure,
+    description: 'Practice checks each answer with the key’s explanation. Exam runs the full test on a 45-minute clock.'
+  },
+  {
+    mode: 'frq',
+    Figure: JudgeRunFigure,
+    description: 'Write Java here, run it on your own machine, then paste its output to compare with the judge’s.'
+  }
+];
+
+function PracticeHero ({ tests, progress, onOpen, onBrowse, autoFocus }) {
   const headingRef = useRef(null);
   const resumeTest = findResume(tests, progress);
   const resumeSummary = resumeTest ? summarizeTest(resumeTest, progress, Date.now()) : null;
@@ -669,62 +766,75 @@ function PracticeHero ({ tests, progress, onOpen, autoFocus }) {
 
   return (
     <section className='pr-hero' aria-labelledby='practice-heading'>
-      <div className='section-inner pr-hero-inner'>
-        <div className='pr-hero-copy'>
+      <div className='section-inner'>
+        <div className='pr-hero-top'>
           <h1 className='section-heading pr-hero-title' id='practice-heading' ref={headingRef} tabIndex={-1}>
-            Practice.
+            Practice
           </h1>
-          <p className='section-intro'>
-            Past UIL contests, set as readable questions. Sit the written test against a 45-minute clock or check each answer as you go, then work the programming problems against the judges’ data.
-          </p>
+
+          <div className='pr-hero-side'>
+            <p className='pr-hero-intro'>
+              Past UIL computer science contests, set as readable questions. Your answers and code stay saved in this browser.
+            </p>
+
+            {resumeTest
+              ? (
+                <div className='pr-resume'>
+                  <div className='pr-resume-copy'>
+                    <p className='pr-resume-label'>Pick up where you left off</p>
+                    <p className='pr-resume-title'>
+                      {resumeTest.title} · {MODE_LABELS[resumeTest.mode]}
+                    </p>
+                    <p className='pr-resume-status'>{resumeSummary.label}</p>
+                  </div>
+                  <a
+                    className='pr-button'
+                    data-variant='primary'
+                    href={`?test=${encodeURIComponent(resumeTest.id)}`}
+                    onClick={(event) => {
+                      if (!getNavigationTarget(event, event.currentTarget, window.location.href)) return;
+                      event.preventDefault();
+                      onOpen(resumeTest.id);
+                    }}
+                  >
+                    Resume <span className='action-arrow' aria-hidden='true'>→</span>
+                  </a>
+                </div>
+                )
+              : (
+                <button className='pr-button' data-variant='primary' type='button' onClick={() => onBrowse('all')}>
+                  {tests.length ? `Browse all ${plural(tests.length, 'test')}` : 'Browse the archive'}
+                  <span className='action-arrow' aria-hidden='true'>↓</span>
+                </button>
+                )}
+          </div>
         </div>
 
-        <div className='pr-hero-aside'>
-          <dl className='pr-modes'>
-            <div>
-              <dt>Multiple choice</dt>
-              <dd>Practice with instant checks and answer-key explanations, or take a timed exam scored when you finish.</dd>
-            </div>
-            <div>
-              <dt>Programming FRQ</dt>
-              <dd>Write your solution in Java, run it on your own machine, and compare what it prints with the official judge output.</dd>
-            </div>
-          </dl>
-
-          {resumeTest
-            ? (
-              <div className='pr-resume'>
-                <p className='pr-resume-label'>Pick up where you left off</p>
-                <p className='pr-resume-title'>
-                  {resumeTest.title} · {MODE_LABELS[resumeTest.mode]}
-                </p>
-                <p className='pr-resume-status'>{resumeSummary.label}</p>
-                <a
-                  className='pr-button'
-                  data-variant='primary'
-                  href={`?test=${encodeURIComponent(resumeTest.id)}`}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onOpen(resumeTest.id);
-                  }}
-                >
-                  Resume <span className='action-arrow' aria-hidden='true'>→</span>
-                </a>
-              </div>
-              )
-            : (
-              <p className='pr-hero-note'>Answers and Java drafts are kept in this browser, so you can leave and come back.</p>
-              )}
-        </div>
+        <ul className='pr-modes'>
+          {HERO_MODES.map(({ mode, Figure, description }) => {
+            const count = tests.filter((test) => test.mode === mode).length;
+            return (
+              <li className='pr-mode' key={mode}>
+                <Figure />
+                <div className='pr-mode-body'>
+                  <h2 className='pr-mode-name'>{MODE_LABELS[mode]}</h2>
+                  <p className='pr-mode-copy'>{description}</p>
+                  <button className='pr-button' type='button' onClick={() => onBrowse(mode)}>
+                    {count ? `Browse ${plural(count, 'test')}` : 'Browse the archive'}
+                    <span className='sr-only'> of {MODE_LABELS[mode]}</span>
+                    <span className='action-arrow' aria-hidden='true'>↓</span>
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
 }
 
-function Library ({ manifest, progress, onOpen, onRetry }) {
-  const [mode, setMode] = useState('all');
-  const [year, setYear] = useState('all');
-  const [round, setRound] = useState('all');
+function Library ({ manifest, progress, mode, onModeChange: setMode, year, onYearChange: setYear, round, onRoundChange: setRound, onOpen, onRetry }) {
   const tests = manifest.tests;
   const resources = manifest.resources || [];
   const now = Date.now();
@@ -735,7 +845,9 @@ function Library ({ manifest, progress, onOpen, onRetry }) {
   const matchesPlace = (item) =>
     (year === 'all' || String(item.year) === year) &&
     (round === 'all' || item.contest === round);
-  const filtered = tests.filter((test) => (mode === 'all' || test.mode === mode) && matchesPlace(test));
+  // Type counts follow the Year/Round choice, so each option says what it would show.
+  const placeTests = tests.filter(matchesPlace);
+  const filtered = placeTests.filter((test) => mode === 'all' || test.mode === mode);
   // Supplementary files are all programming material.
   const filteredResources = resources.filter(resource => (mode === 'all' || mode === (resource.mode || 'frq')) && matchesPlace(resource));
   const filtersActive = mode !== 'all' || year !== 'all' || round !== 'all';
@@ -787,10 +899,10 @@ function Library ({ manifest, progress, onOpen, onRetry }) {
     body = (
       <>
         <div className='pr-filters'>
-          <fieldset className='pr-segmented pr-filter-type'>
+          <fieldset className='pr-type-filter pr-filter-type'>
             <legend className='sr-only'>Test type</legend>
             {[['all', 'All types'], ['mc', MODE_LABELS.mc], ['frq', MODE_LABELS.frq]].map(([value, label]) => (
-              <label className='pr-segment' key={value}>
+              <label className='pr-type-option' key={value}>
                 <input
                   type='radio'
                   name='practice-mode-filter'
@@ -798,7 +910,14 @@ function Library ({ manifest, progress, onOpen, onRetry }) {
                   checked={mode === value}
                   onChange={() => setMode(value)}
                 />
-                <span>{label}</span>
+                <span className='pr-type-label'>
+                  {label}
+                  <span className='pr-type-count'>
+                    <span className='sr-only'>, </span>
+                    {value === 'all' ? placeTests.length : placeTests.filter((test) => test.mode === value).length}
+                    <span className='sr-only'> tests</span>
+                  </span>
+                </span>
               </label>
             ))}
           </fieldset>
@@ -882,7 +1001,7 @@ function Library ({ manifest, progress, onOpen, onRetry }) {
     <section className='pr-library' aria-labelledby='library-heading'>
       <div className='section-inner'>
         <header className='pr-library-head'>
-          <h2 id='library-heading'>Contest archive</h2>
+          <h2 id='library-heading' tabIndex={-1}>Contest archive</h2>
           <p>Latest contests first. Original packets are available as PDF downloads.</p>
         </header>
         {body}
@@ -901,9 +1020,10 @@ function TestEntry ({ test, summary, onOpen }) {
       <p className='pr-entry-status'>{summary.label}</p>
       <div className='pr-entry-actions'>
         <a
-          className='text-action'
+          className='pr-button'
           href={`?test=${encodeURIComponent(test.id)}`}
           onClick={(event) => {
+            if (!getNavigationTarget(event, event.currentTarget, window.location.href)) return;
             event.preventDefault();
             onOpen(test.id);
           }}
@@ -913,7 +1033,7 @@ function TestEntry ({ test, summary, onOpen }) {
         </a>
         {test.pdfUrl
           ? (
-            <a className='text-action secondary-action' href={test.pdfUrl} download>
+            <a className='pr-link-button' href={test.pdfUrl} download>
               PDF<span className='sr-only'> of {name} (download)</span>
             </a>
             )

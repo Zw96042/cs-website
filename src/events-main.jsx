@@ -1,10 +1,3 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import EventsPage from './components/EventsPage.jsx';
-import '../styles.css';
+import { renderApp } from './renderApp.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <EventsPage />
-  </StrictMode>
-);
+renderApp();

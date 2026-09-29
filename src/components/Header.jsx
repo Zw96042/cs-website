@@ -20,7 +20,7 @@ export default function Header ({ currentPage = 'home' }) {
         <nav className='site-nav' aria-label='Main navigation'>
           {pageLinks.map((link) => (
             <a
-              className={link.id === currentPage ? 'nav-current-page' : 'nav-link'}
+              className='nav-link'
               href={link.href}
               aria-current={link.id === currentPage ? 'page' : undefined}
               key={link.id}
