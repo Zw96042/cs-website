@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { formatEventDate, getScheduledEvents, getUnscheduledEvents } from '../lib/events.js';
+import { formatEventDate, getScheduledEvents } from '../lib/events.js';
 import { getPracticeTypeHref } from '../lib/navigation.js';
 
 // Homepage section ids from the components rendered by App.jsx.
@@ -55,7 +55,6 @@ function PanelLink ({ href, children }) {
 
 function EventsPanel () {
   const upcoming = getScheduledEvents().slice(0, 3);
-  const hasUnscheduled = getUnscheduledEvents().length > 0;
 
   return (
     <>
@@ -83,7 +82,6 @@ function EventsPanel () {
         <PanelLink href='/events/'>
           All events <span className='action-arrow' aria-hidden='true'>→</span>
         </PanelLink>
-        {hasUnscheduled ? <PanelLink href='/events/#unscheduled-events-heading'>Dates in progress</PanelLink> : null}
       </div>
     </>
   );
@@ -91,6 +89,26 @@ function EventsPanel () {
 
 export default function Header ({ currentPage = 'home' }) {
   const [openMenu, setOpenMenu] = useState('');
+  const navList = useRef(null);
+  const [selection, setSelection] = useState(null);
+
+  // Share one highlight across links so route changes slide it to the new page.
+  // Remeasure when fonts or the viewport change the navigation's dimensions.
+  useLayoutEffect(() => {
+    const list = navList.current;
+    const updateSelection = () => {
+      const link = list.querySelector('[aria-current="page"]');
+      if (link) setSelection({ left: link.offsetLeft, width: link.offsetWidth });
+    };
+    updateSelection();
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(updateSelection);
+    observer?.observe(list);
+    window.addEventListener('resize', updateSelection);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', updateSelection);
+    };
+  }, [currentPage]);
 
   // The header stays mounted across routes, so close any panel after navigation.
   useEffect(() => { setOpenMenu(''); }, [currentPage]);
@@ -116,7 +134,14 @@ export default function Header ({ currentPage = 'home' }) {
           onValueChange={setOpenMenu}
           delayDuration={120}
         >
-          <NavigationMenu.List className='site-nav-list'>
+          <NavigationMenu.List className='site-nav-list' ref={navList}>
+            {selection && (
+              <li
+                className='site-nav-selection'
+                aria-hidden='true'
+                style={{ width: selection.width, transform: `translateX(${selection.left}px)` }}
+              />
+            )}
             <MenuItem {...item('home')} href='/' label='Home' panelClassName='site-nav-panel-home'>
               <ul className='site-nav-sections'>
                 {homeSections.map((section) => (
