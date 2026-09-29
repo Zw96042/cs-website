@@ -3,11 +3,10 @@ import { createRoot } from 'react-dom/client'
 import SiteApp from './SiteApp.jsx'
 import '../styles.css'
 
-export function renderApp (Inspector) {
+export function renderApp () {
   createRoot(document.getElementById('root')).render(
     <StrictMode>
       <SiteApp />
-      {Inspector ? <Inspector /> : null}
     </StrictMode>
   )
 }

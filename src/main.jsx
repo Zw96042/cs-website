@@ -1,16 +1,3 @@
-async function startApp () {
-  let Inspector = null
+import { renderApp } from './renderApp.jsx'
 
-  if (import.meta.env.DEV) {
-    const { getSharedEngine, Lapse } = await import('@aiforui/lapse')
-    const engine = getSharedEngine()
-    engine.install()
-    engine.setCaptureMode('replay')
-    Inspector = Lapse
-  }
-
-  const { renderApp } = await import('./renderApp.jsx')
-  renderApp(Inspector)
-}
-
-startApp()
+renderApp()
