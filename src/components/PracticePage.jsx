@@ -821,7 +821,7 @@ function PracticeHero ({ tests, progress, onOpen, onBrowse, autoFocus }) {
 
           <div className='pr-hero-side'>
             <p className='pr-hero-intro'>
-              Past UIL computer science contests, set as readable questions. Your answers and code stay saved in this browser.
+              Past UIL computer science contests. Your answers and code stay saved in this browser.
             </p>
 
             {resumeTest
@@ -1037,7 +1037,6 @@ function Library ({ manifest, progress, mode, onModeChange: setMode, year, onYea
       <div className='section-inner'>
         <header className='pr-library-head'>
           <h2 id='library-heading' tabIndex={-1}>Contest archive</h2>
-          <p>Latest contests first. Original packets are available as PDFs.</p>
         </header>
         {body}
       </div>

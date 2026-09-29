@@ -30,7 +30,6 @@ export default function EventsPage ({ embedded = false }) {
         <div className='section-inner events-page-layout'>
           <header className='events-page-heading'>
             <div>
-              <p className='events-page-kicker'>Fall 2026 schedule</p>
               <h1 className='section-heading' id='events-heading'>Events.</h1>
             </div>
             <p className='section-intro'>
