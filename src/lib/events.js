@@ -37,7 +37,9 @@ export const events = [
     date: '2026-10-05',
     endDate: '2026-10-11',
     title: 'Code Bash',
-    description: 'Competitive programming competition running October 5–11.',
+    format: 'Online',
+    description:
+      'This is a FREE Online Programming Contest for High School teams. The Official UIL Computer Science State Contest Directors for Texas put this contest together each year.',
     signupNote: 'Email the officers for signup.'
   },
   {
@@ -45,8 +47,18 @@ export const events = [
     track: 'competitive-programming',
     date: '2026-10-17',
     title: 'Seven Lakes',
-    description: 'Competitive programming competition on October 17.',
+    format: 'Online',
+    description:
+      'A kickoff contest for high school teams, now in its 22nd year. Teams take a written test by apluscompsci, then a 2 hour, 18 question programming round written by the Seven Lakes CS Club.',
     signupNote: 'Email the officers for signup.'
+  },
+  {
+    type: 'Competitive Programming',
+    track: 'competitive-programming',
+    date: '2026-11-21',
+    title: 'Clements',
+    format: 'Online',
+    description: 'A virtual programming-only competition on Hacker Rank (more details to follow).'
   }
 ];
 
@@ -77,7 +89,7 @@ function getClubDateKey (date) {
 export function formatEventDate (event) {
   if (event.date === null) {
     return {
-      dayLabel: 'Date to come',
+      dayLabel: null,
       endDateLabel: null,
       monthLabel: null,
       startDateLabel: 'TBD'
@@ -117,6 +129,11 @@ export function getScheduledEvents (now = new Date()) {
   return events
     .filter((event) => event.date !== null && (event.endDate ?? event.date) >= today)
     .sort((first, second) => first.date.localeCompare(second.date));
+}
+
+/** Returns upcoming competitive programming events for the home page Contests section. */
+export function getUpcomingContests (now = new Date()) {
+  return getScheduledEvents(now).filter((event) => event.track === 'competitive-programming');
 }
 
 export function getEventPreview (now = new Date()) {

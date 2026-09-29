@@ -55,7 +55,7 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
             </div>
             )
           : <span className='event-date-tbd'>{dateDisplay.startDateLabel}</span>}
-        <span className='event-day-label'>{dateDisplay.dayLabel}</span>
+        {dateDisplay.dayLabel ? <span className='event-day-label'>{dateDisplay.dayLabel}</span> : null}
       </div>
       <div className='event-details'>
         <p className='event-type' data-event-track={event.track}>{event.type}</p>
@@ -63,7 +63,7 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
         {event.credential ? <p className='event-credential'>{event.credential}</p> : null}
         {event.location
           ? (
-            <p className='event-location'>
+            <p className='event-meta'>
               <span>Location</span>
               <strong>{event.location}</strong>
             </p>
@@ -72,9 +72,9 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
         <p className='event-description'>{event.description}</p>
         {event.signupNote
           ? (
-            <p className='event-signup-note'>
+            <p className='event-meta'>
               <span>Signup</span>
-              {event.signupNote}
+              <strong>{event.signupNote}</strong>
             </p>
             )
           : null}

@@ -25,7 +25,8 @@ test('keeps a multi-day competition upcoming through its final day', () => {
 
   assert.deepEqual(eventTitles, [
     'Code Bash',
-    'Seven Lakes'
+    'Seven Lakes',
+    'Clements'
   ]);
 });
 
@@ -43,7 +44,7 @@ test('derives the display labels for a multi-day event from its canonical dates'
 test('drops a multi-day competition on the next club calendar day', () => {
   const eventTitles = getScheduledEvents(new Date('2026-10-12T05:00:00Z')).map(({ title }) => title);
 
-  assert.deepEqual(eventTitles, ['Seven Lakes']);
+  assert.deepEqual(eventTitles, ['Seven Lakes', 'Clements']);
 });
 
 test('keeps unscheduled events separate from the dated schedule', () => {
@@ -53,7 +54,7 @@ test('keeps unscheduled events separate from the dated schedule', () => {
 });
 
 test('returns no homepage events after every scheduled event has passed', () => {
-  const eventTitles = getEventPreview(new Date('2026-10-18T12:00:00Z')).map(({ title }) => title);
+  const eventTitles = getEventPreview(new Date('2026-11-22T12:00:00Z')).map(({ title }) => title);
 
   assert.deepEqual(eventTitles, []);
 });

@@ -1,8 +1,10 @@
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
-import { contests } from '../lib/contests.js';
+import { formatEventDate, getUpcomingContests } from '../lib/events.js';
 
 export default function Contests () {
+  const contests = getUpcomingContests();
+
+  if (contests.length === 0) return null;
+
   return (
     <div className='section-inner contests-page-layout'>
       <header className='contests-page-heading'>
@@ -12,28 +14,37 @@ export default function Contests () {
       </header>
 
       <div className='contest-ledger'>
-        {contests.map((contest) => (
-          <article
-            className='contest-ledger-item'
-            key={`${contest.dateLabel}-${contest.title}`}
-          >
-            <time className='contest-date' dateTime={contest.date ?? undefined}>
-              {contest.dateLabel}
-            </time>
-            <div className='contest-details'>
-              <h2>{contest.title}</h2>
-              <p className='contest-type'>{contest.type}</p>
-              <p className='contest-description'>
-                {contest.location && (
-                  <strong className='contest-location'>
-                    {contest.location}
-                  </strong>
-                )}
-                {contest.description}
-              </p>
-            </div>
-          </article>
-        ))}
+        {contests.map((contest) => {
+          const { dayLabel, startDateLabel, endDateLabel } = formatEventDate(contest);
+
+          return (
+            <article
+              className='contest-ledger-item'
+              key={`${contest.date}-${contest.title}`}
+            >
+              <div className='contest-date'>
+                <div className='event-date-range'>
+                  <time dateTime={contest.date}>{startDateLabel}</time>
+                  {contest.endDate && (
+                    <>
+                      <span aria-hidden='true'>–</span>
+                      <time dateTime={contest.endDate}>
+                        <span className='sr-only'>through </span>
+                        {endDateLabel}
+                      </time>
+                    </>
+                  )}
+                </div>
+                <span className='event-day-label'>{dayLabel}</span>
+              </div>
+              <div className='contest-details'>
+                <h2>{contest.title}</h2>
+                <p className='contest-type'>{contest.format ?? contest.type}</p>
+                <p className='contest-description'>{contest.description}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ export default function EventsPage ({ embedded = false }) {
               <h1 className='section-heading' id='events-heading'>Events.</h1>
             </div>
             <p className='section-intro'>
-              Guest lectures, build sessions, and competitions for Westlake students. Scheduled events stay in date order; talks without a final date appear separately.
+              Guest lectures, build sessions, and competitions.
             </p>
           </header>
 

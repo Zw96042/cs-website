@@ -1054,43 +1054,25 @@ summary:focus-visible {
   text-wrap: pretty;
 }
 
-.event-location {
+/* Labeled detail lines under an event (location, signup). */
+.event-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 12px;
+  align-items: baseline;
+  gap: 2px 8px;
   margin: 14px 0 0;
   font-size: 13px;
   line-height: 1.5;
 }
 
-.event-location span {
+.event-meta span {
   color: var(--accent);
-  font-size: 11px;
   font-weight: 650;
 }
 
-.event-location strong {
+.event-meta strong {
   color: var(--ink);
   font-weight: 650;
-}
-
-.event-signup-note {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px 12px;
-  margin: 15px 0 0;
-  color: var(--ink);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.event-signup-note span {
-  color: var(--accent);
-  font-family: "Geist Mono", monospace;
-  font-size: 10px;
-  font-weight: 650;
-  letter-spacing: 0.075em;
-  text-transform: uppercase;
 }
 
 .event-preview-layout {
