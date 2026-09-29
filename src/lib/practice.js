@@ -7,6 +7,57 @@ export function trimCodePadding (value) {
     .replace(/^(?:[\t ]*\n)+|(?:\n[\t ]*)+$/g, '');
 }
 
+function pureCodeParagraphText (block) {
+  if (block?.type !== 'paragraph' || !Array.isArray(block.runs)) return null;
+  let text = '';
+  for (const run of block.runs) {
+    if (run?.runs || run?.style === 'overline' || ['sub', 'sup', 'bold', 'italic'].includes(run?.style)) return null;
+    const value = String(run?.text ?? '');
+    if (/\S/.test(value) && run?.style !== 'code') return null;
+    text += value;
+  }
+  return text;
+}
+
+// Join adjacent code fragments in answer choices when a PDF split one output
+// across a styled paragraph and a code block. Keep every other block intact.
+export function coalesceChoiceCodeBlocks (blocks) {
+  const result = [];
+  for (let index = 0; index < (Array.isArray(blocks) ? blocks.length : 0);) {
+    const firstText = pureCodeParagraphText(blocks[index]);
+    if (firstText === null && blocks[index]?.type !== 'code') {
+      result.push(blocks[index++]);
+      continue;
+    }
+
+    const fragments = [];
+    let hasParagraph = false;
+    let cursor = index;
+    while (cursor < blocks.length) {
+      const block = blocks[cursor];
+      const paragraphText = pureCodeParagraphText(block);
+      if (paragraphText !== null) {
+        fragments.push(paragraphText);
+        hasParagraph = true;
+      } else if (block?.type === 'code') fragments.push(String(block.text ?? ''));
+      else break;
+      cursor++;
+    }
+
+    if (fragments.length > 1 && hasParagraph) {
+      const text = fragments.reduce((joined, fragment) => {
+        if (!joined) return fragment;
+        return `${joined}${joined.endsWith('\n') || fragment.startsWith('\n') ? '' : '\n'}${fragment}`;
+      }, '');
+      result.push({ type: 'code', text });
+      index = cursor;
+    } else {
+      result.push(blocks[index++]);
+    }
+  }
+  return result;
+}
+
 export function normalizeAnswer (value) {
   return String(value ?? '').normalize('NFKC').replace(/[−–]/g, '-').trim().replace(/\s+/g, ' ').toUpperCase();
 }

@@ -197,6 +197,25 @@ test('2022 District keeps the preceding main method with Q11 instead of Q10 opti
 });
 
 
+test('2026 Invitational B keeps the next-page code with its named question', () => {
+  const packet = readJSON('/practice-data/2026-invitational-b-mc.json');
+  const code = n => packet.questions[n - 1].content.filter(block => block.type === 'code').map(block => block.text).join('\n');
+  assert.ok(code(11).includes('/* Code for Q11 */'));
+  assert.ok(code(11).includes('sc.useRadix(8);'));
+  assert.ok(code(11).includes('else last = sc.nextInt(10);'));
+  assert.ok(code(11).endsWith('sc.close();'));
+  assert.equal(packet.questions[11].content.filter(block => block.type === 'code').length, 1);
+  assert.ok(code(12).startsWith('int n = 508;'));
+  assert.ok(code(12).includes('out.println(sum + "|" + prod);'));
+  assert.ok(!code(12).includes('boolean p'));
+  assert.ok(!code(12).includes('ArrayList'));
+  assert.ok(!packet.questions[11].text.includes('Code for Q11'));
+  assert.ok(code(13).includes('boolean p = false;'));
+  assert.ok(!code(13).includes('ArrayList'));
+  assert.ok(code(15).includes('a.subList(1, 4)'));
+});
+
+
 test('older contests preserve actual packet sizes, source blanks and Java file names', () => {
   assert.equal(readJSON('/practice-data/2003-regional-frq.json').questions.length, 10);
   assert.equal(readJSON('/practice-data/2007-district-a-frq.json').questions.length, 6);

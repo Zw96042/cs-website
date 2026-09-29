@@ -530,6 +530,7 @@ def import_written(name, data, year, codes):
             explanations[number] = clean_text(exp[match.end():end])
         native_cache = {pno: page_lines(doc[pno]) for pno in range(previous_key + 1, key_page)}
         full_context = {}
+        context_ranges = {}
         shared_diagrams = {}
         diagram_regions = {}
         diagram_directives = set()
@@ -538,10 +539,11 @@ def import_written(name, data, year, codes):
         for pno, items in native_cache.items():
             for item in items:
                 match = re.search(r'questions?\s+((?:\d{1,2}|,|\s|and|through|to|[-–])+)', item['raw'], re.I)
-                if not match or item['rect'].x0 >= 300: continue
-                nums = [int(n) for n in re.findall(r'\d{1,2}', match[1])]
-                if len(nums) < 2 or any(n < 1 or n > 40 for n in nums): continue
-                if re.search(r'through|to|[-–]', match[1]): nums = list(range(min(nums), max(nums) + 1))
+                named_code = re.search(r'\bcode\s+for\s+Q(\d{1,2}(?:_\d{1,2})*)\b', item['raw'], re.I)
+                if item['rect'].x0 >= 300 or not (match or named_code): continue
+                nums = [int(n) for n in re.findall(r'\d{1,2}', (named_code or match)[1])]
+                if (not named_code and len(nums) < 2) or any(n < 1 or n > 40 for n in nums): continue
+                if match and not named_code and re.search(r'through|to|[-–]', match[1]): nums = list(range(min(nums), max(nums) + 1))
                 first = next(((hp, hy) for hn, hp, hy in headers if hp > pno or (hp == pno and hy > item['rect'].y0)), None)
                 if not first: continue
                 if re.search(r'graph|tree|circuit|diagram|table', item['raw'], re.I) and first[0] == pno:
@@ -556,7 +558,9 @@ def import_written(name, data, year, codes):
                     start = item['rect'].y0 if cp == pno else 40
                     end = first[1] if cp == first[0] else 735
                     code = [line for line in native_cache[cp] if line['mono'] and start <= line['rect'].y0 < end]
-                    if code: shared.append((cp, code))
+                    if code:
+                        shared.append((cp, code))
+                        context_ranges.setdefault(cp, []).append((start, end, nums))
                 for n in nums: full_context.setdefault(n, []).extend(shared)
         code_cells = {pno: native.shared_code_cells(doc[pno], items) for pno, items in native_cache.items()}
         preceding_context = {pno: preceding_code_contexts(doc[pno], items,
@@ -578,7 +582,19 @@ def import_written(name, data, year, codes):
             if following and following[1] != page_no:
                 for n in range(page_no + 1, following[1] + 1):
                     end_y = following[2] - 1 if n == following[1] else 735
-                    extra = clean_text(doc[n].get_text(clip=pdf.Rect(25, 38, doc[n].rect.width - 25, end_y)))
+                    # A page may begin with code explicitly belonging to an
+                    # earlier question (e.g. "Code for Q11"). It is not a
+                    # continuation of the last question on the previous page.
+                    excluded_ranges = [(start, end) for start, end, owners in context_ranges.get(n, [])
+                                       if number not in owners]
+                    if excluded_ranges:
+                        extra = clean_text('\n'.join(item['raw'] for item in native_cache[n]
+                                           if 25 <= item['rect'].x0 < doc[n].rect.width - 25
+                                           and 38 <= item['rect'].y0 < end_y
+                                           and not any(start <= item['rect'].y0 < end
+                                                       for start, end in excluded_ranges)))
+                    else:
+                        extra = clean_text(doc[n].get_text(clip=pdf.Rect(25, 38, doc[n].rect.width - 25, end_y)))
                     if extra and end_y > 65:
                         text += '\n' + extra
                         continuation_pages.append(n)
@@ -587,7 +603,8 @@ def import_written(name, data, year, codes):
             if kind == 'mc': assert answers[number] in letters, (name, number, 'answer not an available choice', letters)
             if re.search(r'previous page|(?:code(?: segment)?|diagram|tree|graph|table|circuit)(?:\s+shown)?\s+above', text, re.I) and page_no > headers[0][1]:
                 continuation_pages.append(page_no - 1)
-            image_pages = sorted(set([page_no] + continuation_pages) | context_pages.get(number, set()))
+            image_pages = sorted(set([page_no] + continuation_pages) | context_pages.get(number, set())
+                                 | {cp for cp, _ in full_context.get(number, [])})
             images = [source_image(doc, n, Path(name).stem) for n in image_pages]
             if page_no not in native_cache: native_cache[page_no] = page_lines(doc[page_no])
             above_code, excluded_code = preceding_context[page_no]

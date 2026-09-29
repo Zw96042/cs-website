@@ -13,7 +13,8 @@ import {
   hasExpired,
   saveProgress,
   scoreAnswers,
-  trimCodePadding
+  trimCodePadding,
+  coalesceChoiceCodeBlocks
 } from '../lib/practice.js';
 
 const MANIFEST_URL = '/practice-data/manifest.json';
@@ -1497,7 +1498,6 @@ function WrittenWorkspace ({ test, session, onUpdateSession, onBack, autoFocus }
 
 function QuestionPanel ({ question, index, total, session, headingRef, feedbackRef, onAnswer, onCheck, onGo, onFinish }) {
   const inputId = useId();
-  const hintId = useId();
   const legendId = useId();
   const answer = session.answers?.[question.id] ?? '';
   const revealed = session.submitted || Boolean(session.checked?.[question.id]);
@@ -1509,7 +1509,7 @@ function QuestionPanel ({ question, index, total, session, headingRef, feedbackR
   const isLast = index === total - 1;
   const choiceBlocks = (letter) => {
     const match = question.choiceContent.find((item) => normalizeAnswer(item.label) === normalizeAnswer(letter));
-    return Array.isArray(match?.content) ? match.content.filter(isRecord) : [];
+    return Array.isArray(match?.content) ? coalesceChoiceCodeBlocks(match.content.filter(isRecord)) : [];
   };
 
   return (
@@ -1536,15 +1536,11 @@ function QuestionPanel ({ question, index, total, session, headingRef, feedbackR
               autoCapitalize='off'
               autoCorrect='off'
               spellCheck={false}
-              aria-describedby={hintId}
               onChange={(event) => onAnswer(event.target.value)}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' && session.mode === 'practice') onCheck();
               }}
             />
-            <p className='pr-field-hint' id={hintId}>
-              Letter case and surrounding spaces are ignored when grading.
-            </p>
           </div>
           )
         : (
