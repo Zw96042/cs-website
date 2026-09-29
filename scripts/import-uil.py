@@ -440,6 +440,43 @@ def test_meta(year, round_code, mode, pdf_url):
             'dataUrl': f'/practice-data/{test_id}.json'}
 
 
+def preceding_code_contexts(page, items, headers):
+    """Keep a full-width code box with the following question referring above."""
+    edges = sorted([pdf.Rect(path['rect']) for path in page.get_drawings()
+                    if path['rect'].height < 2 and path['rect'].width > 160], key=lambda rect: rect.y0)
+    borders = []
+    for edge in edges:
+        if borders and abs(borders[-1].y0 - edge.y0) < 1:
+            old = borders[-1]
+            borders[-1] = pdf.Rect(min(old.x0, edge.x0), min(old.y0, edge.y0),
+                                   max(old.x1, edge.x1), max(old.y1, edge.y1))
+        else:
+            borders.append(edge)
+    borders = [rect for rect in borders if rect.x0 < 80 and rect.x1 > page.rect.width - 45]
+    contexts = {}
+    excluded = set()
+    for upper, lower in zip(borders, borders[1:]):
+        group = sorted([item for item in items if upper.y0 - 2 <= item['rect'].y0 < lower.y0
+                        and item['raw'].strip()], key=lambda item: (item['rect'].y0, item['rect'].x0))
+        if len(group) < 3 or not all(item['mono'] for item in group): continue
+        if not re.search(r'\b(?:class|public|static|void)\b', '\n'.join(item['raw'] for item in group)): continue
+        following = next(((number, top) for number, top in headers if lower.y0 <= top < lower.y0 + 20), None)
+        if not following: continue
+        number, top = following
+        end = next((y for _, y in headers if y > top), 735)
+        prompt = ' '.join(item['raw'] for item in items if top <= item['rect'].y0 < end)
+        if not re.search(r'(?:code(?: segment)?|main method|method|class)(?:\s+shown)?\s+above', prompt, re.I): continue
+        # PDF tabs can be separate blank spans. Recover indentation from the
+        # visible glyph positions, including bold placeholders such as <code>.
+        first_chars = [next(char for char in item['chars'] if char['c'].strip()) for item in group]
+        left = min(char['bbox'][0] for char in first_chars)
+        code = '\n'.join(' ' * max(0, round((char['bbox'][0] - left) / 6)) + item['raw'].strip()
+                         for item, char in zip(group, first_chars))
+        contexts[number] = [{'type': 'code', 'text': code}]
+        excluded.update(id(item) for item in items if upper.y0 - 2 <= item['rect'].y0 < lower.y0)
+    return contexts, excluded
+
+
 def import_written(name, data, year, codes):
     doc = pdf.open(stream=data, filetype='pdf')
     pdf_url = source_pdf(name, data)
@@ -522,6 +559,8 @@ def import_written(name, data, year, codes):
                     if code: shared.append((cp, code))
                 for n in nums: full_context.setdefault(n, []).extend(shared)
         code_cells = {pno: native.shared_code_cells(doc[pno], items) for pno, items in native_cache.items()}
+        preceding_context = {pno: preceding_code_contexts(doc[pno], items,
+                             [(n, y) for n, p, y in headers if p == pno]) for pno, items in native_cache.items()}
         context_pages = {}
         for pno in sorted(set(p for _, p, _ in headers)):
             for match in re.finditer(r'questions?\s+((?:\d{1,2}|,|\s|and|through|to|[-–])+)', doc[pno].get_text(), re.I):
@@ -551,14 +590,16 @@ def import_written(name, data, year, codes):
             image_pages = sorted(set([page_no] + continuation_pages) | context_pages.get(number, set()))
             images = [source_image(doc, n, Path(name).stem) for n in image_pages]
             if page_no not in native_cache: native_cache[page_no] = page_lines(doc[page_no])
-            page_items = [item for item in native_cache[page_no] if (page_no, item['block'], item['raw']) not in diagram_directives]
+            above_code, excluded_code = preceding_context[page_no]
+            page_items = [item for item in native_cache[page_no] if id(item) not in excluded_code
+                          and (page_no, item['block'], item['raw']) not in diagram_directives]
             cell = next((cell for cell in code_cells[page_no] if cell[0] - 3 <= top < cell[1] - 3), None)
             content, choice_content = native_written(doc[page_no], page_items, top, bottom, letters if kind == 'mc' else [], meta['id'], number, right_context=cell[3] if cell else None, excluded_diagrams=diagram_regions.get(page_no, []))
             content.extend(crop_figure(doc[cp], rect, meta['id'], f'q{number}-context-diagram-{i}', f'Shared diagram for question {number}') for i, (cp, rect) in enumerate(shared_diagrams.get(number, [])))
             shared_content = []
             for cp, code in full_context.get(number, []):
                 shared_content.extend(native_blocks(doc[cp], code, meta['id'], f'q{number}-context-p{cp}'))
-            content = shared_content + content
+            content = shared_content + ([] if full_context.get(number) else above_code.get(number, [])) + content
             # Question prose can refer to a shared block on an earlier page.
             # Bring over its code and diagrams, without repeating other prompts.
             for shared_page in sorted(context_pages.get(number, set()) | set(continuation_pages)):

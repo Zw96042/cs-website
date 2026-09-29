@@ -166,6 +166,37 @@ test('native source content retains shared classes, diagram choices and complete
 });
 
 
+test('2022 District keeps the preceding main method with Q11 instead of Q10 option E', () => {
+  const packet = readJSON('/practice-data/2022-district-mc.json');
+  const q10 = packet.questions[9];
+  const q11 = packet.questions[10];
+  const code = q => q.content.filter(block => block.type === 'code').map(block => block.text).join('\n');
+  assert.ok(code(q10).includes('int [] ints = {9, 5, 1, 4, 1, 3};'));
+  assert.ok(code(q10).includes('out.print(Arrays.toString(ints));'));
+  assert.ok(!code(q10).includes('<code>'));
+  const optionE = q10.choiceContent.find(choice => choice.label === 'E');
+  assert.equal(optionE.content.length, 1);
+  assert.equal(optionE.content[0].type, 'paragraph');
+  assert.equal(optionE.content[0].runs.map(run => run.text).join('').trim(), 'There is no output due to an error.');
+  assert.ok(code(q11).includes('public static void main(String[] args) throws IOException'));
+  assert.ok(code(q11).includes('Scanner f = new Scanner(new File("data.dat"));\n     <code>;'));
+  assert.ok(code(q11).includes('s += f.next();'));
+  assert.ok(code(q11).endsWith('f.close();\n}'));
+  assert.deepEqual([q10.answer, q11.answer], ['B', 'B']);
+  const district2020 = readJSON('/practice-data/2020-district-mc.json');
+  assert.ok(!JSON.stringify([district2020.questions[9].content, district2020.questions[9].choiceContent]).includes('public class Q11'));
+  assert.ok(code(district2020.questions[10]).startsWith('public class Q11\n{'));
+  assert.ok(code(district2020.questions[10]).includes('Scanner f = new Scanner(<missing code>);'));
+  const regional2021 = readJSON('/practice-data/2021-regional-mc.json').questions[10];
+  assert.ok(code(regional2021).startsWith('public class Q11\n{'));
+  assert.ok(code(regional2021).includes('scr.close();'));
+  assert.equal(code(regional2021).match(/public class Q11/g).length, 1);
+  const state2022 = readJSON('/practice-data/2022-state-mc.json').questions[10];
+  assert.ok(code(state2022).includes('x += f.nextInt(i);'));
+  assert.ok(code(state2022).endsWith('out.println(x);\n}'));
+});
+
+
 test('older contests preserve actual packet sizes, source blanks and Java file names', () => {
   assert.equal(readJSON('/practice-data/2003-regional-frq.json').questions.length, 10);
   assert.equal(readJSON('/practice-data/2007-district-a-frq.json').questions.length, 6);
