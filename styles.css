@@ -221,10 +221,10 @@ a {
   font-weight: 560;
 }
 
-/* A 32px chip inside the 44px link; the current page is filled, not underlined. */
+/* A 4px inset from the outer shape pairs its 12px radius with an 8px radius. */
 .site-nav-trigger::before {
   position: absolute;
-  inset: 6px 0;
+  inset: 8px 0;
   z-index: -1;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -1941,7 +1941,6 @@ summary:focus-visible {
 
   .site-nav-list {
     gap: 0;
-    padding-inline: 2px;
   }
 }
 
