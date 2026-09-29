@@ -1037,7 +1037,7 @@ function Library ({ manifest, progress, mode, onModeChange: setMode, year, onYea
       <div className='section-inner'>
         <header className='pr-library-head'>
           <h2 id='library-heading' tabIndex={-1}>Contest archive</h2>
-          <p>Latest contests first. Original packets are available as PDF downloads.</p>
+          <p>Latest contests first. Original packets are available as PDFs.</p>
         </header>
         {body}
       </div>
@@ -1068,8 +1068,8 @@ function TestEntry ({ test, summary, onOpen }) {
         </a>
         {test.pdfUrl
           ? (
-            <a className='pr-link-button' href={test.pdfUrl} download>
-              PDF<span className='sr-only'> of {name} (download)</span>
+            <a className='pr-link-button' href={test.pdfUrl} target='_blank' rel='noreferrer'>
+              PDF<span className='sr-only'> of {name} (opens in a new tab)</span>
             </a>
             )
           : null}
@@ -1104,9 +1104,9 @@ function WorkspaceHeader ({ test, headingRef, onBack, status }) {
           : null}
         {test.pdfUrl
           ? (
-            <a className='text-action secondary-action' href={test.pdfUrl} download>
-              Download PDF
-              <span className='action-arrow' aria-hidden='true'>↓</span>
+            <a className='text-action secondary-action' href={test.pdfUrl} target='_blank' rel='noreferrer'>
+              PDF<span className='sr-only'> (opens in a new tab)</span>
+              <span className='action-arrow' aria-hidden='true'>↗</span>
             </a>
             )
           : null}
