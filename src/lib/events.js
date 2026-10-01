@@ -21,7 +21,7 @@ export const events = [
     date: '2026-09-29',
     title: 'Computer architecture and CS at UT',
     credential: 'Director of UT Austin’s Turing Scholars Honors Program',
-    location: 'Room 301 · Ms. Chong’s room',
+    location: 'Chap Room',
     description:
       'Dr. Calvin Lin shares an expert perspective on computer architecture, university research, and studying computer science at UT Austin.'
   },
@@ -42,7 +42,8 @@ export const events = [
     format: 'Online',
     description:
       'This is a FREE Online Programming Contest for High School teams. The Official UIL Computer Science State Contest Directors for Texas put this contest together each year.',
-    signupNote: 'Email the officers for signup.'
+    signupNote: 'Email the officers for signup.',
+    link: 'mailto:dz00214@eanesisd.net'
   },
   {
     type: 'Competitive Programming',
@@ -52,7 +53,8 @@ export const events = [
     format: 'Online',
     description:
       'A kickoff contest for high school teams, now in its 22nd year. Teams take a written test by apluscompsci, then a 2 hour, 18 question programming round written by the Seven Lakes CS Club.',
-    signupNote: 'Email the officers for signup.'
+    signupNote: 'Email the officers for signup.',
+    link: 'mailto:dz00214@eanesisd.net'
   },
   {
     type: 'Competitive Programming',
@@ -62,15 +64,19 @@ export const events = [
     format: 'Online',
     description:
       'A virtual programming-only competition on Hacker Rank (more details to follow).',
-    signupNote: 'Email the officers for signup.'
+    signupNote: 'Email the officers for signup.',
+    link: 'mailto:dz00214@eanesisd.net'
   },
   {
     type: 'Guest Speaker',
     track: 'guest-speaker',
     date: '2026-11-30',
     title: 'An Afternoon with Neo Wang',
+    location: 'To be determined - likely chap room.',
     description:
-      "Neo Wang, Westlake alum ('22) and generous donor to the CS Club, shares his experience in computer science and life after Westlake. He discusses startups, trading, internships, CS + Math, and other topics."
+      "Neo Wang, Westlake alum ('22) and generous donor to the CS Club, shares his experience in computer science and life after Westlake. He discusses startups, trading, internships, CS + Math, and other topics. At Westlake, Neo headed the UIL Computer Science team and was a director of the Competitive Programming Initiative, best known for creating the famous USACO training platform usaco.guide.",
+    signupNote: 'RSVP here.',
+    link: 'https://forms.gle/Zhogm2J19sdz5a7b6'
   }
 ];
 

@@ -1,15 +1,22 @@
 import { formatEventDate } from '../lib/events.js';
 
-export default function EventItem ({ event, headingLevel = 'h2', monthContext = false, preview = false }) {
+export default function EventItem ({
+  event,
+  headingLevel = 'h2',
+  monthContext = false,
+  preview = false
+}) {
   const Heading = headingLevel;
   const className = `event-ledger-item${preview ? ' event-preview-item' : ''}`;
   const dateDisplay = formatEventDate(event);
-  const startDateLabel = monthContext && event.date
-    ? event.date.slice(-2)
-    : dateDisplay.startDateLabel;
-  const endDateLabel = monthContext && event.endDate?.slice(0, 7) === event.date?.slice(0, 7)
-    ? event.endDate.slice(-2)
-    : dateDisplay.endDateLabel;
+  const startDateLabel =
+    monthContext && event.date
+      ? event.date.slice(-2)
+      : dateDisplay.startDateLabel;
+  const endDateLabel =
+    monthContext && event.endDate?.slice(0, 7) === event.date?.slice(0, 7)
+      ? event.endDate.slice(-2)
+      : dateDisplay.endDateLabel;
   const accessibleEndDateLabel = event.endDate
     ? formatEventDate({ date: event.endDate }).startDateLabel
     : null;
@@ -28,7 +35,9 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
                       <span aria-hidden='true'>{startDateLabel}</span>
                     </>
                     )
-                  : startDateLabel}
+                  : (
+                      startDateLabel
+                    )}
               </time>
               {event.endDate
                 ? (
@@ -38,15 +47,17 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
                       {monthContext
                         ? (
                           <>
-                            <span className='sr-only'>through {accessibleEndDateLabel}</span>
-                            <span aria-hidden='true'>{endDateLabel}</span>
-                          </>
+                  <span className='sr-only'>
+                            through {accessibleEndDateLabel}
+                          </span>
+                  <span aria-hidden='true'>{endDateLabel}</span>
+                </>
                           )
                         : (
                           <>
-                            <span className='sr-only'>through </span>
-                            {endDateLabel}
-                          </>
+                  <span className='sr-only'>through </span>
+                  {endDateLabel}
+                </>
                           )}
                     </time>
                   </>
@@ -54,13 +65,25 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
                 : null}
             </div>
             )
-          : <span className='event-date-tbd'>{dateDisplay.startDateLabel}</span>}
-        {dateDisplay.dayLabel ? <span className='event-day-label'>{dateDisplay.dayLabel}</span> : null}
+          : (
+            <span className='event-date-tbd'>{dateDisplay.startDateLabel}</span>
+            )}
+        {dateDisplay.dayLabel
+          ? (
+            <span className='event-day-label'>{dateDisplay.dayLabel}</span>
+            )
+          : null}
       </div>
       <div className='event-details'>
-        <p className='event-type' data-event-track={event.track}>{event.type}</p>
+        <p className='event-type' data-event-track={event.track}>
+          {event.type}
+        </p>
         <Heading>{event.title}</Heading>
-        {event.credential ? <p className='event-credential'>{event.credential}</p> : null}
+        {event.credential
+          ? (
+            <p className='event-credential'>{event.credential}</p>
+            )
+          : null}
         {event.location
           ? (
             <p className='event-meta'>
@@ -74,7 +97,15 @@ export default function EventItem ({ event, headingLevel = 'h2', monthContext = 
           ? (
             <p className='event-meta'>
               <span>Signup</span>
-              <strong>{event.signupNote}</strong>
+              {event.link
+                ? (
+                  <a href={event.link}>
+                    <strong>{event.signupNote}</strong>
+                  </a>
+                  )
+                : (
+                  <strong>{event.signupNote}</strong>
+                  )}
             </p>
             )
           : null}
