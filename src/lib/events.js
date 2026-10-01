@@ -5,14 +5,15 @@ export const events = [
     date: '2026-08-31',
     title: 'Transformer architecture with Joseph Zhang',
     description:
-      'A Westlake alumnus and Stanford Math and CS student explains transformer architecture, university research, and life in computer science.'
+      "A Westlake alum ('24) and Stanford Math and CS student explains transformer architecture, university research, and life in computer science."
   },
   {
     type: 'Hack Club',
     track: 'hack-club',
     date: null,
     title: 'Build a website from scratch',
-    description: 'Learn the basics of HTML, CSS, and JavaScript with the CS Club officers. Finish the site and get free boba.'
+    description:
+      'Learn the basics of HTML, CSS, and JavaScript with the CS Club officers. Finish the site and get free boba.'
   },
   {
     type: 'Guest Speaker',
@@ -21,7 +22,8 @@ export const events = [
     title: 'Computer architecture and CS at UT',
     credential: 'Director of UT Austin’s Turing Scholars Honors Program',
     location: 'Room 301 · Ms. Chong’s room',
-    description: 'Dr. Calvin Lin shares an expert perspective on computer architecture, university research, and studying computer science at UT Austin.'
+    description:
+      'Dr. Calvin Lin shares an expert perspective on computer architecture, university research, and studying computer science at UT Austin.'
   },
   {
     type: 'Guest Speaker',
@@ -58,17 +60,42 @@ export const events = [
     date: '2026-11-21',
     title: 'Clements',
     format: 'Online',
-    description: 'A virtual programming-only competition on Hacker Rank (more details to follow).'
+    description:
+      'A virtual programming-only competition on Hacker Rank (more details to follow).',
+    signupNote: 'Email the officers for signup.'
+  },
+  {
+    type: 'Guest Speaker',
+    track: 'guest-speaker',
+    date: '2026-11-30',
+    title: 'An Afternoon with Neo Wang',
+    description:
+      "Neo Wang, Westlake alum ('22) and generous donor to the CS Club, shares his experience in computer science and life after Westlake. He discusses startups, trading, internships, CS + Math, and other topics."
   }
 ];
 
 const clubTimeZone = 'America/Chicago';
 const utcTimeZone = 'UTC';
-const dayFormatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', timeZone: utcTimeZone });
-const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: utcTimeZone });
-const shortMonthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', timeZone: utcTimeZone });
-const weekdayFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: utcTimeZone });
-const yearFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', timeZone: utcTimeZone });
+const dayFormatter = new Intl.DateTimeFormat('en-US', {
+  day: '2-digit',
+  timeZone: utcTimeZone
+});
+const monthFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  timeZone: utcTimeZone
+});
+const shortMonthFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  timeZone: utcTimeZone
+});
+const weekdayFormatter = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  timeZone: utcTimeZone
+});
+const yearFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  timeZone: utcTimeZone
+});
 
 function parseDateKey (dateKey) {
   return new Date(`${dateKey}T12:00:00Z`);
@@ -82,7 +109,9 @@ function getClubDateKey (date) {
     day: '2-digit'
   }).formatToParts(date);
 
-  const dateParts = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  const dateParts = Object.fromEntries(
+    parts.map(({ type, value }) => [type, value])
+  );
   return `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
 }
 
@@ -112,7 +141,8 @@ export function formatEventDate (event) {
   const endMonth = shortMonthFormatter.format(endDate);
   const endYear = yearFormatter.format(endDate);
   const isSameMonth = startMonth === endMonth && startYear === endYear;
-  const yearLabel = startYear === endYear ? startYear : `${startYear}–${endYear}`;
+  const yearLabel =
+    startYear === endYear ? startYear : `${startYear}–${endYear}`;
 
   return {
     ...display,
@@ -127,13 +157,17 @@ export function formatEventDate (event) {
 export function getScheduledEvents (now = new Date()) {
   const today = getClubDateKey(now);
   return events
-    .filter((event) => event.date !== null && (event.endDate ?? event.date) >= today)
+    .filter(
+      (event) => event.date !== null && (event.endDate ?? event.date) >= today
+    )
     .sort((first, second) => first.date.localeCompare(second.date));
 }
 
 /** Returns upcoming competitive programming events for the home page Contests section. */
 export function getUpcomingContests (now = new Date()) {
-  return getScheduledEvents(now).filter((event) => event.track === 'competitive-programming');
+  return getScheduledEvents(now).filter(
+    (event) => event.track === 'competitive-programming'
+  );
 }
 
 export function getEventPreview (now = new Date()) {
