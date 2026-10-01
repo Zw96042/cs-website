@@ -1,3 +1,3 @@
-import { renderApp } from './renderApp.jsx'
+import { renderApp } from './renderApp.jsx';
 
-renderApp()
+renderApp();

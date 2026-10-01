@@ -2068,8 +2068,8 @@ function OutputCompare ({ outputs, judgePdfUrl }) {
             <CompressedHint file={output} />
             {judgeText !== null
               ? <>
-                  <pre className='pr-pre'>{judgeText.slice(0, 100000) || ' '}</pre>
-                  {judgeText.length > 100000 ? <p className='pr-field-hint'>Preview shows the first 100 KB. Comparison uses the complete file; download for the full output.</p> : null}
+                <pre className='pr-pre'>{judgeText.slice(0, 100000) || ' '}</pre>
+                {judgeText.length > 100000 ? <p className='pr-field-hint'>Preview shows the first 100 KB. Comparison uses the complete file; download for the full output.</p> : null}
                 </>
               : <p className='pr-field-hint'>Download the file to compare by hand.</p>}
           </div>

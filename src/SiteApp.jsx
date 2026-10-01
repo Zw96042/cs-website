@@ -140,9 +140,9 @@ export default function SiteApp () {
       {ready
         ? <RouteContent Component={loaded.Component} page={page} onReady={finishNavigation} />
         : <main id={contentIds[page]} className={page === 'home' ? 'club-main' : `${page}-main`} aria-busy={!error}>
-            {error
-              ? <section role='alert'><h1>This page could not load.</h1><p>Check your connection and try again.</p><button type='button' onClick={() => setAttempt((value) => value + 1)}>Try again</button></section>
-              : <p role='status'>Loading {page === 'home' ? 'home' : page}…</p>}
+          {error
+            ? <section role='alert'><h1>This page could not load.</h1><p>Check your connection and try again.</p><button type='button' onClick={() => setAttempt((value) => value + 1)}>Try again</button></section>
+            : <p role='status'>Loading {page === 'home' ? 'home' : page}…</p>}
           </main>}
       <Footer />
       <Analytics />

@@ -59,7 +59,6 @@ test('returns no homepage events after every scheduled event has passed', () => 
   assert.deepEqual(eventTitles, []);
 });
 
-
 test('keeps the latest schedule addition, reschedule and cancellation', () => {
   assert.equal(events.find(e => e.title === 'Quantum computing with HitoMatch').date, '2026-10-05');
   assert.equal(events.find(e => e.title === 'Build a website from scratch').date, null);

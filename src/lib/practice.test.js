@@ -139,7 +139,6 @@ test('source regressions retain real choices and official alternate answers', ()
   assert.ok(readFileSync(resolve(root, './practice-data/2026-district-frq.json')).byteLength < 1_000_000, 'Large judge outputs should load on demand');
 });
 
-
 test('native source content retains shared classes, diagram choices and complete samples', () => {
   const packet = (id, mode = 'mc') => readJSON(`/practice-data/${id}-${mode}.json`);
   const code = q => q.content.filter(b => b.type === 'code').map(b => b.text).join('\n');
@@ -164,7 +163,6 @@ test('native source content retains shared classes, diagram choices and complete
   assert.ok(code(packet('2026-state', 'frq').questions.find(q => q.title === 'AJ')).includes('3\nXOX Fly'));
   assert.ok(code(packet('2022-regional', 'frq').questions.find(q => q.title === 'Arya')).includes('5\n10 7'));
 });
-
 
 test('2022 District keeps the preceding main method with Q11 instead of Q10 option E', () => {
   const packet = readJSON('/practice-data/2022-district-mc.json');
@@ -196,7 +194,6 @@ test('2022 District keeps the preceding main method with Q11 instead of Q10 opti
   assert.ok(code(state2022).endsWith('out.println(x);\n}'));
 });
 
-
 test('2026 Invitational B keeps the next-page code with its named question', () => {
   const packet = readJSON('/practice-data/2026-invitational-b-mc.json');
   const code = n => packet.questions[n - 1].content.filter(block => block.type === 'code').map(block => block.text).join('\n');
@@ -215,7 +212,6 @@ test('2026 Invitational B keeps the next-page code with its named question', () 
   assert.ok(code(15).includes('a.subList(1, 4)'));
 });
 
-
 test('older contests preserve actual packet sizes, source blanks and Java file names', () => {
   assert.equal(readJSON('/practice-data/2003-regional-frq.json').questions.length, 10);
   assert.equal(readJSON('/practice-data/2007-district-a-frq.json').questions.length, 6);
@@ -226,8 +222,10 @@ test('older contests preserve actual packet sizes, source blanks and Java file n
   assert.equal(blank.content[0].runs[0].text, 'Blank in the original packet');
   for (const entry of readJSON('/practice-data/manifest.json').tests.filter(t => t.year <= 2012 && t.mode === 'frq')) {
     const packet = readJSON(entry.dataUrl);
-    for (const q of packet.questions) for (const file of q.files.filter(f => f.role === 'output')) {
-      assert.ok(!/(?:^|\/)(?:example|sample)\//i.test(file.sourcePath), `Sample selected as judge: ${q.id}`);
+    for (const q of packet.questions) {
+      for (const file of q.files.filter(f => f.role === 'output')) {
+        assert.ok(!/(?:^|\/)(?:example|sample)\//i.test(file.sourcePath), `Sample selected as judge: ${q.id}`);
+      }
     }
   }
 });
@@ -280,7 +278,6 @@ test('2003 State Q34 keeps its source matrix aligned and the shared path functio
   ]);
 });
 
-
 test('native graphs belong to their questions, retain directions and use text options', () => {
   const questions = readJSON('/practice-data/2026-invitational-a-mc.json').questions;
   assert.ok(questions[28].content.every(b => !['figure', 'diagram'].includes(b.type)), 'Graph must not leak into the preceding code question');
@@ -323,7 +320,6 @@ test('the full native tree keeps all leaf nodes and both questions share it', ()
   }
 });
 
-
 test('native Boolean expressions retain individual and nested negation bars', () => {
   const q = readJSON('/practice-data/2025-regional-mc.json').questions[25];
   const text = runs => runs.map(r => r.text ?? text(r.runs)).join('');
@@ -353,7 +349,6 @@ test('shared modern methods retain their complete source cells', () => {
   const prompt = readJSON('/practice-data/2025-regional-mc.json').questions[38].content.filter(b => b.type === 'paragraph').flatMap(b => b.runs).map(r => r.text || '').join('');
   assert.match(prompt, /and E, the number of edges/);
 });
-
 
 test('graph choices and shared illustrations retain native source geometry', () => {
   const packet = id => readJSON(`/practice-data/${id}-mc.json`).questions;
