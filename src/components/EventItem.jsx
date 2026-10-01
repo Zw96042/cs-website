@@ -47,17 +47,17 @@ export default function EventItem ({
                       {monthContext
                         ? (
                           <>
-                  <span className='sr-only'>
-                            through {accessibleEndDateLabel}
-                          </span>
-                  <span aria-hidden='true'>{endDateLabel}</span>
-                </>
+                            <span className='sr-only'>
+                              through {accessibleEndDateLabel}
+                            </span>
+                            <span aria-hidden='true'>{endDateLabel}</span>
+                          </>
                           )
                         : (
                           <>
-                  <span className='sr-only'>through </span>
-                  {endDateLabel}
-                </>
+                            <span className='sr-only'>through </span>
+                            {endDateLabel}
+                          </>
                           )}
                     </time>
                   </>

@@ -4,7 +4,7 @@
 
 # Westlake CS Club
 
-The Westlake High School Computer Science Club website, built with React and Vite.
+The Westlake High School Computer Science Club website, built with Preact and Vite.
 
 ## Development
 
