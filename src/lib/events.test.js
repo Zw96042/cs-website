@@ -5,6 +5,7 @@ import {
   formatEventDate,
   getEventPreview,
   getScheduledEvents,
+  getUpcomingContests,
   getUnscheduledEvents
 } from './events.js';
 
@@ -35,7 +36,7 @@ test('keeps a multi-day competition upcoming through its final day', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['Code Bash', 'Seven Lakes', 'Clements']);
+  assert.deepEqual(eventTitles, ['Code Bash', 'Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest']);
 });
 
 test('derives the display labels for a multi-day event from its canonical dates', () => {
@@ -54,7 +55,7 @@ test('drops a multi-day competition on the next club calendar day', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['Seven Lakes', 'Clements']);
+  assert.deepEqual(eventTitles, ['Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest']);
 });
 
 test('keeps unscheduled events separate from the dated schedule', () => {
@@ -63,8 +64,34 @@ test('keeps unscheduled events separate from the dated schedule', () => {
   assert.deepEqual(eventTitles, ['Build a website from scratch']);
 });
 
-test('returns no homepage events after every scheduled event has passed', () => {
+test('previews the November guest speaker and December contest after Clements', () => {
   const eventTitles = getEventPreview(new Date('2026-11-22T12:00:00Z')).map(
+    ({ title }) => title
+  );
+
+  assert.deepEqual(eventTitles, ['An Afternoon with Neo Wang', 'Stacey & UIL contest']);
+});
+
+test('keeps the limited-availability December contest through club midnight', () => {
+  const now = new Date('2026-12-06T05:59:59Z');
+  const contests = getUpcomingContests(now);
+
+  assert.deepEqual(contests.map(({ title }) => title), ['Stacey & UIL contest']);
+  assert.deepEqual(getEventPreview(now), contests);
+  assert.equal(contests[0].date, '2026-12-05');
+  assert.match(contests[0].description, /Stacey and the UIL contest writers/);
+  assert.match(contests[0].description, /Limited availability/);
+  assert.deepEqual(formatEventDate(contests[0]), {
+    dayLabel: 'Saturday, 2026',
+    endDateLabel: null,
+    monthLabel: 'December',
+    startDateLabel: 'Dec 05'
+  });
+  assert.deepEqual(getUpcomingContests(new Date('2026-12-06T06:00:00Z')), []);
+});
+
+test('returns no homepage events after every scheduled event has passed', () => {
+  const eventTitles = getEventPreview(new Date('2026-12-06T06:00:00Z')).map(
     ({ title }) => title
   );
 

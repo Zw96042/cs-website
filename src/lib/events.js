@@ -77,6 +77,14 @@ export const events = [
       "Neo Wang, Westlake alum ('22) and generous donor to the CS Club, shares his experience in computer science and life after Westlake. He discusses startups, trading, internships, CS + Math, and other topics. At Westlake, Neo headed the UIL Computer Science team and was a director of the Competitive Programming Initiative, best known for creating the famous USACO training platform usaco.guide.",
     signupNote: 'RSVP here.',
     link: 'https://forms.gle/Zhogm2J19sdz5a7b6'
+  },
+  {
+    type: 'Competitive Programming',
+    track: 'competitive-programming',
+    date: '2026-12-05',
+    title: 'Stacey & UIL contest',
+    description:
+      'A contest by Stacey and the UIL contest writers. Limited availability.'
   }
 ];
 
