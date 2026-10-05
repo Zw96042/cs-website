@@ -41,6 +41,15 @@ export default function Hero () {
             <img className='canvas-action-logo' src='/canvas-logo.svg' alt='' />
             Join Canvas
           </a>
+          <a
+            className='text-action'
+            href='https://www.youtube.com/@WestlakeComputerScienceClub'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <img className='canvas-action-logo' src='/yt-logo.svg' alt='' />
+            Watch on Youtube
+          </a>
           <a className='text-action secondary-action' href='#programs'>
             Explore the programs <span className='action-arrow' aria-hidden='true'>→</span>
           </a>
