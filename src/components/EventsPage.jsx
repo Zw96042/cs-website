@@ -29,58 +29,41 @@ export default function EventsPage ({ embedded = false }) {
       <section className='events-page-section' aria-labelledby='events-heading'>
         <div className='section-inner events-page-layout'>
           <header className='events-page-heading'>
-            <div>
-              <h1 className='section-heading' id='events-heading'>Events.</h1>
-            </div>
+            <h1 className='section-heading' id='events-heading'>Events.</h1>
             <p className='section-intro'>
               Guest lectures, build sessions, and competitions.
             </p>
           </header>
 
-          <section className='events-schedule' aria-labelledby='upcoming-events-heading'>
-            <header className='events-schedule-heading'>
-              <h2 id='upcoming-events-heading'>Upcoming</h2>
-            </header>
-
+          <div className='events-schedule'>
             {eventGroups.length > 0
               ? eventGroups.map((group) => {
                 const monthId = `${group.month.toLowerCase()}-events`;
 
                 return (
-                  <section className='event-month' aria-labelledby={monthId} key={group.month}>
-                    <header className='event-month-heading'>
-                      <h3 id={monthId}>{group.month}</h3>
-                    </header>
-                    <div className='event-ledger'>
-                      {group.events.map((event) => (
-                        <EventItem event={event} headingLevel='h4' key={`${event.date}-${event.title}`} monthContext />
-                      ))}
-                    </div>
+                  <section className='events-group' aria-labelledby={monthId} key={group.month}>
+                    <h2 className='events-group-heading' id={monthId}>{group.month}</h2>
+                    {group.events.map((event) => (
+                      <EventItem event={event} headingLevel='h3' key={`${event.date}-${event.title}`} schedule />
+                    ))}
                   </section>
                 );
               })
               : (
                 <p className='events-empty'>No dated events are on the calendar yet. Check back after the next club meeting.</p>
                 )}
-          </section>
 
-          {unscheduledEvents.length > 0
-            ? (
-              <section className='events-unscheduled' aria-labelledby='unscheduled-events-heading'>
-                <header className='events-schedule-heading'>
-                  <div>
-                    <h2 id='unscheduled-events-heading'>Dates in progress</h2>
-                    <p>Confirmed events whose timing is still being finalized.</p>
-                  </div>
-                </header>
-                <div className='event-ledger'>
+            {unscheduledEvents.length > 0
+              ? (
+                <section className='events-group' aria-labelledby='unscheduled-events-heading'>
+                  <h2 className='events-group-heading' id='unscheduled-events-heading'>Dates to be announced</h2>
                   {unscheduledEvents.map((event) => (
-                    <EventItem event={event} headingLevel='h3' key={event.title} />
+                    <EventItem event={event} headingLevel='h3' key={event.title} schedule />
                   ))}
-                </div>
-              </section>
-              )
-            : null}
+                </section>
+                )
+              : null}
+          </div>
         </div>
       </section>
       {!embedded && <Analytics />}
