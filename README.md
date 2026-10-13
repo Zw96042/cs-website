@@ -19,10 +19,13 @@ The Vite server prints the local URL when it starts. Home (`/`), Events (`/event
 
 ```sh
 npm run build
+npm run test:build
 npm run preview
 ```
 
-Vite writes the deployable site to `dist/`.
+The build writes the deployable static site to `dist/`, including rendered homepage, events, and practice archive HTML. The page's critical styles and UI fonts are included in the document so text can paint without extra font or stylesheet requests. Disabled stylesheet links let the route preloader recognize styles already applied. This increases HTML size; compare the complete first-load payload when measuring performance. The app loads directly to attach navigation and practice controls; the rendered content remains usable while its modules download. URL selections and saved scroll positions restore during hydration. Homepage animations load after rendering.
+
+The shared page shell, navigation, and reporting live in `src/SiteApp.jsx`. Public archive rows are retained during initial hydration; filters and private progress render updated rows, while one delegated handler opens tests. The practice archive metadata is included in its HTML; individual tests and judge outputs still load on demand. Answers, timers, and drafts are restored from the visitor's browser after hydration. Event HTML reflects the schedule at build time, and the browser applies the current club date when JavaScript runs. Rebuild to refresh the HTML snapshot. Build-time rendering uses `preact-render-to-string`; it does not require a production application server. `npm run test:build` checks the generated pages and image paths after a build.
 
 ## UIL practice
 
@@ -40,3 +43,11 @@ python3 scripts/merge-practice-data.py
 ```
 
 The legacy importers default to `~/Downloads` and the bundled Codex LibreOffice runtime. Generated native content and original downloads live in `public/practice-data/`; importer working files stay in `work/`.
+
+## Performance assets
+
+The practice archive loads the question runner, diagrams, and workspace styles only when a test is selected. Questions and runner code download concurrently. Browser progress stays in the page controller, and exam ticks update the clock instead of the whole question view.
+
+`assets/newsreader-display-latin.woff2` retains the original font's glyphs and the 400–500 weight range declared in `styles.css`. The full original font remains available. To regenerate the optimized fonts, install Python's `fonttools` and `brotli` in a development environment and run `python scripts/optimize-fonts.py`. These tools are not required for the website build.
+
+Geist and Geist Mono also retain the 400–700 range used by interface text and bold question content. Every glyph stays available. Home and Events load their page-specific styles through their components; shared navigation, typography and event styles remain in `styles.css`. Route metadata is extracted from the entry HTML during the build, so the shared JavaScript does not include full HTML documents.

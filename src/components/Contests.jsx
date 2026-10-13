@@ -1,7 +1,8 @@
 import { formatEventDate, getUpcomingContests } from '../lib/events.js';
+import { useEventDate } from '../lib/event-clock.jsx';
 
 export default function Contests () {
-  const contests = getUpcomingContests();
+  const contests = getUpcomingContests(useEventDate());
 
   if (contests.length === 0) return null;
 

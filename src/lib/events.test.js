@@ -3,11 +3,19 @@ import test from 'node:test';
 import {
   events,
   formatEventDate,
+  getClubDateKey,
   getEventPreview,
   getScheduledEvents,
   getUpcomingContests,
   getUnscheduledEvents
 } from './events.js';
+
+test('shared event snapshots change at club midnight, including daylight saving time', () => {
+  assert.equal(getClubDateKey(new Date('2026-10-04T04:59:59Z')), '2026-10-03');
+  assert.equal(getClubDateKey(new Date('2026-10-04T05:00:00Z')), '2026-10-04');
+  assert.equal(getClubDateKey(new Date('2026-11-01T06:30:00Z')), '2026-11-01');
+  assert.equal(getClubDateKey(new Date('2026-11-01T07:30:00Z')), '2026-11-01');
+});
 
 test('keeps events scheduled for today in the club timezone', () => {
   const eventTitles = getEventPreview(new Date('2026-09-30T04:59:59Z')).map(

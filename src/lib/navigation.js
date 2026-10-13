@@ -5,6 +5,12 @@ export function getPage (pathname) {
   return null;
 }
 
+export function getSavedScrollPosition (state, href) {
+  const saved = state?.siteScroll;
+  if (saved?.href !== href || !Array.isArray(saved.position) || saved.position.length !== 2) return null;
+  return saved.position.every((value) => Number.isFinite(value) && value >= 0) ? saved.position : null;
+}
+
 // Practice archive Type filters that links can request with ?type=.
 const practiceTypes = ['all', 'mc', 'frq'];
 

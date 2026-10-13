@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { getNavigationTarget, getPage } from './navigation.js';
+import { getNavigationTarget, getPage, getSavedScrollPosition } from './navigation.js';
 
 const currentHref = 'https://www.westlakecs.org/events/';
 const primaryClick = { button: 0 };
@@ -8,6 +8,16 @@ const anchor = (href, attributes = {}) => ({
   href,
   ...attributes,
   hasAttribute: (name) => Object.hasOwn(attributes, name)
+});
+
+test('restores reload scroll only for the matching history entry and valid coordinates', () => {
+  const state = { practiceArchive: { mode: 'mc' }, siteScroll: { href: currentHref, position: [0, 458] } };
+  assert.deepEqual(getSavedScrollPosition(state, currentHref), [0, 458]);
+  assert.equal(getSavedScrollPosition(state, 'https://www.westlakecs.org/'), null);
+  for (const position of [null, [0], [0, -1], [0, Infinity], ['0', 458]]) {
+    assert.equal(getSavedScrollPosition({ siteScroll: { href: currentHref, position } }, currentHref), null);
+  }
+  assert.equal(getSavedScrollPosition(null, currentHref), null);
 });
 
 test('recognizes the three public entry pages and leaves unknown paths alone', () => {

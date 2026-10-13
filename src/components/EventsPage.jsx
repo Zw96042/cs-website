@@ -1,9 +1,7 @@
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import '../events.css';
 import EventItem from './EventItem.jsx';
-import Footer from './Footer.jsx';
-import Header from './Header.jsx';
 import { formatEventDate, getScheduledEvents, getUnscheduledEvents } from '../lib/events.js';
+import { useEventDate } from '../lib/event-clock.jsx';
 
 function groupEventsByMonth (events) {
   return events.reduce((groups, event) => {
@@ -19,12 +17,12 @@ function groupEventsByMonth (events) {
   }, []);
 }
 
-export default function EventsPage ({ embedded = false }) {
-  const scheduledEvents = getScheduledEvents();
+export default function EventsPage () {
+  const scheduledEvents = getScheduledEvents(useEventDate());
   const unscheduledEvents = getUnscheduledEvents();
   const eventGroups = groupEventsByMonth(scheduledEvents);
 
-  const content = (
+  return (
     <main className='events-main' id='events-content'>
       <section className='events-page-section' aria-labelledby='events-heading'>
         <div className='section-inner events-page-layout'>
@@ -66,19 +64,6 @@ export default function EventsPage ({ embedded = false }) {
           </div>
         </div>
       </section>
-      {!embedded && <Analytics />}
-      {!embedded && <SpeedInsights />}
     </main>
-  );
-
-  if (embedded) return content;
-
-  return (
-    <div className='site-page'>
-      <a className='skip-link' href='#events-content'>Skip to events</a>
-      <Header currentPage='events' />
-      {content}
-      <Footer />
-    </div>
   );
 }

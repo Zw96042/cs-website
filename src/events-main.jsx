@@ -1,3 +1,4 @@
 import { renderApp } from './renderApp.jsx';
+import EventsPage from './components/EventsPage.jsx';
 
-renderApp();
+renderApp('events', EventsPage);

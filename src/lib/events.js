@@ -115,13 +115,15 @@ function parseDateKey (dateKey) {
   return new Date(`${dateKey}T12:00:00Z`);
 }
 
-function getClubDateKey (date) {
-  const parts = new Intl.DateTimeFormat('en-US', {
-    timeZone: clubTimeZone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  }).formatToParts(date);
+const clubDateFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: clubTimeZone,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+});
+
+export function getClubDateKey (date) {
+  const parts = clubDateFormatter.formatToParts(date);
 
   const dateParts = Object.fromEntries(
     parts.map(({ type, value }) => [type, value])

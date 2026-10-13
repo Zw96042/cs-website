@@ -1,8 +1,9 @@
 import EventItem from './EventItem.jsx';
 import { getEventPreview } from '../lib/events.js';
+import { useEventDate } from '../lib/event-clock.jsx';
 
 export default function EventsPreviewSection () {
-  const upcomingEvents = getEventPreview();
+  const upcomingEvents = getEventPreview(useEventDate());
 
   return (
     <section className='section-shell event-preview-section' id='events' aria-labelledby='event-preview-heading'>
