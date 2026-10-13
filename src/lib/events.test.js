@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+  eventTracks,
   events,
   formatEventDate,
   getClubDateKey,
+  getEventCountdown,
   getEventPreview,
+  getPastEvents,
   getPastSpeakers,
   getScheduledEvents,
   getUpcomingContests,
@@ -134,4 +137,37 @@ test('lists past guest speakers newest first and keeps today\'s talk upcoming', 
     'Transformer architecture with Joseph Zhang'
   ]);
   assert.deepEqual(titles('2026-08-01T17:00:00Z'), []);
+});
+
+test('archives every finished event newest first and keeps multi-day events until they end', () => {
+  const titles = (now) => getPastEvents(new Date(now)).map(({ title }) => title);
+
+  assert.deepEqual(titles('2026-10-11T12:00:00Z'), [
+    'Quantum computing with HitoMatch',
+    'Computer architecture and CS at UT',
+    'Transformer architecture with Joseph Zhang'
+  ]);
+  assert.deepEqual(titles('2026-10-12T05:00:00Z').slice(0, 2), [
+    'Code Bash',
+    'Quantum computing with HitoMatch'
+  ]);
+  assert.deepEqual(titles('2026-08-30T12:00:00Z'), []);
+  assert.ok(!titles('2027-01-01T12:00:00Z').includes('Build a website from scratch'));
+});
+
+test('labels every event track used by the Events page filters', () => {
+  const labelled = new Set(eventTracks.map(({ track }) => track));
+
+  for (const event of events) assert.ok(labelled.has(event.track), event.title);
+});
+
+test('counts down to the next event in club days and marks running events', () => {
+  const sevenLakes = events.find(({ title }) => title === 'Seven Lakes');
+  const codeBash = events.find(({ title }) => title === 'Code Bash');
+
+  assert.equal(getEventCountdown(sevenLakes, new Date('2026-10-13T18:00:00Z')), 'In 4 days');
+  assert.equal(getEventCountdown(sevenLakes, new Date('2026-10-17T04:59:59Z')), 'Tomorrow');
+  assert.equal(getEventCountdown(sevenLakes, new Date('2026-10-17T05:00:00Z')), 'Happening now');
+  assert.equal(getEventCountdown(codeBash, new Date('2026-10-08T12:00:00Z')), 'Happening now');
+  assert.equal(getEventCountdown(sevenLakes, new Date('2026-09-17T12:00:00Z')), 'In 30 days');
 });

@@ -1,3 +1,10 @@
+// Events page filters and row labels, keyed by event.track.
+export const eventTracks = [
+  { track: 'guest-speaker', label: 'Guest lecture', filterLabel: 'Guest lectures' },
+  { track: 'competitive-programming', label: 'Contest', filterLabel: 'Contests' },
+  { track: 'hack-club', label: 'Hack Club', filterLabel: 'Hack Club' }
+];
+
 export const events = [
   {
     type: 'Guest Speaker',
@@ -173,6 +180,16 @@ export function formatEventDate (event) {
   };
 }
 
+/** Describes when a scheduled event happens relative to the club's current day. */
+export function getEventCountdown (event, now = new Date()) {
+  const today = getClubDateKey(now);
+  if (event.date <= today) return 'Happening now';
+
+  const days = Math.round((parseDateKey(event.date) - parseDateKey(today)) / 86400000);
+  if (days === 1) return 'Tomorrow';
+  return `In ${days} days`;
+}
+
 /** Returns every dated event from the club's current day forward. */
 export function getScheduledEvents (now = new Date()) {
   const today = getClubDateKey(now);
@@ -203,6 +220,16 @@ export function getPastSpeakers (now = new Date()) {
   return events
     .filter((event) => event.track === 'guest-speaker' && event.date !== null && event.date < today)
     .sort((first, second) => second.date.localeCompare(first.date));
+}
+
+/** Returns dated events that ended before the club's current day, most recently ended first. */
+export function getPastEvents (now = new Date()) {
+  const today = getClubDateKey(now);
+  return events
+    .filter((event) => event.date !== null && (event.endDate ?? event.date) < today)
+    .sort((first, second) =>
+      (second.endDate ?? second.date).localeCompare(first.endDate ?? first.date)
+    );
 }
 
 export function getUnscheduledEvents () {

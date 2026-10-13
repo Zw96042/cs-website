@@ -2,210 +2,208 @@
   scroll-margin-top: 84px;
 }
 
-.events-page-section {
-  padding-block: clamp(72px, 9vw, 128px) clamp(88px, 10vw, 148px);
-}
-
-.events-page-layout {
+/* Next up: a calendar-style date beside the soonest event's full details. */
+.events-next {
   display: grid;
-  gap: clamp(48px, 6vw, 80px);
-  max-width: 820px;
+  grid-template-columns: clamp(180px, 20vw, 260px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+  padding: clamp(28px, 4vw, 52px);
+  background: var(--surface);
 }
 
-.events-page-heading .section-intro {
-  margin-block-start: 16px;
-}
-
-.events-schedule {
-  display: grid;
-  gap: clamp(48px, 6vw, 72px);
-}
-
-.events-group-heading {
+.events-next-date {
   margin: 0;
-  padding-block-end: 14px;
-  border-block-end: 1px solid var(--line);
-  font-family: "Newsreader", Georgia, serif;
-  font-size: clamp(24px, 2.4vw, 28px);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  font-kerning: normal;
-}
-
-/* Date and title share a first baseline so each row reads as one line. */
-.events-row {
   display: grid;
-  grid-template-columns: 136px minmax(0, 1fr);
-  column-gap: clamp(24px, 4vw, 48px);
-  align-items: first baseline;
-  padding-block: 28px;
+  align-content: start;
+  gap: 8px;
 }
 
-.events-row + .events-row {
-  border-block-start: 1px solid var(--line);
+.events-next-month {
+  color: var(--muted);
+  font-family: "Geist Mono", monospace;
+  font-size: 13px;
+  letter-spacing: -0.01em;
 }
 
-.events-row-when {
-  display: grid;
-  gap: 6px;
-}
-
-.events-row-day {
+.events-next-day {
   display: flex;
-  align-items: baseline;
   color: var(--ink);
   font-family: "Newsreader", Georgia, serif;
-  font-size: 30px;
+  font-size: clamp(76px, 9vw, 120px);
   font-weight: 500;
-  font-variant-numeric: lining-nums tabular-nums;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
+  line-height: 0.86;
+  letter-spacing: -0.04em;
   white-space: nowrap;
 }
 
-.events-row-day-tbd {
+.events-next-weekday {
   color: var(--faint);
+  font-size: 13px;
 }
 
-.events-row-weekday {
-  color: var(--faint);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.events-row-body {
-  display: grid;
-  gap: 8px;
-  justify-items: start;
+.events-next-body {
   min-width: 0;
+  display: grid;
+  justify-items: start;
+  align-content: start;
 }
 
-.events-row-title {
+.events-next-countdown {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 590;
+}
+
+.events-next-title {
   margin: 0;
-  color: var(--ink);
-  font-size: 20px;
-  font-weight: 560;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 540;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
-.events-row-credential {
-  max-width: 62ch;
-  margin: 0;
-  color: var(--ink);
+.events-next-details {
+  margin: 12px 0 0;
+  color: var(--muted);
   font-size: 14px;
-  font-weight: 500;
-  line-height: 1.45;
+}
+
+.events-next-description {
+  max-width: 62ch;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.62;
   text-wrap: pretty;
 }
 
-.events-row-facts {
+.events-next .ledger-action {
+  margin-block-start: 10px;
+}
+
+.events-block {
+  display: grid;
+  gap: 20px;
+}
+
+.events-block-heading {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 8px;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px 32px;
+}
+
+.events-block-title {
   margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(26px, 2.6vw, 32px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+/* Segmented type filter, styled like the header's pill navigation. */
+.events-filters {
+  max-width: 100%;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  scrollbar-width: none;
+}
+
+.events-filter {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: none;
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.events-row-facts > span + span::before {
-  margin-inline-end: 8px;
-  color: var(--faint);
-  content: "·";
-  content: "·" / "";
-}
-
-.events-row-description {
-  max-width: 62ch;
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-
-.events-row-note {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* 44px tall for touch; negative margins keep the visual rhythm unchanged. */
-.events-row-action {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-block: -6px -12px;
-  color: var(--ink);
+  font: inherit;
   font-size: 14px;
   font-weight: 560;
-  line-height: 1.3;
-  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
 }
 
-.events-row-action-label {
-  text-decoration-line: underline;
-  text-decoration-thickness: from-font;
-  text-decoration-color: color-mix(in oklch, currentColor 40%, transparent);
-  text-underline-offset: 4px;
-  transition: text-decoration-color 150ms ease;
+.events-filter[aria-pressed="true"] {
+  border-color: var(--line);
+  background: var(--surface-raised);
+  color: var(--ink);
 }
 
-.events-row-action-arrow {
-  font-family: "Geist Mono", monospace;
-  font-size: 0.92em;
-}
-
-.events-row-action:focus-visible {
-  outline: 2px solid var(--ink);
+.events-filter:focus-visible {
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 4px;
+}
+
+/* Finished events keep the ledger columns but drop to one line each. */
+.ledger-row.events-past-row {
+  padding-block: 16px;
+}
+
+.events-past-title {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .events-row-action:hover .events-row-action-label {
-    text-decoration-color: currentColor;
+  .events-filter:not([aria-pressed="true"]):hover {
+    background: var(--surface);
+    color: var(--ink);
   }
 }
 
-/* Below this width the date column squeezes descriptions; the date moves
-   onto one line above the title instead. */
-@media (max-width: 600px) {
-  .events-page-section {
-    padding-block: clamp(56px, 14vw, 80px) clamp(72px, 18vw, 104px);
+@media (max-width: 700px) {
+  .events-next {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 20px 28px;
   }
 
-  .events-group-heading {
-    padding-block-end: 12px;
+  .events-next-date {
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    gap: 4px 14px;
   }
 
-  .events-row {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 10px;
-    padding-block: 22px;
+  .events-next-day {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    font-size: 72px;
   }
 
-  .events-row-when {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 10px;
+  .events-next-month {
+    grid-column: 2;
+    grid-row: 1;
   }
 
-  .events-row-day {
-    font-size: 24px;
+  .events-next-weekday {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
   }
 
-  .events-row-weekday {
-    font-size: 13px;
+  .events-filter {
+    padding-inline: 11px;
   }
 
-  .events-row-title {
-    font-size: 19px;
+  .events-past-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
