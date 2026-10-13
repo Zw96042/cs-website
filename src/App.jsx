@@ -8,6 +8,7 @@ import JoinSection from './components/JoinSection.jsx';
 import OfficersSection from './components/OfficersSection.jsx';
 import ProgramsSection from './components/ProgramsSection.jsx';
 import SpeakersSection from './components/SpeakersSection.jsx';
+import SponsorsSection from './components/SponsorsSection.jsx';
 
 export default function App () {
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function App () {
       <ClubTracksSection />
       <Contests />
       <OfficersSection />
+      <SponsorsSection />
       <JoinSection />
     </main>
   );

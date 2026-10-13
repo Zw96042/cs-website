@@ -10,6 +10,7 @@ const homeSections = [
   { label: 'Competitive programming', href: '/#tracks' },
   { label: 'Contests', href: '/#contests' },
   { label: 'Officers', href: '/#officers' },
+  { label: 'Sponsors', href: '/#sponsors' },
   { label: 'Join', href: '/#join' }
 ];
 
