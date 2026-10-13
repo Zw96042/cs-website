@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 // Drawn from the two programs and past guest speaker talks.
 const marqueeTopics = [
   'AI / machine learning',
@@ -21,7 +19,6 @@ const marqueeTopics = [
 ];
 
 function TopicMarquee () {
-  const [paused, setPaused] = useState(false);
   const renderTopics = (hidden) => (
     <ul
       className='topic-marquee-list'
@@ -34,26 +31,13 @@ function TopicMarquee () {
 
   // The duplicate list makes the loop seamless; assistive tech reads the first copy only.
   return (
-    <div className='topic-marquee' data-paused={paused || undefined}>
+    <div className='topic-marquee'>
       <div className='topic-marquee-viewport'>
         <div className='topic-marquee-track'>
           {renderTopics(false)}
           {renderTopics(true)}
         </div>
       </div>
-      <button
-        className='topic-marquee-toggle'
-        type='button'
-        aria-label='Pause scrolling topics'
-        aria-pressed={paused}
-        onClick={() => setPaused((value) => !value)}
-      >
-        <svg viewBox='0 0 16 16' aria-hidden='true'>
-          {paused
-            ? <path d='M5 3.5v9l7-4.5z' />
-            : <path d='M4.5 3h2.5v10H4.5zM9 3h2.5v10H9z' />}
-        </svg>
-      </button>
     </div>
   );
 }
