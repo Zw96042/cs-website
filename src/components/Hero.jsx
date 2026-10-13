@@ -18,7 +18,7 @@ export default function Hero () {
           </div>
           <div>
             <dt>Time</dt>
-            <dd>4:30-5:30</dd>
+            <dd>4:30–5:30</dd>
           </div>
           <div>
             <dt>Location</dt>
@@ -38,7 +38,7 @@ export default function Hero () {
             target='_blank'
             rel='noreferrer'
           >
-            <img className='canvas-action-logo' src='/canvas-logo.svg' alt='' />
+            <img className='canvas-action-logo' src='/canvas-logo.svg' alt='' width='21' height='21' />
             Join Canvas
           </a>
           <a
@@ -47,8 +47,8 @@ export default function Hero () {
             target='_blank'
             rel='noreferrer'
           >
-            <img className='canvas-action-logo' src='/yt-logo.svg' alt='' />
-            Watch on Youtube
+            <img className='canvas-action-logo' src='/yt-logo.svg' alt='' width='21' height='21' />
+            Watch on YouTube
           </a>
           <a className='text-action secondary-action' href='#programs'>
             Explore the programs <span className='action-arrow' aria-hidden='true'>→</span>

@@ -100,121 +100,80 @@ function ScheduleEventItem ({ event, headingLevel }) {
   );
 }
 
+/* Homepage ledger row shared by Upcoming events and Contests. */
+function LedgerEventItem ({ event, headingLevel, showType }) {
+  const Heading = headingLevel;
+  const { startDateLabel, endDateLabel } = formatEventDate(event);
+  const titleId = getTitleId(event);
+  const kind = showType ? event.format ?? event.type : event.format;
+
+  return (
+    <li className='ledger-row'>
+      <LedgerDate date={event.date} endDate={event.endDate} startLabel={startDateLabel} endLabel={endDateLabel} />
+      <div className='ledger-body'>
+        <Heading className='ledger-title' id={titleId}>{event.title}</Heading>
+        {event.credential ? <p className='ledger-credential'>{event.credential}</p> : null}
+        <p className='ledger-description'>{event.description}</p>
+        {event.signupNote
+          ? event.link
+            ? (
+              <a className='ledger-action' href={event.link} aria-describedby={titleId}>
+                <span className='ledger-action-label'>{event.signupNote}</span>
+                <span className='ledger-action-arrow' aria-hidden='true'>→</span>
+              </a>
+              )
+            : <p className='ledger-note'>{event.signupNote}</p>
+          : null}
+      </div>
+      {kind || event.location
+        ? (
+          <p className='ledger-aside'>
+            {kind ? <span>{kind}</span> : null}
+            {event.location
+              ? (
+                <span className='ledger-aside-secondary'>
+                  <span className='sr-only'>Location: </span>
+                  {event.location}
+                </span>
+                )
+              : null}
+          </p>
+          )
+        : null}
+    </li>
+  );
+}
+
+export function LedgerDate ({ date, endDate, startLabel, endLabel }) {
+  if (!date) return <p className='ledger-date'>{startLabel}</p>;
+
+  return (
+    <p className='ledger-date'>
+      <time dateTime={date}>{startLabel}</time>
+      {endDate
+        ? (
+          <>
+            <span aria-hidden='true'>–</span>
+            <time dateTime={endDate}>
+              <span className='sr-only'>through </span>
+              {endLabel}
+            </time>
+          </>
+          )
+        : null}
+    </p>
+  );
+}
+
 export default function EventItem ({
   event,
-  headingLevel = 'h2',
-  monthContext = false,
-  preview = false,
-  schedule = false
+  headingLevel = 'h3',
+  schedule = false,
+  showType = true
 }) {
   if (schedule) {
     return <ScheduleEventItem event={event} headingLevel={headingLevel} />;
   }
 
-  const Heading = headingLevel;
-  const className = `event-ledger-item${preview ? ' event-preview-item' : ''}`;
-  const dateDisplay = formatEventDate(event);
-  const startDateLabel =
-    monthContext && event.date
-      ? event.date.slice(-2)
-      : dateDisplay.startDateLabel;
-  const endDateLabel =
-    monthContext && event.endDate?.slice(0, 7) === event.date?.slice(0, 7)
-      ? event.endDate.slice(-2)
-      : dateDisplay.endDateLabel;
-  const accessibleEndDateLabel = event.endDate
-    ? formatEventDate({ date: event.endDate }).startDateLabel
-    : null;
-
-  return (
-    <article className={className}>
-      <div className='event-date'>
-        {event.date
-          ? (
-            <div className='event-date-range'>
-              <time dateTime={event.date}>
-                {monthContext
-                  ? (
-                    <>
-                      <span className='sr-only'>{dateDisplay.startDateLabel}</span>
-                      <span aria-hidden='true'>{startDateLabel}</span>
-                    </>
-                    )
-                  : (
-                      startDateLabel
-                    )}
-              </time>
-              {event.endDate
-                ? (
-                  <>
-                    <span aria-hidden='true'>–</span>
-                    <time dateTime={event.endDate}>
-                      {monthContext
-                        ? (
-                          <>
-                            <span className='sr-only'>
-                              through {accessibleEndDateLabel}
-                            </span>
-                            <span aria-hidden='true'>{endDateLabel}</span>
-                          </>
-                          )
-                        : (
-                          <>
-                            <span className='sr-only'>through </span>
-                            {endDateLabel}
-                          </>
-                          )}
-                    </time>
-                  </>
-                  )
-                : null}
-            </div>
-            )
-          : (
-            <span className='event-date-tbd'>{dateDisplay.startDateLabel}</span>
-            )}
-        {dateDisplay.dayLabel
-          ? (
-            <span className='event-day-label'>{dateDisplay.dayLabel}</span>
-            )
-          : null}
-      </div>
-      <div className='event-details'>
-        <p className='event-type' data-event-track={event.track}>
-          {event.type}
-        </p>
-        <Heading>{event.title}</Heading>
-        {event.credential
-          ? (
-            <p className='event-credential'>{event.credential}</p>
-            )
-          : null}
-        {event.location
-          ? (
-            <p className='event-meta'>
-              <span>Location</span>
-              <strong>{event.location}</strong>
-            </p>
-            )
-          : null}
-        <p className='event-description'>{event.description}</p>
-        {event.signupNote
-          ? (
-            <p className='event-meta'>
-              <span>Signup</span>
-              {event.link
-                ? (
-                  <a href={event.link}>
-                    <strong>{event.signupNote}</strong>
-                  </a>
-                  )
-                : (
-                  <strong>{event.signupNote}</strong>
-                  )}
-            </p>
-            )
-          : null}
-      </div>
-    </article>
-  );
+  return <LedgerEventItem event={event} headingLevel={headingLevel} showType={showType} />;
 }

@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import './home.css';
-import AffiliationSection from './components/AffiliationSection.jsx';
+import ClubTracksSection from './components/ClubTracksSection.jsx';
 import Contests from './components/Contests.jsx';
 import EventsPreviewSection from './components/EventsPreviewSection.jsx';
-import GeneralCsSection from './components/GeneralCsSection.jsx';
 import Hero from './components/Hero.jsx';
 import JoinSection from './components/JoinSection.jsx';
 import OfficersSection from './components/OfficersSection.jsx';
-import ProgramSection from './components/ProgramSection.jsx';
-import ClubTracksSection from './components/ClubTracksSection.jsx';
+import ProgramsSection from './components/ProgramsSection.jsx';
+import SpeakersSection from './components/SpeakersSection.jsx';
 
 export default function App () {
   useEffect(() => {
@@ -40,11 +39,10 @@ export default function App () {
     <main className='club-main' id='club-content'>
       <Hero />
       <EventsPreviewSection />
-      <Contests />
-      <ProgramSection />
-      <GeneralCsSection />
+      <ProgramsSection />
+      <SpeakersSection />
       <ClubTracksSection />
-      <AffiliationSection />
+      <Contests />
       <OfficersSection />
       <JoinSection />
     </main>

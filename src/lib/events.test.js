@@ -5,6 +5,7 @@ import {
   formatEventDate,
   getClubDateKey,
   getEventPreview,
+  getPastSpeakers,
   getScheduledEvents,
   getUpcomingContests,
   getUnscheduledEvents
@@ -35,7 +36,7 @@ test('drops an event when the next club calendar day starts', () => {
 
   assert.deepEqual(eventTitles, [
     'Quantum computing with HitoMatch',
-    'Code Bash'
+    'An Afternoon with Neo Wang'
   ]);
 });
 
@@ -72,12 +73,12 @@ test('keeps unscheduled events separate from the dated schedule', () => {
   assert.deepEqual(eventTitles, ['Build a website from scratch']);
 });
 
-test('previews the November guest speaker and December contest after Clements', () => {
+test('leaves contests out of the homepage preview after Clements', () => {
   const eventTitles = getEventPreview(new Date('2026-11-22T12:00:00Z')).map(
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['An Afternoon with Neo Wang', 'Stacey & UIL contest']);
+  assert.deepEqual(eventTitles, ['An Afternoon with Neo Wang']);
 });
 
 test('keeps the limited-availability December contest through club midnight', () => {
@@ -85,7 +86,7 @@ test('keeps the limited-availability December contest through club midnight', ()
   const contests = getUpcomingContests(now);
 
   assert.deepEqual(contests.map(({ title }) => title), ['Stacey & UIL contest']);
-  assert.deepEqual(getEventPreview(now), contests);
+  assert.deepEqual(getEventPreview(now), []);
   assert.equal(contests[0].date, '2026-12-05');
   assert.match(contests[0].description, /Stacey and the UIL contest writers/);
   assert.match(contests[0].description, /Limited availability/);
@@ -118,4 +119,19 @@ test('keeps the latest schedule addition, reschedule and cancellation', () => {
   assert.ok(
     !events.some((e) => e.title === 'Inside the Turing Scholars program')
   );
+});
+
+test('lists past guest speakers newest first and keeps today\'s talk upcoming', () => {
+  const titles = (now) => getPastSpeakers(new Date(now)).map(({ title }) => title);
+
+  assert.deepEqual(titles('2026-10-05T17:00:00Z'), [
+    'Computer architecture and CS at UT',
+    'Transformer architecture with Joseph Zhang'
+  ]);
+  assert.deepEqual(titles('2026-10-06T05:00:00Z'), [
+    'Quantum computing with HitoMatch',
+    'Computer architecture and CS at UT',
+    'Transformer architecture with Joseph Zhang'
+  ]);
+  assert.deepEqual(titles('2026-08-01T17:00:00Z'), []);
 });

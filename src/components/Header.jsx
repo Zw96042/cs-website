@@ -5,11 +5,10 @@ import { useEventDate } from '../lib/event-clock.jsx';
 
 // Homepage section ids from the components rendered by App.jsx.
 const homeSections = [
-  { label: 'Contests', href: '/#contests-heading' },
-  { label: 'Meetings', href: '/#programs' },
-  { label: 'Computer science', href: '/#general-cs' },
+  { label: 'What we do', href: '/#programs' },
+  { label: 'Guest lectures', href: '/#speakers' },
   { label: 'Competitive programming', href: '/#tracks' },
-  { label: 'Hack Club', href: '/#hack-club' },
+  { label: 'Contests', href: '/#contests' },
   { label: 'Officers', href: '/#officers' },
   { label: 'Join', href: '/#join' }
 ];

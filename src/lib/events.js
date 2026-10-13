@@ -4,6 +4,7 @@ export const events = [
     track: 'guest-speaker',
     date: '2026-08-31',
     title: 'Transformer architecture with Joseph Zhang',
+    speaker: 'Joseph Zhang',
     description:
       "A Westlake alum ('24) and Stanford Math and CS student explains transformer architecture, university research, and life in computer science."
   },
@@ -20,6 +21,7 @@ export const events = [
     track: 'guest-speaker',
     date: '2026-09-29',
     title: 'Computer architecture and CS at UT',
+    speaker: 'Dr. Calvin Lin',
     credential: 'Director of UT Austin’s Turing Scholars Honors Program',
     location: 'Chap Room',
     description:
@@ -30,6 +32,7 @@ export const events = [
     track: 'guest-speaker',
     date: '2026-10-05',
     title: 'Quantum computing with HitoMatch',
+    speaker: 'Anna White',
     description:
       'Anna White, President of Dikan Quantum Corporation & Executive Director, HitoMatch Foundation, discusses quantum computing and CS education.'
   },
@@ -72,6 +75,7 @@ export const events = [
     track: 'guest-speaker',
     date: '2026-11-30',
     title: 'An Afternoon with Neo Wang',
+    speaker: 'Neo Wang',
     location: 'To be determined - likely chap room.',
     description:
       "Neo Wang, Westlake alum ('22) and generous donor to the CS Club, shares his experience in computer science and life after Westlake. He discusses startups, trading, internships, CS + Math, and other topics. At Westlake, Neo headed the UIL Computer Science team and was a director of the Competitive Programming Initiative, best known for creating the famous USACO training platform usaco.guide.",
@@ -186,8 +190,19 @@ export function getUpcomingContests (now = new Date()) {
   );
 }
 
+/** Returns the next two non-contest events; contests have their own homepage section. */
 export function getEventPreview (now = new Date()) {
-  return getScheduledEvents(now).slice(0, 2);
+  return getScheduledEvents(now)
+    .filter((event) => event.track !== 'competitive-programming')
+    .slice(0, 2);
+}
+
+/** Returns guest speaker events before the club's current day, newest first. */
+export function getPastSpeakers (now = new Date()) {
+  const today = getClubDateKey(now);
+  return events
+    .filter((event) => event.track === 'guest-speaker' && event.date !== null && event.date < today)
+    .sort((first, second) => second.date.localeCompare(first.date));
 }
 
 export function getUnscheduledEvents () {

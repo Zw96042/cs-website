@@ -89,7 +89,7 @@ export default function OfficersSection () {
       <div className='section-inner'>
         <div className='officers-header'>
           <h2 className='section-heading' id='officers-heading'>
-            The people who keep it moving.
+            Officers.
           </h2>
           <p className='section-intro'>
             Student officers plan the sessions, support projects, and make the

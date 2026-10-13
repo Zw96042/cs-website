@@ -17,14 +17,14 @@ export default function EventsPreviewSection () {
 
         {upcomingEvents.length > 0
           ? (
-            <div className='event-ledger event-preview-ledger'>
+            <ol className='ledger'>
               {upcomingEvents.map((event) => (
-                <EventItem event={event} headingLevel='h3' key={`${event.date}-${event.title}`} preview />
+                <EventItem event={event} key={`${event.date}-${event.title}`} />
               ))}
-            </div>
+            </ol>
             )
           : (
-            <p className='events-empty'>No dated events are on the calendar yet. Check back after the next club meeting.</p>
+            <p className='events-empty'>No speakers or club events are scheduled right now. Check back after the next club meeting.</p>
             )}
       </div>
     </section>

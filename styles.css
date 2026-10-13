@@ -36,6 +36,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* No rubber-band stretch past the top or bottom of the page. */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -542,6 +544,7 @@ a {
 .nav-back-link:focus-visible,
 .nav-current-page:focus-visible,
 .text-action:focus-visible,
+.ledger-action:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -610,112 +613,13 @@ summary:focus-visible {
   text-wrap: pretty;
 }
 
-.event-ledger {
-  display: grid;
-  gap: clamp(26px, 3vw, 42px);
-}
-
-.event-ledger-item {
-  display: grid;
-  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
-  gap: clamp(30px, 5vw, 72px);
-  align-items: start;
-  padding-block: clamp(8px, 1vw, 14px);
-}
-
-.event-date {
-  color: var(--ink);
-  font-family: "Newsreader", Georgia, serif;
-  font-size: clamp(30px, 3.5vw, 44px);
-  font-weight: 500;
-  line-height: 0.94;
-  letter-spacing: -0.035em;
-  text-decoration: none;
-}
-
-.event-date-range {
-  display: flex;
-  align-items: baseline;
-}
-
-.event-date-tbd {
-  display: block;
-}
-
-.event-day-label {
-  display: block;
-  margin-block-start: 8px;
-  color: var(--faint);
-  font-family: "Geist", Arial, sans-serif;
-  font-size: 11px;
-  font-weight: 520;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.event-type {
-  margin: 3px 0 10px;
-  color: var(--faint);
-  font-size: 12px;
-  font-weight: 620;
-  letter-spacing: -0.01em;
-}
-
-.event-type[data-event-track="hack-club"],
-.event-type[data-event-track="competitive-programming"] {
-  color: var(--accent);
-}
-
-.event-details h2,
-.event-details h3,
-.event-details h4 {
+/* Shared by the homepage preview and the Events page. */
+.events-empty {
+  max-width: 48ch;
   margin: 0;
-  font-size: clamp(19px, 2vw, 26px);
-  font-weight: 560;
-  line-height: 1.17;
-  letter-spacing: -0.028em;
-  text-wrap: balance;
-}
-
-.event-credential {
-  max-width: 52ch;
-  margin: 9px 0 0;
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 620;
-  line-height: 1.45;
-  text-wrap: pretty;
-}
-
-.event-description {
-  max-width: 52ch;
-  margin: 10px 0 0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.62;
-  text-wrap: pretty;
-}
-
-/* Labeled detail lines under an event (location, signup). */
-.event-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 2px 8px;
-  margin: 14px 0 0;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.event-meta span {
-  color: var(--accent);
-  font-weight: 650;
-}
-
-.event-meta strong {
-  color: var(--ink);
-  font-weight: 650;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .site-footer {
@@ -804,15 +708,6 @@ summary:focus-visible {
 
   .section-shell {
     padding-block: clamp(78px, 20vw, 112px);
-  }
-
-  .event-ledger-item {
-    grid-template-columns: 1fr;
-    gap: 17px;
-  }
-
-  .event-type {
-    margin-block-start: 0;
   }
 
   .footer-inner {
