@@ -289,6 +289,7 @@ function drawDijkstra (svg, progress = 1) {
   statusLabel.textContent = status;
 
   svg._graphProgress = progress;
+  setBooleanAttribute(svg, 'data-ready', true);
 }
 
 let graphAnimation = 0;

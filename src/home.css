@@ -192,6 +192,11 @@
   overflow: visible;
 }
 
+/* The prerendered graph has no geometry until site.js first draws it. */
+.hero-visual:not([data-ready]) {
+  visibility: hidden;
+}
+
 .graph-kicker,
 .graph-status,
 .graph-weight,
