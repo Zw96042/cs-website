@@ -1,9 +1,10 @@
+/* Build inlines these fonts into the HTML, so block only waits for decoding and avoids a fallback-font flash. */
 @font-face {
   font-family: "Geist";
   src: url("assets/geist-ui-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 700;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -11,7 +12,7 @@
   src: url("assets/geist-mono-ui-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 700;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -19,7 +20,7 @@
   src: url("assets/newsreader-display-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 500;
-  font-display: swap;
+  font-display: block;
 }
 
 
